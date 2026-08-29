@@ -1,0 +1,7 @@
+interface:
+  display_name: "Rigorous Research"
+  short_description: "Run evidence-gated research with independent review"
+  default_prompt: "Use $rigorous-research to run this objective as a resumable evidence loop and release only what passes independent review."
+
+policy:
+  allow_implicit_invocation: true
