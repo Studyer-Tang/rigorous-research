@@ -1,70 +1,82 @@
 # Rigorous Research
 
-An evidence-gated Codex skill for difficult research, mathematical proof, technical investigation, reproduction, and long-horizon implementation.
+A Codex skill for mathematical reasoning, statistical inference, and quantitative-finance research.
 
-The skill combines a concise operating protocol with a durable research ledger. It can work as a quick proof auditor, an executor-plus-reviewer loop, or a bounded multi-role research cell. Completion requires evidence, deterministic acceptance checks, and independent review—not a confident final message.
+The project is built around one unit: the **inference contract**. A result is releasable only when its claim, domain, assumptions, falsifiers, and evidence agree. This prevents three common category errors:
 
-## Why it is different
+- treating a numerical pattern as an exact proof;
+- treating model fit as identification;
+- treating an in-sample backtest as investable evidence.
 
-- The original target is frozen before exploration begins.
-- Ambiguous or repaired statements become separate branches.
-- Claims and deliverables are decomposed into explicit obligations.
-- Evidence is checksummed and linked to the obligations it supports.
-- Failed branches and scope changes remain in the journal.
-- Test collection, test count, exclusions, and return codes are audited.
-- Independent review operates on raw artifacts, not only an executor summary.
-- Repeated rounds must produce new evidence or change method.
-- Public claims pass a separate scope, novelty, and reproducibility gate.
-- Reusable lessons retain triggers, scope boundaries, and supporting evidence instead of silently rewriting the workflow.
+## What is new
 
-This is not an automatic scientist. It is a compact control plane for making AI-assisted work inspectable and hard to overclaim.
+### Domain-specific contracts
 
-## Install
+Mathematics, statistics, and finance use different required fields and different release gates. A proof must close type and logical obligations. A statistical result must name its estimand, identification route, uncertainty, and sensitivity. A financial result must reconstruct its information set and survive timing, costs, benchmark, and walk-forward checks.
 
-Copy this folder to your Codex skills directory and invoke `$rigorous-research`. Python 3.10 or newer is needed only for the optional ledger tool; the skill instructions themselves have no package dependencies.
+### Assumption surfaces
 
-## Start a managed case
+Assumptions are first-class records rather than prose hidden in limitations. Each claim declares the assumptions it uses; a violated or unexamined assumption blocks release.
 
-```text
-python scripts/research_loop.py init cases zipper-question \
-  --mode proof \
-  --objective "Determine whether the exact source-defined element is nonzero"
-```
+### Falsification before confirmation
 
-Add an obligation and evidence:
+Every check records the observation that would defeat the claim. Boundary examples, adversarial data-generating processes, leakage probes, and cost stress tests are designed before a positive conclusion is accepted.
+
+### Evidence-type firewalls
+
+Symbolic, numerical, statistical, and market evidence remain distinct. Moving from one type to another requires a written logical bridge.
+
+## Included workflow
 
 ```text
-python scripts/research_loop.py obligation cases/zipper-question/case.json \
-  --branch LITERAL --statement "The proposed representation descends to the exact quotient"
-
-python scripts/research_loop.py evidence cases/zipper-question/case.json \
-  --kind computation --summary "All defining relations verified over the stated ring" \
-  --file artifacts/verify_relations.txt --independent
+Claim class
+   ↓
+Domain contract
+   ↓
+Assumption surface
+   ↓
+Falsification suite
+   ↓
+Evidence links
+   ↓
+Domain release gate
 ```
 
-Render a readable report and run the release gate:
+The optional standard-library CLI stores this structure in a portable JSON case file:
 
 ```text
-python scripts/research_loop.py render cases/zipper-question/case.json
-python scripts/research_loop.py validate cases/zipper-question/case.json --release
+python scripts/inference_case.py init cases/nonvanishing \
+  --domain mathematics \
+  --question "Is the specified element nonzero in the exact quotient?" \
+  --claim "The element is nonzero over K(q)."
+
+python scripts/inference_case.py validate cases/nonvanishing/case.json
+python scripts/inference_case.py report cases/nonvanishing/case.json
 ```
 
-The release gate checks record consistency and evidence linkage. It does not certify that a proof is true or that a result is novel.
+Run `python scripts/inference_case.py --help` for the commands that add assumptions, checks, evidence, contract fields, and verdicts.
 
 ## Repository layout
 
 ```text
-SKILL.md                    concise routing and invariants
-references/                 guidance loaded only for relevant modes
-scripts/research_loop.py    durable case ledger and release gate
-assets/                     paper, case-file, and author-email templates
-tests/                      standard-library behavioral tests
-agents/openai.yaml          Codex interface metadata
+SKILL.md                         routing and operating rules
+references/mathematical-claims.md
+references/statistical-inference.md
+references/financial-research.md
+references/evidence-contracts.md
+references/release-standards.md
+scripts/inference_case.py        inference-contract ledger and gates
+assets/                          domain templates
+tests/                           behavioral tests for every release gate
 ```
 
-## Security and privacy
+The validator proves that a case is structurally honest about its dependencies. It cannot decide whether a cited theorem is correct, a dataset is trustworthy, or an assumption is scientifically justified; those remain research judgments that must be supported by inspectable evidence.
 
-Do not put secrets, private correspondence, unpublished personal data, or proprietary datasets into a public case ledger. Store a description and controlled locator instead. Never expose a local dashboard, service, or remote command channel as part of this skill.
+## Requirements
+
+- Codex for skill use
+- Python 3.10+ only for the optional CLI
+- No third-party Python packages
 
 ## License
 

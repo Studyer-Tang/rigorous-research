@@ -1,67 +1,85 @@
 ---
 name: rigorous-research
-description: Run evidence-gated research, mathematical proof, technical investigation, reproduction, or long-horizon implementation from exact objective through independent review and release. Use when a claim or artifact must be checked, iterated, resumed, or published with traceable evidence; do not use for a quick factual answer or ordinary summary.
+description: Audit or develop mathematical proofs, statistical analyses, and quantitative-finance studies through explicit assumptions, falsification tests, and domain-specific release gates. Use for theorem checking, counterexamples, estimand and identification design, simulations, empirical finance, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 ---
 
 # Rigorous Research
 
-Operate a resumable evidence loop. Optimize for a correct, inspectable outcome rather than activity, persuasive prose, or model agreement.
+Treat every research result as an **inference contract**: a scoped claim joined to the objects or estimand, assumptions, falsifiers, and evidence that make the conclusion valid. Do not let mathematical proof, statistical estimation, and financial backtesting borrow standards from one another without an explicit bridge.
 
-## Non-negotiable invariants
+## Start with the claim class
 
-- Freeze the exact objective, acceptance criteria, scope, and user constraints before expanding the task.
-- Treat primary sources, repository state, commands, raw outputs, and reproducible artifacts as evidence. Treat model assertions as hypotheses.
-- Separate literal statements from corrections, stable variants, approximations, and inferred author intent. Never transfer a result between them without proof.
-- Give each critical claim or deliverable an obligation and attach evidence to that obligation.
-- A completion verdict requires all three: critical obligations closed, deterministic checks passed, and independent review accepted.
-- Failed tests, zero collected tests, collection errors, timeouts, excluded cases, and unverifiable citations are failures, not partial passes.
-- Preserve failed branches and scope changes. Do not rewrite history to make the final route look inevitable.
-- Stop safely on missing authority, destructive risk, secrets, external approvals, or exhausted evidence; do not convert these into invented results.
+Classify the requested conclusion before doing substantial work:
 
-## Choose the smallest sufficient topology
+- **Mathematics:** identity, bound, existence, uniqueness, classification, construction, or counterexample.
+- **Statistics:** descriptive, associational, predictive, causal, structural, or decision-theoretic.
+- **Finance:** stylized fact, forecast, factor, strategy, risk estimate, pricing result, or market-design claim.
 
-1. **Direct audit:** use one agent for a bounded claim with inspectable evidence.
-2. **Execute + review:** use a separate reviewer for substantive proofs, code changes, reproductions, or publication claims.
-3. **Research cell:** for broad or long-horizon work, separate scout, executor, adversarial reviewer, and integrator roles. Give each a bounded task and isolated context when subagents are available and authorized.
+If the class is ambiguous, state the strongest precise reading you can test and label nearby readings separately. A result for one reading does not transfer automatically.
 
-Do not spawn roles merely to simulate rigor. Independent roles must receive different evidence packets or attack surfaces. For topology, handoffs, and reviewer blindness, read [references/orchestration.md](references/orchestration.md).
+For a multi-step investigation, initialize a case with `python scripts/inference_case.py init`. Read [references/evidence-contracts.md](references/evidence-contracts.md) before maintaining the case record.
 
-## Evidence loop
+## Build the inference contract
 
-1. **Frame:** record the exact target, success tests, non-goals, authority boundaries, sources, assumptions, and material interpretations.
-2. **Decompose:** create critical obligations and acceptance criteria. Mark dependencies and a concrete falsifier or check for each.
-3. **Explore:** search primary sources and run cheap discriminating tests. Record negative results and eliminate weak branches early.
-4. **Execute:** perform the next smallest action that can close an obligation or materially change the plan.
-5. **Verify:** run deterministic checks; verify that they actually executed the intended cases. Recompute decisive mathematical or computational steps independently when feasible.
-6. **Review:** provide the reviewer the frozen target, diff or proof, raw evidence, check results, and unresolved obligations. Do not ask it to validate only the executor's summary.
-7. **Decide:** continue, revise, branch, refute, declare ill-posed, or complete. Repeated rounds require new evidence or a changed method.
-8. **Distill:** produce a conservative result, reproducibility instructions, limitations, and reusable lessons. Never publish internal chain-of-thought; preserve evidence and decision summaries instead.
-
-For work spanning several actions or turns, initialize a case with `scripts/research_loop.py init`. The case ledger is the source of truth after context compaction. Read [references/state-and-evidence.md](references/state-and-evidence.md) before maintaining a case.
+1. Write one falsifiable headline claim with quantifiers, population or universe, time horizon, and parameter domain.
+2. Fill the domain contract:
+   - mathematics: ambient object, coefficient domain, quantifiers, equality semantics;
+   - statistics: population, sampling unit, outcome, estimand, identification route;
+   - finance: universe, decision clock, information cutoff, holding period, split policy, cost model, benchmark.
+3. List assumptions individually. Mark each `UNTESTED`, `JUSTIFIED`, `CONDITIONAL`, or `VIOLATED` and link its evidence.
+4. Design checks that could fail the claim. A check without a concrete falsifier is an activity, not a test.
+5. Attach raw evidence and record whether it is logically decisive, diagnostic, or merely suggestive.
+6. Issue the narrowest verdict that passes the relevant domain gate.
 
 ## Domain routing
 
-- Mathematical claims, constructions, quotients, representations, or counterexamples: read [references/mathematical-audit.md](references/mathematical-audit.md).
-- Code, experiments, CAS, numerical output, benchmarks, or reproductions: read [references/computational-evidence.md](references/computational-evidence.md) and [references/acceptance-gates.md](references/acceptance-gates.md).
-- Openness, novelty, priority, related work, or source interpretation: read [references/literature-and-novelty.md](references/literature-and-novelty.md).
-- Papers, abstracts, announcements, expert emails, or public claims: read [references/claim-and-publication.md](references/claim-and-publication.md).
-- Full research investigations with several interpretations: also read [references/research-protocol.md](references/research-protocol.md).
+- For definitions, quotient objects, representations, limits, exact computation, proof, or counterexamples, read [references/mathematical-claims.md](references/mathematical-claims.md).
+- For estimands, identification, uncertainty, diagnostics, simulation, or causal and predictive claims, read [references/statistical-inference.md](references/statistical-inference.md).
+- For signals, portfolios, backtests, factor tests, market data, or risk models, read [references/financial-research.md](references/financial-research.md).
+- Before presenting a theorem, empirical conclusion, paper, or public result, read [references/release-standards.md](references/release-standards.md).
 
-## Review verdicts
+Load only the references required by the current claim class.
 
-Use one per interpretation or deliverable:
+## Work counterexample-first
 
-- `VERIFIED`: all critical obligations and acceptance criteria are supported.
-- `REFUTED`: valid evidence defeats the exact target.
-- `INCOMPLETE`: meaningful progress exists but a critical obligation remains open.
-- `ILL-POSED`: the target lacks a truth condition without additional choices.
-- `BLOCKED`: required authority or external input is unavailable after safe alternatives are exhausted.
+Before investing in a long proof or model:
 
-`BLOCKED` is operational; it does not establish anything about the research claim.
+- type-check every definition and map;
+- test boundary, degenerate, and smallest nontrivial cases;
+- search for a minimal counterexample or adversarial data-generating process;
+- inspect whether the claimed conclusion survives weakening each assumption;
+- in finance, reconstruct the exact information set available at each decision time.
 
-## Completion and reporting
+A failed attack is evidence only for the region actually searched. Record its coverage; never call it a proof unless exhaustiveness is established.
 
-Before declaring completion, run `scripts/research_loop.py validate <case.json> --release` for a managed case. Passing confirms ledger consistency, not truth; the independent reviewer still owns the truth-oriented verdict.
+## Keep symbolic and empirical evidence separate
 
-Lead the final response with verdict and exact scope. Then give the decisive evidence, checks actually run, files or artifacts, unresolved limits, and the strongest unsupported nearby claim. Do not advertise an open-problem resolution unless source identity, mathematical correctness, current openness, and novelty are independently supported.
+Numerical agreement can discover a theorem but does not prove an exact identity without certified bounds or reconstruction. A theorem about an estimator does not establish that an empirical implementation satisfies its assumptions. A profitable backtest does not establish a risk-adjusted opportunity without realistic timing, costs, selection accounting, and out-of-sample evidence.
 
+When one evidence type supports another, write the bridge explicitly.
+
+## Verdicts
+
+Use one verdict per headline claim:
+
+- `SUPPORTED`: the exact claim passes every required domain gate.
+- `REFUTED`: a valid contradiction, counterexample, or failed identifying condition defeats it.
+- `INCONCLUSIVE`: evidence is informative but at least one decisive gate remains open.
+- `MISSPECIFIED`: the claim has no stable truth condition or estimand as written.
+
+Confidence may describe uncertainty inside a supported statistical claim; it never substitutes for an open logical or design obligation.
+
+## Release discipline
+
+Run `python scripts/inference_case.py validate <case.json> --release` for a managed case. This checks contract completeness and evidence linkage, not the substantive truth of the inputs. Recompute the decisive step by a different method when feasible.
+
+Report in this order:
+
+1. verdict and exact scope;
+2. claim and domain contract;
+3. assumptions that carry the result;
+4. decisive falsification attempts and evidence;
+5. what remains unsupported;
+6. reproducibility instructions.
+
+Do not market a computation as a theorem, a fit statistic as identification, or a backtest as investable performance.

@@ -1,7 +1,7 @@
 interface:
   display_name: "Rigorous Research"
-  short_description: "Run evidence-gated research with independent review"
-  default_prompt: "Use $rigorous-research to run this objective as a resumable evidence loop and release only what passes independent review."
+  short_description: "Audit mathematical and quantitative research claims"
+  default_prompt: "Use $rigorous-research to build and test an inference contract for this mathematical, statistical, or financial claim."
 
 policy:
   allow_implicit_invocation: true
