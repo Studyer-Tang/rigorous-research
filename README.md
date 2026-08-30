@@ -205,6 +205,7 @@ references/evidence-contracts.md
 references/release-standards.md
 scripts/research_workspace.py      planning, sources, runs, recovery, briefs
 scripts/inference_case.py          inference ledger and release gates
+scripts/research_io.py             shared JSON, hashing, and portable-path primitives
 scripts/literature_search.py       Crossref/arXiv retrieval and conservative deduplication
 scripts/math_backend.py            SymPy certificates and optional Lean checking
 scripts/statistics_backend.py      HAC, bootstrap, multiplicity, coverage simulation
@@ -214,6 +215,7 @@ scripts/review_protocol.py         blind packets, review receipts, adjudication
 assets/                            reusable research templates
 examples/                          complete released workspaces and small audits
 tests/                             behavioral and integrity tests
+pyproject.toml                     compact Ruff formatting and static-check rules
 ```
 
 ## Requirements

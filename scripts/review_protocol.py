@@ -4,55 +4,23 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
-import hashlib
 import json
-import os
 import shutil
 from pathlib import Path
 from typing import Any
 
+from research_io import (
+    canonical_hash,
+    load_json_object as load,
+    portable_locator as locator,
+    resolve_locator as resolve,
+    sha256,
+    utc_timestamp as timestamp,
+    write_json as write,
+)
 
 SCHEMA_VERSION = 1
 ASSESSMENTS = ("ACCEPT", "REJECT", "REVISE")
-
-
-def timestamp() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
-
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
-def canonical_hash(value: Any) -> str:
-    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-
-
-def load(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError("JSON root must be an object")
-    return value
-
-
-def write(path: Path, value: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-
-
-def locator(path: Path, base_dir: Path | None) -> str:
-    resolved = path.resolve()
-    return os.path.relpath(resolved, base_dir.resolve()).replace("\\", "/") if base_dir else str(resolved)
-
-
-def resolve(value: str, base_dir: Path) -> Path:
-    path = Path(value)
-    return path if path.is_absolute() else base_dir / path
 
 
 def blind_case(case: dict[str, Any]) -> dict[str, Any]:
@@ -96,7 +64,13 @@ def prepare(case_path: Path, artifact_paths: list[Path], base_dir: Path | None =
         suffix = source.suffix if source.suffix.lower() in {".md", ".txt", ".json", ".py", ".lean"} else ".bin"
         destination = snapshot_dir / f"A{index:03d}{suffix}"
         shutil.copyfile(source, destination)
-        snapshots.append({"id": f"A{index:03d}", "file": locator(destination, base_dir), "sha256": sha256(destination)})
+        snapshots.append(
+            {
+                "id": f"A{index:03d}",
+                "file": locator(destination, base_dir),
+                "sha256": sha256(destination),
+            }
+        )
     return {
         "schema_version": SCHEMA_VERSION,
         "kind": "blind-review-packet",
@@ -105,7 +79,13 @@ def prepare(case_path: Path, artifact_paths: list[Path], base_dir: Path | None =
         "blinded_case": blinded,
         "blinded_case_sha256": canonical_hash(blinded),
         "artifacts": snapshots,
-        "redactions": ["author identity", "author verdict", "claim status", "check outcomes", "evidence role"],
+        "redactions": [
+            "author identity",
+            "author verdict",
+            "claim status",
+            "check outcomes",
+            "evidence role",
+        ],
     }
 
 
@@ -158,7 +138,10 @@ def submit(
         "issues": {"fatal": fatal, "major": major, "minor": minor},
     }
     if report_path is not None:
-        result["review_report"] = {"file": locator(report_path, base_dir), "sha256": sha256(report_path)}
+        result["review_report"] = {
+            "file": locator(report_path, base_dir),
+            "sha256": sha256(report_path),
+        }
     return result
 
 
@@ -206,9 +189,7 @@ def adjudicate(case_path: Path, reviews: list[Path], base_dir: Path | None = Non
             if packet.get("author_case_commitment") != sha256(case_path):
                 errors.append(f"{path}: author case changed after blind packet preparation")
         verified.append(review)
-    if errors:
-        status = "RECONCILIATION_REQUIRED"
-    elif any(item.get("assessment") != "ACCEPT" or item.get("issues", {}).get("fatal") for item in verified):
+    if errors or any(item.get("assessment") != "ACCEPT" or item.get("issues", {}).get("fatal") for item in verified):
         status = "RECONCILIATION_REQUIRED"
     elif not verified:
         status = "REVIEW_REQUIRED"
@@ -291,7 +272,21 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "prepare":
             write(args.output, prepare(args.case, args.artifact, args.output.parent))
         elif args.command == "submit":
-            write(args.output, submit(args.packet, args.reviewer, args.assessment, args.reproduced, args.fatal, args.major, args.minor, args.author_id, args.output.parent, args.report))
+            write(
+                args.output,
+                submit(
+                    args.packet,
+                    args.reviewer,
+                    args.assessment,
+                    args.reproduced,
+                    args.fatal,
+                    args.major,
+                    args.minor,
+                    args.author_id,
+                    args.output.parent,
+                    args.report,
+                ),
+            )
         elif args.command == "adjudicate":
             result = adjudicate(args.case, args.review, args.output.parent)
             write(args.output, result)

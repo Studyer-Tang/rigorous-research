@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 import unittest
 from pathlib import Path
 
-
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "literature_search.py"
+sys.path.insert(0, str(MODULE_PATH.parent))
 SPEC = importlib.util.spec_from_file_location("literature_search", MODULE_PATH)
 assert SPEC and SPEC.loader
 ls = importlib.util.module_from_spec(SPEC)
@@ -56,7 +57,12 @@ class LiteratureSearchTests(unittest.TestCase):
             "record_type": "article",
             "providers": ["crossref"],
         }
-        variant = dict(base, title="Inference in dependent financial time-series", url="b", providers=["arxiv"])
+        variant = dict(
+            base,
+            title="Inference in dependent financial time-series",
+            url="b",
+            providers=["arxiv"],
+        )
         records, decisions = ls.merge_records([base, variant], threshold=0.85)
         self.assertEqual(len(records), 2)
         self.assertTrue(decisions[0]["reason"].startswith("fuzzy-title"))

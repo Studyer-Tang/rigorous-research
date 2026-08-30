@@ -17,7 +17,9 @@ jobs:
           python-version: "3.12"
       - name: Compile and test
         run: |
-          pip install -r requirements-math.txt
+          pip install -r requirements-math.txt ruff==0.16.1
+          ruff format --check scripts tests
+          ruff check scripts tests
           python -m py_compile scripts/*.py
           python -m unittest discover -s tests -v
       - name: Validate released workspaces

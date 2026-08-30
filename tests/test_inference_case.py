@@ -5,7 +5,6 @@ import tempfile
 import unittest
 from pathlib import Path
 
-
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "inference_case.py"
 SPEC = importlib.util.spec_from_file_location("inference_case", MODULE_PATH)
 assert SPEC and SPEC.loader
@@ -22,7 +21,13 @@ class InferenceCaseTests(unittest.TestCase):
         self.temp.cleanup()
 
     def case(self, domain: str = "mathematics"):
-        path = ic.initialize(self.root, f"case-{domain}", domain, "What is supported?", "The scoped claim holds.")
+        path = ic.initialize(
+            self.root,
+            f"case-{domain}",
+            domain,
+            "What is supported?",
+            "The scoped claim holds.",
+        )
         _, data = ic.load_case(path)
         return path, data
 
@@ -271,7 +276,16 @@ class InferenceCaseTests(unittest.TestCase):
         )
         self.assertEqual(result, 0)
         case_path = self.root / "cli-case" / "case.json"
-        result = ic.main(["set-contract", str(case_path), "--field", "ambient_object", "--value", "A quotient algebra"])
+        result = ic.main(
+            [
+                "set-contract",
+                str(case_path),
+                "--field",
+                "ambient_object",
+                "--value",
+                "A quotient algebra",
+            ]
+        )
         self.assertEqual(result, 0)
         _, data = ic.load_case(case_path)
         self.assertEqual(data["contract"]["ambient_object"], "A quotient algebra")

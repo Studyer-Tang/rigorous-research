@@ -4,8 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
-import hashlib
 import json
 import re
 import shutil
@@ -13,17 +11,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-
-def timestamp() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
-
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+from research_io import sha256, utc_timestamp as timestamp, write_json
 
 
 def load_sympy() -> Any:
@@ -91,7 +79,9 @@ def identity_certificate(
     try:
         poly = sympy.Poly(numerator, *[symbols[name] for name in names], domain="QQ")
         polynomial = True
-        coefficients = [str(value) for value in poly.all_coeffs()] if len(names) == 1 else [str(value) for value in poly.coeffs()]
+        coefficients = (
+            [str(value) for value in poly.all_coeffs()] if len(names) == 1 else [str(value) for value in poly.coeffs()]
+        )
         exact_zero = poly.is_zero
     except (sympy.PolynomialError, ValueError):
         exact_zero = bool(sympy.simplify(difference) == 0)
@@ -146,7 +136,13 @@ def matrix_certificate(matrix_file: Path, expected: str, names: list[str], **ass
     width = len(data[0])
     if width != len(data) or any(len(row) != width for row in data):
         raise ValueError("determinant requires a square matrix")
-    table = symbol_table(sympy, names, assumptions.get("real", set()), assumptions.get("positive", set()), assumptions.get("integer", set()))
+    table = symbol_table(
+        sympy,
+        names,
+        assumptions.get("real", set()),
+        assumptions.get("positive", set()),
+        assumptions.get("integer", set()),
+    )
     matrix = sympy.Matrix([[sympy.sympify(value, locals=table) for value in row] for row in data])
     determinant = sympy.factor(matrix.det(method="domain-ge"))
     certificate = identity_certificate(str(determinant), expected, names, **assumptions)
@@ -173,13 +169,34 @@ def lean_certificate(file: Path, executable: str, project: Path | None, timeout:
     source = file.read_text(encoding="utf-8")
     scan = lean_trust_scan(source)
     if project:
-        command = [executable, "env", "lean", str(file.resolve())] if Path(executable).name.startswith("lake") else [executable, str(file.resolve())]
+        command = (
+            [executable, "env", "lean", str(file.resolve())]
+            if Path(executable).name.startswith("lake")
+            else [executable, str(file.resolve())]
+        )
         cwd = project.resolve()
     else:
         command = [executable, str(file.resolve())]
         cwd = file.parent.resolve()
-    completed = subprocess.run(command, cwd=cwd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout, check=False)
-    version = subprocess.run([executable, "--version"], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30, check=False)
+    completed = subprocess.run(
+        command,
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=timeout,
+        check=False,
+    )
+    version = subprocess.run(
+        [executable, "--version"],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=30,
+        check=False,
+    )
     compiled = completed.returncode == 0
     trusted = compiled and bool(scan["trust_clean"])
     certificate = {
@@ -200,11 +217,6 @@ def lean_certificate(file: Path, executable: str, project: Path | None, timeout:
         "warning": "Compilation with sorry, admit, or declared axioms is not a closed proof certificate.",
     }
     return certificate, 0 if compiled else 1
-
-
-def write_json(path: Path, data: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -239,7 +251,11 @@ def main() -> int:
     args = build_parser().parse_args()
     try:
         if args.command in {"sympy-identity", "sympy-matrix-det"}:
-            assumption_args = {"real": set(args.real), "positive": set(args.positive), "integer": set(args.integer)}
+            assumption_args = {
+                "real": set(args.real),
+                "positive": set(args.positive),
+                "integer": set(args.integer),
+            }
             if args.command == "sympy-identity":
                 result = identity_certificate(args.lhs, args.rhs, args.symbols, **assumption_args)
             else:
@@ -254,7 +270,12 @@ def main() -> int:
         write_json(args.output, result)
         print(f"compiled={result['compiled']} trusted={result['trusted_certificate']}")
         return returncode
-    except (RuntimeError, ValueError, subprocess.TimeoutExpired, json.JSONDecodeError) as exc:
+    except (
+        RuntimeError,
+        ValueError,
+        subprocess.TimeoutExpired,
+        json.JSONDecodeError,
+    ) as exc:
         print(f"ERROR: {exc}")
         return 2
 

@@ -4,21 +4,23 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
 import json
-import os
 import platform
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
-import inference_case as ic
 import finance_data as fd
+import inference_case as ic
 import research_seal as rs
 import review_protocol as rp
-
+from research_io import (
+    atomic_write_json as atomic_json,
+    contained_locator as locator,
+    resolve_locator as resolve,
+    utc_timestamp as timestamp,
+)
 
 SCHEMA_VERSION = 1
 STAGES = ("SCOPING", "DISCOVERY", "ANALYSIS", "FALSIFICATION", "SYNTHESIS", "RELEASED")
@@ -39,26 +41,6 @@ SOURCE_ROLES = ("primary", "secondary", "data", "software")
 
 class WorkspaceError(ValueError):
     """Raised when a workspace operation is invalid."""
-
-
-def timestamp() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
-
-
-def atomic_json(path: Path, data: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    handle, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
-    try:
-        with os.fdopen(handle, "w", encoding="utf-8", newline="\n") as stream:
-            json.dump(data, stream, ensure_ascii=False, indent=2)
-            stream.write("\n")
-        os.replace(temp_name, path)
-    except Exception:
-        try:
-            os.unlink(temp_name)
-        except OSError:
-            pass
-        raise
 
 
 def load(path: Path) -> tuple[Path, dict[str, Any]]:
@@ -98,19 +80,6 @@ def find(items: list[dict[str, Any]], item_id: str, label: str) -> dict[str, Any
     raise WorkspaceError(f"unknown {label}: {item_id}")
 
 
-def locator(path: Path, workspace_dir: Path) -> str:
-    resolved = path.resolve()
-    try:
-        return resolved.relative_to(workspace_dir).as_posix()
-    except ValueError:
-        return str(resolved)
-
-
-def resolve(value: str, workspace_dir: Path) -> Path:
-    path = Path(value)
-    return path if path.is_absolute() else workspace_dir / path
-
-
 def initialize(root: Path, slug: str, domain: str, question: str, claim: str) -> Path:
     case_path = ic.initialize(root, slug, domain, question, claim)
     workspace_path = case_path.parent / "workspace.json"
@@ -138,7 +107,11 @@ def initialize(root: Path, slug: str, domain: str, question: str, claim: str) ->
     }
     atomic_json(workspace_path, data)
     (workspace_path.parent / "research-journal.jsonl").write_text(
-        json.dumps({"time": stamp, "event": "workspace-initialized", "domain": domain}, ensure_ascii=False) + "\n",
+        json.dumps(
+            {"time": stamp, "event": "workspace-initialized", "domain": domain},
+            ensure_ascii=False,
+        )
+        + "\n",
         encoding="utf-8",
     )
     return workspace_path
@@ -172,7 +145,11 @@ def validate_workspace(
     if not str(data["question"]).strip():
         errors.append("workspace question must be non-empty")
 
-    collections = {"task": data["tasks"], "source": data["sources"], "run": data["runs"]}
+    collections = {
+        "task": data["tasks"],
+        "source": data["sources"],
+        "run": data["runs"],
+    }
     id_sets: dict[str, set[str]] = {}
     expected = {"task": "W", "source": "S", "run": "R"}
     all_ids: set[str] = set()
@@ -350,7 +327,10 @@ def validate_workspace(
                     else:
                         snapshot_errors, _ = fd.verify(manifest_path)
                         errors.extend(f"data snapshot: {error}" for error in snapshot_errors)
-            if policy.get("independent_review_required") and case_data.get("decision", {}).get("verdict") in {"SUPPORTED", "REFUTED"}:
+            if policy.get("independent_review_required") and case_data.get("decision", {}).get("verdict") in {
+                "SUPPORTED",
+                "REFUTED",
+            }:
                 review_value = str(data.get("review_adjudication", "")).strip()
                 if not review_value:
                     errors.append("release policy requires an independent review adjudication")
@@ -392,7 +372,9 @@ def render_brief(data: dict[str, Any], workspace_path: Path) -> str:
     for source in data["sources"]:
         location = source.get("url") or source.get("file")
         supports = ", ".join(source.get("supports", [])) or "context only"
-        lines.append(f"- **{source['id']}** `{source['role']}` supports `{supports}` — {source['citation']} [{location}]")
+        lines.append(
+            f"- **{source['id']}** `{source['role']}` supports `{supports}` — {source['citation']} [{location}]"
+        )
     lines.extend(["", "## Reproducible runs", ""])
     for run in data["runs"]:
         lines.append(
@@ -552,8 +534,7 @@ def execute_run(args: argparse.Namespace) -> int:
     if missing_outputs and returncode == 0:
         returncode = 3
         stderr_path.write_text(
-            stderr_path.read_text(encoding="utf-8")
-            + f"Declared outputs missing: {', '.join(missing_outputs)}\n",
+            stderr_path.read_text(encoding="utf-8") + f"Declared outputs missing: {', '.join(missing_outputs)}\n",
             encoding="utf-8",
             newline="\n",
         )
@@ -591,7 +572,12 @@ def execute_run(args: argparse.Namespace) -> int:
     errors, _ = validate_workspace(data, workspace_path, release=False)
     if errors:
         raise WorkspaceError("; ".join(errors))
-    save(workspace_path, data, "run-recorded", {"run_id": run_id, "task_id": args.task, "returncode": returncode})
+    save(
+        workspace_path,
+        data,
+        "run-recorded",
+        {"run_id": run_id, "task_id": args.task, "returncode": returncode},
+    )
     print(run_id)
     return returncode
 
@@ -630,7 +616,9 @@ def main(argv: list[str] | None = None) -> int:
             counts = {status: sum(task.get("status") == status for task in data["tasks"]) for status in TASK_STATUSES}
             case_path = resolve(str(data["case_file"]), path.parent)
             _, case_data = ic.load_case(case_path)
-            print(f"Workspace: {data['workspace_id']} | stage={data['stage']} | verdict={case_data['decision']['verdict']}")
+            print(
+                f"Workspace: {data['workspace_id']} | stage={data['stage']} | verdict={case_data['decision']['verdict']}"
+            )
             print("Tasks: " + ", ".join(f"{status}={counts[status]}" for status in TASK_STATUSES))
             print("Ready: " + (", ".join(ready) or "none"))
             print(f"Integrity: errors={len(errors)}, warnings={len(warnings)}")
@@ -652,6 +640,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         if args.command == "task":
+
             def add_task(data: dict[str, Any]) -> dict[str, Any]:
                 for dependency in args.depends_on:
                     find(data["tasks"], dependency, "task")
@@ -669,8 +658,10 @@ def main(argv: list[str] | None = None) -> int:
                     }
                 )
                 return {"task_id": task_id}
+
             mutate(args.workspace, add_task, "task-added")
         elif args.command == "set-task":
+
             def update_task(data: dict[str, Any]) -> dict[str, Any]:
                 task = find(data["tasks"], args.id, "task")
                 if args.status == "IN_PROGRESS":
@@ -681,8 +672,10 @@ def main(argv: list[str] | None = None) -> int:
                 task["status"] = args.status
                 task["note"] = args.note.strip()
                 return {"task_id": args.id, "status": args.status}
+
             mutate(args.workspace, update_task, "task-updated")
         elif args.command == "source":
+
             def add_source(data: dict[str, Any]) -> dict[str, Any]:
                 source_id = next_id(data["sources"], "S")
                 file_value = ""
@@ -710,8 +703,10 @@ def main(argv: list[str] | None = None) -> int:
                     }
                 )
                 return {"source_id": source_id}
+
             mutate(args.workspace, add_source, "source-added")
         elif args.command == "set-source":
+
             def update_source(data: dict[str, Any]) -> dict[str, Any]:
                 if args.note is None and args.supports is None:
                     raise WorkspaceError("set-source requires --note or --supports")
@@ -721,8 +716,10 @@ def main(argv: list[str] | None = None) -> int:
                 if args.supports is not None:
                     source["supports"] = list(dict.fromkeys(args.supports))
                 return {"source_id": args.id}
+
             mutate(args.workspace, update_source, "source-updated")
         elif args.command == "governance":
+
             def update_governance(data: dict[str, Any]) -> dict[str, Any]:
                 if args.plan_seal is None and not args.data_snapshot and args.review_adjudication is None:
                     raise WorkspaceError("governance requires at least one artifact")
@@ -743,6 +740,7 @@ def main(argv: list[str] | None = None) -> int:
                         raise WorkspaceError(f"review adjudication not found: {args.review_adjudication}")
                     data["review_adjudication"] = locator(args.review_adjudication, workspace_path.parent)
                 return {"governance_updated": True}
+
             mutate(args.workspace, update_governance, "governance-updated")
         elif args.command == "rehash-run":
             workspace_path, data = load(args.workspace)
@@ -759,9 +757,11 @@ def main(argv: list[str] | None = None) -> int:
                 output["sha256"] = ic.sha256(output_path)
             save(workspace_path, data, "run-rehashed", {"run_id": args.id})
         elif args.command == "set-stage":
+
             def update_stage(data: dict[str, Any]) -> dict[str, Any]:
                 data["stage"] = args.stage
                 return {"stage": args.stage}
+
             workspace_path, data = load(args.workspace)
             details = update_stage(data)
             errors, _ = validate_workspace(data, workspace_path, release=args.stage == "RELEASED")

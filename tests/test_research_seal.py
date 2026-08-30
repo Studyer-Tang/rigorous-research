@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-
 MODULE = Path(__file__).resolve().parents[1] / "scripts" / "research_seal.py"
+sys.path.insert(0, str(MODULE.parent))
 SPEC = importlib.util.spec_from_file_location("research_seal", MODULE)
 assert SPEC and SPEC.loader
 seal = importlib.util.module_from_spec(SPEC)
@@ -24,7 +25,10 @@ class ResearchSealTests(unittest.TestCase):
 
     def plan(self) -> Path:
         path = self.root / "plan.json"
-        path.write_text(json.dumps({field: f"fixed {field}" for field in seal.PLAN_FIELDS}), encoding="utf-8")
+        path.write_text(
+            json.dumps({field: f"fixed {field}" for field in seal.PLAN_FIELDS}),
+            encoding="utf-8",
+        )
         return path
 
     def test_plan_mutation_invalidates_seal(self):
@@ -49,8 +53,16 @@ class ResearchSealTests(unittest.TestCase):
         lock.write_text("sympy==1.14.0", encoding="utf-8")
         receipt_path = self.root / "receipt.json"
         receipt = seal.make_receipt(
-            [source], [output], [lock], command="verify claim", backend="sympy", backend_version="1.14.0",
-            semantic_domain="Q[x]", returncode=0, result="ESTABLISHED", base_dir=receipt_path.parent
+            [source],
+            [output],
+            [lock],
+            command="verify claim",
+            backend="sympy",
+            backend_version="1.14.0",
+            semantic_domain="Q[x]",
+            returncode=0,
+            result="ESTABLISHED",
+            base_dir=receipt_path.parent,
         )
         seal.write_json(receipt_path, receipt)
         self.assertEqual(seal.verify_receipt(receipt_path, True)[0], [])
@@ -67,8 +79,16 @@ class ResearchSealTests(unittest.TestCase):
         )
         receipt_path = self.root / "receipt.json"
         receipt = seal.make_receipt(
-            [source], [output], [], command="verify false claim", backend="sympy", backend_version="1.14.0",
-            semantic_domain="Z", returncode=1, result="NOT_ESTABLISHED", base_dir=receipt_path.parent
+            [source],
+            [output],
+            [],
+            command="verify false claim",
+            backend="sympy",
+            backend_version="1.14.0",
+            semantic_domain="Z",
+            returncode=1,
+            result="NOT_ESTABLISHED",
+            base_dir=receipt_path.parent,
         )
         seal.write_json(receipt_path, receipt)
         self.assertTrue(any("does not establish" in error for error in seal.verify_receipt(receipt_path, True)[0]))

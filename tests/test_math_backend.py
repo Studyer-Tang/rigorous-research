@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import importlib.util
+import sys
 import unittest
 from pathlib import Path
 
-
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "math_backend.py"
+sys.path.insert(0, str(MODULE_PATH.parent))
 SPEC = importlib.util.spec_from_file_location("math_backend", MODULE_PATH)
 assert SPEC and SPEC.loader
 mb = importlib.util.module_from_spec(SPEC)

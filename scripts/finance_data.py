@@ -4,14 +4,13 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
-import hashlib
 import json
 import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
 
+from research_io import sha256, sha256_bytes, utc_timestamp as timestamp, write_json
 
 SCHEMA_VERSION = 1
 PROVIDERS = {
@@ -31,18 +30,6 @@ PROVIDERS = {
         "format": "csv",
     },
 }
-
-
-def timestamp() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
-
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def safe_name(value: str) -> str:
@@ -84,7 +71,7 @@ def create_snapshot(
     if not raw:
         raise ValueError("refusing to snapshot an empty response")
     retrieved_at = retrieved_at or timestamp()
-    digest = hashlib.sha256(raw).hexdigest()
+    digest = sha256_bytes(raw)
     folder = root.resolve() / safe_name(provider) / safe_name(dataset) / f"{safe_name(as_of)}-{digest[:12]}"
     folder.mkdir(parents=True, exist_ok=False)
     raw_path = folder / f"raw.{extension.lstrip('.') or 'bin'}"
@@ -110,7 +97,7 @@ def create_snapshot(
         "license": license_text,
     }
     manifest_path = folder / "manifest.json"
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_json(manifest_path, manifest)
     return raw_path, manifest_path, manifest
 
 
@@ -121,9 +108,21 @@ def verify(manifest_path: Path) -> tuple[list[str], dict[str, Any]]:
         errors.append("unsupported snapshot manifest")
         return errors, manifest
     required = (
-        "provider", "dataset", "request", "retrieved_at", "as_of", "revision_policy", "raw_file",
-        "raw_sha256", "schema", "units", "timezone", "calendar", "identifier_system",
-        "adjustment_policy", "license",
+        "provider",
+        "dataset",
+        "request",
+        "retrieved_at",
+        "as_of",
+        "revision_policy",
+        "raw_file",
+        "raw_sha256",
+        "schema",
+        "units",
+        "timezone",
+        "calendar",
+        "identifier_system",
+        "adjustment_policy",
+        "license",
     )
     for field in required:
         if manifest.get(field) in (None, ""):
@@ -141,7 +140,13 @@ def compare(old_path: Path, new_path: Path) -> dict[str, Any]:
     new_errors, new = verify(new_path)
     if old_errors or new_errors:
         raise ValueError("cannot compare invalid snapshots: " + "; ".join(old_errors + new_errors))
-    metadata_fields = ("as_of", "revision_policy", "schema", "units", "adjustment_policy")
+    metadata_fields = (
+        "as_of",
+        "revision_policy",
+        "schema",
+        "units",
+        "adjustment_policy",
+    )
     return {
         "kind": "snapshot-diff",
         "old_manifest": str(old_path.resolve()),
@@ -151,7 +156,8 @@ def compare(old_path: Path, new_path: Path) -> dict[str, Any]:
         "new_raw_sha256": new["raw_sha256"],
         "metadata_changes": {
             field: {"old": old.get(field), "new": new.get(field)}
-            for field in metadata_fields if old.get(field) != new.get(field)
+            for field in metadata_fields
+            if old.get(field) != new.get(field)
         },
     }
 
@@ -191,11 +197,22 @@ def main(argv: list[str] | None = None) -> int:
             query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(request["url"]).query))
             extension = "zip" if request["format"].startswith("zip") else "csv"
             _, manifest, _ = create_snapshot(
-                raw, args.root, provider=request["provider"], dataset=request["dataset"], url=request["url"],
-                query=query, as_of=args.as_of, revision_policy=request["revision_policy"], schema=args.schema,
-                units=args.units, timezone=args.timezone, calendar=args.calendar,
-                identifier_system=args.identifier_system, adjustment_policy=args.adjustment_policy,
-                license_text=request["license"], extension=extension,
+                raw,
+                args.root,
+                provider=request["provider"],
+                dataset=request["dataset"],
+                url=request["url"],
+                query=query,
+                as_of=args.as_of,
+                revision_policy=request["revision_policy"],
+                schema=args.schema,
+                units=args.units,
+                timezone=args.timezone,
+                calendar=args.calendar,
+                identifier_system=args.identifier_system,
+                adjustment_policy=args.adjustment_policy,
+                license_text=request["license"],
+                extension=extension,
             )
             print(manifest)
             return 0

@@ -4,13 +4,9 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
-import hashlib
 import json
-import os
 import re
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -18,7 +14,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 import research_seal as rs
-
+from research_io import atomic_write_json as atomic_json, contained_locator, sha256, utc_timestamp as timestamp
 
 SCHEMA_VERSION = 3
 DOMAINS = ("mathematics", "statistics", "finance")
@@ -40,8 +36,19 @@ EVIDENCE_KINDS = (
 )
 EVIDENCE_ROLES = ("decisive", "diagnostic", "suggestive")
 CONTRACT_FIELDS = {
-    "mathematics": ("ambient_object", "coefficient_domain", "quantifiers", "equality_semantics"),
-    "statistics": ("population", "sampling_unit", "outcome", "estimand", "identification"),
+    "mathematics": (
+        "ambient_object",
+        "coefficient_domain",
+        "quantifiers",
+        "equality_semantics",
+    ),
+    "statistics": (
+        "population",
+        "sampling_unit",
+        "outcome",
+        "estimand",
+        "identification",
+    ),
     "finance": (
         "universe",
         "clock",
@@ -102,30 +109,10 @@ class ContractError(ValueError):
     """Raised when a case mutation would violate the schema."""
 
 
-def timestamp() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
-
-
 def parse_slug(value: str) -> str:
     if not SLUG_RE.fullmatch(value):
         raise argparse.ArgumentTypeError("use lowercase letters, digits, and hyphens (max 63 characters)")
     return value
-
-
-def atomic_json(path: Path, data: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    handle, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
-    try:
-        with os.fdopen(handle, "w", encoding="utf-8", newline="\n") as stream:
-            json.dump(data, stream, ensure_ascii=False, indent=2)
-            stream.write("\n")
-        os.replace(temp_name, path)
-    except Exception:
-        try:
-            os.unlink(temp_name)
-        except OSError:
-            pass
-        raise
 
 
 def load_case(path: Path) -> tuple[Path, dict[str, Any]]:
@@ -164,14 +151,6 @@ def find(items: list[dict[str, Any]], item_id: str, label: str) -> dict[str, Any
     raise ContractError(f"unknown {label}: {item_id}")
 
 
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def resolve_locator(locator: str, case_dir: Path) -> Path:
     path = Path(locator)
     return path if path.is_absolute() else case_dir / path
@@ -181,11 +160,7 @@ def file_record(path: Path, case_dir: Path) -> tuple[str, str]:
     resolved = path.resolve()
     if not resolved.is_file():
         raise ContractError(f"evidence file not found: {resolved}")
-    try:
-        locator = resolved.relative_to(case_dir).as_posix()
-    except ValueError:
-        locator = str(resolved)
-    return locator, sha256(resolved)
+    return contained_locator(resolved, case_dir), sha256(resolved)
 
 
 def initialize(root: Path, slug: str, domain: str, question: str, claim: str) -> Path:
@@ -230,7 +205,11 @@ def initialize(root: Path, slug: str, domain: str, question: str, claim: str) ->
     (case_dir / "artifacts").mkdir(exist_ok=True)
     atomic_json(case_path, data)
     (case_dir / "journal.jsonl").write_text(
-        json.dumps({"time": stamp, "event": "initialized", "domain": domain}, ensure_ascii=False) + "\n",
+        json.dumps(
+            {"time": stamp, "event": "initialized", "domain": domain},
+            ensure_ascii=False,
+        )
+        + "\n",
         encoding="utf-8",
     )
     return case_path
@@ -266,7 +245,12 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         errors.append("contract must be an object")
         return errors, warnings
 
-    collections = {"claim": data["claims"], "assumption": data["assumptions"], "check": data["checks"], "evidence": data["evidence"]}
+    collections = {
+        "claim": data["claims"],
+        "assumption": data["assumptions"],
+        "check": data["checks"],
+        "evidence": data["evidence"],
+    }
     ids: dict[str, set[str]] = {}
     all_ids: set[str] = set()
     for label, items in collections.items():
@@ -280,8 +264,7 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         malformed = [
             value
             for value in values
-            if isinstance(value, str)
-            and (not ID_RE.fullmatch(value) or not value.startswith(ID_PREFIXES[label]))
+            if isinstance(value, str) and (not ID_RE.fullmatch(value) or not value.startswith(ID_PREFIXES[label]))
         ]
         if malformed:
             errors.append(f"malformed {label} IDs: {', '.join(sorted(malformed))}")
@@ -338,7 +321,10 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
             errors.append(f"{cid}: invalid claim status")
         if not str(item.get("statement", "")).strip():
             errors.append(f"{cid}: statement is required")
-        for field, allowed in (("assumption_ids", assumption_ids), ("evidence_ids", evidence_ids)):
+        for field, allowed in (
+            ("assumption_ids", assumption_ids),
+            ("evidence_ids", evidence_ids),
+        ):
             links = item.get(field, [])
             if not isinstance(links, list):
                 errors.append(f"{cid}: {field} must be a list")
@@ -347,7 +333,6 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
             if unknown:
                 errors.append(f"{cid}: unknown {field}: {', '.join(unknown)}")
 
-    check_ids = ids.get("check", set())
     for item in data["checks"]:
         kid = item.get("id", "?")
         if item.get("kind") not in CHECK_KINDS[domain]:
@@ -434,7 +419,8 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
                     errors.extend(f"{item['id']}: {error}" for error in receipt_errors)
                     output_files = {
                         str(rs.resolve_locator(str(record.get("file", "")), receipt_path.parent).resolve())
-                        for record in receipt.get("outputs", []) if isinstance(record, dict)
+                        for record in receipt.get("outputs", [])
+                        if isinstance(record, dict)
                     }
                     if str(artifact.resolve()) not in output_files:
                         errors.append(f"{item['id']}: verification receipt does not bind the evidence artifact")
@@ -450,7 +436,9 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         triggered = [item["id"] for item in target_checks if item.get("outcome") == "TRIGGERED"]
         if triggered:
             errors.append(f"SUPPORTED claim has triggered falsifiers: {', '.join(triggered)}")
-        cleared = {item.get("kind") for item in target_checks if item.get("outcome") == "CLEARED" and item.get("evidence_ids")}
+        cleared = {
+            item.get("kind") for item in target_checks if item.get("outcome") == "CLEARED" and item.get("evidence_ids")
+        }
         missing_checks = [kind for kind in REQUIRED_CHECKS[domain] if kind not in cleared]
         if missing_checks:
             errors.append(f"SUPPORTED {domain} claim lacks cleared checks: {', '.join(missing_checks)}")
@@ -470,8 +458,7 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
             errors.append("REFUTED release requires decisive decision evidence")
     elif verdict in {"INCONCLUSIVE", "MISSPECIFIED"}:
         if verdict == "MISSPECIFIED" and not any(
-            item.get("kind") == "specification" and item.get("outcome") == "TRIGGERED"
-            for item in target_checks
+            item.get("kind") == "specification" and item.get("outcome") == "TRIGGERED" for item in target_checks
         ):
             errors.append("MISSPECIFIED release requires a triggered specification check")
         if verdict == "MISSPECIFIED" and not decisive_decision_evidence:
@@ -502,17 +489,32 @@ def render(data: dict[str, Any]) -> str:
     ]
     for key, value in data.get("contract", {}).items():
         lines.append(f"| `{key}` | {escape(value) or '-'} |")
-    lines.extend(["", "## Claims", "", "| ID | Status | Statement | Scope | Assumptions |", "|---|---|---|---|---|"])
+    lines.extend(
+        [
+            "",
+            "## Claims",
+            "",
+            "| ID | Status | Statement | Scope | Assumptions |",
+            "|---|---|---|---|---|",
+        ]
+    )
     for item in data.get("claims", []):
         lines.append(
             f"| {item['id']} | {item['status']} | {escape(item['statement'])} | {escape(item.get('scope', '')) or '-'} | "
             f"{', '.join(item.get('assumption_ids', [])) or '-'} |"
         )
-    lines.extend(["", "## Assumption surface", "", "| ID | Status | Role | Statement | Evidence |", "|---|---|---|---|---|"])
+    lines.extend(
+        [
+            "",
+            "## Assumption surface",
+            "",
+            "| ID | Status | Role | Statement | Evidence |",
+            "|---|---|---|---|---|",
+        ]
+    )
     for item in data.get("assumptions", []):
         lines.append(
-            f"| {item['id']} | {item['status']} | {escape(item['role'])} | {escape(item['statement'])} | "
-            f"{', '.join(item.get('evidence_ids', [])) or '-'} |"
+            f"| {item['id']} | {item['status']} | {escape(item['role'])} | {escape(item['statement'])} | {', '.join(item.get('evidence_ids', [])) or '-'} |"
         )
     lines.extend(
         [
@@ -533,8 +535,7 @@ def render(data: dict[str, Any]) -> str:
     for item in data.get("evidence", []):
         independence = "independent" if item.get("independent") else "primary path"
         lines.append(
-            f"- **{item['id']}** `{item['kind']}` `{item.get('role', 'unclassified')}` "
-            f"({independence}) — {item['summary']} [{item['locator']}]"
+            f"- **{item['id']}** `{item['kind']}` `{item.get('role', 'unclassified')}` ({independence}) — {item['summary']} [{item['locator']}]"
         )
     decision = data.get("decision", {})
     lines.extend(
@@ -687,19 +688,33 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         if args.command == "set-contract":
+
             def change_contract(data: dict[str, Any]) -> dict[str, Any]:
                 if args.field not in CONTRACT_FIELDS[data["domain"]]:
                     raise ContractError(f"{args.field!r} is not a contract field for {data['domain']}")
                 data["contract"][args.field] = args.value.strip()
                 return {"field": args.field}
+
             mutate(args.case, change_contract, "contract-set")
         elif args.command == "claim":
+
             def add_claim(data: dict[str, Any]) -> dict[str, Any]:
                 item_id = next_id(data["claims"], "C")
-                data["claims"].append({"id": item_id, "statement": args.statement.strip(), "scope": args.scope.strip(), "status": "OPEN", "assumption_ids": [], "evidence_ids": []})
+                data["claims"].append(
+                    {
+                        "id": item_id,
+                        "statement": args.statement.strip(),
+                        "scope": args.scope.strip(),
+                        "status": "OPEN",
+                        "assumption_ids": [],
+                        "evidence_ids": [],
+                    }
+                )
                 return {"claim_id": item_id}
+
             mutate(args.case, add_claim, "claim-added")
         elif args.command == "set-claim":
+
             def update_claim(data: dict[str, Any]) -> dict[str, Any]:
                 if args.statement is None and args.scope is None:
                     raise ContractError("set-claim requires --statement or --scope")
@@ -711,14 +726,26 @@ def main(argv: list[str] | None = None) -> int:
                 if args.scope is not None:
                     item["scope"] = args.scope.strip()
                 return {"claim_id": args.id}
+
             mutate(args.case, update_claim, "claim-updated")
         elif args.command == "assumption":
+
             def add_assumption(data: dict[str, Any]) -> dict[str, Any]:
                 item_id = next_id(data["assumptions"], "A")
-                data["assumptions"].append({"id": item_id, "statement": args.statement.strip(), "role": args.role.strip(), "status": "UNTESTED", "evidence_ids": []})
+                data["assumptions"].append(
+                    {
+                        "id": item_id,
+                        "statement": args.statement.strip(),
+                        "role": args.role.strip(),
+                        "status": "UNTESTED",
+                        "evidence_ids": [],
+                    }
+                )
                 return {"assumption_id": item_id}
+
             mutate(args.case, add_assumption, "assumption-added")
         elif args.command == "check":
+
             def add_check(data: dict[str, Any]) -> dict[str, Any]:
                 if args.kind not in CHECK_KINDS[data["domain"]]:
                     raise ContractError(f"check kind {args.kind!r} is invalid for {data['domain']}")
@@ -738,8 +765,10 @@ def main(argv: list[str] | None = None) -> int:
                     }
                 )
                 return {"check_id": item_id}
+
             mutate(args.case, add_check, "check-added")
         elif args.command == "evidence":
+
             def add_evidence(data: dict[str, Any]) -> dict[str, Any]:
                 path, _ = load_case(args.case)
                 checksum = None
@@ -760,6 +789,7 @@ def main(argv: list[str] | None = None) -> int:
                     }
                 )
                 return {"evidence_id": item_id}
+
             mutate(args.case, add_evidence, "evidence-added")
         elif args.command == "rehash-evidence":
             case_path, data = load_case(args.case)
@@ -775,13 +805,22 @@ def main(argv: list[str] | None = None) -> int:
                 case_path,
                 data,
                 "evidence-rehashed",
-                {"evidence_id": args.id, "previous_sha256": previous, "sha256": item["sha256"]},
+                {
+                    "evidence_id": args.id,
+                    "previous_sha256": previous,
+                    "sha256": item["sha256"],
+                },
             )
         elif args.command == "link":
+
             def add_link(data: dict[str, Any]) -> dict[str, Any]:
                 find(data["evidence"], args.evidence, "evidence")
                 prefix = args.target[:1]
-                mapping = {"C": ("claims", "claim"), "A": ("assumptions", "assumption"), "K": ("checks", "check")}
+                mapping = {
+                    "C": ("claims", "claim"),
+                    "A": ("assumptions", "assumption"),
+                    "K": ("checks", "check"),
+                }
                 if prefix not in mapping:
                     raise ContractError("target must be a claim, assumption, or check ID")
                 collection, label = mapping[prefix]
@@ -790,21 +829,27 @@ def main(argv: list[str] | None = None) -> int:
                 if args.evidence not in target["evidence_ids"]:
                     target["evidence_ids"].append(args.evidence)
                 return {"target": args.target, "evidence_id": args.evidence}
+
             mutate(args.case, add_link, "evidence-linked")
         elif args.command == "use-assumption":
+
             def bind_assumption(data: dict[str, Any]) -> dict[str, Any]:
                 claim_item = find(data["claims"], args.claim, "claim")
                 find(data["assumptions"], args.assumption, "assumption")
                 if args.assumption not in claim_item["assumption_ids"]:
                     claim_item["assumption_ids"].append(args.assumption)
                 return {"claim_id": args.claim, "assumption_id": args.assumption}
+
             mutate(args.case, bind_assumption, "assumption-bound")
         elif args.command == "set-assumption":
+
             def update_assumption(data: dict[str, Any]) -> dict[str, Any]:
                 find(data["assumptions"], args.id, "assumption")["status"] = args.status
                 return {"assumption_id": args.id, "status": args.status}
+
             mutate(args.case, update_assumption, "assumption-updated")
         elif args.command == "set-check":
+
             def update_check(data: dict[str, Any]) -> dict[str, Any]:
                 if args.outcome != "OPEN" and not args.result.strip():
                     raise ContractError("a non-OPEN check outcome requires --result")
@@ -812,8 +857,10 @@ def main(argv: list[str] | None = None) -> int:
                 item["outcome"] = args.outcome
                 item["result"] = args.result.strip() if args.outcome != "OPEN" else ""
                 return {"check_id": args.id, "outcome": args.outcome}
+
             mutate(args.case, update_check, "check-updated")
         elif args.command == "decide":
+
             def record_decision(data: dict[str, Any]) -> dict[str, Any]:
                 claim_item = find(data["claims"], args.claim, "claim")
                 for evidence_id in args.evidence:
@@ -829,6 +876,7 @@ def main(argv: list[str] | None = None) -> int:
                     "reproduction": args.reproduction.strip(),
                 }
                 return {"claim_id": args.claim, "verdict": args.verdict}
+
             mutate(args.case, record_decision, "decision-recorded")
         print("OK")
         return 0

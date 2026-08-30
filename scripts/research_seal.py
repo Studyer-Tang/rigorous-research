@@ -4,15 +4,21 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
-import hashlib
 import json
 import platform
 import sys
-import os
 from pathlib import Path
 from typing import Any
 
+from research_io import (
+    canonical_hash,
+    load_json_object as load_object,
+    portable_locator,
+    resolve_locator,
+    sha256,
+    utc_timestamp as timestamp,
+    write_json,
+)
 
 SCHEMA_VERSION = 1
 VALIDATOR_VERSION = "1.0.0"
@@ -26,45 +32,6 @@ PLAN_FIELDS = (
     "decision_rule",
     "multiplicity_family",
 )
-
-
-def timestamp() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
-
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
-def canonical_hash(value: Any) -> str:
-    encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    return hashlib.sha256(encoded).hexdigest()
-
-
-def load_object(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"JSON root must be an object: {path}")
-    return value
-
-
-def write_json(path: Path, value: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-
-
-def portable_locator(path: Path, base_dir: Path | None) -> str:
-    resolved = path.resolve()
-    return os.path.relpath(resolved, base_dir.resolve()).replace("\\", "/") if base_dir else str(resolved)
-
-
-def resolve_locator(value: str, base_dir: Path) -> Path:
-    path = Path(value)
-    return path if path.is_absolute() else base_dir / path
 
 
 def seal_plan(plan_path: Path, protocol: str, base_dir: Path | None = None) -> dict[str, Any]:
@@ -159,7 +126,15 @@ def verify_receipt(receipt_path: Path, require_established: bool = False) -> tup
     if receipt.get("kind") != "verification-receipt" or receipt.get("schema_version") != SCHEMA_VERSION:
         errors.append("unsupported verification receipt")
         return errors, receipt
-    for field in ("semantic_domain", "command", "backend", "inputs", "outputs", "result", "returncode"):
+    for field in (
+        "semantic_domain",
+        "command",
+        "backend",
+        "inputs",
+        "outputs",
+        "result",
+        "returncode",
+    ):
         if field not in receipt:
             errors.append(f"receipt is missing {field}")
     for collection in ("inputs", "outputs", "environment_locks"):
@@ -168,7 +143,11 @@ def verify_receipt(receipt_path: Path, require_established: bool = False) -> tup
             errors.append(f"receipt {collection} must be a list")
             continue
         for record in records:
-            path = resolve_locator(str(record.get("file", "")), receipt_path.parent) if isinstance(record, dict) else Path("")
+            path = (
+                resolve_locator(str(record.get("file", "")), receipt_path.parent)
+                if isinstance(record, dict)
+                else Path("")
+            )
             if not path.is_file():
                 errors.append(f"receipt-bound {collection} file is missing: {path}")
             elif sha256(path) != record.get("sha256"):
@@ -191,7 +170,10 @@ def verify_receipt(receipt_path: Path, require_established: bool = False) -> tup
             if backend_name == "sympy":
                 if output.get("backend") != "sympy" or output.get("backend_version") != backend.get("version"):
                     errors.append("SymPy output/backend version does not match receipt")
-                if output.get("identity_established") is not True or output.get("recommended_evidence_role") != "decisive":
+                if (
+                    output.get("identity_established") is not True
+                    or output.get("recommended_evidence_role") != "decisive"
+                ):
                     errors.append("SymPy output is not a decisive exact certificate")
             elif backend_name == "lean":
                 if output.get("backend") != "lean" or output.get("backend_version") != backend.get("version"):

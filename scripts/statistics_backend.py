@@ -5,13 +5,13 @@ from __future__ import annotations
 
 import argparse
 import csv
-import json
 import math
 import random
 import statistics
 from pathlib import Path
 from typing import Any
 
+from research_io import write_json as write
 
 SCHEMA_VERSION = 1
 
@@ -43,7 +43,11 @@ def hac_standard_error(values: list[float], lags: int) -> float:
 
 
 def circular_block_bootstrap_ci(
-    values: list[float], block_length: int, replications: int, seed: int, alpha: float = 0.05
+    values: list[float],
+    block_length: int,
+    replications: int,
+    seed: int,
+    alpha: float = 0.05,
 ) -> tuple[float, float]:
     n = len(values)
     if n < 2 or not 1 <= block_length <= n or replications < 100 or not 0 < alpha < 1:
@@ -78,7 +82,11 @@ def holm(p_values: list[float], alpha: float = 0.05) -> list[dict[str, Any]]:
     for rank, ((index, value), adjusted) in enumerate(zip(ordered, adjusted_sorted)):
         threshold = alpha / (m - rank)
         reject_prefix = reject_prefix and value <= threshold
-        result[index] = {"p_value": value, "adjusted_p": adjusted, "reject": reject_prefix}
+        result[index] = {
+            "p_value": value,
+            "adjusted_p": adjusted,
+            "reject": reject_prefix,
+        }
     return result  # type: ignore[return-value]
 
 
@@ -94,7 +102,10 @@ def benjamini_hochberg(p_values: list[float], q: float = 0.05) -> list[dict[str,
         rank = reverse_rank + 1
         running = min(running, value * m / rank)
         adjusted[index] = min(1.0, running)
-    cutoff_rank = max((rank for rank, (_, value) in enumerate(ordered, start=1) if value <= q * rank / m), default=0)
+    cutoff_rank = max(
+        (rank for rank, (_, value) in enumerate(ordered, start=1) if value <= q * rank / m),
+        default=0,
+    )
     rejected = {index for index, _ in ordered[:cutoff_rank]}
     return [
         {"p_value": value, "adjusted_p": adjusted[index], "reject": index in rejected}
@@ -114,7 +125,10 @@ def analyze(values: list[float], hac_lags: int, block_length: int, replications:
         "sample_size": len(values),
         "mean": estimate,
         "methods": {
-            "iid": {"standard_error": iid_se, "ci95": [estimate - 1.96 * iid_se, estimate + 1.96 * iid_se]},
+            "iid": {
+                "standard_error": iid_se,
+                "ci95": [estimate - 1.96 * iid_se, estimate + 1.96 * iid_se],
+            },
             "newey_west": {
                 "lags": hac_lags,
                 "kernel": "Bartlett",
@@ -122,7 +136,9 @@ def analyze(values: list[float], hac_lags: int, block_length: int, replications:
                 "ci95": [estimate - 1.96 * hac_se, estimate + 1.96 * hac_se],
             },
             "circular_block_bootstrap": {
-                "block_length": block_length, "replications": replications, "seed": seed,
+                "block_length": block_length,
+                "replications": replications,
+                "seed": seed,
                 "percentile_ci95": list(block_ci),
             },
         },
@@ -140,7 +156,9 @@ def draw_innovation(rng: random.Random, distribution: str) -> float:
     raise ValueError("unknown innovation distribution")
 
 
-def coverage_simulation(n: int, phi: float, replications: int, hac_lags: int, distribution: str, seed: int) -> dict[str, Any]:
+def coverage_simulation(
+    n: int, phi: float, replications: int, hac_lags: int, distribution: str, seed: int
+) -> dict[str, Any]:
     if n < 20 or replications < 100 or abs(phi) >= 1 or not 0 <= hac_lags < n:
         raise ValueError("invalid coverage simulation configuration")
     rng = random.Random(seed)
@@ -165,13 +183,25 @@ def coverage_simulation(n: int, phi: float, replications: int, hac_lags: int, di
     return {
         "schema_version": SCHEMA_VERSION,
         "kind": "coverage-simulation",
-        "dgp": {"model": "stationary AR(1)", "phi": phi, "innovation": distribution, "true_mean": 0.0},
+        "dgp": {
+            "model": "stationary AR(1)",
+            "phi": phi,
+            "innovation": distribution,
+            "true_mean": 0.0,
+        },
         "sample_size": n,
         "replications": replications,
         "seed": seed,
         "methods": {
-            "iid_normal": {"coverage": covered_iid / replications, "mean_width": mean(widths_iid)},
-            "newey_west_normal": {"lags": hac_lags, "coverage": covered_hac / replications, "mean_width": mean(widths_hac)},
+            "iid_normal": {
+                "coverage": covered_iid / replications,
+                "mean_width": mean(widths_iid),
+            },
+            "newey_west_normal": {
+                "lags": hac_lags,
+                "coverage": covered_hac / replications,
+                "mean_width": mean(widths_hac),
+            },
         },
         "target_coverage": 0.95,
         "monte_carlo_se_at_target": math.sqrt(0.95 * 0.05 / replications),
@@ -193,11 +223,6 @@ def read_column(path: Path, column: str) -> list[float]:
             except ValueError as exc:
                 raise ValueError(f"non-numeric value at row {row_number}: {text}") from exc
     return values
-
-
-def write(path: Path, value: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -231,13 +256,31 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         if args.command == "mean":
-            result = analyze(read_column(args.csv, args.column), args.hac_lags, args.block_length, args.replications, args.seed)
+            result = analyze(
+                read_column(args.csv, args.column),
+                args.hac_lags,
+                args.block_length,
+                args.replications,
+                args.seed,
+            )
         elif args.command == "multiplicity":
             method = holm if args.method == "holm" else benjamini_hochberg
-            result = {"schema_version": SCHEMA_VERSION, "kind": "multiplicity", "method": args.method, "level": args.level,
-                      "hypotheses": method(args.p, args.level)}
+            result = {
+                "schema_version": SCHEMA_VERSION,
+                "kind": "multiplicity",
+                "method": args.method,
+                "level": args.level,
+                "hypotheses": method(args.p, args.level),
+            }
         else:
-            result = coverage_simulation(args.n, args.phi, args.replications, args.hac_lags, args.innovation, args.seed)
+            result = coverage_simulation(
+                args.n,
+                args.phi,
+                args.replications,
+                args.hac_lags,
+                args.innovation,
+                args.seed,
+            )
         write(args.output, result)
         print(args.output)
         return 0

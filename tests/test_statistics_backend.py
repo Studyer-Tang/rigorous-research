@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import importlib.util
 import math
+import sys
 import unittest
 from pathlib import Path
 
-
 MODULE = Path(__file__).resolve().parents[1] / "scripts" / "statistics_backend.py"
+sys.path.insert(0, str(MODULE.parent))
 SPEC = importlib.util.spec_from_file_location("statistics_backend", MODULE)
 assert SPEC and SPEC.loader
 stats = importlib.util.module_from_spec(SPEC)

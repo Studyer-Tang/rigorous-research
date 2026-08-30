@@ -4,26 +4,22 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
 import json
 import re
 import unicodedata
+import urllib.error
 import urllib.parse
 import urllib.request
-import urllib.error
 import xml.etree.ElementTree as ET
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
+from research_io import utc_timestamp as timestamp, write_json
 
 CROSSREF = "https://api.crossref.org/works"
 ARXIV = "https://export.arxiv.org/api/query"
 ATOM = {"a": "http://www.w3.org/2005/Atom", "x": "http://arxiv.org/schemas/atom"}
-
-
-def timestamp() -> str:
-    return dt.datetime.now(dt.timezone.utc).isoformat()
 
 
 def request_bytes(url: str) -> bytes:
@@ -49,7 +45,7 @@ def normalize_doi(value: str) -> str:
 
 
 def arxiv_identifier(value: str) -> str:
-    match = re.search(r"arxiv\.org/abs/([^?#]+)", value, re.I)
+    match = re.search(r"arxiv\.org/abs/([^?#]+)", value, re.IGNORECASE)
     identifier = match.group(1) if match else value
     return re.sub(r"v\d+$", "", identifier.strip())
 
@@ -82,7 +78,11 @@ def parse_crossref(payload: bytes) -> list[dict[str, Any]]:
             {
                 "title": title,
                 "authors": authors,
-                "year": year_from_parts(item.get("published-print"), item.get("published-online"), item.get("created")),
+                "year": year_from_parts(
+                    item.get("published-print"),
+                    item.get("published-online"),
+                    item.get("created"),
+                ),
                 "doi": doi,
                 "arxiv_id": "",
                 "url": item.get("URL") or (f"https://doi.org/{doi}" if doi else ""),
@@ -103,8 +103,7 @@ def parse_arxiv(payload: bytes) -> list[dict[str, Any]]:
         if not title:
             continue
         authors = [
-            clean_text(node.findtext("a:name", default="", namespaces=ATOM))
-            for node in entry.findall("a:author", ATOM)
+            clean_text(node.findtext("a:name", default="", namespaces=ATOM)) for node in entry.findall("a:author", ATOM)
         ]
         published = entry.findtext("a:published", default="", namespaces=ATOM)
         entry_url = entry.findtext("a:id", default="", namespaces=ATOM)
@@ -163,7 +162,9 @@ def review_reason(left: dict[str, Any], right: dict[str, Any], threshold: float)
     return None
 
 
-def merge_records(records: list[dict[str, Any]], threshold: float = 0.94) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def merge_records(
+    records: list[dict[str, Any]], threshold: float = 0.94
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     unique: list[dict[str, Any]] = []
     decisions: list[dict[str, Any]] = []
     ordered = sorted(
@@ -262,6 +263,9 @@ def render_bibtex(records: list[dict[str, Any]]) -> str:
 
 
 def render_markdown(data: dict[str, Any]) -> str:
+    auto_merges = sum(item["disposition"] == "AUTO_MERGED" for item in data["dedup_decisions"])
+    review_pairs = sum(item["disposition"] == "REVIEW_REQUIRED" for item in data["dedup_decisions"])
+    summary = f"Raw records: {data['raw_count']}; unique candidates: {data['unique_count']}; auto-merged: {auto_merges}; review-required pairs: {review_pairs}."
     lines = [
         "# Literature candidate matrix",
         "",
@@ -269,9 +273,7 @@ def render_markdown(data: dict[str, Any]) -> str:
         "",
         f"Retrieved: {data['retrieved_at']}",
         "",
-        f"Raw records: {data['raw_count']}; unique candidates: {data['unique_count']}; auto-merged: "
-        f"{sum(item['disposition'] == 'AUTO_MERGED' for item in data['dedup_decisions'])}; review-required pairs: "
-        f"{sum(item['disposition'] == 'REVIEW_REQUIRED' for item in data['dedup_decisions'])}.",
+        summary,
         "",
         "| ID | Year | Title | Authors | DOI / arXiv | Providers | Verification |",
         "|---|---:|---|---|---|---|---|",
@@ -319,28 +321,63 @@ def main() -> int:
     request_errors = []
     if "crossref" in providers:
         params = urllib.parse.urlencode(
-            {"query.bibliographic": args.query, "rows": args.limit, "select": "DOI,title,author,published-print,published-online,created,URL,type,container-title,abstract"}
+            {
+                "query.bibliographic": args.query,
+                "rows": args.limit,
+                "select": "DOI,title,author,published-print,published-online,created,URL,type,container-title,abstract",
+            }
         )
         url = f"{CROSSREF}?{params}"
         try:
             payload = request_bytes(url)
             parsed = parse_crossref(payload)
             raw_records.extend(parsed)
-            requests.append({"provider": "crossref", "url": url, "records": len(parsed), "status": "OK"})
+            requests.append(
+                {
+                    "provider": "crossref",
+                    "url": url,
+                    "records": len(parsed),
+                    "status": "OK",
+                }
+            )
         except (OSError, ValueError, json.JSONDecodeError) as exc:
-            request_errors.append({"provider": "crossref", "url": url, "error": f"{type(exc).__name__}: {exc}"})
+            request_errors.append(
+                {
+                    "provider": "crossref",
+                    "url": url,
+                    "error": f"{type(exc).__name__}: {exc}",
+                }
+            )
     if "arxiv" in providers:
         params = urllib.parse.urlencode(
-            {"search_query": f"all:{args.query}", "start": 0, "max_results": args.limit, "sortBy": "relevance"}
+            {
+                "search_query": f"all:{args.query}",
+                "start": 0,
+                "max_results": args.limit,
+                "sortBy": "relevance",
+            }
         )
         url = f"{ARXIV}?{params}"
         try:
             payload = request_bytes(url)
             parsed = parse_arxiv(payload)
             raw_records.extend(parsed)
-            requests.append({"provider": "arxiv", "url": url, "records": len(parsed), "status": "OK"})
+            requests.append(
+                {
+                    "provider": "arxiv",
+                    "url": url,
+                    "records": len(parsed),
+                    "status": "OK",
+                }
+            )
         except (OSError, ValueError, ET.ParseError) as exc:
-            request_errors.append({"provider": "arxiv", "url": url, "error": f"{type(exc).__name__}: {exc}"})
+            request_errors.append(
+                {
+                    "provider": "arxiv",
+                    "url": url,
+                    "error": f"{type(exc).__name__}: {exc}",
+                }
+            )
     records, decisions = merge_records(raw_records, args.fuzzy_threshold)
     data = {
         "schema_version": 1,
@@ -357,7 +394,7 @@ def main() -> int:
     }
     for path in (args.output, args.markdown, args.bibtex):
         path.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    write_json(args.output, data)
     args.markdown.write_text(render_markdown(data), encoding="utf-8", newline="\n")
     args.bibtex.write_text(render_bibtex(records), encoding="utf-8", newline="\n")
     print(f"raw={len(raw_records)} unique={len(records)} merged={len(decisions)}")
