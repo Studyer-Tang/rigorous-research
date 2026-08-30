@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "kind": "blind-review-packet",
+  "created_at": "2026-08-30T02:54:31.904652+00:00",
+  "author_case_commitment": "495b0a4894b503b118f0daee2692f0fa865e37145e89eee6246757a1d566a4ff",
+  "blinded_case": {
+    "domain": "mathematics",
+    "question": "For T_n(rho)=(rho^|i-j|), what is det T_n(rho) over Z[rho]?",
+    "contract": {
+      "ambient_object": "Matrices M_n(Z[rho]) and their determinants in the commutative polynomial ring Z[rho].",
+      "coefficient_domain": "Z[rho], with specialization to an arbitrary commutative ring only after the polynomial identity is proved.",
+      "quantifiers": "Every integer n>=1; rho is an indeterminate. No genericity exclusion at rho=+-1.",
+      "equality_semantics": "Exact equality of polynomials in Z[rho]."
+    },
+    "claims": [
+      {
+        "id": "C001",
+        "statement": "For every integer n>=1, det T_n(rho)=(1-rho^2)^(n-1) in Z[rho].",
+        "assumption_ids": [],
+        "evidence_ids": [
+          "E002",
+          "E004"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "checks": [
+      {
+        "id": "K001",
+        "target_claim": "C001",
+        "kind": "typecheck",
+        "target": "The matrix, determinant, coefficient ring, indices, and specializations.",
+        "falsifier": "An undefined entry, illegal index, noncommutative determinant step, or excluded specialization.",
+        "coverage": "All definitions in Z[rho], n=1 boundary, and rho=+-1 specializations.",
+        "evidence_ids": [
+          "E001",
+          "E002"
+        ]
+      },
+      {
+        "id": "K002",
+        "target_claim": "C001",
+        "kind": "proof",
+        "target": "The all-n determinant identity.",
+        "falsifier": "A determinant-changing operation, wrong triangular entries, or an uncovered n.",
+        "coverage": "A symbolic argument for arbitrary n>=1 over Z[rho].",
+        "evidence_ids": [
+          "E002"
+        ]
+      },
+      {
+        "id": "K003",
+        "target_claim": "C001",
+        "kind": "counterexample",
+        "target": "Boundary and adversarial instances of the universal identity.",
+        "falsifier": "Any exact polynomial or rational specialization differing from the formula.",
+        "coverage": "Exact polynomials n=1..7 and 84 rational cases through n=12, including rho=0,+-1 and nonintegral values.",
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E005"
+        ]
+      },
+      {
+        "id": "K004",
+        "target_claim": "C001",
+        "kind": "exact-computation",
+        "target": "Two executable exact-arithmetic implementations.",
+        "falsifier": "Coefficient disagreement, rational determinant disagreement, or a failed recorded run.",
+        "coverage": "Leibniz coefficient collection through n=7 and independent rational elimination through n=12.",
+        "evidence_ids": [
+          "E003",
+          "E004"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E001",
+        "kind": "derivation",
+        "locator": "artifacts/problem.md",
+        "sha256": "e4e668d35d7afdbfc5ba5da77113e0418c91eef92e0d3dd9ab1415f5afbcec48"
+      },
+      {
+        "id": "E002",
+        "kind": "derivation",
+        "locator": "artifacts/proof.md",
+        "sha256": "f9d4cee9d2d0e1d70cdd51c1262d1de374e2dbc3168ac1da0643ba1a00e229b9"
+      },
+      {
+        "id": "E003",
+        "kind": "exact-computation",
+        "locator": "artifacts/polynomial-check.json",
+        "sha256": "d5d6dda9ead0bb4bd555efb323783303288820b28cce0aa586f896513c8b5d35"
+      },
+      {
+        "id": "E004",
+        "kind": "exact-computation",
+        "locator": "artifacts/rational-check.json",
+        "sha256": "0e8fd24e780bcc792978b059211f52586e0d689098a5f7ce80e5756957b10f22"
+      },
+      {
+        "id": "E005",
+        "kind": "diagnostic",
+        "locator": "artifacts/falsification.md",
+        "sha256": "43dd0f0faf370afd558b0e3ee23aca8024d42bb84a3db7c3aa7d911ddfe4c8b5"
+      }
+    ]
+  },
+  "blinded_case_sha256": "7d594b0e07d270d76a0c7a2b1f59b2f69f475f7fb15d849466afd7eebfc42fe0",
+  "artifacts": [
+    {
+      "id": "A001",
+      "file": "sealed-artifacts/A001.md",
+      "sha256": "e4e668d35d7afdbfc5ba5da77113e0418c91eef92e0d3dd9ab1415f5afbcec48"
+    },
+    {
+      "id": "A002",
+      "file": "sealed-artifacts/A002.md",
+      "sha256": "f9d4cee9d2d0e1d70cdd51c1262d1de374e2dbc3168ac1da0643ba1a00e229b9"
+    },
+    {
+      "id": "A003",
+      "file": "sealed-artifacts/A003.md",
+      "sha256": "43dd0f0faf370afd558b0e3ee23aca8024d42bb84a3db7c3aa7d911ddfe4c8b5"
+    },
+    {
+      "id": "A004",
+      "file": "sealed-artifacts/A004.py",
+      "sha256": "80b6dbc597891d5b29b3daa5a48449639aceef5f4dfb811cf96403065c2ba9b1"
+    },
+    {
+      "id": "A005",
+      "file": "sealed-artifacts/A005.json",
+      "sha256": "d5d6dda9ead0bb4bd555efb323783303288820b28cce0aa586f896513c8b5d35"
+    },
+    {
+      "id": "A006",
+      "file": "sealed-artifacts/A006.txt",
+      "sha256": "6f3d9aa3a6f16cf7157300e25306d2c98d72fa263fe44b4e64c78c2c9c0a7ad6"
+    },
+    {
+      "id": "A007",
+      "file": "sealed-artifacts/A007.py",
+      "sha256": "4984b1601151dd57aea8cc50e88f3dfb18dc17bf3d3f067dde28e25796663513"
+    },
+    {
+      "id": "A008",
+      "file": "sealed-artifacts/A008.json",
+      "sha256": "0e8fd24e780bcc792978b059211f52586e0d689098a5f7ce80e5756957b10f22"
+    },
+    {
+      "id": "A009",
+      "file": "sealed-artifacts/A009.txt",
+      "sha256": "7b96af6964bd369322b03fcd8b9698c581cc52632d9ea8932a77d0f884ca2f38"
+    }
+  ],
+  "redactions": [
+    "author identity",
+    "author verdict",
+    "claim status",
+    "check outcomes",
+    "evidence role"
+  ]
+}

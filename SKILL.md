@@ -14,6 +14,8 @@ Treat every research result as an **inference contract**: a scoped claim joined 
 
 Do not create a managed workspace for a short explanation or an answer that has no persistent artifacts.
 
+For literature retrieval, machine-checkable mathematics, statistical stress tests, financial-data snapshots, sealed plans, or independent review, read [references/verification-backends.md](references/verification-backends.md). Use the supplied scripts instead of inventing an untracked workflow.
+
 ## Start with the claim class
 
 Classify the requested conclusion before doing substantial work:
@@ -25,6 +27,8 @@ Classify the requested conclusion before doing substantial work:
 If the class is ambiguous, state the strongest precise reading you can test and label nearby readings separately. A result for one reading does not transfer automatically.
 
 Before substantial work, create claim-scoped work packages with acceptance conditions, dependencies, and intended deliverables. Record primary sources and data vintages against the claims they support. A literature search is incomplete evidence until its query and coverage limits are stated.
+
+For confirmatory statistical or financial work, seal the estimand, sample window, exclusions, primary method, sensitivity set, decision rule, and multiplicity family before reading the first result. A post-result design change creates a new exploratory protocol; never silently reseal it as if preregistered.
 
 ## Build the inference contract
 
@@ -67,6 +71,15 @@ Numerical agreement can discover a theorem but does not prove an exact identity 
 
 When one evidence type supports another, write the bridge explicitly.
 
+## Use backends conservatively
+
+- Retrieve Crossref and arXiv candidates with `literature_search.py`. Merge automatically only on a shared DOI, a shared arXiv identifier, or compatible title-author-year metadata. Send fuzzy and conflicting matches to `REVIEW_REQUIRED`.
+- Use `math_backend.py` for exact polynomial or rational identities and optional Lean compilation. SymPy simplification of a general transcendental expression is diagnostic. A Lean file containing `sorry`, `admit`, or a declared axiom is not a closed proof certificate.
+- Bind decisive machine evidence to its inputs, outputs, backend version, command, environment locks, semantic domain, and return code with `research_seal.py`. Changed inputs invalidate the receipt.
+- Use `statistics_backend.py` to compare IID and dependence-aware uncertainty, run circular block bootstrap, control Holm or BH multiplicity, and test empirical coverage under prespecified data-generating processes.
+- Fetch financial series through `finance_data.py` when an adapter exists. Preserve the raw response, retrieval time, as-of meaning, revision policy, units, calendar, identifiers, adjustments, license, and SHA-256. A latest-revised FRED series is not point-in-time data.
+- Use `review_protocol.py` to prepare a blinded packet before requesting independent review. Do not expose the author verdict, check outcomes, or evidence roles. Any author-side artifact change invalidates the review receipt.
+
 ## Verdicts
 
 Use one verdict per headline claim:
@@ -80,7 +93,7 @@ Confidence may describe uncertainty inside a supported statistical claim; it nev
 
 ## Release discipline
 
-For a focused case, run `python scripts/inference_case.py validate <case.json> --release`. For a multi-step project, complete the work packages, generate a research brief, set the stage to `RELEASED`, and run `python scripts/research_workspace.py validate <workspace.json> --release`. These checks verify structure, provenance, dependencies, and evidence linkage—not the substantive truth of a mislabeled artifact.
+For a focused case, run `python scripts/inference_case.py validate <case.json> --release`. For a multi-step project, complete the work packages, generate a research brief, attach required governance artifacts, set the stage to `RELEASED`, and run `python scripts/research_workspace.py validate <workspace.json> --release`. These checks verify structure, provenance, dependencies, receipt semantics, and evidence linkage. A human derivation still requires mathematical review; no schema can infer truth from prose alone.
 
 A successful program run means the computation executed. It does not mean the hypothesis was supported. Negative and inconclusive results are legitimate releases when their evidence and scope pass the same gate.
 

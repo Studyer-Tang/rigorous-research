@@ -84,6 +84,16 @@
       ]
     }
   ],
+  "release_policy": {
+    "plan_seal_required": true,
+    "data_snapshot_required": true,
+    "independent_review_required": true
+  },
+  "plan_seal": "artifacts/plan-seal.json",
+  "data_snapshots": [
+    "snapshots/Kenneth-French-Data-Library/F-F-Momentum-Factor-monthly-archive/2026-08-30-f405ee2d47a5/manifest.json"
+  ],
+  "review_adjudication": "",
   "runs": [
     {
       "id": "R001",

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "verification-receipt",
+  "created_at": "2026-08-30T02:55:20.813290+00:00",
+  "validator_version": "1.0.0",
+  "semantic_domain": "Z[rho], determinant of the fixed n=6 matrix",
+  "backend": {
+    "name": "sympy",
+    "version": "1.14.0"
+  },
+  "command": "python scripts/math_backend.py sympy-matrix-det --matrix sympy-matrix-n6.json --expected (1-rho**2)**5 --symbols rho",
+  "returncode": 0,
+  "result": "ESTABLISHED",
+  "inputs": [
+    {
+      "file": "sympy-matrix-n6.json",
+      "sha256": "27352cb1e87198823657044e9b2b21d8de8bd6aebde1d4b269254bc6913b6316"
+    },
+    {
+      "file": "problem.md",
+      "sha256": "e4e668d35d7afdbfc5ba5da77113e0418c91eef92e0d3dd9ab1415f5afbcec48"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "sympy-certificate-n6.json",
+      "sha256": "b207478ce670cbedbf619bb421cb47de4678bd08ca0190c53878487a196df918"
+    }
+  ],
+  "environment_locks": [
+    {
+      "file": "../../../requirements-math.txt",
+      "sha256": "fe459e55afabdc4730d09318f2777b8e70e755292f42c221c2d602f809f70185"
+    }
+  ],
+  "runtime": {
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}

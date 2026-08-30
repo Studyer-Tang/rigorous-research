@@ -1,0 +1,168 @@
+{
+  "method": "Leibniz determinant expansion with exact integer coefficient collection",
+  "coverage": "all n from 1 through 7",
+  "all_match": true,
+  "cases": [
+    {
+      "n": 1,
+      "permutations": 1,
+      "observed_coefficients_low_to_high": [
+        1
+      ],
+      "expected_coefficients_low_to_high": [
+        1
+      ],
+      "match": true
+    },
+    {
+      "n": 2,
+      "permutations": 2,
+      "observed_coefficients_low_to_high": [
+        1,
+        0,
+        -1
+      ],
+      "expected_coefficients_low_to_high": [
+        1,
+        0,
+        -1
+      ],
+      "match": true
+    },
+    {
+      "n": 3,
+      "permutations": 6,
+      "observed_coefficients_low_to_high": [
+        1,
+        0,
+        -2,
+        0,
+        1
+      ],
+      "expected_coefficients_low_to_high": [
+        1,
+        0,
+        -2,
+        0,
+        1
+      ],
+      "match": true
+    },
+    {
+      "n": 4,
+      "permutations": 24,
+      "observed_coefficients_low_to_high": [
+        1,
+        0,
+        -3,
+        0,
+        3,
+        0,
+        -1
+      ],
+      "expected_coefficients_low_to_high": [
+        1,
+        0,
+        -3,
+        0,
+        3,
+        0,
+        -1
+      ],
+      "match": true
+    },
+    {
+      "n": 5,
+      "permutations": 120,
+      "observed_coefficients_low_to_high": [
+        1,
+        0,
+        -4,
+        0,
+        6,
+        0,
+        -4,
+        0,
+        1
+      ],
+      "expected_coefficients_low_to_high": [
+        1,
+        0,
+        -4,
+        0,
+        6,
+        0,
+        -4,
+        0,
+        1
+      ],
+      "match": true
+    },
+    {
+      "n": 6,
+      "permutations": 720,
+      "observed_coefficients_low_to_high": [
+        1,
+        0,
+        -5,
+        0,
+        10,
+        0,
+        -10,
+        0,
+        5,
+        0,
+        -1
+      ],
+      "expected_coefficients_low_to_high": [
+        1,
+        0,
+        -5,
+        0,
+        10,
+        0,
+        -10,
+        0,
+        5,
+        0,
+        -1
+      ],
+      "match": true
+    },
+    {
+      "n": 7,
+      "permutations": 5040,
+      "observed_coefficients_low_to_high": [
+        1,
+        0,
+        -6,
+        0,
+        15,
+        0,
+        -20,
+        0,
+        15,
+        0,
+        -6,
+        0,
+        1
+      ],
+      "expected_coefficients_low_to_high": [
+        1,
+        0,
+        -6,
+        0,
+        15,
+        0,
+        -20,
+        0,
+        15,
+        0,
+        -6,
+        0,
+        1
+      ],
+      "match": true
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "kind": "review-adjudication",
+  "created_at": "2026-08-30T03:01:37.788873+00:00",
+  "case_file": "../case.json",
+  "case_sha256": "495b0a4894b503b118f0daee2692f0fa865e37145e89eee6246757a1d566a4ff",
+  "author_verdict_revealed": "SUPPORTED",
+  "review_count": 1,
+  "reviewers": [
+    "fresh-blind-math-review"
+  ],
+  "reviews": [
+    {
+      "file": "review-receipt.json",
+      "sha256": "b0256925fc38b7c8713e7cda96b06bb3bb306430dc19c3522715db2e0bd3e5fb"
+    }
+  ],
+  "status": "CLEARED_FOR_RELEASE",
+  "errors": []
+}

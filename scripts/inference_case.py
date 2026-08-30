@@ -14,6 +14,11 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import research_seal as rs
+
 
 SCHEMA_VERSION = 3
 DOMAINS = ("mathematics", "statistics", "finance")
@@ -412,6 +417,27 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         for evidence_id in decision_evidence
         if evidence_id in evidence_by_id and evidence_by_id[evidence_id].get("role") == "decisive"
     ]
+    for item in decisive_decision_evidence:
+        artifact = resolve_locator(str(item.get("locator", "")), case_path.parent)
+        if not item.get("sha256") or not artifact.is_file():
+            errors.append(f"{item['id']}: decisive release evidence must be a checksummed local artifact")
+        if item.get("kind") in {"exact-computation", "formal-certificate"}:
+            receipt_value = str(item.get("verification_receipt", "")).strip()
+            if not receipt_value:
+                errors.append(f"{item['id']}: decisive machine evidence requires a verification receipt")
+            else:
+                receipt_path = resolve_locator(receipt_value, case_path.parent)
+                if not receipt_path.is_file():
+                    errors.append(f"{item['id']}: verification receipt is missing")
+                else:
+                    receipt_errors, receipt = rs.verify_receipt(receipt_path, require_established=True)
+                    errors.extend(f"{item['id']}: {error}" for error in receipt_errors)
+                    output_files = {
+                        str(rs.resolve_locator(str(record.get("file", "")), receipt_path.parent).resolve())
+                        for record in receipt.get("outputs", []) if isinstance(record, dict)
+                    }
+                    if str(artifact.resolve()) not in output_files:
+                        errors.append(f"{item['id']}: verification receipt does not bind the evidence artifact")
     if verdict == "SUPPORTED":
         if domain in {"statistics", "finance"} and not linked_assumptions:
             errors.append(f"SUPPORTED {domain} release requires at least one explicit assumption")

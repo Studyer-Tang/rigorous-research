@@ -1,0 +1,10 @@
+{
+  "claim": "The 1993-01 through 2024-12 monthly momentum-factor mean is positive under the stated descriptive and weak-dependence scope.",
+  "estimand": "Arithmetic population mean of the published monthly Mom factor over the fixed 384-month window, interpreted under weak stationarity.",
+  "sample_window": "1993-01 through 2024-12 inclusive; exactly 384 monthly observations.",
+  "exclusion_rules": "Exclude provider missing-value sentinels at or below -99%; fail rather than silently continue if any fixed-window month is missing.",
+  "primary_method": "Newey-West standard error of the sample mean with Bartlett weights and six lags; two-sided normal 95% interval.",
+  "sensitivity_set": "Circular 12-month block bootstrap with 10,000 replications and seed 20260830; pre/post-2009 split; symmetric 1% trimming; remove five best and worst months; leave-one-year-out means.",
+  "decision_rule": "Support requires a positive point estimate, positive lower bounds for both dependence-aware intervals, positive trimmed mean, and every leave-one-year-out mean positive; otherwise INCONCLUSIVE unless a valid refutation is established.",
+  "multiplicity_family": "One preregistered headline mean claim; sensitivity analyses are robustness checks and are not separate confirmatory discoveries."
+}

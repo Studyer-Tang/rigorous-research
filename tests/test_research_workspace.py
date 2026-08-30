@@ -59,6 +59,7 @@ class ResearchWorkspaceTests(unittest.TestCase):
         _, data = rw.load(workspace)
         self.assertEqual(data["stage"], "SCOPING")
         self.assertEqual(data["domain"], "mathematics")
+        self.assertTrue(data["release_policy"]["independent_review_required"])
 
     def test_dependency_blocks_premature_execution(self):
         workspace = self.workspace()

@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "experiment": "AR(1) mean-interval coverage grid",
+  "preregistered_cells": 6,
+  "cells": [
+    {
+      "schema_version": 1,
+      "kind": "coverage-simulation",
+      "dgp": {
+        "model": "stationary AR(1)",
+        "phi": 0.0,
+        "innovation": "gaussian",
+        "true_mean": 0.0
+      },
+      "sample_size": 120,
+      "replications": 5000,
+      "seed": 20260830,
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.944,
+          "mean_width": 0.3566491647002504
+        },
+        "newey_west_normal": {
+          "lags": 8,
+          "coverage": 0.9238,
+          "mean_width": 0.3399383739663719
+        }
+      },
+      "target_coverage": 0.95,
+      "monte_carlo_se_at_target": 0.0030822070014844883
+    },
+    {
+      "schema_version": 1,
+      "kind": "coverage-simulation",
+      "dgp": {
+        "model": "stationary AR(1)",
+        "phi": 0.4,
+        "innovation": "gaussian",
+        "true_mean": 0.0
+      },
+      "sample_size": 120,
+      "replications": 5000,
+      "seed": 20260831,
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.7918,
+          "mean_width": 0.38690855713785466
+        },
+        "newey_west_normal": {
+          "lags": 8,
+          "coverage": 0.9002,
+          "mean_width": 0.5294648241876823
+        }
+      },
+      "target_coverage": 0.95,
+      "monte_carlo_se_at_target": 0.0030822070014844883
+    },
+    {
+      "schema_version": 1,
+      "kind": "coverage-simulation",
+      "dgp": {
+        "model": "stationary AR(1)",
+        "phi": 0.8,
+        "innovation": "gaussian",
+        "true_mean": 0.0
+      },
+      "sample_size": 120,
+      "replications": 5000,
+      "seed": 20260832,
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.4858,
+          "mean_width": 0.5712385059721705
+        },
+        "newey_west_normal": {
+          "lags": 8,
+          "coverage": 0.8208,
+          "mean_width": 1.2258744692050438
+        }
+      },
+      "target_coverage": 0.95,
+      "monte_carlo_se_at_target": 0.0030822070014844883
+    },
+    {
+      "schema_version": 1,
+      "kind": "coverage-simulation",
+      "dgp": {
+        "model": "stationary AR(1)",
+        "phi": 0.0,
+        "innovation": "student-t3",
+        "true_mean": 0.0
+      },
+      "sample_size": 120,
+      "replications": 5000,
+      "seed": 20260833,
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.9484,
+          "mean_width": 0.3437289255631039
+        },
+        "newey_west_normal": {
+          "lags": 8,
+          "coverage": 0.9294,
+          "mean_width": 0.32753308179145024
+        }
+      },
+      "target_coverage": 0.95,
+      "monte_carlo_se_at_target": 0.0030822070014844883
+    },
+    {
+      "schema_version": 1,
+      "kind": "coverage-simulation",
+      "dgp": {
+        "model": "stationary AR(1)",
+        "phi": 0.4,
+        "innovation": "student-t3",
+        "true_mean": 0.0
+      },
+      "sample_size": 120,
+      "replications": 5000,
+      "seed": 20260834,
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.7834,
+          "mean_width": 0.3732284659529744
+        },
+        "newey_west_normal": {
+          "lags": 8,
+          "coverage": 0.9038,
+          "mean_width": 0.5129419995270388
+        }
+      },
+      "target_coverage": 0.95,
+      "monte_carlo_se_at_target": 0.0030822070014844883
+    },
+    {
+      "schema_version": 1,
+      "kind": "coverage-simulation",
+      "dgp": {
+        "model": "stationary AR(1)",
+        "phi": 0.8,
+        "innovation": "student-t3",
+        "true_mean": 0.0
+      },
+      "sample_size": 120,
+      "replications": 5000,
+      "seed": 20260835,
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.4636,
+          "mean_width": 0.5562818628062487
+        },
+        "newey_west_normal": {
+          "lags": 8,
+          "coverage": 0.8122,
+          "mean_width": 1.1955626547159377
+        }
+      },
+      "target_coverage": 0.95,
+      "monte_carlo_se_at_target": 0.0030822070014844883
+    }
+  ]
+}

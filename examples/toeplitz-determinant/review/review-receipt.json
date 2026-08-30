@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "kind": "review-receipt",
+  "created_at": "2026-08-30T03:01:37.708696+00:00",
+  "packet_file": "blind-packet-v2.json",
+  "packet_sha256": "4e40c67aa3d8c746af21299e4f81d51c0ddaac9041d38fe52f1f470b9ba6b89b",
+  "blinded_case_sha256": "7d594b0e07d270d76a0c7a2b1f59b2f69f475f7fb15d849466afd7eebfc42fe0",
+  "reviewer": "fresh-blind-math-review",
+  "identity_assurance": "SELF_DECLARED",
+  "independence": "DECLARED_INDEPENDENT",
+  "assessment": "ACCEPT",
+  "reproduced": true,
+  "issues": {
+    "fatal": [],
+    "major": [],
+    "minor": []
+  },
+  "review_report": {
+    "file": "review-report.json",
+    "sha256": "cd49c7973ba250cfdaf62f54f4d105b673c56bedd7457e13491a1791a325ef51"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "plan-seal",
+  "protocol": "ar1-coverage-confirmatory-v1",
+  "created_at": "2026-08-30T02:50:51.997746+00:00",
+  "plan_file": "plan.json",
+  "plan_sha256": "971a0e10ae9b2169aca3656595b36b8eac5709f3555eec2d52343bece7c911e2",
+  "semantic_sha256": "0d17cac2f59bd1d8c916315fec70624d9b115fc958d087d8c3e9694d3ff27664",
+  "sealed_fields": [
+    "claim",
+    "estimand",
+    "sample_window",
+    "exclusion_rules",
+    "primary_method",
+    "sensitivity_set",
+    "decision_rule",
+    "multiplicity_family"
+  ],
+  "status": "SEALED",
+  "validator_version": "1.0.0"
+}

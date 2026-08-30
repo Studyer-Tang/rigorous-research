@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "query": "heteroskedasticity autocorrelation consistent covariance matrix finite sample",
+  "retrieved_at": "2026-08-30T03:00:09.548485+00:00",
+  "requests": [
+    {
+      "provider": "crossref",
+      "url": "https://api.crossref.org/works?query.bibliographic=heteroskedasticity+autocorrelation+consistent+covariance+matrix+finite+sample&rows=8&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Ccreated%2CURL%2Ctype%2Ccontainer-title%2Cabstract",
+      "records": 8,
+      "status": "OK"
+    }
+  ],
+  "request_errors": [
+    {
+      "provider": "arxiv",
+      "url": "https://export.arxiv.org/api/query?search_query=all%3Aheteroskedasticity+autocorrelation+consistent+covariance+matrix+finite+sample&start=0&max_results=8&sortBy=relevance",
+      "error": "HTTPError: HTTP Error 429: Unknown Error"
+    }
+  ],
+  "fuzzy_threshold": 0.94,
+  "raw_count": 8,
+  "unique_count": 7,
+  "records": [
+    {
+      "title": "Some heteroskedasticity-consistent covariance matrix estimators with improved finite sample properties",
+      "authors": [
+        "James G MacKinnon",
+        "Halbert White"
+      ],
+      "year": 1985,
+      "doi": "10.1016/0304-4076(85)90158-7",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.1016/0304-4076(85)90158-7",
+      "venue": "Journal of Econometrics",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        7
+      ],
+      "id": "L001",
+      "normalized_title": "some heteroskedasticity consistent covariance matrix estimators with improved finite sample properties"
+    },
+    {
+      "title": "Another heteroskedasticity- and autocorrelation-consistent covariance matrix estimator",
+      "authors": [
+        "Kenneth D. West"
+      ],
+      "year": 1997,
+      "doi": "10.1016/0304-4076(95)01788-7",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.1016/0304-4076(95)01788-7",
+      "venue": "Journal of Econometrics",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        8
+      ],
+      "id": "L002",
+      "normalized_title": "another heteroskedasticity and autocorrelation consistent covariance matrix estimator"
+    },
+    {
+      "title": "Spatial Heteroskedasticity and Autocorrelation Consistent Estimation of Covariance Matrix",
+      "authors": [
+        "Yixiao Sun",
+        "Min Seong Kim"
+      ],
+      "year": 2012,
+      "doi": "10.2139/ssrn.1714713",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2139/ssrn.1714713",
+      "venue": "",
+      "abstract": "This paper considers spatial heteroskedasticity and autocorrelation consistent (spatial HAC) estimation of covariance matrices of parameter estimators. We generalize the spatial HAC estimators introduced by Kelejian and Prucha (2007) to apply to linear and nonlinear spatial models with moment conditions. We establish its consistency, rate of convergence and asymptotic truncated mean squared error (MSE). Based on the asymptotic truncated MSE criterion, we derive the optimal bandwidth parameter and suggest its data dependent estimation procedure using a parametric plug-in method. The finite sample performances of the spatial HAC estimator are evaluated via Monte Carlo simulation.",
+      "record_type": "posted-content",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        2
+      ],
+      "id": "L003",
+      "normalized_title": "spatial heteroskedasticity and autocorrelation consistent estimation of covariance matrix"
+    },
+    {
+      "title": "Comment on Andrews (1991) “Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimation”*",
+      "authors": [
+        "Alessandro Casini"
+      ],
+      "year": 2022,
+      "doi": "10.2139/ssrn.4073803",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2139/ssrn.4073803",
+      "venue": "SSRN Electronic Journal",
+      "abstract": "This comment includes a solution to a problem in Section 8 in Andrews (1991) and points out a method to generalize the mean‐squared error (MSE) bounds appearing in Andrews (1988) and Andrews (1991).",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        4,
+        5
+      ],
+      "id": "L004",
+      "normalized_title": "comment on andrews 1991 heteroskedasticity and autocorrelation consistent covariance matrix estimation"
+    },
+    {
+      "title": "Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimation",
+      "authors": [
+        "Donald W. K. Andrews"
+      ],
+      "year": 1991,
+      "doi": "10.2307/2938229",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2307/2938229",
+      "venue": "Econometrica",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        3
+      ],
+      "id": "L005",
+      "normalized_title": "heteroskedasticity and autocorrelation consistent covariance matrix estimation"
+    },
+    {
+      "title": "An Improved Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimator",
+      "authors": [
+        "Donald W. K. Andrews",
+        "J. Christopher Monahan"
+      ],
+      "year": 1992,
+      "doi": "10.2307/2951574",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2307/2951574",
+      "venue": "Econometrica",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        6
+      ],
+      "id": "L006",
+      "normalized_title": "an improved heteroskedasticity and autocorrelation consistent covariance matrix estimator"
+    },
+    {
+      "title": "Another Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimator",
+      "authors": [
+        "Kenneth West"
+      ],
+      "year": 1995,
+      "doi": "10.3386/t0183",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.3386/t0183",
+      "venue": "",
+      "abstract": "",
+      "record_type": "report",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        1
+      ],
+      "id": "L007",
+      "normalized_title": "another heteroskedasticity and autocorrelation consistent covariance matrix estimator"
+    }
+  ],
+  "dedup_decisions": [
+    {
+      "source_record": 1,
+      "target_record": 2,
+      "reason": "same-title-metadata-conflict",
+      "disposition": "REVIEW_REQUIRED",
+      "source_title": "Another Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimator",
+      "target_title": "Another heteroskedasticity- and autocorrelation-consistent covariance matrix estimator"
+    },
+    {
+      "source_record": 5,
+      "target_record": 4,
+      "reason": "same-title-author-year",
+      "disposition": "AUTO_MERGED",
+      "source_title": "Comment on Andrews (1991) “Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimation”",
+      "target_title": "Comment on Andrews (1991) “Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimation”*"
+    }
+  ],
+  "raw_records": [
+    {
+      "title": "Another Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimator",
+      "authors": [
+        "Kenneth West"
+      ],
+      "year": 1995,
+      "doi": "10.3386/t0183",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.3386/t0183",
+      "venue": "",
+      "abstract": "",
+      "record_type": "report",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "Spatial Heteroskedasticity and Autocorrelation Consistent Estimation of Covariance Matrix",
+      "authors": [
+        "Yixiao Sun",
+        "Min Seong Kim"
+      ],
+      "year": 2012,
+      "doi": "10.2139/ssrn.1714713",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2139/ssrn.1714713",
+      "venue": "",
+      "abstract": "This paper considers spatial heteroskedasticity and autocorrelation consistent (spatial HAC) estimation of covariance matrices of parameter estimators. We generalize the spatial HAC estimators introduced by Kelejian and Prucha (2007) to apply to linear and nonlinear spatial models with moment conditions. We establish its consistency, rate of convergence and asymptotic truncated mean squared error (MSE). Based on the asymptotic truncated MSE criterion, we derive the optimal bandwidth parameter and suggest its data dependent estimation procedure using a parametric plug-in method. The finite sample performances of the spatial HAC estimator are evaluated via Monte Carlo simulation.",
+      "record_type": "posted-content",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimation",
+      "authors": [
+        "Donald W. K. Andrews"
+      ],
+      "year": 1991,
+      "doi": "10.2307/2938229",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2307/2938229",
+      "venue": "Econometrica",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "Comment on Andrews (1991) “Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimation”*",
+      "authors": [
+        "Alessandro Casini"
+      ],
+      "year": 2022,
+      "doi": "10.2139/ssrn.4073803",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2139/ssrn.4073803",
+      "venue": "SSRN Electronic Journal",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "Comment on Andrews (1991) “Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimation”",
+      "authors": [
+        "Alessandro Casini"
+      ],
+      "year": 2022,
+      "doi": "10.3982/ecta20162",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.3982/ecta20162",
+      "venue": "Econometrica",
+      "abstract": "This comment includes a solution to a problem in Section 8 in Andrews (1991) and points out a method to generalize the mean‐squared error (MSE) bounds appearing in Andrews (1988) and Andrews (1991).",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "An Improved Heteroskedasticity and Autocorrelation Consistent Covariance Matrix Estimator",
+      "authors": [
+        "Donald W. K. Andrews",
+        "J. Christopher Monahan"
+      ],
+      "year": 1992,
+      "doi": "10.2307/2951574",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2307/2951574",
+      "venue": "Econometrica",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "Some heteroskedasticity-consistent covariance matrix estimators with improved finite sample properties",
+      "authors": [
+        "James G MacKinnon",
+        "Halbert White"
+      ],
+      "year": 1985,
+      "doi": "10.1016/0304-4076(85)90158-7",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.1016/0304-4076(85)90158-7",
+      "venue": "Journal of Econometrics",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "Another heteroskedasticity- and autocorrelation-consistent covariance matrix estimator",
+      "authors": [
+        "Kenneth D. West"
+      ],
+      "year": 1997,
+      "doi": "10.1016/0304-4076(95)01788-7",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.1016/0304-4076(95)01788-7",
+      "venue": "Journal of Econometrics",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "financial-data-snapshot",
+  "provider": "Kenneth French Data Library",
+  "dataset": "F-F Momentum Factor monthly archive",
+  "request": {
+    "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Momentum_Factor_CSV.zip",
+    "query": {}
+  },
+  "retrieved_at": "2026-08-30T02:48:04.982849+00:00",
+  "as_of": "2026-08-30",
+  "revision_policy": "latest archive; historical values may be revised by provider",
+  "raw_file": "raw.zip",
+  "raw_sha256": "f405ee2d47a5c75ce05025f789733d0599879361e9836a553504240b89159871",
+  "raw_bytes": 5610,
+  "schema": "ZIP containing one monthly CSV with YYYYMM and percent return",
+  "units": "percent monthly return in archive; analysis converts to decimal",
+  "timezone": "period-end monthly, timezone not applicable",
+  "calendar": "provider monthly observation calendar",
+  "identifier_system": "Kenneth French factor mnemonic Mom",
+  "adjustment_policy": "provider-constructed factor; no local adjustment",
+  "license": "provider terms apply"
+}

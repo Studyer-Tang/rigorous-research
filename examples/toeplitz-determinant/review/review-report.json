@@ -1,0 +1,31 @@
+{
+  "assessment": "ACCEPT",
+  "reproduced": true,
+  "fatal_issues": [],
+  "major_issues": [],
+  "minor_issues": [],
+  "isolation": {
+    "reviewed": "blind-packet-v2.json and its nine sealed artifacts only",
+    "excluded": "parent directory, original case, README, Git history, author report, and conversation context",
+    "all_artifact_sha256_match": true
+  },
+  "mathematical_check": {
+    "object": "T_n(rho) is well-defined over Z[rho] for every integer n >= 1.",
+    "row_operation": "Descending R_i <- R_i - rho R_{i-1} uses an unmodified preceding row and preserves the determinant over a commutative ring.",
+    "entry_formula": "Entries below the diagonal cancel; entries on or above it become rho^(j-i)(1-rho^2).",
+    "conclusion": "The transformed matrix is upper triangular with diagonal 1, 1-rho^2, ..., 1-rho^2, hence determinant (1-rho^2)^(n-1).",
+    "boundaries": "n=1 and rho=+-1 are covered because the proof uses no division."
+  },
+  "independent_recomputation": {
+    "case": "n=5, rho=2/3",
+    "elimination_result": "625/6561",
+    "independent_leibniz_result": "625/6561",
+    "formula_result": "625/6561",
+    "match": true
+  },
+  "program_reproduction": {
+    "polynomial_program": "Recomputed n=1 through 7 exactly; all records matched the sealed output; total permutations 5913.",
+    "rational_program": "Recomputed n=1 through 12 at seven rational parameters; all 84 records matched the sealed output."
+  },
+  "scope": "Finite computations are diagnostic; the all-n conclusion is carried by the division-free row-operation proof."
+}

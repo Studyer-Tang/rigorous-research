@@ -1,0 +1,8 @@
+[
+  ["1", "rho", "rho**2", "rho**3", "rho**4", "rho**5"],
+  ["rho", "1", "rho", "rho**2", "rho**3", "rho**4"],
+  ["rho**2", "rho", "1", "rho", "rho**2", "rho**3"],
+  ["rho**3", "rho**2", "rho", "1", "rho", "rho**2"],
+  ["rho**4", "rho**3", "rho**2", "rho", "1", "rho"],
+  ["rho**5", "rho**4", "rho**3", "rho**2", "rho", "1"]
+]

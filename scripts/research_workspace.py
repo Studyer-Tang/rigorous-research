@@ -15,6 +15,9 @@ from pathlib import Path
 from typing import Any
 
 import inference_case as ic
+import finance_data as fd
+import research_seal as rs
+import review_protocol as rp
 
 
 SCHEMA_VERSION = 1
@@ -124,6 +127,14 @@ def initialize(root: Path, slug: str, domain: str, question: str, claim: str) ->
         "tasks": [],
         "sources": [],
         "runs": [],
+        "release_policy": {
+            "plan_seal_required": domain in {"statistics", "finance"},
+            "data_snapshot_required": domain == "finance",
+            "independent_review_required": True,
+        },
+        "plan_seal": "",
+        "data_snapshots": [],
+        "review_adjudication": "",
     }
     atomic_json(workspace_path, data)
     (workspace_path.parent / "research-journal.jsonl").write_text(
@@ -282,6 +293,7 @@ def validate_workspace(
                 errors.append(f"{run_id}: output checksum mismatch: {output.get('file', '')}")
 
     case_path = resolve(str(data["case_file"]), workspace_path.parent)
+    case_data: dict[str, Any] = {}
     try:
         resolved_case, case_data = ic.load_case(case_path)
         case_errors, case_warnings = ic.validate_case(case_data, resolved_case, release=release)
@@ -312,6 +324,43 @@ def validate_workspace(
             source.get("role") == "data" for source in data["sources"]
         ):
             errors.append(f"released {data['domain']} workspace requires a data source")
+        policy = data.get("release_policy")
+        if not isinstance(policy, dict):
+            warnings.append("legacy workspace has no machine-enforced seal, snapshot, or independent-review policy")
+        else:
+            seal_value = str(data.get("plan_seal", "")).strip()
+            if policy.get("plan_seal_required"):
+                if not seal_value:
+                    errors.append("release policy requires a sealed preregistration plan")
+                else:
+                    seal_path = resolve(seal_value, workspace_path.parent)
+                    if not seal_path.is_file():
+                        errors.append("plan seal is missing")
+                    else:
+                        seal_errors, _ = rs.verify_plan(seal_path)
+                        errors.extend(f"plan seal: {error}" for error in seal_errors)
+            if policy.get("data_snapshot_required"):
+                manifests = data.get("data_snapshots", [])
+                if not manifests:
+                    errors.append("release policy requires an immutable financial-data snapshot")
+                for value in manifests:
+                    manifest_path = resolve(str(value), workspace_path.parent)
+                    if not manifest_path.is_file():
+                        errors.append(f"data snapshot manifest is missing: {value}")
+                    else:
+                        snapshot_errors, _ = fd.verify(manifest_path)
+                        errors.extend(f"data snapshot: {error}" for error in snapshot_errors)
+            if policy.get("independent_review_required") and case_data.get("decision", {}).get("verdict") in {"SUPPORTED", "REFUTED"}:
+                review_value = str(data.get("review_adjudication", "")).strip()
+                if not review_value:
+                    errors.append("release policy requires an independent review adjudication")
+                else:
+                    review_path = resolve(review_value, workspace_path.parent)
+                    if not review_path.is_file():
+                        errors.append("review adjudication is missing")
+                    else:
+                        review_errors, _ = rp.verify_adjudication(review_path, require_clear=True)
+                        errors.extend(f"review: {error}" for error in review_errors)
     return errors, warnings
 
 
@@ -404,6 +453,12 @@ def build_parser() -> argparse.ArgumentParser:
     set_source.add_argument("--id", required=True)
     set_source.add_argument("--note")
     set_source.add_argument("--supports", nargs="*")
+
+    governance = commands.add_parser("governance", help="attach plan seals, data snapshots, and review adjudication")
+    governance.add_argument("workspace", type=Path)
+    governance.add_argument("--plan-seal", type=Path)
+    governance.add_argument("--data-snapshot", type=Path, action="append", default=[])
+    governance.add_argument("--review-adjudication", type=Path)
 
     stage = commands.add_parser("set-stage", help="set the research stage")
     stage.add_argument("workspace", type=Path)
@@ -667,6 +722,28 @@ def main(argv: list[str] | None = None) -> int:
                     source["supports"] = list(dict.fromkeys(args.supports))
                 return {"source_id": args.id}
             mutate(args.workspace, update_source, "source-updated")
+        elif args.command == "governance":
+            def update_governance(data: dict[str, Any]) -> dict[str, Any]:
+                if args.plan_seal is None and not args.data_snapshot and args.review_adjudication is None:
+                    raise WorkspaceError("governance requires at least one artifact")
+                workspace_path, _ = load(args.workspace)
+                if args.plan_seal is not None:
+                    if not args.plan_seal.is_file():
+                        raise WorkspaceError(f"plan seal not found: {args.plan_seal}")
+                    data["plan_seal"] = locator(args.plan_seal, workspace_path.parent)
+                for manifest in args.data_snapshot:
+                    if not manifest.is_file():
+                        raise WorkspaceError(f"data snapshot not found: {manifest}")
+                    value = locator(manifest, workspace_path.parent)
+                    data.setdefault("data_snapshots", [])
+                    if value not in data["data_snapshots"]:
+                        data["data_snapshots"].append(value)
+                if args.review_adjudication is not None:
+                    if not args.review_adjudication.is_file():
+                        raise WorkspaceError(f"review adjudication not found: {args.review_adjudication}")
+                    data["review_adjudication"] = locator(args.review_adjudication, workspace_path.parent)
+                return {"governance_updated": True}
+            mutate(args.workspace, update_governance, "governance-updated")
         elif args.command == "rehash-run":
             workspace_path, data = load(args.workspace)
             run = find(data["runs"], args.id, "run")

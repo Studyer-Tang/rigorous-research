@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "backend": "sympy",
+  "backend_version": "1.14.0",
+  "created_at": "2026-08-30T02:55:20.703509+00:00",
+  "claim": {
+    "lhs": "-(rho - 1)**5*(rho + 1)**5",
+    "rhs": "(1-rho**2)**5",
+    "symbols": [
+      "rho"
+    ]
+  },
+  "assumptions": {
+    "real": [],
+    "positive": [],
+    "integer": []
+  },
+  "normalized": {
+    "lhs": "-(rho - 1)**5*(rho + 1)**5",
+    "rhs": "(1 - rho**2)**5",
+    "difference": "-(1 - rho**2)**5 - (rho - 1)**5*(rho + 1)**5",
+    "numerator": "0",
+    "denominator": "1"
+  },
+  "polynomial_numerator": true,
+  "numerator_coefficients": [
+    "0"
+  ],
+  "exceptional_set": "none",
+  "identity_established": true,
+  "classification": "exact-polynomial",
+  "recommended_evidence_role": "decisive",
+  "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object.",
+  "operation": "matrix-determinant",
+  "matrix_sha256": "27352cb1e87198823657044e9b2b21d8de8bd6aebde1d4b269254bc6913b6316",
+  "matrix_shape": [
+    6,
+    6
+  ],
+  "computed_determinant": "-(rho - 1)**5*(rho + 1)**5"
+}

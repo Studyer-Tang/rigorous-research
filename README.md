@@ -1,6 +1,6 @@
 # Rigorous Research
 
-A Codex skill and standard-library research workspace for mathematics, statistics, and quantitative finance.
+A Codex skill and evidence-gated research laboratory for mathematics, statistics, and quantitative finance.
 
 [![validate](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml/badge.svg)](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml)
 
@@ -48,6 +48,19 @@ The project does not assume that a completed computation confirms a hypothesis. 
 
 The workspace contains an inference case. A short, focused audit can use the inference case by itself.
 
+## Verification stack
+
+| Layer | What it does | What it refuses to claim |
+|---|---|---|
+| Literature | Searches Crossref and arXiv; deduplicates DOI/arXiv/title-author-year records; exports JSON, Markdown, and BibTeX | A search hit is not evidence, and a fuzzy title match is not an automatic duplicate |
+| Exact mathematics | Produces conservative SymPy identity/determinant certificates and optional Lean compilation records | General symbolic simplification is not automatically a proof; Lean holes and custom axioms are not closed certificates |
+| Statistical inference | Computes IID and Newey-West uncertainty, circular block-bootstrap intervals, Holm/BH corrections, and DGP coverage grids | A standard estimator name does not establish finite-sample validity |
+| Financial data | Freezes raw Kenneth French or FRED responses with vintage, schema, units, calendar, adjustments, license, and SHA-256 | Latest-revised data is not point-in-time information |
+| Governance | Seals preregistered plans, binds backend receipts to inputs and versions, and creates blind independent-review packets | Self-authored evidence labels and stale review receipts cannot clear a strict release gate |
+
+The strict path is tamper-evident: changing a claim input, dependency lock, certificate, raw data file, author case, or review packet invalidates the corresponding receipt.
+Reviewer identity is self-declared locally; high-stakes use still needs an authenticated external identity or signature bound to the receipt hash.
+
 ## Why the gates matter
 
 - A finite symbolic pattern cannot silently become an all-parameter theorem.
@@ -73,6 +86,7 @@ over \(\mathbb Z[\rho]\). The workspace contains:
 - an all-\(n\), division-free proof that \(\det T_n(\rho)=(1-\rho^2)^{n-1}\);
 - exact Leibniz polynomial expansion through \(n=7\);
 - an independent exact-rational elimination implementation covering 84 cases through \(n=12\);
+- a SymPy exact-polynomial determinant certificate for the nontrivial \(n=6\) matrix, with a portable receipt binding the matrix, theorem statement, SymPy 1.14 environment lock, command, and output;
 - attacks on \(n=1\), \(\rho=\pm1\), row-operation order, hidden division, and finite-versus-general evidence.
 
 The proof is decisive; the two executable computations remain diagnostic. The release gate preserves that distinction.
@@ -87,6 +101,16 @@ The proof is decisive; the two executable computations remain diagnostic. The re
 - symmetric trimming, removal of extreme months, and every leave-one-year-out sample.
 
 The observed mean is **0.408% per month**, but the HAC \(t\)-statistic is **1.621**; both dependence-aware 95% intervals include zero, and the 2009–2024 mean is **−0.097% per month**. The project therefore releases `INCONCLUSIVE`, despite the positive full-period point estimate. It does not upgrade the result to persistence, causality, tradability, or net alpha.
+
+The exact provider ZIP is now retained as an immutable offline snapshot. Its SHA-256 matches the archive used by the original analysis, and the preregistered estimand, window, inference method, sensitivity family, and decision rule are sealed.
+
+### Dependence and heavy-tail coverage — 30,000 simulated samples
+
+[`examples/dependence-coverage`](examples/dependence-coverage/report.md) tests mean intervals in six preregistered AR(1) data-generating processes. With \(\phi=0.8\), the nominal IID 95% interval covers only **48.58%** of Gaussian cases and **46.36%** of Student-\(t_3\) cases. Eight-lag Newey–West improves coverage to **82.08%** and **81.22%**, respectively, but still misses the nominal target.
+
+This is a deliberately nontrivial negative control: the backend must expose that a familiar correction remains inadequate under strong persistence instead of declaring success because HAC was computed.
+
+The example also contains a live Crossref/arXiv retrieval audit. Crossref returned eight records; conservative deduplication retained seven candidates, auto-merged one exact work-level duplicate, and flagged one metadata pair for review. arXiv rate-limited the request, and that coverage gap is preserved in the literature matrix instead of being hidden.
 
 The smaller [`math-counterexample`](examples/math-counterexample/report.md) and [`lookahead-audit`](examples/lookahead-audit/report.md) cases remain as fast validator examples.
 
@@ -128,6 +152,33 @@ python scripts/inference_case.py init cases nonvanishing \
 
 Run either script with `--help` for the complete command set.
 
+## Research backends
+
+```text
+# Retrieve and conservatively deduplicate literature
+python scripts/literature_search.py --help
+
+# Certify an exact polynomial identity
+python scripts/math_backend.py sympy-identity \
+  --lhs "(x + 1)**3" --rhs "x**3 + 3*x**2 + 3*x + 1" \
+  --symbols x --output certificate.json
+
+# Seal a confirmatory plan before reading results
+python scripts/research_seal.py seal-plan \
+  --plan plan.json --protocol confirmatory-v1 --output plan-seal.json
+
+# Run an AR(1) finite-sample coverage audit
+python scripts/statistics_backend.py coverage \
+  --n 120 --phi 0.8 --replications 5000 --hac-lags 8 \
+  --innovation student-t3 --seed 20260830 --output coverage.json
+
+# Freeze a replayable public-data vintage
+python scripts/finance_data.py fetch --help
+
+# Prepare a packet that hides the author's answer from the reviewer
+python scripts/review_protocol.py prepare --help
+```
+
 ## Outputs
 
 Depending on the question, the skill can produce:
@@ -139,7 +190,7 @@ Depending on the question, the skill can produce:
 - a checksum-linked computation ledger;
 - a paper-ready research brief stating the strongest supported and unsupported claims.
 
-It cannot manufacture novelty, verify that a mislabeled artifact is mathematically true, obtain proprietary data, or turn a weak design into identification. Those obligations remain visible rather than hidden behind fluent prose.
+It cannot manufacture novelty, infer the truth of an unchecked prose proof, obtain proprietary data, or turn a weak design into identification. Those obligations remain visible rather than hidden behind fluent prose.
 
 ## Repository layout
 
@@ -154,6 +205,12 @@ references/evidence-contracts.md
 references/release-standards.md
 scripts/research_workspace.py      planning, sources, runs, recovery, briefs
 scripts/inference_case.py          inference ledger and release gates
+scripts/literature_search.py       Crossref/arXiv retrieval and conservative deduplication
+scripts/math_backend.py            SymPy certificates and optional Lean checking
+scripts/statistics_backend.py      HAC, bootstrap, multiplicity, coverage simulation
+scripts/finance_data.py            immutable financial-data snapshots and vintage diffs
+scripts/research_seal.py            plan seals and verification receipts
+scripts/review_protocol.py         blind packets, review receipts, adjudication
 assets/                            reusable research templates
 examples/                          complete released workspaces and small audits
 tests/                             behavioral and integrity tests
@@ -163,8 +220,10 @@ tests/                             behavioral and integrity tests
 
 - Codex for skill invocation
 - Python 3.10+ for the optional local tools
-- no third-party Python packages
+- standard-library core; SymPy is the only optional mathematical dependency
 - network access only for examples that explicitly download public data
+
+Install the exact-mathematics backend with `pip install -r requirements-math.txt`. Lean 4 is optional and is invoked only when present; the project never substitutes a simulated formal check.
 
 The official Codex skill validator additionally uses PyYAML; it is not a runtime dependency of this project.
 

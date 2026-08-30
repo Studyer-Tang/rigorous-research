@@ -31,17 +31,18 @@ class InferenceCaseTests(unittest.TestCase):
         for field in ic.CONTRACT_FIELDS[data["domain"]]:
             data["contract"][field] = f"specified {field}"
 
-    @staticmethod
-    def evidence(data, *, independent=False, kind="derivation", role="diagnostic"):
+    def evidence(self, data, *, independent=False, kind="derivation", role="diagnostic"):
         item_id = ic.next_id(data["evidence"], "E")
+        artifact = self.root / f"{item_id}.txt"
+        artifact.write_text(f"evidence for {item_id}", encoding="utf-8")
         data["evidence"].append(
             {
                 "id": item_id,
                 "kind": kind,
                 "role": role,
                 "summary": f"evidence for {item_id}",
-                "locator": f"memory://{item_id}",
-                "sha256": None,
+                "locator": str(artifact),
+                "sha256": ic.sha256(artifact),
                 "independent": independent,
             }
         )
@@ -116,6 +117,23 @@ class InferenceCaseTests(unittest.TestCase):
         path, data = self.support_case("mathematics")
         errors, _ = ic.validate_case(data, path, release=True)
         self.assertEqual(errors, [])
+
+    def test_decisive_memory_text_cannot_support_release(self):
+        path, data = self.support_case("mathematics")
+        decisive = data["decision"]["evidence_ids"][0]
+        item = next(value for value in data["evidence"] if value["id"] == decisive)
+        item["locator"] = "memory://self-authored-claim"
+        item["sha256"] = None
+        errors, _ = ic.validate_case(data, path, release=True)
+        self.assertTrue(any("checksummed local artifact" in error for error in errors))
+
+    def test_decisive_machine_output_requires_receipt(self):
+        path, data = self.support_case("mathematics")
+        decisive = data["decision"]["evidence_ids"][0]
+        item = next(value for value in data["evidence"] if value["id"] == decisive)
+        item["kind"] = "exact-computation"
+        errors, _ = ic.validate_case(data, path, release=True)
+        self.assertTrue(any("verification receipt" in error for error in errors))
 
     def test_unconditional_mathematics_does_not_require_dummy_assumption(self):
         path, data = self.support_case("mathematics")

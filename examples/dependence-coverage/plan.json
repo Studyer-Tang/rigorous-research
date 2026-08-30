@@ -1,0 +1,10 @@
+{
+  "claim": "Naive IID normal intervals materially under-cover the mean of a positively autocorrelated process, while a preregistered HAC correction improves coverage without guaranteeing nominal coverage.",
+  "estimand": "Unconditional mean zero of stationary AR(1) processes under Gaussian and variance-standardized Student-t(3) innovations.",
+  "sample_window": "Each replication uses 120 post-burn-in observations after 100 discarded initialization steps.",
+  "exclusion_rules": "No replication or observation is excluded; invalid numerical results terminate the run.",
+  "primary_method": "Compare empirical 95% coverage of IID-normal and Newey-West-normal mean intervals with eight Bartlett lags.",
+  "sensitivity_set": "AR coefficients 0.0, 0.4, and 0.8 crossed with Gaussian and Student-t(3) innovations; 5,000 replications per cell.",
+  "decision_rule": "Report cell-level coverage and Monte Carlo standard error; call under-coverage material only when the shortfall from 0.95 exceeds five target-rate Monte Carlo standard errors.",
+  "multiplicity_family": "Six prespecified DGP cells form one diagnostic coverage grid; no cell is selected after simulation."
+}

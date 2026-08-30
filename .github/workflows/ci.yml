@@ -17,12 +17,17 @@ jobs:
           python-version: "3.12"
       - name: Compile and test
         run: |
+          pip install -r requirements-math.txt
           python -m py_compile scripts/*.py
           python -m unittest discover -s tests -v
       - name: Validate released workspaces
         run: |
           python scripts/research_workspace.py validate examples/toeplitz-determinant/workspace.json --release
           python scripts/research_workspace.py validate examples/momentum-factor/workspace.json --release
+          python scripts/research_seal.py verify-plan --seal examples/momentum-factor/artifacts/plan-seal.json
+          python scripts/research_seal.py verify-receipt --receipt examples/toeplitz-determinant/artifacts/sympy-receipt-n6.json --require-established
+          python scripts/finance_data.py verify --manifest examples/momentum-factor/snapshots/Kenneth-French-Data-Library/F-F-Momentum-Factor-monthly-archive/2026-08-30-f405ee2d47a5/manifest.json
+          python scripts/review_protocol.py verify-packet --packet examples/toeplitz-determinant/review/blind-packet-v2.json
       - name: Check forbidden scaffold residue
         shell: bash
         run: |

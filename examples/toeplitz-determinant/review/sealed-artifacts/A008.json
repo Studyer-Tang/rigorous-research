@@ -1,0 +1,595 @@
+{
+  "method": "Gaussian elimination over fractions.Fraction",
+  "coverage": "n=1..12; rho in -2, -1, -1/2, 0, 1/3, 1, 2",
+  "all_match": true,
+  "cases": [
+    {
+      "n": 1,
+      "rho": "-2",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 1,
+      "rho": "-1",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 1,
+      "rho": "-1/2",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 1,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 1,
+      "rho": "1/3",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 1,
+      "rho": "1",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 1,
+      "rho": "2",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 2,
+      "rho": "-2",
+      "observed": "-3",
+      "expected": "-3",
+      "match": true
+    },
+    {
+      "n": 2,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 2,
+      "rho": "-1/2",
+      "observed": "3/4",
+      "expected": "3/4",
+      "match": true
+    },
+    {
+      "n": 2,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 2,
+      "rho": "1/3",
+      "observed": "8/9",
+      "expected": "8/9",
+      "match": true
+    },
+    {
+      "n": 2,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 2,
+      "rho": "2",
+      "observed": "-3",
+      "expected": "-3",
+      "match": true
+    },
+    {
+      "n": 3,
+      "rho": "-2",
+      "observed": "9",
+      "expected": "9",
+      "match": true
+    },
+    {
+      "n": 3,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 3,
+      "rho": "-1/2",
+      "observed": "9/16",
+      "expected": "9/16",
+      "match": true
+    },
+    {
+      "n": 3,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 3,
+      "rho": "1/3",
+      "observed": "64/81",
+      "expected": "64/81",
+      "match": true
+    },
+    {
+      "n": 3,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 3,
+      "rho": "2",
+      "observed": "9",
+      "expected": "9",
+      "match": true
+    },
+    {
+      "n": 4,
+      "rho": "-2",
+      "observed": "-27",
+      "expected": "-27",
+      "match": true
+    },
+    {
+      "n": 4,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 4,
+      "rho": "-1/2",
+      "observed": "27/64",
+      "expected": "27/64",
+      "match": true
+    },
+    {
+      "n": 4,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 4,
+      "rho": "1/3",
+      "observed": "512/729",
+      "expected": "512/729",
+      "match": true
+    },
+    {
+      "n": 4,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 4,
+      "rho": "2",
+      "observed": "-27",
+      "expected": "-27",
+      "match": true
+    },
+    {
+      "n": 5,
+      "rho": "-2",
+      "observed": "81",
+      "expected": "81",
+      "match": true
+    },
+    {
+      "n": 5,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 5,
+      "rho": "-1/2",
+      "observed": "81/256",
+      "expected": "81/256",
+      "match": true
+    },
+    {
+      "n": 5,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 5,
+      "rho": "1/3",
+      "observed": "4096/6561",
+      "expected": "4096/6561",
+      "match": true
+    },
+    {
+      "n": 5,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 5,
+      "rho": "2",
+      "observed": "81",
+      "expected": "81",
+      "match": true
+    },
+    {
+      "n": 6,
+      "rho": "-2",
+      "observed": "-243",
+      "expected": "-243",
+      "match": true
+    },
+    {
+      "n": 6,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 6,
+      "rho": "-1/2",
+      "observed": "243/1024",
+      "expected": "243/1024",
+      "match": true
+    },
+    {
+      "n": 6,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 6,
+      "rho": "1/3",
+      "observed": "32768/59049",
+      "expected": "32768/59049",
+      "match": true
+    },
+    {
+      "n": 6,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 6,
+      "rho": "2",
+      "observed": "-243",
+      "expected": "-243",
+      "match": true
+    },
+    {
+      "n": 7,
+      "rho": "-2",
+      "observed": "729",
+      "expected": "729",
+      "match": true
+    },
+    {
+      "n": 7,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 7,
+      "rho": "-1/2",
+      "observed": "729/4096",
+      "expected": "729/4096",
+      "match": true
+    },
+    {
+      "n": 7,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 7,
+      "rho": "1/3",
+      "observed": "262144/531441",
+      "expected": "262144/531441",
+      "match": true
+    },
+    {
+      "n": 7,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 7,
+      "rho": "2",
+      "observed": "729",
+      "expected": "729",
+      "match": true
+    },
+    {
+      "n": 8,
+      "rho": "-2",
+      "observed": "-2187",
+      "expected": "-2187",
+      "match": true
+    },
+    {
+      "n": 8,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 8,
+      "rho": "-1/2",
+      "observed": "2187/16384",
+      "expected": "2187/16384",
+      "match": true
+    },
+    {
+      "n": 8,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 8,
+      "rho": "1/3",
+      "observed": "2097152/4782969",
+      "expected": "2097152/4782969",
+      "match": true
+    },
+    {
+      "n": 8,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 8,
+      "rho": "2",
+      "observed": "-2187",
+      "expected": "-2187",
+      "match": true
+    },
+    {
+      "n": 9,
+      "rho": "-2",
+      "observed": "6561",
+      "expected": "6561",
+      "match": true
+    },
+    {
+      "n": 9,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 9,
+      "rho": "-1/2",
+      "observed": "6561/65536",
+      "expected": "6561/65536",
+      "match": true
+    },
+    {
+      "n": 9,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 9,
+      "rho": "1/3",
+      "observed": "16777216/43046721",
+      "expected": "16777216/43046721",
+      "match": true
+    },
+    {
+      "n": 9,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 9,
+      "rho": "2",
+      "observed": "6561",
+      "expected": "6561",
+      "match": true
+    },
+    {
+      "n": 10,
+      "rho": "-2",
+      "observed": "-19683",
+      "expected": "-19683",
+      "match": true
+    },
+    {
+      "n": 10,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 10,
+      "rho": "-1/2",
+      "observed": "19683/262144",
+      "expected": "19683/262144",
+      "match": true
+    },
+    {
+      "n": 10,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 10,
+      "rho": "1/3",
+      "observed": "134217728/387420489",
+      "expected": "134217728/387420489",
+      "match": true
+    },
+    {
+      "n": 10,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 10,
+      "rho": "2",
+      "observed": "-19683",
+      "expected": "-19683",
+      "match": true
+    },
+    {
+      "n": 11,
+      "rho": "-2",
+      "observed": "59049",
+      "expected": "59049",
+      "match": true
+    },
+    {
+      "n": 11,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 11,
+      "rho": "-1/2",
+      "observed": "59049/1048576",
+      "expected": "59049/1048576",
+      "match": true
+    },
+    {
+      "n": 11,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 11,
+      "rho": "1/3",
+      "observed": "1073741824/3486784401",
+      "expected": "1073741824/3486784401",
+      "match": true
+    },
+    {
+      "n": 11,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 11,
+      "rho": "2",
+      "observed": "59049",
+      "expected": "59049",
+      "match": true
+    },
+    {
+      "n": 12,
+      "rho": "-2",
+      "observed": "-177147",
+      "expected": "-177147",
+      "match": true
+    },
+    {
+      "n": 12,
+      "rho": "-1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 12,
+      "rho": "-1/2",
+      "observed": "177147/4194304",
+      "expected": "177147/4194304",
+      "match": true
+    },
+    {
+      "n": 12,
+      "rho": "0",
+      "observed": "1",
+      "expected": "1",
+      "match": true
+    },
+    {
+      "n": 12,
+      "rho": "1/3",
+      "observed": "8589934592/31381059609",
+      "expected": "8589934592/31381059609",
+      "match": true
+    },
+    {
+      "n": 12,
+      "rho": "1",
+      "observed": "0",
+      "expected": "0",
+      "match": true
+    },
+    {
+      "n": 12,
+      "rho": "2",
+      "observed": "-177147",
+      "expected": "-177147",
+      "match": true
+    }
+  ]
+}

@@ -96,6 +96,14 @@
       ]
     }
   ],
+  "release_policy": {
+    "plan_seal_required": false,
+    "data_snapshot_required": false,
+    "independent_review_required": true
+  },
+  "plan_seal": "",
+  "data_snapshots": [],
+  "review_adjudication": "review/adjudication.json",
   "runs": [
     {
       "id": "R001",

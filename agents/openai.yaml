@@ -1,7 +1,7 @@
 interface:
   display_name: "Rigorous Research"
-  short_description: "Plan and execute evidence-gated quantitative research"
-  default_prompt: "Use $rigorous-research to plan, execute, challenge, and package this mathematical, statistical, or financial research question."
+  short_description: "Verify mathematical and quantitative research"
+  default_prompt: "Use $rigorous-research to retrieve sources, seal the design, run exact or dependence-aware checks, challenge the result independently, and package this mathematical, statistical, or financial research question."
 
 policy:
   allow_implicit_invocation: true
