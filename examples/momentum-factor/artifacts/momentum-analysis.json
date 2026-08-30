@@ -1,0 +1,111 @@
+{
+  "analysis_completed": true,
+  "circular_block_bootstrap": {
+    "block_length": 12,
+    "fraction_nonpositive": 0.0585,
+    "mean_95_high": 0.00855916015625,
+    "mean_95_low": -0.0011749869791666666,
+    "replications": 10000,
+    "seed": 20260830
+  },
+  "claim": "The 1993-01 to 2024-12 monthly momentum-factor mean is positive under the stated descriptive and weak-dependence scope.",
+  "descriptive": {
+    "annualized_arithmetic_mean": 0.048984375,
+    "annualized_sharpe_zero_benchmark": 0.2955695127087278,
+    "maximum": 0.1802,
+    "mean_monthly": 0.00408203125,
+    "median_monthly": 0.005600000000000001,
+    "minimum": -0.3436,
+    "monthly_standard_deviation": 0.04784177812040705,
+    "n": 384,
+    "positive_fraction": 0.5989583333333334
+  },
+  "fixed_design": {
+    "bootstrap_block_length": 12,
+    "bootstrap_replications": 10000,
+    "end": 202412,
+    "hac_lags": 6,
+    "observations": 384,
+    "seed": 20260830,
+    "start": 199301,
+    "units": "decimal monthly return"
+  },
+  "hac_inference": {
+    "hac_lags": 6,
+    "hac_standard_error": 0.002518067268439934,
+    "hac_t": 1.621096982261724,
+    "mean": 0.00408203125,
+    "normal_95_high": 0.009017352406791423,
+    "normal_95_low": -0.0008532899067914233,
+    "normal_two_sided_p": 0.10499684109712018
+  },
+  "release_condition_passed": false,
+  "sensitivity": {
+    "2009_onward": {
+      "annualized_arithmetic_mean": -0.011631250000000001,
+      "annualized_sharpe_zero_benchmark": -0.07353351168808767,
+      "maximum": 0.1,
+      "mean_monthly": -0.0009692708333333334,
+      "median_monthly": 0.0041,
+      "minimum": -0.3436,
+      "monthly_standard_deviation": 0.045661530126540284,
+      "n": 192,
+      "positive_fraction": 0.5677083333333334
+    },
+    "leave_one_year_out_means": {
+      "1993": 0.0036524193548387097,
+      "1994": 0.004118279569892473,
+      "1995": 0.0038397849462365593,
+      "1996": 0.004068010752688173,
+      "1997": 0.003964516129032258,
+      "1998": 0.00365752688172043,
+      "1999": 0.003486559139784946,
+      "2000": 0.0036900537634408604,
+      "2001": 0.004316666666666667,
+      "2002": 0.0034610215053763444,
+      "2003": 0.004704301075268817,
+      "2004": 0.0042061827956989244,
+      "2005": 0.003830913978494624,
+      "2006": 0.004387096774193548,
+      "2007": 0.0036368279569892474,
+      "2008": 0.0036852150537634407,
+      "2009": 0.005958333333333333,
+      "2010": 0.00403763440860215,
+      "2011": 0.003995430107526882,
+      "2012": 0.004230645161290323,
+      "2013": 0.0040672043010752685,
+      "2014": 0.004188709677419355,
+      "2015": 0.0036629032258064516,
+      "2016": 0.004733333333333333,
+      "2017": 0.004109946236559139,
+      "2018": 0.003929032258064516,
+      "2019": 0.004327956989247312,
+      "2020": 0.004186559139784947,
+      "2021": 0.004271505376344086,
+      "2022": 0.0037,
+      "2023": 0.004776344086021505,
+      "2024": 0.0037440860215053762
+    },
+    "one_percent_symmetric_trim_mean": 0.004898677248677249,
+    "pre_2009": {
+      "annualized_arithmetic_mean": 0.1096,
+      "annualized_sharpe_zero_benchmark": 0.638759577655751,
+      "maximum": 0.1802,
+      "mean_monthly": 0.009133333333333334,
+      "median_monthly": 0.007850000000000001,
+      "minimum": -0.2535,
+      "monthly_standard_deviation": 0.04953161699383973,
+      "n": 192,
+      "positive_fraction": 0.6302083333333334
+    },
+    "remove_five_best_and_worst_mean": 0.005044385026737968
+  },
+  "source": {
+    "archive_member": "F-F_Momentum_Factor.csv",
+    "available_first_month": 192701,
+    "available_last_month": 202606,
+    "download_bytes": 5610,
+    "download_sha256": "f405ee2d47a5c75ce05025f789733d0599879361e9836a553504240b89159871",
+    "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Momentum_Factor_CSV.zip"
+  }
+}

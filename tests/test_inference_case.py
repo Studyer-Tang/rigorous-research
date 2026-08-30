@@ -281,6 +281,22 @@ class InferenceCaseTests(unittest.TestCase):
         self.assertEqual(updated["claims"][1]["assumption_ids"], ["A001"])
         self.assertEqual(updated["claims"][0]["assumption_ids"], [])
 
+    def test_cli_updates_claim_scope(self):
+        path, _ = self.case("statistics")
+        result = ic.main(
+            [
+                "set-claim",
+                str(path),
+                "--id",
+                "C001",
+                "--scope",
+                "Conditional on weak dependence over the fixed evaluation period.",
+            ]
+        )
+        self.assertEqual(result, 0)
+        _, data = ic.load_case(path)
+        self.assertIn("weak dependence", data["claims"][0]["scope"])
+
     def test_supported_claim_rejects_triggered_falsifier(self):
         path, data = self.support_case("mathematics")
         witness = self.evidence(data, kind="counterexample", role="decisive")

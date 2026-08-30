@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "workspace_id": "momentum-factor",
+  "domain": "statistics",
+  "question": "Is the 1993-01 to 2024-12 U.S. monthly momentum-factor mean positive under weak-dependence inference?",
+  "stage": "RELEASED",
+  "created_at": "2026-08-30T02:15:23.144084+00:00",
+  "updated_at": "2026-08-30T02:17:22.975015+00:00",
+  "case_file": "case.json",
+  "tasks": [
+    {
+      "id": "W001",
+      "title": "Freeze estimand, sample, and falsifiers",
+      "kind": "definition",
+      "acceptance": "Dates, units, HAC lags, block length, seed, and release conditions are fixed before analysis.",
+      "depends_on": [],
+      "deliverable": "artifacts/design.md",
+      "status": "DONE",
+      "note": "Empirical design frozen."
+    },
+    {
+      "id": "W002",
+      "title": "Download and analyze the fixed momentum sample",
+      "kind": "analysis",
+      "acceptance": "The archive vintage is hashed; all 384 months are present; descriptive, HAC, bootstrap, split, trim, and leave-one-year-out results are emitted.",
+      "depends_on": [
+        "W001"
+      ],
+      "deliverable": "artifacts/momentum-analysis.json",
+      "status": "DONE",
+      "note": "Completed by R001."
+    },
+    {
+      "id": "W003",
+      "title": "Audit interpretation and unsupported extrapolations",
+      "kind": "falsification",
+      "acceptance": "The audit separates historical mean, weak-dependence inference, tradability, alpha, causality, and persistence.",
+      "depends_on": [
+        "W002"
+      ],
+      "deliverable": "artifacts/limitations.md",
+      "status": "DONE",
+      "note": "Interpretation firewall completed."
+    },
+    {
+      "id": "W004",
+      "title": "Calibrate the final verdict",
+      "kind": "writing",
+      "acceptance": "The verdict follows the predeclared interval and sensitivity gates even if the sample mean is positive.",
+      "depends_on": [
+        "W002",
+        "W003"
+      ],
+      "deliverable": "artifacts/release-note.md",
+      "status": "DONE",
+      "note": "Result calibrated without upgrading a positive point estimate to significance."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S001",
+      "citation": "Kenneth R. French Data Library, Momentum Factor (Mom), monthly CSV archive.",
+      "role": "data",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Momentum_Factor_CSV.zip",
+      "file": "",
+      "sha256": null,
+      "accessed_at": "2026-08-30T02:15:23.249336+00:00",
+      "note": "The executable records the downloaded archive SHA-256 and available date range.",
+      "supports": [
+        "C001"
+      ]
+    },
+    {
+      "id": "S002",
+      "citation": "Kenneth R. French Data Library, description of the Momentum Factor construction.",
+      "role": "primary",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_mom_factor.html",
+      "file": "",
+      "sha256": null,
+      "accessed_at": "2026-08-30T02:15:23.338852+00:00",
+      "note": "Construction documentation; the example does not claim direct implementation or net tradability.",
+      "supports": [
+        "C001"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "R001",
+      "task_id": "W002",
+      "label": "Frozen momentum-factor analysis",
+      "command": [
+        "C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\.venv\\Scripts\\python.exe",
+        "analyze_momentum.py",
+        "--output",
+        "artifacts/momentum-analysis.json",
+        "--report",
+        "artifacts/analysis-summary.md"
+      ],
+      "cwd": ".",
+      "started_at": "2026-08-30T02:15:23.751048+00:00",
+      "finished_at": "2026-08-30T02:15:26.347928+00:00",
+      "returncode": 0,
+      "timed_out": false,
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R001/stdout.txt",
+      "stderr": "artifacts/runs/R001/stderr.txt",
+      "outputs": [
+        {
+          "file": "artifacts/momentum-analysis.json",
+          "sha256": "8337f955c8db67eb91109aa37265361df16e6c214594d8746e675a2e61897788"
+        },
+        {
+          "file": "artifacts/analysis-summary.md",
+          "sha256": "0fd1e99a3e6507e66fac7c281db597920c302a8a14ce94006fcb9ea95eac1015"
+        }
+      ]
+    }
+  ]
+}

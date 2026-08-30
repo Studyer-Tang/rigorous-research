@@ -557,6 +557,12 @@ def build_parser() -> argparse.ArgumentParser:
     claim.add_argument("--statement", required=True)
     claim.add_argument("--scope", default="")
 
+    set_claim = commands.add_parser("set-claim", help="update a claim statement or scope")
+    set_claim.add_argument("case", type=Path)
+    set_claim.add_argument("--id", default="C001")
+    set_claim.add_argument("--statement")
+    set_claim.add_argument("--scope")
+
     assumption = commands.add_parser("assumption", help="add an assumption")
     assumption.add_argument("case", type=Path)
     assumption.add_argument("--statement", required=True)
@@ -663,6 +669,19 @@ def main(argv: list[str] | None = None) -> int:
                 data["claims"].append({"id": item_id, "statement": args.statement.strip(), "scope": args.scope.strip(), "status": "OPEN", "assumption_ids": [], "evidence_ids": []})
                 return {"claim_id": item_id}
             mutate(args.case, add_claim, "claim-added")
+        elif args.command == "set-claim":
+            def update_claim(data: dict[str, Any]) -> dict[str, Any]:
+                if args.statement is None and args.scope is None:
+                    raise ContractError("set-claim requires --statement or --scope")
+                item = find(data["claims"], args.id, "claim")
+                if args.statement is not None:
+                    if not args.statement.strip():
+                        raise ContractError("claim statement must be non-empty")
+                    item["statement"] = args.statement.strip()
+                if args.scope is not None:
+                    item["scope"] = args.scope.strip()
+                return {"claim_id": args.id}
+            mutate(args.case, update_claim, "claim-updated")
         elif args.command == "assumption":
             def add_assumption(data: dict[str, Any]) -> dict[str, Any]:
                 item_id = next_id(data["assumptions"], "A")

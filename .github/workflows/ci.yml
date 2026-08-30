@@ -1,0 +1,31 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile and test
+        run: |
+          python -m py_compile scripts/*.py
+          python -m unittest discover -s tests -v
+      - name: Validate released workspaces
+        run: |
+          python scripts/research_workspace.py validate examples/toeplitz-determinant/workspace.json --release
+          python scripts/research_workspace.py validate examples/momentum-factor/workspace.json --release
+      - name: Check forbidden scaffold residue
+        shell: bash
+        run: |
+          if grep -RInE 'TODO|YOUR_[A-Z_]+|PLACEHOLDER' SKILL.md agents assets references scripts; then
+            exit 1
+          fi

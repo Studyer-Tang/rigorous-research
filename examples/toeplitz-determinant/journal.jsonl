@@ -1,0 +1,27 @@
+{"time": "2026-08-30T02:11:10.274662+00:00", "event": "initialized", "domain": "mathematics"}
+{"time": "2026-08-30T02:11:43.521884+00:00", "event": "contract-set", "field": "ambient_object"}
+{"time": "2026-08-30T02:11:43.625212+00:00", "event": "contract-set", "field": "coefficient_domain"}
+{"time": "2026-08-30T02:11:43.701071+00:00", "event": "contract-set", "field": "quantifiers"}
+{"time": "2026-08-30T02:11:43.780044+00:00", "event": "contract-set", "field": "equality_semantics"}
+{"time": "2026-08-30T02:11:43.863093+00:00", "event": "evidence-added", "evidence_id": "E001"}
+{"time": "2026-08-30T02:11:43.943719+00:00", "event": "evidence-added", "evidence_id": "E002"}
+{"time": "2026-08-30T02:11:44.034558+00:00", "event": "evidence-added", "evidence_id": "E003"}
+{"time": "2026-08-30T02:11:44.135671+00:00", "event": "evidence-added", "evidence_id": "E004"}
+{"time": "2026-08-30T02:11:44.237563+00:00", "event": "evidence-added", "evidence_id": "E005"}
+{"time": "2026-08-30T02:11:44.342365+00:00", "event": "check-added", "check_id": "K001"}
+{"time": "2026-08-30T02:11:44.441862+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E001"}
+{"time": "2026-08-30T02:11:44.513500+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E002"}
+{"time": "2026-08-30T02:11:44.601646+00:00", "event": "check-updated", "check_id": "K001", "outcome": "CLEARED"}
+{"time": "2026-08-30T02:11:44.681416+00:00", "event": "check-added", "check_id": "K002"}
+{"time": "2026-08-30T02:11:44.763294+00:00", "event": "evidence-linked", "target": "K002", "evidence_id": "E002"}
+{"time": "2026-08-30T02:11:44.856604+00:00", "event": "check-updated", "check_id": "K002", "outcome": "CLEARED"}
+{"time": "2026-08-30T02:11:44.956006+00:00", "event": "check-added", "check_id": "K003"}
+{"time": "2026-08-30T02:11:45.028465+00:00", "event": "evidence-linked", "target": "K003", "evidence_id": "E003"}
+{"time": "2026-08-30T02:11:45.110023+00:00", "event": "evidence-linked", "target": "K003", "evidence_id": "E004"}
+{"time": "2026-08-30T02:11:45.195582+00:00", "event": "evidence-linked", "target": "K003", "evidence_id": "E005"}
+{"time": "2026-08-30T02:11:45.277741+00:00", "event": "check-updated", "check_id": "K003", "outcome": "CLEARED"}
+{"time": "2026-08-30T02:11:45.368870+00:00", "event": "check-added", "check_id": "K004"}
+{"time": "2026-08-30T02:11:45.468364+00:00", "event": "evidence-linked", "target": "K004", "evidence_id": "E003"}
+{"time": "2026-08-30T02:11:45.545408+00:00", "event": "evidence-linked", "target": "K004", "evidence_id": "E004"}
+{"time": "2026-08-30T02:11:45.630037+00:00", "event": "check-updated", "check_id": "K004", "outcome": "CLEARED"}
+{"time": "2026-08-30T02:11:45.712377+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "SUPPORTED"}

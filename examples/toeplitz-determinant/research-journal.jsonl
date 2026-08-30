@@ -1,0 +1,16 @@
+{"time": "2026-08-30T02:11:10.274662+00:00", "event": "workspace-initialized", "domain": "mathematics"}
+{"time": "2026-08-30T02:11:10.356695+00:00", "event": "source-added", "source_id": "S001"}
+{"time": "2026-08-30T02:11:10.448031+00:00", "event": "task-added", "task_id": "W001"}
+{"time": "2026-08-30T02:11:10.532953+00:00", "event": "task-updated", "task_id": "W001", "status": "DONE"}
+{"time": "2026-08-30T02:11:10.618637+00:00", "event": "task-added", "task_id": "W002"}
+{"time": "2026-08-30T02:11:10.860390+00:00", "event": "run-recorded", "run_id": "R001", "task_id": "W002", "returncode": 0}
+{"time": "2026-08-30T02:11:10.962875+00:00", "event": "task-added", "task_id": "W003"}
+{"time": "2026-08-30T02:11:11.045303+00:00", "event": "task-updated", "task_id": "W003", "status": "DONE"}
+{"time": "2026-08-30T02:11:11.128873+00:00", "event": "task-added", "task_id": "W004"}
+{"time": "2026-08-30T02:11:11.373252+00:00", "event": "run-recorded", "run_id": "R002", "task_id": "W004", "returncode": 0}
+{"time": "2026-08-30T02:11:11.468271+00:00", "event": "task-added", "task_id": "W005"}
+{"time": "2026-08-30T02:11:11.545956+00:00", "event": "task-updated", "task_id": "W005", "status": "DONE"}
+{"time": "2026-08-30T02:11:11.637034+00:00", "event": "task-added", "task_id": "W006"}
+{"time": "2026-08-30T02:11:11.720011+00:00", "event": "task-updated", "task_id": "W006", "status": "DONE"}
+{"time": "2026-08-30T02:11:56.106484+00:00", "event": "stage-updated", "stage": "RELEASED"}
+{"time": "2026-08-30T02:17:22.757846+00:00", "event": "source-updated", "source_id": "S001"}

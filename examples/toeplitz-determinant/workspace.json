@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "workspace_id": "toeplitz-determinant",
+  "domain": "mathematics",
+  "question": "For T_n(rho)=(rho^|i-j|), what is det T_n(rho) over Z[rho]?",
+  "stage": "RELEASED",
+  "created_at": "2026-08-30T02:11:10.274662+00:00",
+  "updated_at": "2026-08-30T02:17:22.757846+00:00",
+  "case_file": "case.json",
+  "tasks": [
+    {
+      "id": "W001",
+      "title": "Type the matrix and coefficient domain",
+      "kind": "definition",
+      "acceptance": "All indices, quantifiers, specializations, and singular parameters are explicit.",
+      "depends_on": [],
+      "deliverable": "artifacts/problem.md",
+      "status": "DONE",
+      "note": "Definition contract written and checked."
+    },
+    {
+      "id": "W002",
+      "title": "Expand determinants symbolically for small n",
+      "kind": "computation",
+      "acceptance": "Leibniz expansion matches the proposed polynomial coefficient-by-coefficient for n=1..7.",
+      "depends_on": [
+        "W001"
+      ],
+      "deliverable": "artifacts/polynomial-check.json",
+      "status": "DONE",
+      "note": "Completed by R001."
+    },
+    {
+      "id": "W003",
+      "title": "Prove the all-n polynomial identity",
+      "kind": "proof",
+      "acceptance": "A division-free determinant argument closes every n>=1 and includes rho=+-1.",
+      "depends_on": [
+        "W001",
+        "W002"
+      ],
+      "deliverable": "artifacts/proof.md",
+      "status": "DONE",
+      "note": "Descending row-operation proof completed."
+    },
+    {
+      "id": "W004",
+      "title": "Independently recompute exact rational specializations",
+      "kind": "replication",
+      "acceptance": "A different elimination implementation matches the formula for n=1..12 at seven adversarial rho values.",
+      "depends_on": [
+        "W003"
+      ],
+      "deliverable": "artifacts/rational-check.json",
+      "status": "DONE",
+      "note": "Completed by R002."
+    },
+    {
+      "id": "W005",
+      "title": "Attack boundaries and proof failure modes",
+      "kind": "falsification",
+      "acceptance": "The audit covers n=1, rho=+-1, row-order dependence, hidden division, and finite-versus-general evidence.",
+      "depends_on": [
+        "W003",
+        "W004"
+      ],
+      "deliverable": "artifacts/falsification.md",
+      "status": "DONE",
+      "note": "Boundary and adversarial audit completed."
+    },
+    {
+      "id": "W006",
+      "title": "Calibrate and release the result",
+      "kind": "writing",
+      "acceptance": "The note distinguishes the decisive proof from diagnostic finite computations.",
+      "depends_on": [
+        "W005"
+      ],
+      "deliverable": "artifacts/release-note.md",
+      "status": "DONE",
+      "note": "Release scope and evidence roles written."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S001",
+      "citation": "Kac, Murdock, and Szego (1953), On the eigen-values of certain Hermitian forms.",
+      "role": "primary",
+      "url": "https://doi.org/10.1512/iumj.1953.2.52023",
+      "file": "",
+      "sha256": null,
+      "accessed_at": "2026-08-30T02:11:10.356695+00:00",
+      "note": "Historical context for this structured Toeplitz matrix; the included proof is self-contained.",
+      "supports": [
+        "C001"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "R001",
+      "task_id": "W002",
+      "label": "Exact symbolic permutation expansion",
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "verify_symbolic.py",
+        "--max-n",
+        "7",
+        "--output",
+        "artifacts/polynomial-check.json"
+      ],
+      "cwd": ".",
+      "started_at": "2026-08-30T02:11:10.707562+00:00",
+      "finished_at": "2026-08-30T02:11:10.779451+00:00",
+      "returncode": 0,
+      "timed_out": false,
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R001/stdout.txt",
+      "stderr": "artifacts/runs/R001/stderr.txt",
+      "outputs": [
+        {
+          "file": "artifacts/polynomial-check.json",
+          "sha256": "edef69f82dabf3990d27620f0314f02296eb0def69160d6b7149e785da59c3d9"
+        }
+      ]
+    },
+    {
+      "id": "R002",
+      "task_id": "W004",
+      "label": "Independent rational elimination",
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "verify_rational.py",
+        "--max-n",
+        "12",
+        "--output",
+        "artifacts/rational-check.json"
+      ],
+      "cwd": ".",
+      "started_at": "2026-08-30T02:11:11.214078+00:00",
+      "finished_at": "2026-08-30T02:11:11.301568+00:00",
+      "returncode": 0,
+      "timed_out": false,
+      "environment": {
+        "python": "3.12.13",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R002/stdout.txt",
+      "stderr": "artifacts/runs/R002/stderr.txt",
+      "outputs": [
+        {
+          "file": "artifacts/rational-check.json",
+          "sha256": "352e778cbb2682e81e928f71b1aacb08e9c7a41eae47effe0312607831a326f4"
+        }
+      ]
+    }
+  ]
+}

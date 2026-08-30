@@ -1,0 +1,14 @@
+{"time": "2026-08-30T02:15:23.144084+00:00", "event": "workspace-initialized", "domain": "statistics"}
+{"time": "2026-08-30T02:15:23.249336+00:00", "event": "source-added", "source_id": "S001"}
+{"time": "2026-08-30T02:15:23.338852+00:00", "event": "source-added", "source_id": "S002"}
+{"time": "2026-08-30T02:15:23.440713+00:00", "event": "task-added", "task_id": "W001"}
+{"time": "2026-08-30T02:15:23.542759+00:00", "event": "task-updated", "task_id": "W001", "status": "DONE"}
+{"time": "2026-08-30T02:15:23.654066+00:00", "event": "task-added", "task_id": "W002"}
+{"time": "2026-08-30T02:15:26.443636+00:00", "event": "run-recorded", "run_id": "R001", "task_id": "W002", "returncode": 0}
+{"time": "2026-08-30T02:15:26.535334+00:00", "event": "task-added", "task_id": "W003"}
+{"time": "2026-08-30T02:15:26.616835+00:00", "event": "task-updated", "task_id": "W003", "status": "DONE"}
+{"time": "2026-08-30T02:15:26.723570+00:00", "event": "task-added", "task_id": "W004"}
+{"time": "2026-08-30T02:15:26.817695+00:00", "event": "task-updated", "task_id": "W004", "status": "DONE"}
+{"time": "2026-08-30T02:16:22.422962+00:00", "event": "stage-updated", "stage": "RELEASED"}
+{"time": "2026-08-30T02:17:22.861612+00:00", "event": "source-updated", "source_id": "S001"}
+{"time": "2026-08-30T02:17:22.975015+00:00", "event": "source-updated", "source_id": "S002"}

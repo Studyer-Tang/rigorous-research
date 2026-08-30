@@ -1,0 +1,144 @@
+{
+  "schema_version": 3,
+  "case_id": "toeplitz-determinant",
+  "domain": "mathematics",
+  "question": "For T_n(rho)=(rho^|i-j|), what is det T_n(rho) over Z[rho]?",
+  "created_at": "2026-08-30T02:11:10.274662+00:00",
+  "updated_at": "2026-08-30T02:11:45.712377+00:00",
+  "contract": {
+    "ambient_object": "Matrices M_n(Z[rho]) and their determinants in the commutative polynomial ring Z[rho].",
+    "coefficient_domain": "Z[rho], with specialization to an arbitrary commutative ring only after the polynomial identity is proved.",
+    "quantifiers": "Every integer n>=1; rho is an indeterminate. No genericity exclusion at rho=+-1.",
+    "equality_semantics": "Exact equality of polynomials in Z[rho]."
+  },
+  "claims": [
+    {
+      "id": "C001",
+      "statement": "For every integer n>=1, det T_n(rho)=(1-rho^2)^(n-1) in Z[rho].",
+      "scope": "",
+      "status": "SUPPORTED",
+      "assumption_ids": [],
+      "evidence_ids": [
+        "E002",
+        "E004"
+      ]
+    }
+  ],
+  "assumptions": [],
+  "checks": [
+    {
+      "id": "K001",
+      "target_claim": "C001",
+      "kind": "typecheck",
+      "target": "The matrix, determinant, coefficient ring, indices, and specializations.",
+      "falsifier": "An undefined entry, illegal index, noncommutative determinant step, or excluded specialization.",
+      "coverage": "All definitions in Z[rho], n=1 boundary, and rho=+-1 specializations.",
+      "outcome": "CLEARED",
+      "result": "Every operation is defined in Z[rho] and no division excludes singular parameters.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ]
+    },
+    {
+      "id": "K002",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "The all-n determinant identity.",
+      "falsifier": "A determinant-changing operation, wrong triangular entries, or an uncovered n.",
+      "coverage": "A symbolic argument for arbitrary n>=1 over Z[rho].",
+      "outcome": "CLEARED",
+      "result": "Descending row operations yield diagonal 1,1-rho^2,...,1-rho^2.",
+      "evidence_ids": [
+        "E002"
+      ]
+    },
+    {
+      "id": "K003",
+      "target_claim": "C001",
+      "kind": "counterexample",
+      "target": "Boundary and adversarial instances of the universal identity.",
+      "falsifier": "Any exact polynomial or rational specialization differing from the formula.",
+      "coverage": "Exact polynomials n=1..7 and 84 rational cases through n=12, including rho=0,+-1 and nonintegral values.",
+      "outcome": "CLEARED",
+      "result": "No counterexample occurred in the documented exact coverage; the general scope is carried by K002, not finite search.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E005"
+      ]
+    },
+    {
+      "id": "K004",
+      "target_claim": "C001",
+      "kind": "exact-computation",
+      "target": "Two executable exact-arithmetic implementations.",
+      "falsifier": "Coefficient disagreement, rational determinant disagreement, or a failed recorded run.",
+      "coverage": "Leibniz coefficient collection through n=7 and independent rational elimination through n=12.",
+      "outcome": "CLEARED",
+      "result": "Both exact implementations returned complete agreement in their declared domains.",
+      "evidence_ids": [
+        "E003",
+        "E004"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Definition and coefficient-domain audit for the Toeplitz matrix.",
+      "locator": "artifacts/problem.md",
+      "sha256": "e4e668d35d7afdbfc5ba5da77113e0418c91eef92e0d3dd9ab1415f5afbcec48",
+      "independent": false
+    },
+    {
+      "id": "E002",
+      "kind": "derivation",
+      "role": "decisive",
+      "summary": "Division-free descending row operations triangularize T_n for every n.",
+      "locator": "artifacts/proof.md",
+      "sha256": "f9d4cee9d2d0e1d70cdd51c1262d1de374e2dbc3168ac1da0643ba1a00e229b9",
+      "independent": false
+    },
+    {
+      "id": "E003",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "Exact Leibniz expansion matches polynomial coefficients for n=1..7.",
+      "locator": "artifacts/polynomial-check.json",
+      "sha256": "edef69f82dabf3990d27620f0314f02296eb0def69160d6b7149e785da59c3d9",
+      "independent": false
+    },
+    {
+      "id": "E004",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "Independent exact-rational elimination matches 84 parameterized cases.",
+      "locator": "artifacts/rational-check.json",
+      "sha256": "352e778cbb2682e81e928f71b1aacb08e9c7a41eae47effe0312607831a326f4",
+      "independent": true
+    },
+    {
+      "id": "E005",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Boundary, singular-parameter, row-order, and evidence-scope attacks.",
+      "locator": "artifacts/falsification.md",
+      "sha256": "43dd0f0faf370afd558b0e3ee23aca8024d42bb84a3db7c3aa7d911ddfe4c8b5",
+      "independent": false
+    }
+  ],
+  "decision": {
+    "verdict": "SUPPORTED",
+    "claim_id": "C001",
+    "reason": "A division-free proof establishes the exact identity for arbitrary n, and an independent exact implementation attacks computational and boundary errors.",
+    "evidence_ids": [
+      "E002",
+      "E004"
+    ],
+    "limitations": "This is a determinant identity; it does not by itself establish spectral or positive-definiteness claims for all parameter regimes.",
+    "reproduction": "Run verify_symbolic.py and verify_rational.py as recorded in workspace.json, then check the descending row operations in artifacts/proof.md."
+  }
+}

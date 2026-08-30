@@ -1,7 +1,7 @@
 interface:
   display_name: "Rigorous Research"
-  short_description: "Audit mathematical and quantitative research claims"
-  default_prompt: "Use $rigorous-research to build and test an inference contract for this mathematical, statistical, or financial claim."
+  short_description: "Plan and execute evidence-gated quantitative research"
+  default_prompt: "Use $rigorous-research to plan, execute, challenge, and package this mathematical, statistical, or financial research question."
 
 policy:
   allow_implicit_invocation: true

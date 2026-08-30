@@ -1,0 +1,35 @@
+{"time": "2026-08-30T02:15:23.142078+00:00", "event": "initialized", "domain": "statistics"}
+{"time": "2026-08-30T02:16:10.209567+00:00", "event": "claim-updated", "claim_id": "C001"}
+{"time": "2026-08-30T02:16:10.289231+00:00", "event": "contract-set", "field": "population"}
+{"time": "2026-08-30T02:16:10.373555+00:00", "event": "contract-set", "field": "sampling_unit"}
+{"time": "2026-08-30T02:16:10.466733+00:00", "event": "contract-set", "field": "outcome"}
+{"time": "2026-08-30T02:16:10.549479+00:00", "event": "contract-set", "field": "estimand"}
+{"time": "2026-08-30T02:16:10.628017+00:00", "event": "contract-set", "field": "identification"}
+{"time": "2026-08-30T02:16:10.711166+00:00", "event": "evidence-added", "evidence_id": "E001"}
+{"time": "2026-08-30T02:16:10.791736+00:00", "event": "evidence-added", "evidence_id": "E002"}
+{"time": "2026-08-30T02:16:10.885772+00:00", "event": "evidence-added", "evidence_id": "E003"}
+{"time": "2026-08-30T02:16:10.984221+00:00", "event": "evidence-added", "evidence_id": "E004"}
+{"time": "2026-08-30T02:16:11.086342+00:00", "event": "evidence-added", "evidence_id": "E005"}
+{"time": "2026-08-30T02:16:11.167083+00:00", "event": "assumption-added", "assumption_id": "A001"}
+{"time": "2026-08-30T02:16:11.246639+00:00", "event": "evidence-linked", "target": "A001", "evidence_id": "E001"}
+{"time": "2026-08-30T02:16:11.328644+00:00", "event": "evidence-linked", "target": "A001", "evidence_id": "E002"}
+{"time": "2026-08-30T02:16:11.411778+00:00", "event": "assumption-updated", "assumption_id": "A001", "status": "JUSTIFIED"}
+{"time": "2026-08-30T02:16:11.501888+00:00", "event": "assumption-bound", "claim_id": "C001", "assumption_id": "A001"}
+{"time": "2026-08-30T02:16:11.600565+00:00", "event": "assumption-added", "assumption_id": "A002"}
+{"time": "2026-08-30T02:16:11.679528+00:00", "event": "assumption-updated", "assumption_id": "A002", "status": "CONDITIONAL"}
+{"time": "2026-08-30T02:16:11.758689+00:00", "event": "assumption-bound", "claim_id": "C001", "assumption_id": "A002"}
+{"time": "2026-08-30T02:16:11.839461+00:00", "event": "check-added", "check_id": "K001"}
+{"time": "2026-08-30T02:16:11.924108+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E002"}
+{"time": "2026-08-30T02:16:12.020620+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E003"}
+{"time": "2026-08-30T02:16:12.099037+00:00", "event": "check-updated", "check_id": "K001", "outcome": "CLEARED"}
+{"time": "2026-08-30T02:16:12.177955+00:00", "event": "check-added", "check_id": "K002"}
+{"time": "2026-08-30T02:16:12.260399+00:00", "event": "evidence-linked", "target": "K002", "evidence_id": "E002"}
+{"time": "2026-08-30T02:16:12.347933+00:00", "event": "check-updated", "check_id": "K002", "outcome": "TRIGGERED"}
+{"time": "2026-08-30T02:16:12.434748+00:00", "event": "check-added", "check_id": "K003"}
+{"time": "2026-08-30T02:16:12.531974+00:00", "event": "evidence-linked", "target": "K003", "evidence_id": "E002"}
+{"time": "2026-08-30T02:16:12.609764+00:00", "event": "evidence-linked", "target": "K003", "evidence_id": "E004"}
+{"time": "2026-08-30T02:16:12.691671+00:00", "event": "check-updated", "check_id": "K003", "outcome": "UNRESOLVED"}
+{"time": "2026-08-30T02:16:12.771292+00:00", "event": "check-added", "check_id": "K004"}
+{"time": "2026-08-30T02:16:12.856198+00:00", "event": "evidence-linked", "target": "K004", "evidence_id": "E003"}
+{"time": "2026-08-30T02:16:12.949642+00:00", "event": "check-updated", "check_id": "K004", "outcome": "CLEARED"}
+{"time": "2026-08-30T02:16:13.054883+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "INCONCLUSIVE"}

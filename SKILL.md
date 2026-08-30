@@ -1,11 +1,18 @@
 ---
 name: rigorous-research
-description: Audit or develop mathematical proofs, statistical analyses, and quantitative-finance studies through explicit assumptions, falsification tests, and domain-specific release gates. Use for theorem checking, counterexamples, estimand and identification design, simulations, empirical finance, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
+description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 ---
 
 # Rigorous Research
 
-Treat every research result as an **inference contract**: a scoped claim joined to the objects or estimand, assumptions, falsifiers, and evidence that make the conclusion valid. Do not let mathematical proof, statistical estimation, and financial backtesting borrow standards from one another without an explicit bridge.
+Treat every research result as an **inference contract**: a scoped claim joined to the objects or estimand, assumptions, falsifiers, and evidence that make the conclusion valid. Build the surrounding investigation as a recoverable research workspace. Do not let mathematical proof, statistical estimation, and financial backtesting borrow standards from one another without an explicit bridge.
+
+## Choose the operating layer
+
+- For a focused claim audit, use `scripts/inference_case.py` and read [references/evidence-contracts.md](references/evidence-contracts.md).
+- For research spanning literature, dependent tasks, computations, revisions, or a paper-quality output, use `scripts/research_workspace.py` and read [references/research-workflow.md](references/research-workflow.md). The workspace initializes and validates an inference case inside it.
+
+Do not create a managed workspace for a short explanation or an answer that has no persistent artifacts.
 
 ## Start with the claim class
 
@@ -17,7 +24,7 @@ Classify the requested conclusion before doing substantial work:
 
 If the class is ambiguous, state the strongest precise reading you can test and label nearby readings separately. A result for one reading does not transfer automatically.
 
-For a multi-step investigation, initialize a case with `python scripts/inference_case.py init`. Read [references/evidence-contracts.md](references/evidence-contracts.md) before maintaining the case record.
+Before substantial work, create claim-scoped work packages with acceptance conditions, dependencies, and intended deliverables. Record primary sources and data vintages against the claims they support. A literature search is incomplete evidence until its query and coverage limits are stated.
 
 ## Build the inference contract
 
@@ -73,7 +80,9 @@ Confidence may describe uncertainty inside a supported statistical claim; it nev
 
 ## Release discipline
 
-Run `python scripts/inference_case.py validate <case.json> --release` for a managed case. This checks contract completeness and evidence linkage, not the substantive truth of the inputs. Recompute the decisive step by a different method when feasible.
+For a focused case, run `python scripts/inference_case.py validate <case.json> --release`. For a multi-step project, complete the work packages, generate a research brief, set the stage to `RELEASED`, and run `python scripts/research_workspace.py validate <workspace.json> --release`. These checks verify structure, provenance, dependencies, and evidence linkage—not the substantive truth of a mislabeled artifact.
+
+A successful program run means the computation executed. It does not mean the hypothesis was supported. Negative and inconclusive results are legitimate releases when their evidence and scope pass the same gate.
 
 Do not issue `SUPPORTED` while any falsifier targeting the same headline claim is triggered. Resolve the contradiction by narrowing the claim, correcting an artifact, or changing the verdict.
 
