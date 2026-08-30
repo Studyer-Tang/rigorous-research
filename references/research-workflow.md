@@ -76,6 +76,8 @@ python scripts/research_workspace.py run cases/question-slug/workspace.json \
 
 The command runner does not expand the user's authorization. Run only local or external operations already within the requested scope. It records commands and artifacts; it is not a sandbox.
 
+If an artifact is intentionally regenerated, use `rehash-run` and `rehash-evidence` only after reviewing the substantive diff. These commands journal the accepted revision. Never use them merely to silence an unexplained integrity failure.
+
 Resume or release with:
 
 ```text

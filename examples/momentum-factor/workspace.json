@@ -5,7 +5,7 @@
   "question": "Is the 1993-01 to 2024-12 U.S. monthly momentum-factor mean positive under weak-dependence inference?",
   "stage": "RELEASED",
   "created_at": "2026-08-30T02:15:23.144084+00:00",
-  "updated_at": "2026-08-30T02:17:22.975015+00:00",
+  "updated_at": "2026-08-30T02:25:41.260787+00:00",
   "case_file": "case.json",
   "tasks": [
     {
@@ -111,13 +111,15 @@
       "outputs": [
         {
           "file": "artifacts/momentum-analysis.json",
-          "sha256": "8337f955c8db67eb91109aa37265361df16e6c214594d8746e675a2e61897788"
+          "sha256": "1de449766a82f7462a87341dcb5ebaf58772d91488b18102f2617f25564dc216"
         },
         {
           "file": "artifacts/analysis-summary.md",
-          "sha256": "0fd1e99a3e6507e66fac7c281db597920c302a8a14ce94006fcb9ea95eac1015"
+          "sha256": "49561e829ee77e13c0538fe1aa0b24fa794b555aaaf881c05dfd19b599c0cf2e"
         }
-      ]
+      ],
+      "stdout_sha256": "4a25c4361e9df49f67c8779ecdc0e52eefab9d5691c9ea6558704ccf50567688",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ]
 }

@@ -12,3 +12,4 @@
 {"time": "2026-08-30T02:16:22.422962+00:00", "event": "stage-updated", "stage": "RELEASED"}
 {"time": "2026-08-30T02:17:22.861612+00:00", "event": "source-updated", "source_id": "S001"}
 {"time": "2026-08-30T02:17:22.975015+00:00", "event": "source-updated", "source_id": "S002"}
+{"time": "2026-08-30T02:25:41.260787+00:00", "event": "run-rehashed", "run_id": "R001"}

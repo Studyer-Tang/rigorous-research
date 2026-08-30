@@ -25,3 +25,5 @@
 {"time": "2026-08-30T02:11:45.545408+00:00", "event": "evidence-linked", "target": "K004", "evidence_id": "E004"}
 {"time": "2026-08-30T02:11:45.630037+00:00", "event": "check-updated", "check_id": "K004", "outcome": "CLEARED"}
 {"time": "2026-08-30T02:11:45.712377+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "SUPPORTED"}
+{"time": "2026-08-30T02:25:41.064497+00:00", "event": "evidence-rehashed", "evidence_id": "E003", "previous_sha256": "edef69f82dabf3990d27620f0314f02296eb0def69160d6b7149e785da59c3d9", "sha256": "d5d6dda9ead0bb4bd555efb323783303288820b28cce0aa586f896513c8b5d35"}
+{"time": "2026-08-30T02:25:41.156806+00:00", "event": "evidence-rehashed", "evidence_id": "E004", "previous_sha256": "352e778cbb2682e81e928f71b1aacb08e9c7a41eae47effe0312607831a326f4", "sha256": "0e8fd24e780bcc792978b059211f52586e0d689098a5f7ce80e5756957b10f22"}

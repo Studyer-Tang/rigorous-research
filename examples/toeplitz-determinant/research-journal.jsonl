@@ -14,3 +14,5 @@
 {"time": "2026-08-30T02:11:11.720011+00:00", "event": "task-updated", "task_id": "W006", "status": "DONE"}
 {"time": "2026-08-30T02:11:56.106484+00:00", "event": "stage-updated", "stage": "RELEASED"}
 {"time": "2026-08-30T02:17:22.757846+00:00", "event": "source-updated", "source_id": "S001"}
+{"time": "2026-08-30T02:25:40.893853+00:00", "event": "run-rehashed", "run_id": "R001"}
+{"time": "2026-08-30T02:25:40.984511+00:00", "event": "run-rehashed", "run_id": "R002"}

@@ -586,6 +586,10 @@ def build_parser() -> argparse.ArgumentParser:
     location.add_argument("--locator")
     evidence.add_argument("--independent", action="store_true")
 
+    rehash_evidence = commands.add_parser("rehash-evidence", help="accept an intentional file-evidence revision")
+    rehash_evidence.add_argument("case", type=Path)
+    rehash_evidence.add_argument("--id", required=True)
+
     link = commands.add_parser("link", help="link evidence to a claim, assumption, or check")
     link.add_argument("case", type=Path)
     link.add_argument("--evidence", required=True)
@@ -731,6 +735,22 @@ def main(argv: list[str] | None = None) -> int:
                 )
                 return {"evidence_id": item_id}
             mutate(args.case, add_evidence, "evidence-added")
+        elif args.command == "rehash-evidence":
+            case_path, data = load_case(args.case)
+            item = find(data["evidence"], args.id, "evidence")
+            if not item.get("sha256"):
+                raise ContractError("only checksummed file evidence can be rehashed")
+            artifact = resolve_locator(str(item.get("locator", "")), case_path.parent)
+            if not artifact.is_file():
+                raise ContractError(f"evidence file not found: {artifact}")
+            previous = item["sha256"]
+            item["sha256"] = sha256(artifact)
+            save_case(
+                case_path,
+                data,
+                "evidence-rehashed",
+                {"evidence_id": args.id, "previous_sha256": previous, "sha256": item["sha256"]},
+            )
         elif args.command == "link":
             def add_link(data: dict[str, Any]) -> dict[str, Any]:
                 find(data["evidence"], args.evidence, "evidence")

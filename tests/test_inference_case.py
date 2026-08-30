@@ -205,6 +205,11 @@ class InferenceCaseTests(unittest.TestCase):
         artifact.write_text("changed", encoding="utf-8")
         errors, _ = ic.validate_case(data, path)
         self.assertTrue(any("checksum mismatch" in error for error in errors))
+        ic.atomic_json(path, data)
+        self.assertEqual(ic.main(["rehash-evidence", str(path), "--id", "E001"]), 0)
+        _, accepted = ic.load_case(path)
+        errors, _ = ic.validate_case(accepted, path)
+        self.assertEqual(errors, [])
 
     def test_wrong_domain_check_is_rejected(self):
         path, data = self.case("statistics")

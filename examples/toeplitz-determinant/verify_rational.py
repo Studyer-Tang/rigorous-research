@@ -61,7 +61,7 @@ def main() -> int:
         "cases": cases,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"verified={result['all_match']} cases={len(cases)}")
     return 0 if result["all_match"] else 1
 

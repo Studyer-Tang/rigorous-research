@@ -418,6 +418,10 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--timeout", type=int, default=300)
     run.add_argument("--complete", action="store_true")
 
+    rehash_run = commands.add_parser("rehash-run", help="accept intentional revisions to captured run files")
+    rehash_run.add_argument("workspace", type=Path)
+    rehash_run.add_argument("--id", required=True)
+
     status = commands.add_parser("status", help="show work readiness and inference verdict")
     status.add_argument("workspace", type=Path)
     status.add_argument("--release", action="store_true", help="show release-gate gaps")
@@ -663,6 +667,20 @@ def main(argv: list[str] | None = None) -> int:
                     source["supports"] = list(dict.fromkeys(args.supports))
                 return {"source_id": args.id}
             mutate(args.workspace, update_source, "source-updated")
+        elif args.command == "rehash-run":
+            workspace_path, data = load(args.workspace)
+            run = find(data["runs"], args.id, "run")
+            for stream_name in ("stdout", "stderr"):
+                stream_path = resolve(str(run.get(stream_name, "")), workspace_path.parent)
+                if not stream_path.is_file():
+                    raise WorkspaceError(f"{stream_name} capture not found: {stream_path}")
+                run[f"{stream_name}_sha256"] = ic.sha256(stream_path)
+            for output in run.get("outputs", []):
+                output_path = resolve(str(output.get("file", "")), workspace_path.parent)
+                if not output_path.is_file():
+                    raise WorkspaceError(f"run output not found: {output_path}")
+                output["sha256"] = ic.sha256(output_path)
+            save(workspace_path, data, "run-rehashed", {"run_id": args.id})
         elif args.command == "set-stage":
             def update_stage(data: dict[str, Any]) -> dict[str, Any]:
                 data["stage"] = args.stage

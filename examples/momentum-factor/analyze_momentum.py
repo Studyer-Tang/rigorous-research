@@ -205,7 +205,9 @@ def main() -> int:
         "release_condition_passed": supported,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+    )
 
     report = [
         "# Momentum factor replication",
@@ -225,7 +227,7 @@ def main() -> int:
         "",
         "This is a fixed-period statistical fact about a published factor series. It is not evidence that the factor was directly tradable at zero cost, that the mean persists after 2024, or that the return is a causal premium.",
     ]
-    args.report.write_text("\n".join(report) + "\n", encoding="utf-8")
+    args.report.write_text("\n".join(report) + "\n", encoding="utf-8", newline="\n")
     print(f"mean={full['mean_monthly']:.8f} hac_t={hac['hac_t']:.3f} supported={supported}")
     # A scientifically unsupported hypothesis is still a successfully completed analysis.
     return 0

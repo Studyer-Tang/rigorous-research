@@ -33,3 +33,5 @@
 {"time": "2026-08-30T02:16:12.856198+00:00", "event": "evidence-linked", "target": "K004", "evidence_id": "E003"}
 {"time": "2026-08-30T02:16:12.949642+00:00", "event": "check-updated", "check_id": "K004", "outcome": "CLEARED"}
 {"time": "2026-08-30T02:16:13.054883+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "INCONCLUSIVE"}
+{"time": "2026-08-30T02:25:41.360261+00:00", "event": "evidence-rehashed", "evidence_id": "E002", "previous_sha256": "8337f955c8db67eb91109aa37265361df16e6c214594d8746e675a2e61897788", "sha256": "1de449766a82f7462a87341dcb5ebaf58772d91488b18102f2617f25564dc216"}
+{"time": "2026-08-30T02:25:41.465858+00:00", "event": "evidence-rehashed", "evidence_id": "E005", "previous_sha256": "0fd1e99a3e6507e66fac7c281db597920c302a8a14ce94006fcb9ea95eac1015", "sha256": "49561e829ee77e13c0538fe1aa0b24fa794b555aaaf881c05dfd19b599c0cf2e"}

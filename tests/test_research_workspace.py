@@ -135,6 +135,10 @@ class ResearchWorkspaceTests(unittest.TestCase):
         _, data = rw.load(workspace)
         errors, _ = rw.validate_workspace(data, workspace)
         self.assertTrue(any("checksum mismatch" in error for error in errors))
+        self.assertEqual(rw.main(["rehash-run", str(workspace), "--id", "R001"]), 0)
+        _, accepted = rw.load(workspace)
+        errors, _ = rw.validate_workspace(accepted, workspace)
+        self.assertEqual(errors, [])
 
     def test_dependency_cycle_is_rejected(self):
         workspace = self.workspace()
