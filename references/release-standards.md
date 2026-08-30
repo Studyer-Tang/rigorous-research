@@ -38,6 +38,8 @@ For decisive work, prefer a method with a different failure surface:
 
 Agreement is meaningful only when the methods do not share the same hidden assumptions or code path.
 
+Absence of an independent recomputation should be reported, not concealed. It is a release warning unless the claim itself promises independent replication or a domain-specific standard makes it mandatory.
+
 ## Verdict wording
 
 Lead with the verdict and scope. Then state the assumptions that carry it and the strongest attempted falsifier. If a gate remains open, use `INCONCLUSIVE`; do not hide it behind a confidence percentage.

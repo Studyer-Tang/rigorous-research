@@ -32,12 +32,13 @@ class InferenceCaseTests(unittest.TestCase):
             data["contract"][field] = f"specified {field}"
 
     @staticmethod
-    def evidence(data, *, independent=False, kind="derivation"):
+    def evidence(data, *, independent=False, kind="derivation", role="diagnostic"):
         item_id = ic.next_id(data["evidence"], "E")
         data["evidence"].append(
             {
                 "id": item_id,
                 "kind": kind,
+                "role": role,
                 "summary": f"evidence for {item_id}",
                 "locator": f"memory://{item_id}",
                 "sha256": None,
@@ -60,7 +61,7 @@ class InferenceCaseTests(unittest.TestCase):
             }
         )
         data["claims"][0]["assumption_ids"] = ["A001"]
-        decisive = self.evidence(data, independent=True)
+        decisive = self.evidence(data, independent=True, role="decisive")
         for index, kind in enumerate(ic.REQUIRED_CHECKS[domain], start=1):
             check_evidence = decisive if index == 1 else self.evidence(data, kind="diagnostic")
             data["checks"].append(
@@ -70,7 +71,9 @@ class InferenceCaseTests(unittest.TestCase):
                     "kind": kind,
                     "target": f"required property {kind}",
                     "falsifier": f"a documented failure of {kind}",
+                    "coverage": f"the full stated {kind} obligation",
                     "outcome": "CLEARED",
+                    "result": f"no failure of {kind} was found",
                     "evidence_ids": [check_evidence],
                 }
             )
@@ -82,6 +85,7 @@ class InferenceCaseTests(unittest.TestCase):
             "reason": "Every required domain check is cleared.",
             "evidence_ids": [decisive],
             "limitations": "The conclusion is conditional on A001.",
+            "reproduction": "Run the recorded derivation and release validator.",
         }
         return path, data
 
@@ -101,14 +105,23 @@ class InferenceCaseTests(unittest.TestCase):
         data["decision"]["verdict"] = "INCONCLUSIVE"
         data["decision"]["reason"] = "Initial evidence only."
         data["decision"]["limitations"] = "No proof yet."
-        evidence = self.evidence(data)
+        evidence = self.evidence(data, role="decisive")
         data["decision"]["evidence_ids"] = [evidence]
+        data["decision"]["reproduction"] = "Inspect the recorded derivation."
         data["claims"][0]["status"] = "INCONCLUSIVE"
         errors, _ = ic.validate_case(data, path, release=True)
         self.assertTrue(any("contract fields" in error for error in errors))
 
     def test_supported_mathematics_passes_release_gate(self):
         path, data = self.support_case("mathematics")
+        errors, _ = ic.validate_case(data, path, release=True)
+        self.assertEqual(errors, [])
+
+    def test_unconditional_mathematics_does_not_require_dummy_assumption(self):
+        path, data = self.support_case("mathematics")
+        data["assumptions"] = []
+        data["claims"][0]["assumption_ids"] = []
+        data["decision"]["limitations"] = "No limitations beyond the exact contract and quantifiers."
         errors, _ = ic.validate_case(data, path, release=True)
         self.assertEqual(errors, [])
 
@@ -140,7 +153,7 @@ class InferenceCaseTests(unittest.TestCase):
     def test_refutation_requires_triggered_falsifier(self):
         path, data = self.case()
         self.fill_contract(data)
-        evidence = self.evidence(data, kind="counterexample")
+        evidence = self.evidence(data, kind="counterexample", role="decisive")
         data["claims"][0]["status"] = "REFUTED"
         data["decision"] = {
             "verdict": "REFUTED",
@@ -148,6 +161,7 @@ class InferenceCaseTests(unittest.TestCase):
             "reason": "A witness defeats the universal statement.",
             "evidence_ids": [evidence],
             "limitations": "Restricted variants remain open.",
+            "reproduction": "Substitute the recorded witness into the statement.",
         }
         errors, _ = ic.validate_case(data, path, release=True)
         self.assertTrue(any("triggered falsifier" in error for error in errors))
@@ -158,7 +172,9 @@ class InferenceCaseTests(unittest.TestCase):
                 "kind": "counterexample",
                 "target": "universal quantifier",
                 "falsifier": "one valid witness",
+                "coverage": "the stated universal quantifier",
                 "outcome": "TRIGGERED",
+                "result": "the witness satisfies the hypotheses and violates the conclusion",
                 "evidence_ids": [evidence],
             }
         )
@@ -179,6 +195,7 @@ class InferenceCaseTests(unittest.TestCase):
             {
                 "id": "E001",
                 "kind": "exact-computation",
+                "role": "decisive",
                 "summary": "an exact result",
                 "locator": "artifacts/result.txt",
                 "sha256": ic.sha256(artifact),
@@ -198,7 +215,9 @@ class InferenceCaseTests(unittest.TestCase):
                 "kind": "cost",
                 "target": "fees",
                 "falsifier": "large costs",
+                "coverage": "the stated cost model",
                 "outcome": "OPEN",
+                "result": "",
                 "evidence_ids": [],
             }
         )
@@ -261,6 +280,80 @@ class InferenceCaseTests(unittest.TestCase):
         _, updated = ic.load_case(path)
         self.assertEqual(updated["claims"][1]["assumption_ids"], ["A001"])
         self.assertEqual(updated["claims"][0]["assumption_ids"], [])
+
+    def test_supported_claim_rejects_triggered_falsifier(self):
+        path, data = self.support_case("mathematics")
+        witness = self.evidence(data, kind="counterexample", role="decisive")
+        data["checks"].append(
+            {
+                "id": "K004",
+                "target_claim": "C001",
+                "kind": "boundary",
+                "target": "the stated universal scope",
+                "falsifier": "one boundary witness violating the conclusion",
+                "coverage": "the smallest admissible parameter",
+                "outcome": "TRIGGERED",
+                "result": "the boundary witness violates the conclusion",
+                "evidence_ids": [witness],
+            }
+        )
+        errors, _ = ic.validate_case(data, path, release=True)
+        self.assertTrue(any("triggered falsifiers" in error for error in errors))
+
+    def test_violated_assumption_does_not_refute_claim(self):
+        path, data = self.case("statistics")
+        self.fill_contract(data)
+        evidence = self.evidence(data, kind="diagnostic", role="decisive")
+        data["assumptions"].append(
+            {
+                "id": "A001",
+                "statement": "There is no unmeasured confounding.",
+                "role": "identification",
+                "status": "VIOLATED",
+                "evidence_ids": [evidence],
+            }
+        )
+        data["claims"][0]["assumption_ids"] = ["A001"]
+        data["claims"][0]["status"] = "REFUTED"
+        data["decision"] = {
+            "verdict": "REFUTED",
+            "claim_id": "C001",
+            "reason": "The identifying assumption failed.",
+            "evidence_ids": [evidence],
+            "limitations": "Failure of identification does not establish the opposite effect.",
+            "reproduction": "Inspect the diagnostic evidence.",
+        }
+        errors, _ = ic.validate_case(data, path, release=True)
+        self.assertTrue(any("triggered falsifier" in error for error in errors))
+
+    def test_misspecified_requires_specification_check(self):
+        path, data = self.case("mathematics")
+        self.fill_contract(data)
+        evidence = self.evidence(data, kind="counterexample", role="decisive")
+        data["checks"].append(
+            {
+                "id": "K001",
+                "target_claim": "C001",
+                "kind": "boundary",
+                "target": "a boundary case",
+                "falsifier": "the conclusion fails",
+                "coverage": "one boundary value",
+                "outcome": "TRIGGERED",
+                "result": "the conclusion fails at the boundary",
+                "evidence_ids": [evidence],
+            }
+        )
+        data["claims"][0]["status"] = "MISSPECIFIED"
+        data["decision"] = {
+            "verdict": "MISSPECIFIED",
+            "claim_id": "C001",
+            "reason": "The claim was alleged to be malformed.",
+            "evidence_ids": [evidence],
+            "limitations": "A counterexample refutes a defined claim; it does not make it undefined.",
+            "reproduction": "Inspect the boundary witness.",
+        }
+        errors, _ = ic.validate_case(data, path, release=True)
+        self.assertTrue(any("specification check" in error for error in errors))
 
 
 if __name__ == "__main__":

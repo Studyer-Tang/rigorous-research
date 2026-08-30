@@ -52,3 +52,5 @@ Treat a result as exploratory when it emerged from broad search without selectio
 ## Claim calibration
 
 “Predictive” requires prospective or faithfully simulated out-of-sample evidence. “Tradable” additionally requires timing and cost realism. “Alpha” requires an explicit benchmark and risk adjustment. “Persistent” requires a time and regime statement, not a full-sample average.
+
+When a strategy rule cannot be mapped to a decision-time information set, use a triggered `specification` check if the claimed strategy itself is undefined. If the rule is defined but uses unavailable future data in a backtest, trigger `information-set`; that defeats tradability and usually leaves any genuine predictive content unresolved.

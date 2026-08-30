@@ -1,0 +1,10 @@
+{"time": "2026-08-30T01:51:30.674876+00:00", "event": "initialized", "domain": "mathematics"}
+{"time": "2026-08-30T01:51:30.752513+00:00", "event": "contract-set", "field": "ambient_object"}
+{"time": "2026-08-30T01:51:30.830228+00:00", "event": "contract-set", "field": "coefficient_domain"}
+{"time": "2026-08-30T01:51:30.922078+00:00", "event": "contract-set", "field": "quantifiers"}
+{"time": "2026-08-30T01:51:30.987007+00:00", "event": "contract-set", "field": "equality_semantics"}
+{"time": "2026-08-30T01:51:31.061702+00:00", "event": "check-added", "check_id": "K001"}
+{"time": "2026-08-30T01:51:31.138935+00:00", "event": "evidence-added", "evidence_id": "E001"}
+{"time": "2026-08-30T01:51:31.217577+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E001"}
+{"time": "2026-08-30T01:51:31.284019+00:00", "event": "check-updated", "check_id": "K001", "outcome": "TRIGGERED"}
+{"time": "2026-08-30T01:51:31.365594+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "REFUTED"}

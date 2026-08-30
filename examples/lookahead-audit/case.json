@@ -1,0 +1,66 @@
+{
+  "schema_version": 3,
+  "case_id": "lookahead-audit",
+  "domain": "finance",
+  "question": "Is the same-day sign strategy tradable under its stated clock?",
+  "created_at": "2026-08-30T01:51:53.150633+00:00",
+  "updated_at": "2026-08-30T01:51:54.003757+00:00",
+  "contract": {
+    "universe": "Any security with consecutive tradable closing prices; no survivorship claim is needed for the timing contradiction.",
+    "clock": "The position for the P_(t-1) to P_t interval must be fixed no later than the start of that return interval.",
+    "information_cutoff": "Only information observed before P_t is realized may determine the position earning r_t.",
+    "holding_period": "One close-to-close interval, from P_(t-1) to P_t.",
+    "split_policy": "Not applicable to the logical timing audit; any performance estimate would require chronological evaluation.",
+    "cost_model": "Zero costs are granted; the timing contradiction occurs before cost modeling.",
+    "benchmark": "Cash with zero return; benchmark choice does not repair unavailable information."
+  },
+  "claims": [
+    {
+      "id": "C001",
+      "statement": "Choosing the sign of day t close-to-close return and earning that same return is a tradable strategy.",
+      "scope": "",
+      "status": "REFUTED",
+      "assumption_ids": [],
+      "evidence_ids": [
+        "E001"
+      ]
+    }
+  ],
+  "assumptions": [],
+  "checks": [
+    {
+      "id": "K001",
+      "target_claim": "C001",
+      "kind": "information-set",
+      "target": "Whether w_t = sign(r_t) is known before the interval return r_t is earned.",
+      "falsifier": "The signal requires the terminal price P_t that is only observed after the earning interval.",
+      "coverage": "The algebraic definition r_t = P_t/P_(t-1)-1 for every nonzero price move.",
+      "outcome": "TRIGGERED",
+      "result": "The decision requires future information relative to the claimed holding interval.",
+      "evidence_ids": [
+        "E001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "derivation",
+      "role": "decisive",
+      "summary": "The strategy uses P_t to choose a position that is credited with the return ending at P_t.",
+      "locator": "artifacts/timing-proof.md",
+      "sha256": "3621f88f4d00fae4ce3fb5210c38de63ecfbeb30bddb4934e607a239be4be6d6",
+      "independent": false
+    }
+  ],
+  "decision": {
+    "verdict": "REFUTED",
+    "claim_id": "C001",
+    "reason": "The stated payoff is a look-ahead construction and is not tradable under the stated clock.",
+    "evidence_ids": [
+      "E001"
+    ],
+    "limitations": "This refutes only the same-interval implementation; it does not test whether a lagged signal predicts future returns.",
+    "reproduction": "Write r_t from P_(t-1) and P_t, note when P_t becomes observable, and compare that time with when w_t must be fixed."
+  }
+}

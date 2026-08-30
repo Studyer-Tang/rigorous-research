@@ -12,6 +12,8 @@ Fill:
 
 Classify the claim as descriptive, associational, predictive, causal, structural, or decision-theoretic. Predictive accuracy does not identify a causal effect, and an unbiased estimator under a model does not show the model holds.
 
+If the outcome, population, or estimand has no stable definition, record a `specification` failure and use `MISSPECIFIED`. If identification fails for a well-defined estimand, the causal effect is generally `INCONCLUSIVE`, not `REFUTED`.
+
 ## Required checks for a supported claim
 
 The default statistical gate requires cleared checks of kinds:

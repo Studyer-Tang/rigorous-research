@@ -21,7 +21,7 @@ Conditional assumptions are legitimate in a conditional theorem or analysis. The
 
 ### Check
 
-Every check records a target and falsifier. Outcomes are:
+Every check records a target, falsifier, planned coverage, and result summary. Outcomes are:
 
 - `OPEN`: not executed;
 - `CLEARED`: the specified falsifier did not occur within documented coverage;
@@ -32,11 +32,11 @@ Every check records a target and falsifier. Outcomes are:
 
 ### Evidence
 
-Evidence has a kind, summary, locator, optional SHA-256 checksum, and independence flag. Use the flag only for a materially different source, derivation, implementation, or sample—not a second paraphrase of the same work.
+Evidence has a kind, role, summary, locator, optional SHA-256 checksum, and independence flag. Roles are `decisive`, `diagnostic`, and `suggestive`. Use the independence flag only for a materially different source, derivation, implementation, or sample—not a second paraphrase of the same work.
 
 ### Decision
 
-A decision names one claim, one verdict, decisive evidence, reasoning, and limitations. The validator rejects verdicts whose supporting records do not satisfy the domain gate.
+A decision names one claim, one verdict, decisive evidence, reasoning, limitations, and reproduction instructions. The validator rejects verdicts whose supporting records do not satisfy the domain gate.
 
 ## Evidence roles
 
@@ -46,7 +46,7 @@ Distinguish:
 - **diagnostic:** tests an assumption or failure mode;
 - **suggestive:** motivates a hypothesis but cannot settle it.
 
-State the bridge when evidence moves between roles. For example, modular computation proves nonzero over an integral domain only if the specialization map and exceptional set are controlled.
+State the bridge when evidence moves between roles. For example, modular computation proves nonzero over an integral domain only if the specialization map and exceptional set are controlled. Merely relabeling an artifact as decisive is not such a bridge.
 
 ## Reproducibility
 

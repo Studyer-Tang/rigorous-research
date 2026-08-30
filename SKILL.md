@@ -27,8 +27,8 @@ For a multi-step investigation, initialize a case with `python scripts/inference
    - statistics: population, sampling unit, outcome, estimand, identification route;
    - finance: universe, decision clock, information cutoff, holding period, split policy, cost model, benchmark.
 3. List assumptions individually. Mark each `UNTESTED`, `JUSTIFIED`, `CONDITIONAL`, or `VIOLATED` and link its evidence.
-4. Design checks that could fail the claim. A check without a concrete falsifier is an activity, not a test.
-5. Attach raw evidence and record whether it is logically decisive, diagnostic, or merely suggestive.
+4. Design checks that could fail the claim. Record the intended coverage before execution and the observed result afterward. A check without a concrete falsifier is an activity, not a test.
+5. Attach raw evidence and classify its role as `decisive`, `diagnostic`, or `suggestive`.
 6. Issue the narrowest verdict that passes the relevant domain gate.
 
 ## Domain routing
@@ -52,6 +52,8 @@ Before investing in a long proof or model:
 
 A failed attack is evidence only for the region actually searched. Record its coverage; never call it a proof unless exhaustiveness is established.
 
+Use a `specification` check only when the claim lacks a stable truth condition: for example, an undefined generator, incompatible domain and codomain, or an unidentified estimand. A false but well-defined claim is `REFUTED`, not `MISSPECIFIED`. A failed assumption blocks support but does not by itself prove the opposite claim.
+
 ## Keep symbolic and empirical evidence separate
 
 Numerical agreement can discover a theorem but does not prove an exact identity without certified bounds or reconstruction. A theorem about an estimator does not establish that an empirical implementation satisfies its assumptions. A profitable backtest does not establish a risk-adjusted opportunity without realistic timing, costs, selection accounting, and out-of-sample evidence.
@@ -72,6 +74,8 @@ Confidence may describe uncertainty inside a supported statistical claim; it nev
 ## Release discipline
 
 Run `python scripts/inference_case.py validate <case.json> --release` for a managed case. This checks contract completeness and evidence linkage, not the substantive truth of the inputs. Recompute the decisive step by a different method when feasible.
+
+Do not issue `SUPPORTED` while any falsifier targeting the same headline claim is triggered. Resolve the contradiction by narrowing the claim, correcting an artifact, or changing the verdict.
 
 Report in this order:
 

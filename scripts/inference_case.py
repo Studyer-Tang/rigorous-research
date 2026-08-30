@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 DOMAINS = ("mathematics", "statistics", "finance")
 VERDICTS = ("OPEN", "SUPPORTED", "REFUTED", "INCONCLUSIVE", "MISSPECIFIED")
 CLAIM_STATUSES = ("OPEN", "SUPPORTED", "REFUTED", "INCONCLUSIVE", "MISSPECIFIED")
@@ -33,6 +33,7 @@ EVIDENCE_KINDS = (
     "formal-certificate",
     "counterexample",
 )
+EVIDENCE_ROLES = ("decisive", "diagnostic", "suggestive")
 CONTRACT_FIELDS = {
     "mathematics": ("ambient_object", "coefficient_domain", "quantifiers", "equality_semantics"),
     "statistics": ("population", "sampling_unit", "outcome", "estimand", "identification"),
@@ -53,6 +54,7 @@ REQUIRED_CHECKS = {
 }
 CHECK_KINDS = {
     "mathematics": (
+        "specification",
         "typecheck",
         "proof",
         "counterexample",
@@ -62,6 +64,7 @@ CHECK_KINDS = {
         "boundary",
     ),
     "statistics": (
+        "specification",
         "identification",
         "uncertainty",
         "sensitivity",
@@ -73,6 +76,7 @@ CHECK_KINDS = {
         "replication",
     ),
     "finance": (
+        "specification",
         "information-set",
         "cost",
         "benchmark",
@@ -85,7 +89,8 @@ CHECK_KINDS = {
     ),
 }
 SLUG_RE = re.compile(r"[a-z0-9][a-z0-9-]{0,62}\Z")
-ID_RE = re.compile(r"[ACK E][0-9]{3}\Z".replace(" ", ""))
+ID_RE = re.compile(r"[CAKE][0-9]{3}\Z")
+ID_PREFIXES = {"claim": "C", "assumption": "A", "check": "K", "evidence": "E"}
 
 
 class ContractError(ValueError):
@@ -179,6 +184,8 @@ def file_record(path: Path, case_dir: Path) -> tuple[str, str]:
 
 
 def initialize(root: Path, slug: str, domain: str, question: str, claim: str) -> Path:
+    if not question.strip() or not claim.strip():
+        raise ContractError("question and claim must be non-empty")
     case_dir = root.resolve() / slug
     case_path = case_dir / "case.json"
     if case_path.exists():
@@ -211,6 +218,7 @@ def initialize(root: Path, slug: str, domain: str, question: str, claim: str) ->
             "reason": "",
             "evidence_ids": [],
             "limitations": "",
+            "reproduction": "",
         },
     }
     case_dir.mkdir(parents=True, exist_ok=True)
@@ -264,6 +272,14 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         values = [item.get("id") for item in items if isinstance(item, dict)]
         if len(values) != len(items) or any(not isinstance(value, str) for value in values):
             errors.append(f"{label} entries require string IDs")
+        malformed = [
+            value
+            for value in values
+            if isinstance(value, str)
+            and (not ID_RE.fullmatch(value) or not value.startswith(ID_PREFIXES[label]))
+        ]
+        if malformed:
+            errors.append(f"malformed {label} IDs: {', '.join(sorted(malformed))}")
         duplicates = {value for value in values if values.count(value) > 1}
         if duplicates:
             errors.append(f"duplicate {label} IDs: {', '.join(sorted(duplicates))}")
@@ -278,6 +294,10 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         eid = item.get("id", "?")
         if item.get("kind") not in EVIDENCE_KINDS:
             errors.append(f"{eid}: invalid evidence kind")
+        if item.get("role") not in EVIDENCE_ROLES:
+            errors.append(f"{eid}: invalid evidence role")
+        if not isinstance(item.get("independent"), bool):
+            errors.append(f"{eid}: independent must be boolean")
         if not str(item.get("summary", "")).strip() or not str(item.get("locator", "")).strip():
             errors.append(f"{eid}: summary and locator are required")
         checksum = item.get("sha256")
@@ -331,14 +351,20 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
             errors.append(f"{kid}: unknown target claim")
         if item.get("outcome") not in CHECK_OUTCOMES:
             errors.append(f"{kid}: invalid check outcome")
-        if not str(item.get("target", "")).strip() or not str(item.get("falsifier", "")).strip():
-            errors.append(f"{kid}: target and falsifier are required")
+        if (
+            not str(item.get("target", "")).strip()
+            or not str(item.get("falsifier", "")).strip()
+            or not str(item.get("coverage", "")).strip()
+        ):
+            errors.append(f"{kid}: target, falsifier, and coverage are required")
         links = item.get("evidence_ids", [])
         unknown = [value for value in links if value not in evidence_ids]
         if unknown:
             errors.append(f"{kid}: unknown evidence IDs: {', '.join(unknown)}")
         if item.get("outcome") in {"CLEARED", "TRIGGERED"} and not links:
             errors.append(f"{kid}: decisive outcome requires evidence")
+        if item.get("outcome") != "OPEN" and not str(item.get("result", "")).strip():
+            errors.append(f"{kid}: non-OPEN outcome requires a result summary")
 
     decision = data["decision"]
     if not isinstance(decision, dict) or decision.get("verdict") not in VERDICTS:
@@ -368,6 +394,10 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         errors.append("release requires a decision reason")
     if not decision_evidence:
         errors.append("release requires decision evidence")
+    if not str(decision.get("limitations", "")).strip():
+        errors.append("release requires explicit limitations")
+    if not str(decision.get("reproduction", "")).strip():
+        errors.append("release requires reproduction instructions")
     claim = next((item for item in data["claims"] if item.get("id") == decision_claim), None)
     if not claim:
         return errors, warnings
@@ -376,12 +406,24 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
 
     linked_assumptions = [item for item in data["assumptions"] if item.get("id") in claim.get("assumption_ids", [])]
     target_checks = [item for item in data["checks"] if item.get("target_claim") == decision_claim]
+    evidence_by_id = {item["id"]: item for item in data["evidence"]}
+    decisive_decision_evidence = [
+        evidence_by_id[evidence_id]
+        for evidence_id in decision_evidence
+        if evidence_id in evidence_by_id and evidence_by_id[evidence_id].get("role") == "decisive"
+    ]
     if verdict == "SUPPORTED":
-        if not linked_assumptions:
-            errors.append("SUPPORTED release requires at least one explicit assumption")
+        if domain in {"statistics", "finance"} and not linked_assumptions:
+            errors.append(f"SUPPORTED {domain} release requires at least one explicit assumption")
         bad_assumptions = [item["id"] for item in linked_assumptions if item.get("status") in {"UNTESTED", "VIOLATED"}]
         if bad_assumptions:
             errors.append(f"SUPPORTED claim has unresolved or violated assumptions: {', '.join(bad_assumptions)}")
+        conditional = [item["id"] for item in linked_assumptions if item.get("status") == "CONDITIONAL"]
+        if conditional and not str(claim.get("scope", "")).strip():
+            errors.append(f"SUPPORTED conditional claim requires an explicit scope: {', '.join(conditional)}")
+        triggered = [item["id"] for item in target_checks if item.get("outcome") == "TRIGGERED"]
+        if triggered:
+            errors.append(f"SUPPORTED claim has triggered falsifiers: {', '.join(triggered)}")
         cleared = {item.get("kind") for item in target_checks if item.get("outcome") == "CLEARED" and item.get("evidence_ids")}
         missing_checks = [kind for kind in REQUIRED_CHECKS[domain] if kind not in cleared]
         if missing_checks:
@@ -391,17 +433,23 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
             support_evidence.update(item.get("evidence_ids", []))
         independent = {item["id"] for item in data["evidence"] if item.get("independent") is True}
         if not support_evidence.intersection(independent):
-            errors.append("SUPPORTED release requires independently produced evidence")
+            warnings.append("SUPPORTED release has no independently produced evidence")
+        if not decisive_decision_evidence:
+            errors.append("SUPPORTED release requires decisive decision evidence")
     elif verdict == "REFUTED":
         triggered = [item for item in target_checks if item.get("outcome") == "TRIGGERED" and item.get("evidence_ids")]
-        violated = [item for item in linked_assumptions if item.get("status") == "VIOLATED" and item.get("evidence_ids")]
-        if not triggered and not violated:
-            errors.append("REFUTED release requires a triggered falsifier or violated linked assumption")
+        if not triggered:
+            errors.append("REFUTED release requires a triggered falsifier of the headline claim")
+        if not decisive_decision_evidence:
+            errors.append("REFUTED release requires decisive decision evidence")
     elif verdict in {"INCONCLUSIVE", "MISSPECIFIED"}:
-        if not str(decision.get("limitations", "")).strip():
-            errors.append(f"{verdict} release requires explicit limitations")
-        if verdict == "MISSPECIFIED" and not any(item.get("outcome") == "TRIGGERED" for item in target_checks):
+        if verdict == "MISSPECIFIED" and not any(
+            item.get("kind") == "specification" and item.get("outcome") == "TRIGGERED"
+            for item in target_checks
+        ):
             errors.append("MISSPECIFIED release requires a triggered specification check")
+        if verdict == "MISSPECIFIED" and not decisive_decision_evidence:
+            errors.append("MISSPECIFIED release requires decisive decision evidence")
 
     open_checks = [item["id"] for item in target_checks if item.get("outcome") == "OPEN"]
     if open_checks and verdict == "SUPPORTED":
@@ -440,16 +488,28 @@ def render(data: dict[str, Any]) -> str:
             f"| {item['id']} | {item['status']} | {escape(item['role'])} | {escape(item['statement'])} | "
             f"{', '.join(item.get('evidence_ids', [])) or '-'} |"
         )
-    lines.extend(["", "## Falsification checks", "", "| ID | Kind | Outcome | Target | Falsifier | Evidence |", "|---|---|---|---|---|---|"])
+    lines.extend(
+        [
+            "",
+            "## Falsification checks",
+            "",
+            "| ID | Kind | Outcome | Target | Falsifier | Coverage | Result | Evidence |",
+            "|---|---|---|---|---|---|---|---|",
+        ]
+    )
     for item in data.get("checks", []):
         lines.append(
             f"| {item['id']} | {item['kind']} | {item['outcome']} | {escape(item['target'])} | "
-            f"{escape(item['falsifier'])} | {', '.join(item.get('evidence_ids', [])) or '-'} |"
+            f"{escape(item['falsifier'])} | {escape(item.get('coverage', '')) or '-'} | "
+            f"{escape(item.get('result', '')) or '-'} | {', '.join(item.get('evidence_ids', [])) or '-'} |"
         )
     lines.extend(["", "## Evidence", ""])
     for item in data.get("evidence", []):
         independence = "independent" if item.get("independent") else "primary path"
-        lines.append(f"- **{item['id']}** `{item['kind']}` ({independence}) — {item['summary']} [{item['locator']}]")
+        lines.append(
+            f"- **{item['id']}** `{item['kind']}` `{item.get('role', 'unclassified')}` "
+            f"({independence}) — {item['summary']} [{item['locator']}]"
+        )
     decision = data.get("decision", {})
     lines.extend(
         [
@@ -459,6 +519,8 @@ def render(data: dict[str, Any]) -> str:
             f"**{decision.get('verdict', 'OPEN')}** — {decision.get('reason') or 'not set'}",
             "",
             f"Limitations: {decision.get('limitations') or 'not set'}",
+            "",
+            f"Reproduction: {decision.get('reproduction') or 'not set'}",
             "",
         ]
     )
@@ -506,10 +568,12 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--kind", required=True)
     check.add_argument("--target", required=True)
     check.add_argument("--falsifier", required=True)
+    check.add_argument("--coverage", required=True)
 
     evidence = commands.add_parser("evidence", help="add evidence")
     evidence.add_argument("case", type=Path)
     evidence.add_argument("--kind", choices=EVIDENCE_KINDS, required=True)
+    evidence.add_argument("--role", choices=EVIDENCE_ROLES, required=True)
     evidence.add_argument("--summary", required=True)
     location = evidence.add_mutually_exclusive_group(required=True)
     location.add_argument("--file", type=Path)
@@ -535,6 +599,7 @@ def build_parser() -> argparse.ArgumentParser:
     set_check.add_argument("case", type=Path)
     set_check.add_argument("--id", required=True)
     set_check.add_argument("--outcome", choices=CHECK_OUTCOMES, required=True)
+    set_check.add_argument("--result", default="")
 
     decide = commands.add_parser("decide", help="record the scoped verdict")
     decide.add_argument("case", type=Path)
@@ -542,14 +607,16 @@ def build_parser() -> argparse.ArgumentParser:
     decide.add_argument("--verdict", choices=VERDICTS[1:], required=True)
     decide.add_argument("--reason", required=True)
     decide.add_argument("--evidence", nargs="+", required=True)
-    decide.add_argument("--limitations", default="")
+    decide.add_argument("--limitations", required=True)
+    decide.add_argument("--reproduction", required=True)
 
     validate = commands.add_parser("validate", help="validate a case")
     validate.add_argument("case", type=Path)
     validate.add_argument("--release", action="store_true")
 
-    report = commands.add_parser("report", help="write report.md")
+    report = commands.add_parser("report", help="validate the case and write report.md")
     report.add_argument("case", type=Path)
+    report.add_argument("--release", action="store_true", help="require the release gate before writing")
     return parser
 
 
@@ -573,6 +640,11 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "report":
             path, data = load_case(args.case)
+            errors, warnings = validate_case(data, path, release=args.release)
+            for warning in warnings:
+                print(f"WARNING: {warning}")
+            if errors:
+                raise ContractError("; ".join(errors))
             destination = path.parent / "report.md"
             destination.write_text(render(data), encoding="utf-8", newline="\n")
             print(destination)
@@ -603,7 +675,19 @@ def main(argv: list[str] | None = None) -> int:
                     raise ContractError(f"check kind {args.kind!r} is invalid for {data['domain']}")
                 find(data["claims"], args.claim, "claim")
                 item_id = next_id(data["checks"], "K")
-                data["checks"].append({"id": item_id, "target_claim": args.claim, "kind": args.kind, "target": args.target.strip(), "falsifier": args.falsifier.strip(), "outcome": "OPEN", "evidence_ids": []})
+                data["checks"].append(
+                    {
+                        "id": item_id,
+                        "target_claim": args.claim,
+                        "kind": args.kind,
+                        "target": args.target.strip(),
+                        "falsifier": args.falsifier.strip(),
+                        "coverage": args.coverage.strip(),
+                        "outcome": "OPEN",
+                        "result": "",
+                        "evidence_ids": [],
+                    }
+                )
                 return {"check_id": item_id}
             mutate(args.case, add_check, "check-added")
         elif args.command == "evidence":
@@ -615,7 +699,17 @@ def main(argv: list[str] | None = None) -> int:
                 else:
                     locator = args.locator.strip()
                 item_id = next_id(data["evidence"], "E")
-                data["evidence"].append({"id": item_id, "kind": args.kind, "summary": args.summary.strip(), "locator": locator, "sha256": checksum, "independent": args.independent})
+                data["evidence"].append(
+                    {
+                        "id": item_id,
+                        "kind": args.kind,
+                        "role": args.role,
+                        "summary": args.summary.strip(),
+                        "locator": locator,
+                        "sha256": checksum,
+                        "independent": args.independent,
+                    }
+                )
                 return {"evidence_id": item_id}
             mutate(args.case, add_evidence, "evidence-added")
         elif args.command == "link":
@@ -647,7 +741,11 @@ def main(argv: list[str] | None = None) -> int:
             mutate(args.case, update_assumption, "assumption-updated")
         elif args.command == "set-check":
             def update_check(data: dict[str, Any]) -> dict[str, Any]:
-                find(data["checks"], args.id, "check")["outcome"] = args.outcome
+                if args.outcome != "OPEN" and not args.result.strip():
+                    raise ContractError("a non-OPEN check outcome requires --result")
+                item = find(data["checks"], args.id, "check")
+                item["outcome"] = args.outcome
+                item["result"] = args.result.strip() if args.outcome != "OPEN" else ""
                 return {"check_id": args.id, "outcome": args.outcome}
             mutate(args.case, update_check, "check-updated")
         elif args.command == "decide":
@@ -657,7 +755,14 @@ def main(argv: list[str] | None = None) -> int:
                     find(data["evidence"], evidence_id, "evidence")
                 claim_item["status"] = args.verdict
                 claim_item["evidence_ids"] = list(dict.fromkeys([*claim_item.get("evidence_ids", []), *args.evidence]))
-                data["decision"] = {"verdict": args.verdict, "claim_id": args.claim, "reason": args.reason.strip(), "evidence_ids": list(dict.fromkeys(args.evidence)), "limitations": args.limitations.strip()}
+                data["decision"] = {
+                    "verdict": args.verdict,
+                    "claim_id": args.claim,
+                    "reason": args.reason.strip(),
+                    "evidence_ids": list(dict.fromkeys(args.evidence)),
+                    "limitations": args.limitations.strip(),
+                    "reproduction": args.reproduction.strip(),
+                }
                 return {"claim_id": args.claim, "verdict": args.verdict}
             mutate(args.case, record_decision, "decision-recorded")
         print("OK")

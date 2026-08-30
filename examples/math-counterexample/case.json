@@ -1,0 +1,63 @@
+{
+  "schema_version": 3,
+  "case_id": "math-counterexample",
+  "domain": "mathematics",
+  "question": "Does x^2 >= x hold for every real x?",
+  "created_at": "2026-08-30T01:51:30.674876+00:00",
+  "updated_at": "2026-08-30T01:51:31.365594+00:00",
+  "contract": {
+    "ambient_object": "The ordered field of real numbers R.",
+    "coefficient_domain": "Exact rational arithmetic embedded in R.",
+    "quantifiers": "For every x in R.",
+    "equality_semantics": "The usual exact order relation on R."
+  },
+  "claims": [
+    {
+      "id": "C001",
+      "statement": "For every real x, x^2 >= x.",
+      "scope": "",
+      "status": "REFUTED",
+      "assumption_ids": [],
+      "evidence_ids": [
+        "E001"
+      ]
+    }
+  ],
+  "assumptions": [],
+  "checks": [
+    {
+      "id": "K001",
+      "target_claim": "C001",
+      "kind": "counterexample",
+      "target": "The universal quantifier over all real x.",
+      "falsifier": "One admissible real x satisfying x^2 < x.",
+      "coverage": "The exact rational witness x=1/2.",
+      "outcome": "TRIGGERED",
+      "result": "The admissible witness x=1/2 violates the claimed inequality.",
+      "evidence_ids": [
+        "E001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "counterexample",
+      "role": "decisive",
+      "summary": "Exact substitution gives 1/4 < 1/2 at x=1/2.",
+      "locator": "artifacts/witness.md",
+      "sha256": "e68c2dd0daf051967cfc0963b8be2b14838bd5e85101e02b7e88343b21272ab6",
+      "independent": false
+    }
+  ],
+  "decision": {
+    "verdict": "REFUTED",
+    "claim_id": "C001",
+    "reason": "One exact admissible witness defeats the universal statement.",
+    "evidence_ids": [
+      "E001"
+    ],
+    "limitations": "This does not refute the restricted inequality on x <= 0 or x >= 1.",
+    "reproduction": "Substitute x=1/2 and compare 1/4 with 1/2 using exact rational arithmetic."
+  }
+}

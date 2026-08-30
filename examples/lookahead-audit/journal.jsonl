@@ -1,0 +1,13 @@
+{"time": "2026-08-30T01:51:53.150633+00:00", "event": "initialized", "domain": "finance"}
+{"time": "2026-08-30T01:51:53.236394+00:00", "event": "contract-set", "field": "universe"}
+{"time": "2026-08-30T01:51:53.300018+00:00", "event": "contract-set", "field": "clock"}
+{"time": "2026-08-30T01:51:53.375431+00:00", "event": "contract-set", "field": "information_cutoff"}
+{"time": "2026-08-30T01:51:53.439096+00:00", "event": "contract-set", "field": "holding_period"}
+{"time": "2026-08-30T01:51:53.499745+00:00", "event": "contract-set", "field": "split_policy"}
+{"time": "2026-08-30T01:51:53.578709+00:00", "event": "contract-set", "field": "cost_model"}
+{"time": "2026-08-30T01:51:53.642190+00:00", "event": "contract-set", "field": "benchmark"}
+{"time": "2026-08-30T01:51:53.720936+00:00", "event": "check-added", "check_id": "K001"}
+{"time": "2026-08-30T01:51:53.801320+00:00", "event": "evidence-added", "evidence_id": "E001"}
+{"time": "2026-08-30T01:51:53.863100+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E001"}
+{"time": "2026-08-30T01:51:53.940532+00:00", "event": "check-updated", "check_id": "K001", "outcome": "TRIGGERED"}
+{"time": "2026-08-30T01:51:54.003757+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "REFUTED"}

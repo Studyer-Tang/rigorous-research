@@ -30,15 +30,15 @@ Choose one: descriptive, associational, predictive, causal, structural, decision
 
 ## Falsification plan
 
-| Check | Defeating observation | Evaluation data | Outcome |
-|---|---|---|---|
-| Identification | | | OPEN |
-| Leakage / information set | | | OPEN |
-| Uncertainty | | | OPEN |
-| Sensitivity | | | OPEN |
-| Costs and turnover | | | OPEN |
-| Benchmark | | | OPEN |
-| Walk-forward evaluation | | | OPEN |
+| Check | Defeating observation | Coverage / evaluation data | Result | Outcome |
+|---|---|---|---|---|
+| Identification | | | | OPEN |
+| Leakage / information set | | | | OPEN |
+| Uncertainty | | | | OPEN |
+| Sensitivity | | | | OPEN |
+| Costs and turnover | | | | OPEN |
+| Benchmark | | | | OPEN |
+| Walk-forward evaluation | | | | OPEN |
 
 ## Result
 

@@ -29,12 +29,12 @@ Write each step with the definition, relation, or theorem that licenses it.
 
 ## Falsification attempts
 
-| Check | Coverage | Defeating observation | Outcome | Artifact |
-|---|---|---|---|---|
-| Type and definition audit | | | OPEN | |
-| Boundary and degenerate cases | | | OPEN | |
-| Minimal counterexample search | | | OPEN | |
-| Independent recomputation | | | OPEN | |
+| Check | Coverage | Defeating observation | Result | Outcome | Artifact |
+|---|---|---|---|---|---|
+| Type and definition audit | | | | OPEN | |
+| Boundary and degenerate cases | | | | OPEN | |
+| Minimal counterexample search | | | | OPEN | |
+| Independent recomputation | | | | OPEN | |
 
 ## Verdict
 

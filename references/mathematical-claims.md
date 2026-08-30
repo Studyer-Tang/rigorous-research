@@ -15,6 +15,8 @@ Trace every target expression back to its definitions. Verify that generators ex
 
 A repair of a malformed definition creates a new claim. Label the literal statement and every correction separately; apparent naturalness does not identify authorial intent.
 
+Use a triggered `specification` check for the literal malformed statement. Use a counterexample or failed proof obligation for a well-defined but false statement. A hypothesis that does not hold means the conditional theorem is inapplicable; it does not refute the conditional theorem.
+
 ## Required checks for a supported claim
 
 The default gate requires cleared checks of kinds:
