@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Search Crossref and arXiv, deduplicate records, and export a literature matrix."""
+"""Search scholarly metadata providers, deduplicate records, and export a literature matrix."""
 
 from __future__ import annotations
 
@@ -19,11 +19,16 @@ from research_io import utc_timestamp as timestamp, write_json
 
 CROSSREF = "https://api.crossref.org/works"
 ARXIV = "https://export.arxiv.org/api/query"
+OPENALEX = "https://api.openalex.org/works"
+SEMANTIC_SCHOLAR = "https://api.semanticscholar.org/graph/v1/paper/search"
+PUBMED_SEARCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+PUBMED_SUMMARY = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+PROVIDERS = ("crossref", "arxiv", "openalex", "semantic-scholar", "pubmed")
 ATOM = {"a": "http://www.w3.org/2005/Atom", "x": "http://arxiv.org/schemas/atom"}
 
 
 def request_bytes(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={"User-Agent": "rigorous-research/1.0 (literature audit)"})
+    request = urllib.request.Request(url, headers={"User-Agent": "rigorous-research/1.2 (literature audit)"})
     with urllib.request.urlopen(request, timeout=60) as response:
         return response.read()
 
@@ -121,6 +126,102 @@ def parse_arxiv(payload: bytes) -> list[dict[str, Any]]:
                 "abstract": clean_text(entry.findtext("a:summary", default="", namespaces=ATOM)),
                 "record_type": "preprint",
                 "providers": ["arxiv"],
+            }
+        )
+    return records
+
+
+def parse_openalex(payload: bytes) -> list[dict[str, Any]]:
+    data = json.loads(payload.decode("utf-8"))
+    records = []
+    for item in data.get("results", []):
+        title = clean_text(item.get("display_name") or item.get("title") or "")
+        if not title:
+            continue
+        authors = [
+            clean_text(authorship.get("author", {}).get("display_name", ""))
+            for authorship in item.get("authorships", [])
+        ]
+        ids = item.get("ids") or {}
+        doi = normalize_doi(item.get("doi") or ids.get("doi") or "")
+        primary = item.get("primary_location") or {}
+        source = primary.get("source") or {}
+        records.append(
+            {
+                "title": title,
+                "authors": [author for author in authors if author],
+                "year": item.get("publication_year"),
+                "doi": doi,
+                "arxiv_id": arxiv_identifier(ids.get("arxiv", "")) if ids.get("arxiv") else "",
+                "url": primary.get("landing_page_url") or item.get("id", ""),
+                "venue": source.get("display_name", ""),
+                "abstract": "",
+                "record_type": item.get("type", ""),
+                "providers": ["openalex"],
+            }
+        )
+    return records
+
+
+def parse_semantic_scholar(payload: bytes) -> list[dict[str, Any]]:
+    data = json.loads(payload.decode("utf-8"))
+    records = []
+    for item in data.get("data", []):
+        title = clean_text(item.get("title", ""))
+        if not title:
+            continue
+        external = item.get("externalIds") or {}
+        arxiv_id = arxiv_identifier(external.get("ArXiv", "")) if external.get("ArXiv") else ""
+        records.append(
+            {
+                "title": title,
+                "authors": [
+                    clean_text(author.get("name", "")) for author in item.get("authors", []) if author.get("name")
+                ],
+                "year": item.get("year"),
+                "doi": normalize_doi(external.get("DOI", "")),
+                "arxiv_id": arxiv_id,
+                "url": item.get("url", ""),
+                "venue": clean_text(item.get("venue", "")),
+                "abstract": clean_text(item.get("abstract", "")),
+                "record_type": "scholarly-work",
+                "providers": ["semantic-scholar"],
+            }
+        )
+    return records
+
+
+def pubmed_item(doc: ET.Element, name: str) -> str:
+    for item in doc.iter("Item"):
+        if item.attrib.get("Name", "").casefold() == name.casefold() and item.text:
+            return clean_text(item.text)
+    return ""
+
+
+def parse_pubmed(payload: bytes) -> list[dict[str, Any]]:
+    root = ET.fromstring(payload)
+    records = []
+    for doc in root.findall(".//DocSum"):
+        identifier = clean_text(doc.findtext("Id", default=""))
+        title = pubmed_item(doc, "Title")
+        if not title:
+            continue
+        author_list = next((item for item in doc.iter("Item") if item.attrib.get("Name") == "AuthorList"), None)
+        authors = [] if author_list is None else [clean_text(item.text or "") for item in author_list.findall("Item")]
+        publication = pubmed_item(doc, "PubDate") or pubmed_item(doc, "EPubDate")
+        year_match = re.search(r"\b(18|19|20|21)\d{2}\b", publication)
+        records.append(
+            {
+                "title": title,
+                "authors": [author for author in authors if author],
+                "year": int(year_match.group(0)) if year_match else None,
+                "doi": normalize_doi(pubmed_item(doc, "doi")),
+                "arxiv_id": "",
+                "url": f"https://pubmed.ncbi.nlm.nih.gov/{identifier}/" if identifier else "",
+                "venue": pubmed_item(doc, "FullJournalName") or pubmed_item(doc, "Source"),
+                "abstract": "",
+                "record_type": pubmed_item(doc, "PubType") or "biomedical-article",
+                "providers": ["pubmed"],
             }
         )
     return records
@@ -303,17 +404,17 @@ def render_markdown(data: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--query", required=True)
-    parser.add_argument("--provider", action="append", choices=("crossref", "arxiv"), default=[])
+    parser.add_argument("--provider", action="append", choices=PROVIDERS, default=[])
     parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--fuzzy-threshold", type=float, default=0.94)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--markdown", type=Path, required=True)
     parser.add_argument("--bibtex", type=Path, required=True)
-    args = parser.parse_args()
-    providers = args.provider or ["crossref", "arxiv"]
+    args = parser.parse_args(argv)
+    providers = args.provider or ["crossref", "arxiv", "openalex"]
     if not 1 <= args.limit <= 100:
         parser.error("limit must be between 1 and 100")
     raw_records: list[dict[str, Any]] = []
@@ -378,6 +479,52 @@ def main() -> int:
                     "error": f"{type(exc).__name__}: {exc}",
                 }
             )
+    if "openalex" in providers:
+        params = urllib.parse.urlencode({"search": args.query, "per-page": args.limit})
+        url = f"{OPENALEX}?{params}"
+        try:
+            parsed = parse_openalex(request_bytes(url))
+            raw_records.extend(parsed)
+            requests.append({"provider": "openalex", "url": url, "records": len(parsed), "status": "OK"})
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            request_errors.append({"provider": "openalex", "url": url, "error": f"{type(exc).__name__}: {exc}"})
+    if "semantic-scholar" in providers:
+        fields = "title,authors,year,externalIds,url,venue,abstract"
+        params = urllib.parse.urlencode({"query": args.query, "limit": args.limit, "fields": fields})
+        url = f"{SEMANTIC_SCHOLAR}?{params}"
+        try:
+            parsed = parse_semantic_scholar(request_bytes(url))
+            raw_records.extend(parsed)
+            requests.append({"provider": "semantic-scholar", "url": url, "records": len(parsed), "status": "OK"})
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            request_errors.append({"provider": "semantic-scholar", "url": url, "error": f"{type(exc).__name__}: {exc}"})
+    if "pubmed" in providers:
+        search_params = urllib.parse.urlencode(
+            {"db": "pubmed", "term": args.query, "retmode": "json", "retmax": args.limit}
+        )
+        search_url = f"{PUBMED_SEARCH}?{search_params}"
+        try:
+            search_data = json.loads(request_bytes(search_url).decode("utf-8"))
+            identifiers = search_data.get("esearchresult", {}).get("idlist", [])
+            if identifiers:
+                summary_params = urllib.parse.urlencode({"db": "pubmed", "id": ",".join(identifiers), "retmode": "xml"})
+                summary_url = f"{PUBMED_SUMMARY}?{summary_params}"
+                parsed = parse_pubmed(request_bytes(summary_url))
+            else:
+                summary_url = ""
+                parsed = []
+            raw_records.extend(parsed)
+            requests.append(
+                {
+                    "provider": "pubmed",
+                    "url": search_url,
+                    "summary_url": summary_url,
+                    "records": len(parsed),
+                    "status": "OK",
+                }
+            )
+        except (OSError, ValueError, json.JSONDecodeError, ET.ParseError) as exc:
+            request_errors.append({"provider": "pubmed", "url": search_url, "error": f"{type(exc).__name__}: {exc}"})
     records, decisions = merge_records(raw_records, args.fuzzy_threshold)
     data = {
         "schema_version": 1,

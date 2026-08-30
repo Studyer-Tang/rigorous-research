@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "name": "release-gate-regression-v1",
+  "cases": [
+    {
+      "id": "released-math-refutation",
+      "validator": "case",
+      "source": "examples/math-counterexample/case.json",
+      "expect_valid": true
+    },
+    {
+      "id": "released-lookahead-audit",
+      "validator": "case",
+      "source": "examples/lookahead-audit/case.json",
+      "expect_valid": true
+    },
+    {
+      "id": "released-toeplitz-workspace",
+      "validator": "workspace",
+      "source": "examples/toeplitz-determinant/workspace.json",
+      "expect_valid": true
+    },
+    {
+      "id": "released-momentum-workspace",
+      "validator": "workspace",
+      "source": "examples/momentum-factor/workspace.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-supported-triggered-falsifier",
+      "validator": "case",
+      "source": "examples/math-counterexample/case.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/decision/verdict",
+        "value": "SUPPORTED"
+      }
+    },
+    {
+      "id": "reject-tampered-evidence-hash",
+      "validator": "case",
+      "source": "examples/math-counterexample/case.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/evidence/0/sha256",
+        "value": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "id": "reject-unreleased-workspace-stage",
+      "validator": "workspace",
+      "source": "examples/toeplitz-determinant/workspace.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/stage",
+        "value": "EXECUTION"
+      }
+    },
+    {
+      "id": "reject-reopened-work-package",
+      "validator": "workspace",
+      "source": "examples/momentum-factor/workspace.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/tasks/0/status",
+        "value": "PLANNED"
+      }
+    }
+  ]
+}

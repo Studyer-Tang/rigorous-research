@@ -1,6 +1,10 @@
 ---
 name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
+license: MIT
+metadata:
+  version: "1.2"
+  skill-author: Rigorous Research contributors
 ---
 
 # Rigorous Research
@@ -11,6 +15,8 @@ Treat every research result as an **inference contract**: a scoped claim joined 
 
 - For a focused claim audit, use `scripts/inference_case.py` and read [references/evidence-contracts.md](references/evidence-contracts.md).
 - For research spanning literature, dependent tasks, computations, revisions, or a paper-quality output, use `scripts/research_workspace.py` and read [references/research-workflow.md](references/research-workflow.md). The workspace initializes and validates an inference case inside it.
+
+After installation, the same tools are available through `rigorous-research case ...` and `rigorous-research workspace ...`. For command selection, optional dependencies, and direct-script fallbacks, read [references/tool-routing.md](references/tool-routing.md).
 
 Do not create a managed workspace for a short explanation or an answer that has no persistent artifacts.
 
@@ -73,7 +79,7 @@ When one evidence type supports another, write the bridge explicitly.
 
 ## Use backends conservatively
 
-- Retrieve Crossref and arXiv candidates with `literature_search.py`. Merge automatically only on a shared DOI, a shared arXiv identifier, or compatible title-author-year metadata. Send fuzzy and conflicting matches to `REVIEW_REQUIRED`.
+- Retrieve candidates from Crossref, arXiv, OpenAlex, Semantic Scholar, or PubMed with `literature_search.py`; read [references/literature-providers.md](references/literature-providers.md) when choosing coverage. Merge automatically only on a shared DOI, a shared arXiv identifier, or compatible title-author-year metadata. Send fuzzy and conflicting matches to `REVIEW_REQUIRED`, and preserve provider failures as coverage gaps.
 - Use `math_backend.py` for exact polynomial or rational identities and optional Lean compilation. SymPy simplification of a general transcendental expression is diagnostic. A Lean file containing `sorry`, `admit`, or a declared axiom is not a closed proof certificate.
 - Bind decisive machine evidence to its inputs, outputs, backend version, command, environment locks, semantic domain, and return code with `research_seal.py`. Changed inputs invalidate the receipt.
 - Use `statistics_backend.py` to compare IID and dependence-aware uncertainty, run circular block bootstrap, control Holm or BH multiplicity, and test empirical coverage under prespecified data-generating processes.

@@ -2,7 +2,7 @@
 
 ## Literature retrieval
 
-Run `literature_search.py` with Crossref and arXiv queries and preserve the raw records, search limits, and retrieval time. The deduplication unit is a scholarly work, but manifestations remain distinct when they carry different mathematical or publication status: preprint, accepted manuscript, version of record, correction, retraction, and supplement are not interchangeable.
+Run `literature_search.py` with the providers relevant to the claim: Crossref, arXiv, OpenAlex, Semantic Scholar, or PubMed. Preserve provider URLs, raw normalized records, search limits, retrieval time, and every request failure. The deduplication unit is a scholarly work, but manifestations remain distinct when they carry different mathematical or publication status: preprint, accepted manuscript, version of record, correction, retraction, and supplement are not interchangeable. Provider overlap improves discovery coverage; it does not make metadata agreement independent scientific evidence.
 
 Automatic merge is allowed only for a shared normalized DOI, a shared arXiv identifier, or a normalized title together with compatible first-author and year metadata. A fuzzy title match is a review candidate, not a duplicate. A conflict between title, author, year, DOI, or manifestation status must be marked `REVIEW_REQUIRED`.
 

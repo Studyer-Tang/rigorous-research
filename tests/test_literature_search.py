@@ -15,6 +15,58 @@ SPEC.loader.exec_module(ls)
 
 
 class LiteratureSearchTests(unittest.TestCase):
+    def test_openalex_parser_preserves_work_identifiers(self):
+        payload = {
+            "results": [
+                {
+                    "id": "https://openalex.org/W1",
+                    "display_name": "A Reproducible Result",
+                    "publication_year": 2025,
+                    "doi": "https://doi.org/10.1000/example",
+                    "authorships": [{"author": {"display_name": "Ada Lovelace"}}],
+                    "primary_location": {
+                        "landing_page_url": "https://doi.org/10.1000/example",
+                        "source": {"display_name": "Research Journal"},
+                    },
+                    "type": "article",
+                }
+            ]
+        }
+        records = ls.parse_openalex(json.dumps(payload).encode())
+        self.assertEqual(records[0]["doi"], "10.1000/example")
+        self.assertEqual(records[0]["providers"], ["openalex"])
+
+    def test_semantic_scholar_parser_preserves_arxiv_id(self):
+        payload = {
+            "data": [
+                {
+                    "title": "A Verified Preprint",
+                    "authors": [{"name": "Grace Hopper"}],
+                    "year": 2024,
+                    "externalIds": {"ArXiv": "2401.00001v2"},
+                    "url": "https://www.semanticscholar.org/paper/1",
+                    "venue": "arXiv",
+                    "abstract": "Evidence.",
+                }
+            ]
+        }
+        records = ls.parse_semantic_scholar(json.dumps(payload).encode())
+        self.assertEqual(records[0]["arxiv_id"], "2401.00001")
+        self.assertEqual(records[0]["authors"], ["Grace Hopper"])
+
+    def test_pubmed_parser_extracts_summary_metadata(self):
+        payload = b"""<eSummaryResult><DocSum><Id>123</Id>
+        <Item Name="PubDate" Type="Date">2026 Jan</Item>
+        <Item Name="Source" Type="String">Test Med</Item>
+        <Item Name="AuthorList" Type="List"><Item Name="Author" Type="String">Turing A</Item></Item>
+        <Item Name="Title" Type="String">A clinical evidence audit</Item>
+        <Item Name="DOI" Type="String">10.1000/clinical</Item>
+        </DocSum></eSummaryResult>"""
+        records = ls.parse_pubmed(payload)
+        self.assertEqual(records[0]["year"], 2026)
+        self.assertEqual(records[0]["doi"], "10.1000/clinical")
+        self.assertIn("123", records[0]["url"])
+
     def test_crossref_and_arxiv_duplicate_by_doi(self):
         crossref = {
             "message": {

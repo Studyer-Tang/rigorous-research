@@ -10,18 +10,26 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - name: Compile and test
         run: |
-          pip install -r requirements-math.txt ruff==0.16.1
+          python -m pip install -e ".[math,dev]"
           ruff format --check scripts tests
           ruff check scripts tests
           python -m py_compile scripts/*.py
           python -m unittest discover -s tests -v
+      - name: Validate portable skill package
+        run: |
+          python scripts/skill_quality.py
+          python scripts/research_eval.py
       - name: Validate released workspaces
         run: |
           python scripts/research_workspace.py validate examples/toeplitz-determinant/workspace.json --release
@@ -36,3 +44,9 @@ jobs:
           if grep -RInE 'TODO|YOUR_[A-Z_]+|PLACEHOLDER' SKILL.md agents assets references scripts; then
             exit 1
           fi
+      - name: Build package and plugin artifacts
+        if: matrix.python-version == '3.12'
+        run: |
+          python -m build
+          rigorous-research --help
+          python scripts/build_plugin.py --output build/agent-plugin

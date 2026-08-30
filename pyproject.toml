@@ -1,3 +1,54 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rigorous-research"
+version = "1.2.0"
+description = "Evidence-gated research workspaces for mathematics, statistics, and quantitative finance"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Rigorous Research contributors" }]
+keywords = ["research", "reproducibility", "agent-skill", "statistics", "quantitative-finance"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+
+[project.optional-dependencies]
+math = ["sympy>=1.13,<2"]
+dev = ["build>=1.2", "PyYAML>=6", "ruff==0.16.1"]
+
+[project.scripts]
+rigorous-research = "rigorous_research_cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Studyer-Tang/rigorous-research"
+Repository = "https://github.com/Studyer-Tang/rigorous-research"
+Issues = "https://github.com/Studyer-Tang/rigorous-research/issues"
+
+[tool.setuptools]
+package-dir = { "" = "scripts" }
+py-modules = [
+  "finance_data",
+  "inference_case",
+  "literature_search",
+  "math_backend",
+  "research_io",
+  "research_eval",
+  "research_seal",
+  "research_workspace",
+  "review_protocol",
+  "rigorous_research_cli",
+  "skill_quality",
+  "statistics_backend",
+]
+
 [tool.ruff]
 line-length = 120
 

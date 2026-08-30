@@ -52,7 +52,7 @@ The workspace contains an inference case. A short, focused audit can use the inf
 
 | Layer | What it does | What it refuses to claim |
 |---|---|---|
-| Literature | Searches Crossref and arXiv; deduplicates DOI/arXiv/title-author-year records; exports JSON, Markdown, and BibTeX | A search hit is not evidence, and a fuzzy title match is not an automatic duplicate |
+| Literature | Searches Crossref, arXiv, OpenAlex, Semantic Scholar, and PubMed; deduplicates DOI/arXiv/title-author-year records; exports JSON, Markdown, and BibTeX | A search hit is not evidence, provider overlap is not independent confirmation, and a fuzzy title match is not an automatic duplicate |
 | Exact mathematics | Produces conservative SymPy identity/determinant certificates and optional Lean compilation records | General symbolic simplification is not automatically a proof; Lean holes and custom axioms are not closed certificates |
 | Statistical inference | Computes IID and Newey-West uncertainty, circular block-bootstrap intervals, Holm/BH corrections, and DGP coverage grids | A standard estimator name does not establish finite-sample validity |
 | Financial data | Freezes raw Kenneth French or FRED responses with vintage, schema, units, calendar, adjustments, license, and SHA-256 | Latest-revised data is not point-in-time information |
@@ -156,7 +156,7 @@ Run either script with `--help` for the complete command set.
 
 ```text
 # Retrieve and conservatively deduplicate literature
-python scripts/literature_search.py --help
+rigorous-research literature --help
 
 # Certify an exact polynomial identity
 python scripts/math_backend.py sympy-identity \
@@ -206,16 +206,21 @@ references/release-standards.md
 scripts/research_workspace.py      planning, sources, runs, recovery, briefs
 scripts/inference_case.py          inference ledger and release gates
 scripts/research_io.py             shared JSON, hashing, and portable-path primitives
-scripts/literature_search.py       Crossref/arXiv retrieval and conservative deduplication
+scripts/rigorous_research_cli.py    unified terminal entry point
+scripts/literature_search.py       five-provider retrieval and conservative deduplication
 scripts/math_backend.py            SymPy certificates and optional Lean checking
 scripts/statistics_backend.py      HAC, bootstrap, multiplicity, coverage simulation
 scripts/finance_data.py            immutable financial-data snapshots and vintage diffs
 scripts/research_seal.py            plan seals and verification receipts
 scripts/review_protocol.py         blind packets, review receipts, adjudication
+scripts/research_eval.py           release fixtures and adversarial mutations
+scripts/skill_quality.py            portable package and privacy checks
+scripts/build_plugin.py             Agent Plugin distribution builder
 assets/                            reusable research templates
 examples/                          complete released workspaces and small audits
+evals/                             deterministic release-gate benchmark manifest
 tests/                             behavioral and integrity tests
-pyproject.toml                     compact Ruff formatting and static-check rules
+pyproject.toml                     package, CLI, optional dependencies, and Ruff rules
 ```
 
 ## Requirements
@@ -228,6 +233,41 @@ pyproject.toml                     compact Ruff formatting and static-check rule
 Install the exact-mathematics backend with `pip install -r requirements-math.txt`. Lean 4 is optional and is invoked only when present; the project never substitutes a simulated formal check.
 
 The official Codex skill validator additionally uses PyYAML; it is not a runtime dependency of this project.
+
+## Install and verify
+
+Install it as an Agent Skill, a Python terminal tool, or both. Standards-compatible hosts can use `npx skills add Studyer-Tang/rigorous-research` or `gh skill install Studyer-Tang/rigorous-research rigorous-research`; confirm the destination with the current host documentation. For a manual Codex installation, clone the repository as one directory under the configured Codex skills path.
+
+The Python toolkit has no mandatory runtime package beyond Python 3.10 for its standard-library core:
+
+```text
+git clone https://github.com/Studyer-Tang/rigorous-research.git
+cd rigorous-research
+python -m pip install -e ".[math]"
+rigorous-research quality
+rigorous-research eval
+python -m unittest discover -s tests -v
+```
+
+Install `requirements-math.txt` only when exact SymPy checks are needed. Live literature and financial-data retrieval require network access; validation, workspace management, sealing, and most tests work offline.
+
+`skill_quality.py` enforces the portable package contract before publication: Agent Skills frontmatter and version metadata, local Markdown links, Python syntax, unsafe dynamic execution, likely committed credentials, and user-specific absolute paths. Use `--json` for CI or other machine consumers. `research_eval.py` separately confirms that released examples pass and known corruptions fail.
+
+To build a standards-shaped Agent Plugin without restructuring the source repository:
+
+```text
+python scripts/build_plugin.py --output build/agent-plugin --archive dist/rigorous-research-agent-plugin
+```
+
+Tagged GitHub releases attach the Python wheel, source archive, Agent Plugin ZIP, dependency SBOM, and GitHub build-provenance attestation. Installing the Agent Plugin ZIP is host-specific; its extracted root contains `plugin.json` and `skills/rigorous-research/SKILL.md`.
+
+See the [quick start](docs/quickstart.md) for a first case, [ROADMAP.md](ROADMAP.md) for planned work, and [CHANGELOG.md](CHANGELOG.md) for version history.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the change protocol, [SECURITY.md](SECURITY.md) for execution and publication trust boundaries, and [CITATION.cff](CITATION.cff) for citation metadata.
+
+## Design relationship to Scientific Agent Skills
+
+This project borrows repository-maintenance ideas from [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills): standards-compatible metadata, progressive disclosure, repository-level structural validation, tests for bundled scripts, and explicit security review. It does not copy that repository's large catalog or replace this project's inference contracts with generic scientific workflows. Both repositories use the MIT license; the implementation here is independent and tailored to one evidence-gated research skill.
 
 ## License
 

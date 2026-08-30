@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If this software supports your research, cite the repository and the exact released version used."
+title: "Rigorous Research"
+type: software
+version: 1.2.0
+date-released: 2026-08-30
+license: MIT
+authors:
+  - name: "Rigorous Research contributors"
+repository-code: "https://github.com/Studyer-Tang/rigorous-research"
+url: "https://github.com/Studyer-Tang/rigorous-research"
+keywords:
+  - reproducible research
+  - inference contracts
+  - agent skills
+  - quantitative research

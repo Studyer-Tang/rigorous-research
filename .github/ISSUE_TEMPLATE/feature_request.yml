@@ -1,0 +1,24 @@
+name: Improvement proposal
+description: Propose a bounded research, interoperability, or usability improvement.
+title: "[Proposal]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Research or usability problem
+      description: Describe the concrete failure or repeated work this proposal addresses.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome and acceptance test
+      description: State observable behavior, including an example that should be rejected when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: trust
+    attributes:
+      label: Dependencies and trust assumptions
+      description: Note services, packages, credentials, data licenses, or network requirements.
