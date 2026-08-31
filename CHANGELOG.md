@@ -12,6 +12,7 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 - Recorded correction/retraction checks, source-version metadata, and explicit version-conflict failures.
 - PDF, public-web, and DOI import commands with page hashes, Crossref metadata, response limits, redirect validation, and private-network blocking.
 - Reviewer provenance, multi-review conflict detection, AI-assisted draft restrictions, local candidate-claim packets, and claim-to-source evidence graphs.
+- English and Simplified Chinese playground localization with automatic language selection, a persistent manual switch, and localized HTML exports.
 - A worked PaperTrail demo, user guide, behavioral tests, and a manual GitHub Pages publication workflow.
 
 ### Safety

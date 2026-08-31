@@ -77,6 +77,11 @@ class PaperTrailWebTests(unittest.TestCase):
         self.assertIn("Draft claim candidates", app)
         self.assertIn("Evidence graph", app)
         self.assertIn("Claims on the left connected to cited sources on the right", app)
+        self.assertIn('id="language-select"', app)
+        self.assertIn("简体中文", app)
+        self.assertIn("追溯每一个结论背后的证据", app)
+        self.assertIn("papertrail-language", app)
+        self.assertIn("checklistLabels[language]", app)
         self.assertEqual(demo_audit["reproducibility_checklist"]["review_provenance"]["status"], "PASS")
 
     def test_cli_builds_pages_ready_site(self):

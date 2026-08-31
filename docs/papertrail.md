@@ -122,6 +122,8 @@ This produces:
 
 The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. An explicit DOI lookup sends only the DOI to Crossref. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
 
+The playground supports English and Simplified Chinese. It initially follows the browser language, provides a manual language selector, remembers that preference locally, and uses the selected language for the live audit and downloaded HTML report. Markdown claim headings may use either `Claims`/`Conclusions` or `结论`/`主要结论`/`核心结论`; report content is never machine-translated.
+
 Both generated reports and the playground include an evidence graph linking claims on the left to cited sources on the right. The graph is an inspection aid; verdict text and the evidence table remain the authoritative accessible representation.
 
 ## Publish with GitHub Pages

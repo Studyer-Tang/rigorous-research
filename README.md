@@ -83,7 +83,7 @@ rigorous-research papertrail \
   --demo-manifest examples/papertrail-demo/evidence.json
 ```
 
-Its homepage accepts pasted text or local `.md` and `.json` files, audits them entirely inside the browser, and downloads the result as JSON or a standalone HTML report. The page has no upload endpoint, analytics script, external runtime dependency, or account requirement.
+Its homepage accepts pasted text or local `.md` and `.json` files, audits them entirely inside the browser, and downloads the result as JSON or a standalone HTML report. The English/简体中文 interface follows the browser language by default, can be switched manually, and exports the HTML report in the selected language. The page has no upload endpoint, analytics script, external runtime dependency, or account requirement.
 
 Import research material before auditing it:
 
