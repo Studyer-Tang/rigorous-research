@@ -66,10 +66,12 @@ For code ownership and module boundaries, see [Architecture](docs/architecture.m
 | Layer | What it does | What it refuses to claim |
 |---|---|---|
 | Literature | Searches Crossref, arXiv, OpenAlex, Semantic Scholar, and PubMed; deduplicates DOI/arXiv/title-author-year records; exports JSON, Markdown, and BibTeX | A search hit is not evidence, provider overlap is not independent confirmation, and a fuzzy title match is not an automatic duplicate |
+| Research integrity | Unifies Crossref, OpenAlex, PubMed, and an explicit Crossmark manual check; records events, response hashes, conflicts, gaps, and version relations | “No recorded issue” is not presented as proof that a work has no integrity problem |
 | Exact mathematics | Produces conservative SymPy identity/determinant certificates and optional Lean compilation records | General symbolic simplification is not automatically a proof; Lean holes and custom axioms are not closed certificates |
 | Statistical inference | Computes IID and Newey-West uncertainty, circular block-bootstrap intervals, Holm/BH corrections, and DGP coverage grids | A standard estimator name does not establish finite-sample validity |
 | Financial data | Freezes raw Kenneth French or FRED responses with vintage, schema, units, calendar, adjustments, license, and SHA-256 | Latest-revised data is not point-in-time information |
 | Governance | Seals preregistered plans, binds backend receipts to inputs and versions, and creates blind independent-review packets | Self-authored evidence labels and stale review receipts cannot clear a strict release gate |
+| Governed AI review | Extracts candidate claims, recommends possible evidence, and flags likely scope overreach locally or through a user-provided model | AI output never assigns a formal evidence verdict; human confirmation requires an exact quote and locator |
 | PaperTrail | Turns Markdown claims plus exact source excerpts into static HTML and JSON audits | A nearby citation is not treated as support, and missing review stays `UNREVIEWED` |
 
 The strict path is tamper-evident: changing a claim input, dependency lock, certificate, raw data file, author case, or review packet invalidates the corresponding receipt.
@@ -116,7 +118,28 @@ rigorous-research import doi 10.1234/example --output source.json
 rigorous-research import assist report.md --output assistance.json
 ```
 
-Install PDF support with `python -m pip install -e ".[papertrail]"`. Public URL import blocks loopback, private, link-local, and reserved network destinations and limits response size. The browser playground may contact Crossref only after an explicit DOI lookup; report and evidence text remain local.
+Install PDF support with `python -m pip install -e ".[papertrail]"`. Public URL import blocks loopback, private, link-local, and reserved network destinations and limits response size. The browser playground may contact Crossref, OpenAlex, and PubMed only after an explicit DOI integrity lookup; report and evidence text remain local.
+
+## Check research integrity and version history
+
+```text
+rigorous-research integrity check 10.1234/example \
+  --output-dir build/integrity
+```
+
+The command produces machine-readable JSON, Markdown with a Mermaid relationship graph, and portable HTML. Every provider check records its time, URL, response SHA-256, status, and limitations. Crossmark is linked as `manual_required` because this project does not pretend its human-facing dialog is a stable public general-purpose API. See the [Research Integrity Network guide](docs/research-integrity.md).
+
+## Draft a governed AI review
+
+The default reviewer is deterministic and fully local:
+
+```text
+rigorous-research ai-review draft report.md \
+  --manifest evidence.json \
+  --output ai-review-draft.json
+```
+
+Optional Ollama and OpenAI-compatible modes are supported. User-provided keys are read only from an environment variable and are never exported. Model output is restricted to rationale, scope issues, and search suggestions; any model-supplied verdict is discarded. A formal evidence judgment requires a separate human confirmation with reviewer ID, exact quote, and locator. See the [Governed AI Reviewer guide](docs/governed-ai-reviewer.md).
 
 ## Why the gates matter
 

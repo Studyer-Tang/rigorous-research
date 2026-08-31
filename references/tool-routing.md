@@ -7,6 +7,8 @@ Use the unified `rigorous-research` command after installing the project. Direct
 | Multi-step investigation | `rigorous-research workspace` | `research_workspace.py` | none |
 | Focused claim audit | `rigorous-research case` | `inference_case.py` | none |
 | Literature candidates | `rigorous-research literature` | `literature_search.py` | network for live retrieval |
+| Research integrity and versions | `rigorous-research integrity` | `research_integrity.py` | network for live checks; fixtures support replay |
+| Governed AI review draft | `rigorous-research ai-review` | `governed_ai_reviewer.py` | none locally; optional Ollama or user endpoint |
 | Exact mathematics | `rigorous-research math` | `math_backend.py` | SymPy; Lean is optional |
 | Statistical stress tests | `rigorous-research statistics` | `statistics_backend.py` | none for bundled methods |
 | Financial-data vintage | `rigorous-research data` | `finance_data.py` | network for live retrieval |

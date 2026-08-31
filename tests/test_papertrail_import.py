@@ -69,7 +69,7 @@ class PaperTrailImportTests(unittest.TestCase):
                     "issued": {"date-parts": [[2025]]},
                     "URL": "https://doi.org/10.1234/example",
                     "type": "journal-article",
-                    "update-to": [{"type": "retraction"}],
+                    "updated-by": [{"type": "retraction"}],
                 }
             },
         )

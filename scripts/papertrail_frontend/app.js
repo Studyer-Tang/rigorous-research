@@ -51,6 +51,8 @@ let currentAudit = null,
   pdfExtractionKind = "pdf_text",
   pendingPdfSelection = null;
 const t = (key) => messages[language][key] || messages.en[key] || key;
+const integrityController = window.PaperTrailIntegrity.createController(t),
+  reviewController = window.PaperTrailGovernedReview.createController(t);
 const verdictText = (value) => verdictLabels[language][value] || value;
 const checkText = (value) => checkLabels[language][value] || value;
 function localizeDetail(value) {
@@ -107,35 +109,47 @@ const cleanStatement = (value) =>
     .replace(/\[@([^\]]+)\]/g, "")
     .replace(/\s+/g, " ")
     .trim();
-function draftClaims() {
+async function draftClaims() {
   setError();
-  if (
-    /^#{1,6}\s+(?:claims|key claims|conclusions|结论|主要结论|核心结论)\s*$/im.test(
-      reportInput.value,
-    )
-  ) {
-    setError(t("draft_exists"));
-    return;
-  }
-  const prose = reportInput.value
+  let claims = parseReport(reportInput.value).claims.map((item) => ({
+    id: item.id,
+    statement: item.statement,
+    origin: "report_claim_section",
+  }));
+  if (!claims.length) {
+    const prose = reportInput.value
       .split(/\r?\n/)
       .filter((line) => !/^\s*(?:#{1,6}\s|```|>)/.test(line))
       .join(" "),
-    sentences = prose.replace(/\s+/g, " ").split(/(?<=[.!?。！？])\s+/),
-    signals =
-      /(?:\d|%|percent|increase|decrease|associated|significant|demonstrat|suggest|show|find|表明|显示|增加|减少|显著|相关)/i,
-    candidates = sentences
-      .map(text)
-      .filter(
-        (value) =>
-          value.length >= 30 && value.length <= 500 && signals.test(value),
-      )
-      .slice(0, 20);
-  if (!candidates.length) {
-    setError(t("draft_none"));
+      sentences = prose.replace(/\s+/g, " ").split(/(?<=[.!?。！？])\s+/),
+      signals =
+        /(?:\d|%|percent|increase|decrease|associated|significant|demonstrat|suggest|show|find|表明|显示|增加|减少|显著|相关)/i,
+      candidates = sentences
+        .map(text)
+        .filter(
+          (value) =>
+            value.length >= 30 && value.length <= 500 && signals.test(value),
+        )
+        .slice(0, 20);
+    if (!candidates.length) {
+      setError(t("draft_none"));
+      return;
+    }
+    claims = candidates.map((statement, index) => ({
+      id: `C${String(index + 1).padStart(3, "0")}`,
+      statement,
+      origin: "candidate_extraction",
+    }));
+    reportInput.value = `${reportInput.value.trim()}\n\n## ${language === "zh" ? "结论" : "Claims"}\n\n${claims.map((item) => `- [${item.id}] ${item.statement}`).join("\n")}\n`;
+  }
+  let manifest;
+  try {
+    manifest = JSON.parse(manifestInput.value);
+  } catch {
+    setError(t("manifest_invalid"));
     return;
   }
-  reportInput.value = `${reportInput.value.trim()}\n\n## ${language === "zh" ? "结论" : "Claims"}\n\n${candidates.map((value, index) => `- [C${String(index + 1).padStart(3, "0")}] ${value}`).join("\n")}\n`;
+  await reviewController.draft(claims, manifest, reportInput.value);
   refreshAnchorTargets();
   setError(t("draft_added"));
 }
@@ -159,8 +173,17 @@ async function addDoiSource() {
       );
     if (!response.ok)
       throw new Error(`${t("crossref_failed")} (HTTP ${response.status})`);
-    const message = (await response.json()).message || {},
-      updates = Array.isArray(message["update-to"]) ? message["update-to"] : [],
+    const rawCrossref = await response.text(),
+      crossrefResult = {
+        provider: "crossref",
+        url: response.url,
+        raw: rawCrossref,
+        data: JSON.parse(rawCrossref),
+      },
+      message = crossrefResult.data.message || {},
+      updates = Array.isArray(message["updated-by"])
+        ? message["updated-by"]
+        : [],
       types = new Set(updates.map((item) => text(item.type).toLowerCase())),
       status = types.has("retraction")
         ? "retracted"
@@ -207,6 +230,7 @@ async function addDoiSource() {
     manifestInput.value = JSON.stringify(manifest, null, 2);
     document.getElementById("doi-input").value = "";
     refreshAnchorTargets();
+    await integrityController.run(doi, crossrefResult);
   } catch (exc) {
     setError(exc instanceof Error ? exc.message : String(exc));
   } finally {
@@ -1182,6 +1206,8 @@ function applyLanguage(value, { remember = true } = {}) {
     preview.setAttribute("data-i18n", "preview_empty");
     preview.textContent = t("preview_empty");
   }
+  integrityController.render();
+  reviewController.render();
   if (pdfDocument)
     setPdfStatus(
       `${t("pdf_ready")} · SHA-256 ${pdfFileHash.slice(0, 12)}… · ${pdfDocument.numPages} ${language === "zh" ? "页" : "pages"}`,
@@ -1200,6 +1226,8 @@ function restore() {
   reportInput.value = demo.report;
   manifestInput.value = demo.manifest;
   currentAudit = null;
+  integrityController.reset();
+  reviewController.reset();
   jsonButton.disabled = true;
   htmlButton.disabled = true;
   preview.className = "preview-empty";

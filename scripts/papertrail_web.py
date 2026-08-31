@@ -12,7 +12,13 @@ from papertrail_audit import build_audit, render_html
 from research_io import atomic_write_json
 
 FRONTEND = files("papertrail_frontend")
-FRONTEND_ASSETS = ("app.css", "i18n.js", "app.js")
+FRONTEND_ASSETS = (
+    "app.css",
+    "i18n.js",
+    "integrity-network.js",
+    "governed-review.js",
+    "app.js",
+)
 
 
 def _frontend_text(name: str) -> str:

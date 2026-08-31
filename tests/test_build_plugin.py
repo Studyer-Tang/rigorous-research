@@ -33,6 +33,16 @@ class PluginBuildTests(unittest.TestCase):
             self.assertTrue(
                 (output / "skills" / "rigorous-research" / "scripts" / "papertrail_frontend" / "i18n.js").is_file()
             )
+            self.assertTrue(
+                (
+                    output / "skills" / "rigorous-research" / "scripts" / "papertrail_frontend" / "integrity-network.js"
+                ).is_file()
+            )
+            self.assertTrue(
+                (
+                    output / "skills" / "rigorous-research" / "scripts" / "papertrail_frontend" / "governed-review.js"
+                ).is_file()
+            )
             self.assertTrue(archive.with_suffix(".zip").is_file())
 
     def test_existing_output_is_not_overwritten(self):

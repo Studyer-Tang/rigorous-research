@@ -16,11 +16,13 @@ class Command:
 
 
 COMMANDS = {
+    "ai-review": Command("governed_ai_reviewer", "draft AI-assisted reviews under mandatory human control"),
     "audit": Command("papertrail_audit", "audit report claims against exact source evidence"),
     "case": Command("inference_case", "create and validate a focused inference case"),
     "data": Command("finance_data", "freeze and verify public financial-data vintages"),
     "eval": Command("research_eval", "run release-gate benchmark and mutation cases"),
     "import": Command("papertrail_import", "import PDF, web, and DOI sources into PaperTrail drafts"),
+    "integrity": Command("research_integrity", "check research integrity across scholarly providers"),
     "literature": Command("literature_search", "search and deduplicate scholarly metadata"),
     "math": Command("math_backend", "run exact SymPy or optional Lean checks"),
     "papertrail": Command("papertrail_web", "build the browser-only PaperTrail playground"),

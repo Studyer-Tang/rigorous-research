@@ -4,6 +4,36 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.5.0 - 2026-08-31
+
+### Added
+
+- Governed local claim extraction, possible supporting/contradicting evidence recommendations, and scope-overreach warnings.
+- Optional Ollama and user-provided OpenAI-compatible model adapters with environment-only secrets and response-field allowlisting.
+- Human confirmation receipts requiring a named reviewer, exact quote, and locator for decisive judgments.
+- A browser-only governed review panel whose suggestions remain downloadable `AI_DRAFT` records.
+
+### Safety
+
+- Model-supplied verdict fields are discarded and cannot enter a PaperTrail audit.
+- AI drafts never modify evidence manifests or create formal judgments.
+
+## 1.4.0 - 2026-08-31
+
+### Added
+
+- A schema-versioned Research Integrity Network for Crossref, OpenAlex, PubMed, and explicit Crossmark manual review.
+- Retraction, withdrawal, correction, expression-of-concern, metadata-conflict, and version-relation aggregation.
+- Provider check timestamps, response hashes, source URLs, limitations, coverage gaps, and deterministic fixture replay.
+- JSON, Markdown/Mermaid, portable HTML, and bilingual browser output.
+
+### Safety
+
+- “No known issue” is explicitly time- and provider-bounded; provider silence is never treated as proof of integrity.
+- Crossmark is not presented as automatically covered through an undocumented interface.
+
+## 1.3.0 - 2026-08-31
+
 ### Added
 
 - PaperTrail Markdown claim extraction and evidence-manifest validation.

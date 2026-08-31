@@ -17,7 +17,7 @@ from urllib.request import Request, urlopen
 
 from research_io import atomic_write_json, sha256
 
-USER_AGENT = "rigorous-research/1.2 (PaperTrail; https://github.com/Studyer-Tang/rigorous-research)"
+USER_AGENT = "rigorous-research/1.5 (PaperTrail; https://github.com/Studyer-Tang/rigorous-research)"
 MAX_RESPONSE_BYTES = 8 * 1024 * 1024
 CLAIM_SIGNAL = re.compile(
     r"(?:\d|%|percent|increase|decrease|associated|significant|demonstrat|suggest|show|find|表明|显示|增加|减少|显著|相关)",
@@ -197,8 +197,10 @@ def crossref_source(doi: str, payload: dict[str, Any]) -> dict[str, Any]:
         "date-parts", []
     )
     year = date_parts[0][0] if date_parts and date_parts[0] else None
-    updates = message.get("update-to") or []
+    updates = message.get("updated-by") or []
+    outgoing_updates = message.get("update-to") or []
     update_types = {str(item.get("type", "")).lower() for item in updates if isinstance(item, dict)}
+    outgoing_types = {str(item.get("type", "")).lower() for item in outgoing_updates if isinstance(item, dict)}
     if "retraction" in update_types:
         status = "retracted"
     elif "withdrawal" in update_types:
@@ -220,8 +222,10 @@ def crossref_source(doi: str, payload: dict[str, Any]) -> dict[str, Any]:
         "version": "version of record",
         "version_url": str(message.get("URL") or f"https://doi.org/{doi}"),
         "version_conflict": None,
-        "version_notes": "Crossref update metadata: "
-        + (", ".join(sorted(update_types)) if update_types else "none recorded"),
+        "version_notes": "Crossref updates applying to this work: "
+        + (", ".join(sorted(update_types)) if update_types else "none recorded")
+        + "; this work updates: "
+        + (", ".join(sorted(outgoing_types)) if outgoing_types else "none recorded"),
         "data_availability": "unknown",
         "code_availability": "unknown",
         "crossref_type": str(message.get("type") or "unknown"),

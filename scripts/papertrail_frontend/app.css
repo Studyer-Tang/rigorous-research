@@ -451,6 +451,55 @@ textarea {
   padding: 12px 16px;
   margin: 12px 0;
 }
+
+.integrity-network {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--panel) 94%, var(--accent) 6%);
+}
+
+.integrity-network h3 { margin: 0; }
+
+.integrity-summary { margin: .75rem 0; font-weight: 700; }
+
+.integrity-providers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: .75rem;
+}
+
+.integrity-provider {
+  padding: .8rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.integrity-provider p { margin: .35rem 0 0; }
+.integrity-provider code { overflow-wrap: anywhere; font-size: .72rem; }
+.integrity-graph, .integrity-gaps { margin-top: 1rem; }
+.integrity-graph ul, .integrity-gaps ul { margin-bottom: 0; }
+
+.governed-review {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--panel) 94%, #f59e0b 6%);
+}
+
+.governed-review h3 { margin: 0; }
+.review-candidates { display: grid; gap: .75rem; }
+.review-candidate {
+  padding: .85rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+.review-candidate p { margin: .35rem 0; }
+.review-warning { color: #a2470b; }
 .pdf-workspace {
   background: var(--panel);
   border: 1px solid var(--line);

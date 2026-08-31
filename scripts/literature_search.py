@@ -28,7 +28,7 @@ ATOM = {"a": "http://www.w3.org/2005/Atom", "x": "http://arxiv.org/schemas/atom"
 
 
 def request_bytes(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={"User-Agent": "rigorous-research/1.2 (literature audit)"})
+    request = urllib.request.Request(url, headers={"User-Agent": "rigorous-research/1.5 (literature audit)"})
     with urllib.request.urlopen(request, timeout=60) as response:
         return response.read()
 

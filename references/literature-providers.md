@@ -9,7 +9,10 @@ Select providers for coverage rather than querying every service automatically. 
 | OpenAlex | Broad cross-disciplinary discovery and work-level identifiers | Aggregated metadata can inherit upstream errors |
 | Semantic Scholar | Citation-oriented discovery and abstracts across many fields | Unauthenticated requests may be rate-limited |
 | PubMed | Biomedical and life-science literature indexed by NCBI | Coverage is domain-specific and summary metadata may omit abstracts or DOI values |
+| Crossmark | Publisher-maintained status and update dialog for DOI records | Human-facing check; do not claim automatic coverage from an undocumented interface |
 
 The default search uses Crossref, arXiv, and OpenAlex. Add `--provider semantic-scholar` or `--provider pubmed` when those indexes match the claim; supplying any `--provider` option replaces the default list, so repeat it for multiple providers.
+
+Discovery and integrity checks are separate. Use `rigorous-research integrity check <identifier>` after selecting a work. That command preserves each provider's response hash, check time, status, limitation, integrity events, and explicit coverage gaps. Provider silence is not evidence that no correction, retraction, or concern exists.
 
 Record the exact query, selected providers, per-provider limit, retrieval time, request URLs, and failures. A zero-result or failed provider is a coverage statement, not evidence that no literature exists. Inspect the primary source and its manifestation status before linking it to a claim.

@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.2"
+  version: "1.5"
   skill-author: Rigorous Research contributors
 ---
 
