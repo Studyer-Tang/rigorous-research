@@ -7,6 +7,7 @@ import argparse
 import html
 import json
 import re
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -37,6 +38,15 @@ EVENT_TYPES = {
     "update": "update",
 }
 HIGH_RISK_EVENTS = {"retraction", "withdrawal", "expression_of_concern"}
+
+
+class ProviderNotFound(ValueError):
+    """Raised when a provider completed a query but has no matching work."""
+
+    def __init__(self, message: str, response: bytes = b"", source_url: str = "") -> None:
+        super().__init__(message)
+        self.response = response
+        self.source_url = source_url
 
 
 def normalize_doi(value: str) -> str:
@@ -220,6 +230,7 @@ def parse_openalex(payload: bytes, checked_at: str, source_url: str) -> dict[str
         "doi": doi,
         "openalex": openalex_id,
         "pmid": re.sub(r".*/", "", str(ids.get("pmid") or "")),
+        "arxiv": re.sub(r"^https?://arxiv\.org/abs/", "", str(ids.get("arxiv") or ""), flags=re.IGNORECASE),
         "url": clean_text((item.get("primary_location") or {}).get("landing_page_url") or item.get("id")),
         "type": clean_text(item.get("type")),
         "abstract": _openalex_abstract(item.get("abstract_inverted_index")),
@@ -237,7 +248,7 @@ def parse_openalex(payload: bytes, checked_at: str, source_url: str) -> dict[str
             }
         )
     versions = []
-    arxiv = re.sub(r"^https?://arxiv\.org/abs/", "", str(ids.get("arxiv") or ""), flags=re.IGNORECASE)
+    arxiv = identity["arxiv"]
     if arxiv:
         versions.append({"identifier": arxiv, "role": "preprint", "relation": "has_preprint", "provider": "openalex"})
     return _check(
@@ -394,10 +405,11 @@ def _fetch_pubmed(identifier: dict[str, str], fetcher: Callable[[str], bytes]) -
         url = provider_url("pubmed", identifier)
         return fetcher(url), url
     search_url = provider_url("pubmed", identifier)
-    search = json.loads(fetcher(search_url).decode("utf-8"))
+    search_payload = fetcher(search_url)
+    search = json.loads(search_payload.decode("utf-8"))
     ids = search.get("esearchresult", {}).get("idlist", [])
     if not ids:
-        raise ValueError("PubMed has no work for this DOI")
+        raise ProviderNotFound("PubMed has no work for this DOI", search_payload, search_url)
     fetch_url = f"{PUBMED_FETCH}?{urllib.parse.urlencode({'db': 'pubmed', 'id': ids[0], 'retmode': 'xml'})}"
     return fetcher(fetch_url), fetch_url
 
@@ -436,11 +448,49 @@ def run_checks(
             if provider in fixture_map:
                 payload = fixture_map[provider].read_bytes()
                 source_url = f"fixture:{fixture_map[provider].name}"
+                if provider == "pubmed" and payload.lstrip().startswith(b"{"):
+                    search = json.loads(payload.decode("utf-8"))
+                    if not search.get("esearchresult", {}).get("idlist", []):
+                        raise ProviderNotFound(
+                            "PubMed fixture records no matching work for this DOI", payload, source_url
+                        )
             elif provider == "pubmed":
                 payload, source_url = _fetch_pubmed(identifier, fetcher)
             else:
                 payload, source_url = fetcher(url), url
             checks.append(parsers[provider](payload, now, source_url))
+        except ProviderNotFound as exc:
+            checks.append(
+                _check(
+                    provider,
+                    now,
+                    exc.source_url or url,
+                    exc.response or None,
+                    status="not_found",
+                    limitation=(
+                        f"{provider} returned no matching record. The work may be outside provider coverage; "
+                        "this does not establish that the identifier is invalid."
+                    ),
+                    error=str(exc),
+                )
+            )
+        except urllib.error.HTTPError as exc:
+            status = "not_found" if exc.code == 404 else "error"
+            checks.append(
+                _check(
+                    provider,
+                    now,
+                    url,
+                    None,
+                    status=status,
+                    limitation=(
+                        f"{provider} returned no matching record; coverage is not established."
+                        if status == "not_found"
+                        else f"{provider} coverage is unknown because this check failed."
+                    ),
+                    error=f"HTTPError {exc.code}: {exc.reason}",
+                )
+            )
         except (OSError, ValueError, json.JSONDecodeError, ET.ParseError) as exc:
             checks.append(
                 _check(
@@ -460,6 +510,17 @@ def _normalized_title(value: str) -> str:
     return " ".join(re.sub(r"[^\w]+", " ", value.casefold(), flags=re.UNICODE).split())
 
 
+def work_role(identity: dict[str, Any]) -> str:
+    record_type = str(identity.get("type") or "").casefold()
+    if any(value in record_type for value in ("posted-content", "preprint")):
+        return "preprint"
+    if any(value in record_type for value in ("correction", "erratum", "retraction", "withdrawal")):
+        return "notice"
+    if any(value in record_type for value in ("journal-article", "article", "proceedings")):
+        return "version_of_record"
+    return "scholarly_work"
+
+
 def aggregate_network(
     identifier: dict[str, str], checks: list[dict[str, Any]], checked_at: str, requested: list[str]
 ) -> dict[str, Any]:
@@ -469,6 +530,19 @@ def aggregate_network(
     priority = {"crossref": 0, "pubmed": 1, "openalex": 2}
     canonical = dict(min(identities, key=lambda item: priority.get(item[0], 9))[1]) if identities else {}
     canonical.setdefault(identifier["kind"], identifier["value"])
+    identifier_claims: dict[str, list[dict[str, str]]] = {}
+    for provider, identity_value in identities:
+        for kind in ("doi", "pmid", "openalex", "arxiv"):
+            normalized = str(identity_value.get(kind) or "").strip()
+            if not normalized:
+                continue
+            claim = {"provider": provider, "value": normalized}
+            if claim not in identifier_claims.setdefault(kind, []):
+                identifier_claims[kind].append(claim)
+            canonical.setdefault(kind, normalized)
+    canonical["identifiers"] = {
+        kind: sorted({claim["value"] for claim in claims}) for kind, claims in identifier_claims.items()
+    }
     events = [dict(event) for check in checks for event in check["events"]]
     conflicts: list[dict[str, Any]] = []
     for index, (left_provider, left) in enumerate(identities):
@@ -502,7 +576,7 @@ def aggregate_network(
                     }
                 )
     root_id = canonical.get("doi") or canonical.get("pmid") or canonical.get("openalex") or identifier["value"]
-    nodes = [{"id": root_id, "role": "version_of_record", "label": canonical.get("title") or root_id}]
+    nodes = [{"id": root_id, "role": work_role(canonical), "label": canonical.get("title") or root_id}]
     edges: list[dict[str, str]] = []
     seen = {root_id}
     for check in checks:
@@ -562,6 +636,7 @@ def aggregate_network(
         "checked_at": checked_at,
         "query": identifier,
         "work": canonical,
+        "identifier_claims": identifier_claims,
         "provider_checks": checks,
         "integrity_events": events,
         "high_risk_events": high_risk,

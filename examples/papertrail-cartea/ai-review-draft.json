@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "governed-ai-review-draft",
+  "created_at": "2026-08-31T06:16:18.918364+00:00",
+  "inputs": {
+    "report": "report.md",
+    "report_sha256": "b6a3e635925cfbd0afe0dc5c3e61ed0c3c470f141063a046f9dd8e48d684cca2",
+    "manifest": "evidence.json",
+    "manifest_sha256": "a937a63981b9883dffd47773c2947d823a35fa0e361433057d4a7954d32e40d7"
+  },
+  "governance": {
+    "state": "AI_DRAFT",
+    "formal_judgments_created": false,
+    "human_confirmation_required": true,
+    "provider": "heuristic",
+    "model": "deterministic-local-rules",
+    "data_sent": "none"
+  },
+  "candidates": [
+    {
+      "id": "C001",
+      "statement": "The benefits of model complexity depend on data quality and infrastructure; noise can eventually overwhelm the value of adding features.",
+      "origin": "report_claim_section",
+      "status": "AI_DRAFT_REQUIRES_HUMAN_REVIEW",
+      "evidence_recommendations": [
+        {
+          "source_id": "cartea2025",
+          "relation": "potential_support",
+          "score": 0.5,
+          "reason": "lexical_overlap",
+          "matched_field": "evidence_quote",
+          "status": "SUGGESTION_NOT_A_VERDICT"
+        }
+      ],
+      "scope_issues": []
+    },
+    {
+      "id": "C002",
+      "statement": "More model complexity always improves return prediction and portfolio performance.",
+      "origin": "report_claim_section",
+      "status": "AI_DRAFT_REQUIRES_HUMAN_REVIEW",
+      "evidence_recommendations": [
+        {
+          "source_id": "cartea2025",
+          "relation": "potential_contradiction",
+          "score": 0.5,
+          "reason": "lexical_overlap_with_opposite_polarity",
+          "matched_field": "evidence_quote",
+          "status": "SUGGESTION_NOT_A_VERDICT"
+        }
+      ],
+      "scope_issues": [
+        {
+          "type": "possible_overgeneralization",
+          "severity": "review",
+          "detail": "The claim uses universal or certainty language that candidate evidence may not preserve."
+        }
+      ]
+    },
+    {
+      "id": "C003",
+      "statement": "In the paper's Figure 5 experiment, out-of-sample R-squared and Sharpe ratio rise from low to moderate feature dimensions and then decline at higher dimensions.",
+      "origin": "report_claim_section",
+      "status": "AI_DRAFT_REQUIRES_HUMAN_REVIEW",
+      "evidence_recommendations": [
+        {
+          "source_id": "cartea2025",
+          "relation": "potential_support",
+          "score": 0.6087,
+          "reason": "lexical_overlap",
+          "matched_field": "evidence_quote",
+          "status": "SUGGESTION_NOT_A_VERDICT"
+        }
+      ],
+      "scope_issues": []
+    }
+  ],
+  "instructions": [
+    "Treat every recommendation and issue as a draft, never as a source verdict.",
+    "Open the source and verify an exact quote, locator, scope, and version before confirmation.",
+    "A decisive confirmation requires a named human reviewer, exact quote, and locator."
+  ]
+}

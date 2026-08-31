@@ -4,6 +4,27 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.6.0 - 2026-08-31
+
+### Added
+
+- A bilingual browser human-review desk that writes decisive evidence judgments back to the local manifest.
+- Stable evidence IDs plus append-only create, update, and revoke history events with preserved before/after states.
+- Visible AI-recommendation versus human-verdict differences; AI remains unable to confirm a judgment.
+- Cross-provider identifier claims, preprint-aware root roles, and domain-coverage `not_found` results with response hashes.
+- A redistributable Cartea-Jin-Shi paper experiment with short excerpts, source hash, minimal frozen provider payloads, and no source PDF.
+- Playwright acceptance coverage for the full integrity, governed-AI, bilingual, human-confirmation, edit, and revoke workflow.
+
+### Changed
+
+- AI evidence direction is computed from the best-matching passage instead of unrelated text concatenated across a source.
+- GitHub Pages now opens with the real preprint experiment while keeping every extracted evidence row `UNREVIEWED`.
+
+### Safety
+
+- Decisive audits now require `review_method: human` and reject missing or AI/model/bot-like reviewer identities.
+- PubMed non-coverage is distinguished from network/provider failure and cannot invalidate a DOI by implication.
+
 ## 1.5.0 - 2026-08-31
 
 ### Added

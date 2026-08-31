@@ -23,6 +23,7 @@ VERDICTS = {
     "UNREVIEWED",
 }
 REVIEW_METHODS = {"human", "ai_assisted", "automated", "unknown"}
+FORBIDDEN_HUMAN_REVIEWER = re.compile(r"(?:^|[\s_-])(ai|bot|model|assistant|gpt)(?:$|[\s_-])", re.IGNORECASE)
 VERDICT_LABELS = {
     "SUPPORTED": "Supported",
     "PARTIALLY_SUPPORTED": "Partially supported",
@@ -185,12 +186,13 @@ def _evidence_anchor(value: Any, field: str) -> dict[str, Any] | None:
     }
 
 
-def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
+def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     data = load_json_object(path)
     raw_sources = data.get("sources", [])
     raw_evidence = data.get("evidence", [])
-    if not isinstance(raw_sources, list) or not isinstance(raw_evidence, list):
-        raise ValueError("manifest sources and evidence must be arrays")
+    raw_history = data.get("review_history", [])
+    if not isinstance(raw_sources, list) or not isinstance(raw_evidence, list) or not isinstance(raw_history, list):
+        raise ValueError("manifest sources, evidence, and review_history must be arrays")
 
     sources: dict[str, dict[str, Any]] = {}
     for index, raw in enumerate(raw_sources):
@@ -241,6 +243,7 @@ def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str,
         if verdict not in VERDICTS:
             raise ValueError(f"evidence[{index}] has invalid verdict: {verdict}")
         item = {
+            "id": _text(raw.get("id"), f"evidence[{index}].id"),
             "claim_id": _text(raw.get("claim_id"), f"evidence[{index}].claim_id").upper(),
             "source_id": _text(raw.get("source_id"), f"evidence[{index}].source_id"),
             "verdict": verdict,
@@ -267,8 +270,33 @@ def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str,
             "CONTRADICTED",
         }:
             raise ValueError(f"evidence[{index}] AI-assisted draft must remain UNREVIEWED or UNVERIFIABLE")
+        if verdict in {"SUPPORTED", "PARTIALLY_SUPPORTED", "CONTRADICTED"} and (
+            item["review_method"] != "human"
+            or not item["reviewer_id"]
+            or FORBIDDEN_HUMAN_REVIEWER.search(item["reviewer_id"])
+        ):
+            raise ValueError(f"evidence[{index}] decisive verdict requires an accountable human reviewer")
         evidence.append(item)
-    return sources, evidence
+    history: list[dict[str, Any]] = []
+    for index, raw in enumerate(raw_history):
+        if not isinstance(raw, dict):
+            raise ValueError(f"review_history[{index}] must be an object")
+        action = _text(raw.get("action"), f"review_history[{index}].action").lower()
+        if action not in {"created", "updated", "revoked"}:
+            raise ValueError(f"review_history[{index}] has invalid action: {action}")
+        history.append(
+            {
+                "event_id": _text(raw.get("event_id"), f"review_history[{index}].event_id"),
+                "action": action,
+                "evidence_id": _text(raw.get("evidence_id"), f"review_history[{index}].evidence_id"),
+                "performed_at": _text(raw.get("performed_at"), f"review_history[{index}].performed_at"),
+                "reviewer_id": _text(raw.get("reviewer_id"), f"review_history[{index}].reviewer_id"),
+                "before": raw.get("before"),
+                "after": raw.get("after"),
+                "ai_recommendation": raw.get("ai_recommendation"),
+            }
+        )
+    return sources, evidence, history
 
 
 def claim_verdict(citations: list[str], rows: list[dict[str, Any]]) -> str:
@@ -303,7 +331,7 @@ def _availability_check(sources: list[dict[str, Any]], kind: str) -> dict[str, s
 
 def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
     report = parse_markdown_report(report_path)
-    sources, evidence = load_manifest(manifest_path)
+    sources, evidence, review_history = load_manifest(manifest_path)
     claims_by_id = {claim["id"]: claim for claim in report["claims"]}
     for item in evidence:
         if item["claim_id"] not in claims_by_id:
@@ -455,6 +483,7 @@ def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
         },
         "claims": audited_claims,
         "sources": resolved_sources,
+        "review_history": review_history,
         "unresolved_source_ids": unresolved_sources,
         "reproducibility_checklist": checklist,
         "limitations": [

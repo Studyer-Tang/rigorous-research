@@ -1,0 +1,19 @@
+{
+  "id": "https://openalex.org/W4410096579",
+  "display_name": "The Limited Virtue of Complexity in a Noisy World",
+  "publication_year": 2025,
+  "doi": "https://doi.org/10.2139/ssrn.5202064",
+  "ids": {
+    "doi": "https://doi.org/10.2139/ssrn.5202064"
+  },
+  "authorships": [
+    {"author": {"display_name": "Álvaro Cartea"}},
+    {"author": {"display_name": "Qi Jin"}},
+    {"author": {"display_name": "Yuantao Shi"}}
+  ],
+  "primary_location": {
+    "landing_page_url": "https://doi.org/10.2139/ssrn.5202064"
+  },
+  "type": "preprint",
+  "is_retracted": false
+}

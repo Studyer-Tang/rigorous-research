@@ -500,6 +500,47 @@ textarea {
 }
 .review-candidate p { margin: .35rem 0; }
 .review-warning { color: #a2470b; }
+.human-review {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--panel) 94%, #16a34a 6%);
+}
+.human-review h3, .human-review h4 { margin: 0; }
+.human-review-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .8rem;
+  margin-top: 1rem;
+}
+.human-review-form label { display: grid; gap: .35rem; font-weight: 700; }
+.human-review-form .wide { grid-column: 1 / -1; }
+.human-review-form input,
+.human-review-form select,
+.human-review-form textarea {
+  width: 100%;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: .7rem;
+  font: inherit;
+}
+.review-ai-diff { padding: .7rem; border-left: 3px solid var(--muted); background: var(--bg); }
+.review-ai-diff.agrees { border-color: var(--good); }
+.review-ai-diff.differs { border-color: var(--warn); }
+.human-review-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.review-list-title { margin-top: 1.2rem; }
+.human-review-records { display: grid; gap: .75rem; }
+.human-review-record {
+  padding: .85rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+.human-review-record-heading { display: flex; justify-content: space-between; gap: .75rem; align-items: center; }
+.human-review-record blockquote { margin: .65rem 0; }
 .pdf-workspace {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -729,6 +770,7 @@ footer {
   color: var(--muted);
 }
 @media (max-width: 760px) {
+  .human-review-form { grid-template-columns: 1fr; }
   main {
     width: min(100% - 20px, 1180px);
     padding: 28px 0 55px;

@@ -83,6 +83,7 @@ window.PaperTrailIntegrity = (() => {
             {}
           )["date-parts"]?.[0]?.[0] || null,
         doi,
+        type: value(message.type),
       },
       events,
       versions,
@@ -101,6 +102,8 @@ window.PaperTrailIntegrity = (() => {
         title: value(item.display_name || item.title),
         year: item.publication_year || null,
         doi,
+        openalex: value(item.id).replace(/^https?:\/\/openalex.org\//i, ""),
+        type: value(item.type),
       },
       events:
         item.is_retracted === true
@@ -130,7 +133,17 @@ window.PaperTrailIntegrity = (() => {
     const searchUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&term=${encodeURIComponent(`${doi}[doi]`)}`,
       search = await fetchJson("pubmed", searchUrl),
       pmid = search.data.esearchresult?.idlist?.[0];
-    if (!pmid) throw new Error(translate("pubmed_no_match"));
+    if (!pmid)
+      return {
+        provider: "pubmed",
+        status: "not_found",
+        source_url: searchUrl,
+        response_sha256: search.hash,
+        limitation: translate("pubmed_not_found_limitation"),
+        identity: {},
+        events: [],
+        versions: [],
+      };
     const url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id=${encodeURIComponent(pmid)}`,
       response = await fetch(url, {
         headers: { Accept: "application/xml" },
@@ -230,6 +243,15 @@ window.PaperTrailIntegrity = (() => {
         providers.append(card);
       });
       graph.replaceChildren(element("strong", "", translate("version_relations")));
+      const rootNode = current.version_graph.nodes[0];
+      if (rootNode)
+        graph.append(
+          element(
+            "p",
+            "integrity-root",
+            `${translate("root_version")}: ${rootNode.id} · ${rootNode.role}`,
+          ),
+        );
       const relations = element("ul");
       if (current.version_graph.edges.length)
         current.version_graph.edges.forEach((edge) =>
@@ -334,7 +356,25 @@ window.PaperTrailIntegrity = (() => {
             provider: check.provider,
             status: check.status,
             limitation: check.limitation,
-          }));
+          })),
+        identities = checks.filter((check) => check.status === "ok").map((check) => ({
+          provider: check.provider,
+          ...check.identity,
+        })),
+        work = identities.find((item) => item.provider === "crossref") || identities[0] || { doi },
+        role = /posted-content|preprint/i.test(value(work.type))
+          ? "preprint"
+          : /journal-article|article|proceedings/i.test(value(work.type))
+            ? "version_of_record"
+            : "scholarly_work",
+        identifierClaims = {};
+      for (const identity of identities)
+        for (const kind of ["doi", "pmid", "openalex", "arxiv"])
+          if (value(identity[kind]))
+            (identifierClaims[kind] ||= []).push({
+              provider: identity.provider,
+              value: value(identity[kind]),
+            });
       current = {
         schema_version: 1,
         kind: "research-integrity-network",
@@ -345,12 +385,14 @@ window.PaperTrailIntegrity = (() => {
             ? "NO_KNOWN_ISSUES_WITH_LIMITATIONS"
             : "NO_KNOWN_ISSUES",
         query: { kind: "doi", value: doi },
+        work,
+        identifier_claims: identifierClaims,
         provider_checks: checks,
         integrity_events: events,
         high_risk_events: highRisk,
         coverage_gaps: coverageGaps,
         version_graph: {
-          nodes: [{ id: doi, role: "version_of_record" }],
+          nodes: [{ id: doi, role }],
           edges,
         },
         interpretation: translate("integrity_interpretation"),

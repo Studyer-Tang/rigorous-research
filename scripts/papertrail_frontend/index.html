@@ -281,6 +281,43 @@
           </div>
           <div id="review-candidates" class="review-candidates"></div>
         </div>
+        <div id="human-review" class="human-review">
+          <div class="section-title">
+            <div>
+              <h3 data-i18n="human_review_title">Human review desk</h3>
+              <p class="muted" data-i18n="human_review_note">
+                Turn an unreviewed excerpt into a formal judgment, with an accountable reviewer and an append-only history.
+              </p>
+            </div>
+            <span class="badge UNREVIEWED" data-i18n="human_only">Human gate</span>
+          </div>
+          <form id="human-review-form" class="human-review-form" novalidate>
+            <input id="review-evidence-id" type="hidden" />
+            <label><span data-i18n="claim_target">Claim</span><select id="review-claim" required></select></label>
+            <label><span data-i18n="source_target">Source</span><select id="review-source" required></select></label>
+            <label><span data-i18n="assessment">Assessment</span><select id="review-verdict" required>
+              <option value="SUPPORTED" data-i18n="verdict_supported">Supported</option>
+              <option value="PARTIALLY_SUPPORTED" data-i18n="verdict_partially">Partially supported</option>
+              <option value="CONTRADICTED" data-i18n="verdict_contradicted">Contradicted</option>
+              <option value="UNVERIFIABLE" data-i18n="verdict_unverifiable">Unverifiable</option>
+              <option value="NOT_FOUND" data-i18n="verdict_not_found">Not found</option>
+            </select></label>
+            <label class="wide"><span data-i18n="review_quote">Exact quote</span><textarea id="review-quote" rows="3"></textarea></label>
+            <label><span data-i18n="review_locator">Page, section, figure, or URL</span><input id="review-locator" /></label>
+            <label><span data-i18n="reviewer_id">Reviewer ID</span><input id="reviewer-id" autocomplete="off" required /></label>
+            <label class="wide"><span data-i18n="review_note">Review note</span><textarea id="review-note" rows="2"></textarea></label>
+            <div id="review-ai-diff" class="review-ai-diff wide" role="status"></div>
+            <div class="human-review-actions wide">
+              <button class="button primary" type="submit" data-i18n="save_review">Save human judgment</button>
+              <button class="button" id="cancel-review-edit" type="button" data-i18n="cancel_edit" hidden>Cancel edit</button>
+            </div>
+          </form>
+          <div class="section-title review-list-title">
+            <h4 data-i18n="recorded_reviews">Recorded evidence reviews</h4>
+            <span id="review-history-count" class="muted"></span>
+          </div>
+          <div id="human-review-records" class="human-review-records"></div>
+        </div>
         <div class="error" id="error" role="alert"></div>
       </section>
 
@@ -305,6 +342,7 @@
     <script src="assets/i18n.js"></script>
     <script src="assets/integrity-network.js"></script>
     <script src="assets/governed-review.js"></script>
+    <script src="assets/human-review.js"></script>
     <script src="assets/app.js"></script>
   </body>
 </html>

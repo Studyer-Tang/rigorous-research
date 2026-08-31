@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "kind": "research-integrity-network",
+  "status": "NO_KNOWN_ISSUES_WITH_LIMITATIONS",
+  "checked_at": "2026-08-31T00:00:00+00:00",
+  "query": {
+    "kind": "doi",
+    "value": "10.2139/ssrn.5202064"
+  },
+  "work": {
+    "title": "The Limited Virtue of Complexity in a Noisy World",
+    "authors": ["Álvaro Cartea", "Qi Jin", "Yuantao Shi"],
+    "year": 2025,
+    "doi": "10.2139/ssrn.5202064",
+    "url": "https://doi.org/10.2139/ssrn.5202064",
+    "type": "posted-content",
+    "openalex": "W4410096579",
+    "identifiers": {
+      "doi": ["10.2139/ssrn.5202064"],
+      "openalex": ["W4410096579"]
+    }
+  },
+  "identifier_claims": {
+    "doi": [
+      {"provider": "crossref", "value": "10.2139/ssrn.5202064"},
+      {"provider": "openalex", "value": "10.2139/ssrn.5202064"}
+    ],
+    "openalex": [
+      {"provider": "openalex", "value": "W4410096579"}
+    ]
+  },
+  "provider_checks": [
+    {
+      "provider": "crossref",
+      "checked_at": "2026-08-31T00:00:00+00:00",
+      "source_url": "fixture:crossref.json",
+      "status": "ok",
+      "response_sha256": "d42ff31c786a89d77bc1bd2ba7e6bd787fcc861ba48c49864342513ed0d348e7",
+      "limitation": "Depositor-supplied metadata can be incomplete or delayed; absence of an update is not proof of integrity.",
+      "error": "",
+      "identity": {
+        "title": "The Limited Virtue of Complexity in a Noisy World",
+        "authors": ["Álvaro Cartea", "Qi Jin", "Yuantao Shi"],
+        "year": 2025,
+        "doi": "10.2139/ssrn.5202064",
+        "url": "https://doi.org/10.2139/ssrn.5202064",
+        "type": "posted-content"
+      },
+      "events": [],
+      "versions": []
+    },
+    {
+      "provider": "openalex",
+      "checked_at": "2026-08-31T00:00:00+00:00",
+      "source_url": "fixture:openalex.json",
+      "status": "ok",
+      "response_sha256": "87100c11c5cddca543abf07ebf4a6b23f335e7a6a5fc09afc54823336ebac8a6",
+      "limitation": "OpenAlex aggregates upstream metadata and does not provide an exhaustive correction or concern registry.",
+      "error": "",
+      "identity": {
+        "title": "The Limited Virtue of Complexity in a Noisy World",
+        "authors": ["Álvaro Cartea", "Qi Jin", "Yuantao Shi"],
+        "year": 2025,
+        "doi": "10.2139/ssrn.5202064",
+        "openalex": "W4410096579",
+        "pmid": "",
+        "arxiv": "",
+        "url": "https://doi.org/10.2139/ssrn.5202064",
+        "type": "preprint",
+        "abstract": ""
+      },
+      "events": [],
+      "versions": []
+    },
+    {
+      "provider": "pubmed",
+      "checked_at": "2026-08-31T00:00:00+00:00",
+      "source_url": "fixture:pubmed-search.json",
+      "status": "not_found",
+      "response_sha256": "c9f3585908ce92e1d9a195fc09475c2a992254593433b482a45a466861fbc7ff",
+      "limitation": "pubmed returned no matching record. The work may be outside provider coverage; this does not establish that the identifier is invalid.",
+      "error": "PubMed fixture records no matching work for this DOI",
+      "identity": {},
+      "events": [],
+      "versions": []
+    },
+    {
+      "provider": "crossmark",
+      "checked_at": "2026-08-31T00:00:00+00:00",
+      "source_url": "https://crossmark.crossref.org/dialog/?doi=10.2139%2Fssrn.5202064",
+      "status": "manual_required",
+      "response_sha256": "",
+      "limitation": "The official Crossmark dialog is a human-facing publisher status surface, not a stable public bulk API. Crossref deposited updates are checked automatically; the dialog still requires human review.",
+      "error": "",
+      "identity": {},
+      "events": [],
+      "versions": []
+    }
+  ],
+  "integrity_events": [],
+  "high_risk_events": [],
+  "metadata_conflicts": [],
+  "coverage_gaps": [
+    {
+      "provider": "pubmed",
+      "status": "not_found",
+      "limitation": "pubmed returned no matching record. The work may be outside provider coverage; this does not establish that the identifier is invalid.",
+      "source_url": "fixture:pubmed-search.json"
+    },
+    {
+      "provider": "crossmark",
+      "status": "manual_required",
+      "limitation": "The official Crossmark dialog is a human-facing publisher status surface, not a stable public bulk API. Crossref deposited updates are checked automatically; the dialog still requires human review.",
+      "source_url": "https://crossmark.crossref.org/dialog/?doi=10.2139%2Fssrn.5202064"
+    }
+  ],
+  "version_graph": {
+    "nodes": [
+      {
+        "id": "10.2139/ssrn.5202064",
+        "role": "preprint",
+        "label": "The Limited Virtue of Complexity in a Noisy World"
+      }
+    ],
+    "edges": []
+  },
+  "interpretation": "No provider result is exhaustive. Absence of a recorded issue means only that selected checks returned no known issue at the stated time."
+}

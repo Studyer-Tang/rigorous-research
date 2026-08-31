@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "papertrail-source-experiment",
+  "source": {
+    "filename": "Cartea-Jin-Shi-2025-The Limited Virtue of Complexity in a Noisy World_20260615104541.pdf",
+    "redistributed": false,
+    "pages": 119,
+    "sha256": "78dd7bb27875db6b5d12136e3634b4c50de423bbd46ad9b36f1f73a99fdaa037",
+    "doi": "10.2139/ssrn.5202064",
+    "openalex": "W4410096579",
+    "latest_version_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5202064"
+  },
+  "visually_inspected_pdf_pages": [
+    1,
+    4,
+    5,
+    7,
+    38,
+    39,
+    42,
+    43
+  ],
+  "test_claims": {
+    "qualified": "C001",
+    "overgeneralized_negative_control": "C002",
+    "figure_specific": "C003"
+  },
+  "privacy": {
+    "original_pdf_committed": false,
+    "absolute_local_path_committed": false,
+    "full_text_committed": false
+  }
+}

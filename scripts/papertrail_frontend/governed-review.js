@@ -1,6 +1,8 @@
 "use strict";
 window.PaperTrailGovernedReview = (() => {
   const value = (item) => (item == null ? "" : String(item).trim());
+  const negative =
+    /\b(?:no|not|never|without|failed|declin\w*|reduc\w*|diminish\w*|degrad\w*|worse|harm\w*|distrust\w*)\b|不|未|无|没有|下降|减少|降低|恶化|反驳/i;
   const tokens = (item) =>
     new Set(
       (item.toLowerCase().match(/[\p{L}\p{N}_]+/gu) || []).filter(
@@ -20,31 +22,49 @@ window.PaperTrailGovernedReview = (() => {
 
   function recommendations(statement, manifest) {
     const claimTokens = tokens(statement),
-      claimNegated = /\b(?:no|not|never|without|failed)\b|不|未|无|没有/i.test(
-        statement,
-      );
+      claimNegated = negative.test(statement);
     return (manifest.sources || [])
       .map((source) => {
-        const quotes = (manifest.evidence || [])
-            .filter((item) => item.source_id === source.id)
-            .map((item) => value(item.quote))
-            .join(" "),
-          body = `${value(source.title)} ${value(source.abstract)} ${value(source.version_notes)} ${quotes}`,
-          sourceTokens = tokens(body),
-          overlap =
-            [...claimTokens].filter((token) => sourceTokens.has(token)).length /
-            Math.max(1, claimTokens.size),
-          sourceNegated =
-            /\b(?:no|not|never|without|failed)\b|不|未|无|没有/i.test(body);
+        const passages = [
+            ["title", value(source.title)],
+            ...[value(source.abstract), value(source.version_notes)].flatMap(
+              (body, index) =>
+                body
+                  .split(/(?<=[.!?。！？])\s+/)
+                  .map((part) => [index ? "version_notes" : "abstract", part]),
+            ),
+            ...(manifest.evidence || [])
+              .filter((item) => item.source_id === source.id)
+              .map((item) => ["evidence_quote", value(item.quote)]),
+          ].filter((item) => item[1]),
+          best = passages
+            .map(([field, body]) => ({
+              field,
+              body,
+              overlap:
+                [...claimTokens].filter((token) => tokens(body).has(token))
+                  .length / Math.max(1, claimTokens.size),
+              size: tokens(body).size,
+            }))
+            .sort(
+              (left, right) =>
+                right.overlap - left.overlap || right.size - left.size,
+            )[0] || {
+              field: "",
+              body: "",
+              overlap: 0,
+            },
+          sourceNegated = negative.test(best.body);
         return {
           source_id: source.id,
           relation:
             claimNegated !== sourceNegated
               ? "potential_contradiction"
               : "potential_support",
-          score: Number(overlap.toFixed(4)),
+          score: Number(best.overlap.toFixed(4)),
           status: "SUGGESTION_NOT_A_VERDICT",
-          body,
+          matched_field: best.field,
+          body: best.body,
         };
       })
       .filter((item) => item.source_id && item.score > 0)
@@ -171,7 +191,7 @@ window.PaperTrailGovernedReview = (() => {
       button.disabled = true;
     };
     button.addEventListener("click", download);
-    return { draft, render, reset };
+    return { current: () => current, draft, render, reset };
   }
 
   return { createController };

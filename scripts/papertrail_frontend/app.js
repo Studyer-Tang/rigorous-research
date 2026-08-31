@@ -42,6 +42,8 @@ const verdicts = new Set(Object.keys(verdictLabels.en)),
     "结论",
   ]),
   highRisk = new Set(["retracted", "withdrawn", "expression_of_concern"]);
+const forbiddenHumanReviewer =
+  /(?:^|[\s_-])(ai|bot|model|assistant|gpt)(?:$|[\s_-])/i;
 let currentAudit = null,
   language = "en",
   pdfLibrary = null,
@@ -52,7 +54,22 @@ let currentAudit = null,
   pendingPdfSelection = null;
 const t = (key) => messages[language][key] || messages.en[key] || key;
 const integrityController = window.PaperTrailIntegrity.createController(t),
-  reviewController = window.PaperTrailGovernedReview.createController(t);
+  reviewController = window.PaperTrailGovernedReview.createController(t),
+  humanReviewController = window.PaperTrailHumanReview.createController({
+    translate: t,
+    verdictLabel: (value) => verdictLabels[language][value] || value,
+    getManifestText: () => manifestInput.value,
+    setManifestText: (value) => {
+      manifestInput.value = value;
+      currentAudit = null;
+      jsonButton.disabled = true;
+      htmlButton.disabled = true;
+      refreshAnchorTargets();
+    },
+    getClaims: () => parseReport(reportInput.value).claims,
+    getDraft: () => reviewController.current(),
+    onMessage: (message) => setError(message),
+  });
 const verdictText = (value) => verdictLabels[language][value] || value;
 const checkText = (value) => checkLabels[language][value] || value;
 function localizeDetail(value) {
@@ -214,7 +231,9 @@ async function addDoiSource() {
         publication_status: status,
         integrity_checked_at: new Date().toISOString().slice(0, 10),
         integrity_url: `https://api.crossref.org/works/${encodeURIComponent(doi)}`,
-        version: "version of record",
+      version: /posted-content|preprint/i.test(text(message.type))
+        ? "preprint"
+        : "version of record",
         version_url: message.URL || `https://doi.org/${doi}`,
         version_conflict: null,
         version_notes: `Crossref update metadata: ${types.size ? [...types].sort().join(", ") : "none recorded"}`,
@@ -333,6 +352,8 @@ function parseManifest(raw) {
     throw new Error("Manifest root must be an object.");
   if (!Array.isArray(data.sources) || !Array.isArray(data.evidence))
     throw new Error("Manifest sources and evidence must be arrays.");
+  if (data.review_history !== undefined && !Array.isArray(data.review_history))
+    throw new Error("Manifest review_history must be an array.");
   const sources = new Map();
   data.sources.forEach((source, index) => {
     if (!source || typeof source !== "object" || Array.isArray(source))
@@ -384,6 +405,7 @@ function parseManifest(raw) {
     if (!item || typeof item !== "object" || Array.isArray(item))
       throw new Error(`evidence[${index}] must be an object.`);
     const row = {
+      id: text(item.id),
       claim_id: text(item.claim_id).toUpperCase(),
       source_id: text(item.source_id),
       verdict: text(item.verdict || "UNREVIEWED").toUpperCase(),
@@ -420,9 +442,28 @@ function parseManifest(raw) {
       throw new Error(
         `evidence[${index}] AI-assisted draft must remain UNREVIEWED or UNVERIFIABLE.`,
       );
+    if (
+      ["SUPPORTED", "PARTIALLY_SUPPORTED", "CONTRADICTED"].includes(
+        row.verdict,
+      ) &&
+      (row.review_method !== "human" ||
+        !row.reviewer_id ||
+        forbiddenHumanReviewer.test(row.reviewer_id))
+    )
+      throw new Error(
+        `evidence[${index}] decisive verdict requires an accountable human reviewer.`,
+      );
     return row;
   });
-  return { sources, evidence };
+  const reviewHistory = (data.review_history || []).map((item, index) => {
+    if (!item || typeof item !== "object" || Array.isArray(item))
+      throw new Error(`review_history[${index}] must be an object.`);
+    const action = text(item.action).toLowerCase();
+    if (!["created", "updated", "revoked"].includes(action))
+      throw new Error(`review_history[${index}] has invalid action: ${action}`);
+    return structuredClone(item);
+  });
+  return { sources, evidence, reviewHistory };
 }
 const aggregate = (citations, rows) => {
   if (!citations.length || rows.some((row) => !row.source_resolved))
@@ -1014,6 +1055,7 @@ async function buildAudit(markdown, manifestRaw) {
     },
     claims,
     sources,
+    review_history: manifest.reviewHistory,
     unresolved_source_ids: unresolved,
     reproducibility_checklist: checklist,
     limitations: [
@@ -1208,6 +1250,7 @@ function applyLanguage(value, { remember = true } = {}) {
   }
   integrityController.render();
   reviewController.render();
+  humanReviewController.render();
   if (pdfDocument)
     setPdfStatus(
       `${t("pdf_ready")} · SHA-256 ${pdfFileHash.slice(0, 12)}… · ${pdfDocument.numPages} ${language === "zh" ? "页" : "pages"}`,
@@ -1228,12 +1271,14 @@ function restore() {
   currentAudit = null;
   integrityController.reset();
   reviewController.reset();
+  humanReviewController.clear();
   jsonButton.disabled = true;
   htmlButton.disabled = true;
   preview.className = "preview-empty";
   preview.setAttribute("data-i18n", "preview_empty");
   preview.textContent = t("preview_empty");
   refreshAnchorTargets();
+  humanReviewController.render();
   setError();
 }
 async function run() {
@@ -1280,8 +1325,14 @@ pdfText.addEventListener("mouseup", capturePdfSelection);
 pdfText.addEventListener("keyup", capturePdfSelection);
 anchorClaim.addEventListener("change", updatePdfSelectionUi);
 anchorSource.addEventListener("change", updatePdfSelectionUi);
-reportInput.addEventListener("input", refreshAnchorTargets);
-manifestInput.addEventListener("input", refreshAnchorTargets);
+reportInput.addEventListener("input", () => {
+  refreshAnchorTargets();
+  humanReviewController.render();
+});
+manifestInput.addEventListener("input", () => {
+  refreshAnchorTargets();
+  humanReviewController.render();
+});
 jsonButton.addEventListener(
   "click",
   () =>

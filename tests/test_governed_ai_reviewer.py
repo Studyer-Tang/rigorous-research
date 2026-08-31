@@ -78,6 +78,41 @@ class GovernedAiReviewerTests(unittest.TestCase):
         issue_types = {item["type"] for item in claim["scope_issues"]}
         self.assertIn("possible_overgeneralization", issue_types)
 
+    def test_polarity_uses_the_best_matching_passage_not_unrelated_source_text(self):
+        report = self.root / "paper.md"
+        report.write_text(
+            "# Paper\n\n## Claims\n\n"
+            "- [C001] Performance rises at moderate dimensions and declines at high dimensions. [@paper]\n"
+            "- [C002] Complexity always improves performance. [@paper]\n",
+            encoding="utf-8",
+        )
+        manifest = self.root / "paper-evidence.json"
+        manifest.write_text(
+            json.dumps(
+                {
+                    "sources": [
+                        {
+                            "id": "paper",
+                            "title": "Complexity study",
+                            "abstract": "Complex models do not necessarily lead to better performance.",
+                        }
+                    ],
+                    "evidence": [
+                        {
+                            "source_id": "paper",
+                            "quote": "Performance rises at moderate dimensions and declines at high dimensions.",
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        draft = reviewer.heuristic_draft(report, manifest)
+        by_id = {item["id"]: item for item in draft["candidates"]}
+        self.assertEqual(by_id["C001"]["evidence_recommendations"][0]["relation"], "potential_support")
+        self.assertEqual(by_id["C001"]["evidence_recommendations"][0]["matched_field"], "evidence_quote")
+        self.assertEqual(by_id["C002"]["evidence_recommendations"][0]["relation"], "potential_contradiction")
+
     def test_openai_compatible_key_is_used_but_not_persisted(self):
         draft = reviewer.heuristic_draft(self.report, self.manifest)
         captured = {}

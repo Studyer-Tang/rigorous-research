@@ -10,7 +10,7 @@ rigorous-research ai-review draft report.md \
   --output ai-review-draft.json
 ```
 
-This mode sends no data anywhere and requires no model. It is also the mode available in the public browser playground.
+This mode sends no data anywhere and requires no model. It is also the mode available in the public browser playground. Candidate direction is based on the best-matching local passage, not a verdict and not source-level sentiment.
 
 ## Local model with Ollama
 
@@ -54,5 +54,6 @@ rigorous-research ai-review confirm ai-review-draft.json \
   --output confirmation.json
 ```
 
-The confirmation contains a PaperTrail-compatible evidence row, the human review method, time, and a SHA-256 binding to the draft. It does not automatically modify the evidence manifest or bypass independent review.
+The CLI confirmation contains a PaperTrail-compatible evidence row, the human review method, time, and a SHA-256 binding to the draft. It does not automatically modify the evidence manifest or bypass independent review.
 
+The browser human-review desk provides the interactive write-back path. It can reuse an `UNREVIEWED` excerpt, requires a non-AI reviewer ID plus exact quote and locator for decisive judgments, appends create/update/revoke events to `review_history`, and displays whether the saved human direction agrees with the current AI suggestion. All operations remain in the browser until the user downloads or copies the manifest.

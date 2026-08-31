@@ -5,6 +5,7 @@ import json
 import sys
 import tempfile
 import unittest
+import urllib.parse
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
@@ -41,7 +42,11 @@ OPENALEX = {
     "display_name": "A Trial Result",
     "publication_year": 2024,
     "doi": "https://doi.org/10.1000/study",
-    "ids": {"doi": "https://doi.org/10.1000/study", "pmid": "https://pubmed.ncbi.nlm.nih.gov/42"},
+    "ids": {
+        "doi": "https://doi.org/10.1000/study",
+        "pmid": "https://pubmed.ncbi.nlm.nih.gov/42",
+        "arxiv": "https://arxiv.org/abs/2401.00001",
+    },
     "authorships": [{"author": {"display_name": "Ada Lovelace"}}],
     "primary_location": {"landing_page_url": "https://doi.org/10.1000/study"},
     "type": "article",
@@ -97,6 +102,74 @@ class ResearchIntegrityTests(unittest.TestCase):
         self.assertEqual(network["coverage_gaps"][0]["provider"], "crossmark")
         self.assertTrue(network["version_graph"]["edges"])
         self.assertIn("absence", network["interpretation"].casefold())
+        self.assertEqual(network["identifier_claims"]["openalex"], [{"provider": "openalex", "value": "W123"}])
+        self.assertEqual(network["identifier_claims"]["arxiv"], [{"provider": "openalex", "value": "2401.00001"}])
+
+    def test_ssrn_posted_content_is_a_preprint_and_pubmed_absence_is_not_an_error(self):
+        crossref = {
+            "message": {
+                "DOI": "10.2139/ssrn.5202064",
+                "title": ["The Limited Virtue of Complexity in a Noisy World"],
+                "author": [
+                    {"given": "Álvaro", "family": "Cartea"},
+                    {"given": "Qi", "family": "Jin"},
+                    {"given": "Yuantao", "family": "Shi"},
+                ],
+                "published-online": {"date-parts": [[2025]]},
+                "URL": "https://doi.org/10.2139/ssrn.5202064",
+                "type": "posted-content",
+            }
+        }
+        openalex = {
+            "id": "https://openalex.org/W4410096579",
+            "display_name": "The Limited Virtue of Complexity in a Noisy World",
+            "publication_year": 2025,
+            "doi": "https://doi.org/10.2139/ssrn.5202064",
+            "ids": {"doi": "https://doi.org/10.2139/ssrn.5202064"},
+            "authorships": [
+                {"author": {"display_name": "Álvaro Cartea"}},
+                {"author": {"display_name": "Qi Jin"}},
+                {"author": {"display_name": "Yuantao Shi"}},
+            ],
+            "primary_location": {"landing_page_url": "https://doi.org/10.2139/ssrn.5202064"},
+            "type": "preprint",
+            "is_retracted": False,
+        }
+
+        def fetcher(url: str) -> bytes:
+            if "api.crossref.org" in url:
+                return json.dumps(crossref).encode()
+            if "api.openalex.org" in url:
+                return json.dumps(openalex).encode()
+            if "esearch.fcgi" in url:
+                self.assertEqual(
+                    urllib.parse.parse_qs(urllib.parse.urlparse(url).query)["term"], ["10.2139/ssrn.5202064[doi]"]
+                )
+                return b'{"esearchresult":{"idlist":[]}}'
+            self.fail(f"Unexpected provider URL: {url}")
+
+        network = integrity.run_checks(
+            "10.2139/ssrn.5202064",
+            checked_at="2026-08-31T00:00:00+00:00",
+            fetcher=fetcher,
+        )
+        checks = {item["provider"]: item for item in network["provider_checks"]}
+        self.assertEqual(checks["pubmed"]["status"], "not_found")
+        self.assertTrue(checks["pubmed"]["response_sha256"])
+        self.assertIn("outside provider coverage", checks["pubmed"]["limitation"])
+        self.assertNotIn("network", checks["pubmed"]["limitation"].casefold())
+        self.assertEqual(network["version_graph"]["nodes"][0]["role"], "preprint")
+        self.assertEqual(
+            network["identifier_claims"]["doi"],
+            [
+                {"provider": "crossref", "value": "10.2139/ssrn.5202064"},
+                {"provider": "openalex", "value": "10.2139/ssrn.5202064"},
+            ],
+        )
+        self.assertEqual(
+            network["identifier_claims"]["openalex"],
+            [{"provider": "openalex", "value": "W4410096579"}],
+        )
 
     def test_update_notice_is_not_mislabeled_as_retracted_work(self):
         checked = "2026-08-31T00:00:00+00:00"

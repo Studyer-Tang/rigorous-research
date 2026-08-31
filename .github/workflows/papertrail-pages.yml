@@ -28,8 +28,10 @@ jobs:
           python -m pip install .
           rigorous-research papertrail \
             --output-dir build/papertrail-demo \
-            --demo-report examples/papertrail-demo/report.md \
-            --demo-manifest examples/papertrail-demo/evidence.json
+            --demo-report examples/papertrail-cartea/report.md \
+            --demo-manifest examples/papertrail-cartea/evidence.json
+          cp examples/papertrail-cartea/ai-review-draft.json build/papertrail-demo/demo/
+          cp examples/papertrail-cartea/integrity.json build/papertrail-demo/demo/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

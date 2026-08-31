@@ -138,6 +138,40 @@ class PaperTrailAuditTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "must remain UNREVIEWED"):
                 papertrail.build_audit(report, manifest)
 
+    def test_decisive_verdict_requires_a_real_human_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report, manifest = self.write_fixture(root)
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            data["evidence"][0]["reviewer_id"] = "ai-reviewer"
+            manifest.write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "accountable human reviewer"):
+                papertrail.build_audit(report, manifest)
+
+    def test_review_history_is_validated_and_preserved(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report, manifest = self.write_fixture(root)
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            data["evidence"][0]["id"] = "E001"
+            data["review_history"] = [
+                {
+                    "event_id": "H001",
+                    "action": "created",
+                    "evidence_id": "E001",
+                    "performed_at": "2026-08-31T00:00:00Z",
+                    "reviewer_id": "reviewer-a",
+                    "before": None,
+                    "after": data["evidence"][0],
+                    "ai_recommendation": {"relation": "potential_support", "score": 0.8},
+                }
+            ]
+            manifest.write_text(json.dumps(data), encoding="utf-8")
+            audit = papertrail.build_audit(report, manifest)
+        self.assertEqual(audit["claims"][0]["evidence"][0]["id"], "E001")
+        self.assertEqual(audit["review_history"][0]["action"], "created")
+        self.assertEqual(audit["review_history"][0]["ai_recommendation"]["relation"], "potential_support")
+
     def test_conflicting_human_reviews_fail_consensus(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

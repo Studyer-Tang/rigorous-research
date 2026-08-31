@@ -87,18 +87,18 @@ rigorous-research audit report.md \
   --output-dir papertrail-site
 ```
 
-The result is a self-contained `index.html` plus machine-readable `audit.json`; neither needs a backend, database, account, or API key. Decisive assessments require an exact quote and locator. See the [PaperTrail guide](docs/papertrail.md) and [worked demo](examples/papertrail-demo/report.md).
+The result is a self-contained `index.html` plus machine-readable `audit.json`; neither needs a backend, database, account, or API key. Decisive assessments require an exact quote, locator, and accountable human reviewer. See the [PaperTrail guide](docs/papertrail.md) and the [Cartea-Jin-Shi paper experiment](examples/papertrail-cartea/README.md).
 
 Build the public, browser-only playground locally:
 
 ```text
 rigorous-research papertrail \
   --output-dir build/papertrail-site \
-  --demo-report examples/papertrail-demo/report.md \
-  --demo-manifest examples/papertrail-demo/evidence.json
+  --demo-report examples/papertrail-cartea/report.md \
+  --demo-manifest examples/papertrail-cartea/evidence.json
 ```
 
-Its homepage accepts pasted text or local `.md`, `.json`, and `.pdf` files, audits them inside the browser, and downloads the result as JSON or a standalone HTML report. The PDF workspace renders pages, extracts embedded text, hashes the file, and attaches selected passages to claims as `UNREVIEWED` evidence with page and selection anchors. The English/简体中文 interface follows the browser language by default, can be switched manually, and exports the HTML report in the selected language. The page has no upload endpoint, analytics script, account requirement, or embedded API key.
+Its homepage accepts pasted text or local `.md`, `.json`, and `.pdf` files, audits them inside the browser, and downloads the result as JSON or a standalone HTML report. The PDF workspace renders pages, extracts embedded text, hashes the file, and attaches selected passages to claims as `UNREVIEWED` evidence with page and selection anchors. The human review desk then requires an accountable reviewer, exact quote, and locator before saving a decisive verdict; edits and revocations append history instead of erasing provenance. It also shows whether the human direction agrees with or differs from the AI draft. The English/简体中文 interface follows the browser language by default, can be switched manually, and exports the HTML report in the selected language. The page has no upload endpoint, analytics script, account requirement, or embedded API key.
 
 PDF.js is fetched from a pinned jsDelivr URL only after the user selects a PDF. Optional OCR fetches a pinned Tesseract.js runtime and language data only after the user explicitly requests OCR; the PDF and rendered page stay in the browser. The ordinary Markdown/JSON audit path does not load either dependency.
 
@@ -140,6 +140,8 @@ rigorous-research ai-review draft report.md \
 ```
 
 Optional Ollama and OpenAI-compatible modes are supported. User-provided keys are read only from an environment variable and are never exported. Model output is restricted to rationale, scope issues, and search suggestions; any model-supplied verdict is discarded. A formal evidence judgment requires a separate human confirmation with reviewer ID, exact quote, and locator. See the [Governed AI Reviewer guide](docs/governed-ai-reviewer.md).
+
+The public [Cartea-Jin-Shi experiment](examples/papertrail-cartea/README.md) exercises the complete path with a real 119-page finance preprint without redistributing the PDF. It fixes Crossref/OpenAlex/PubMed replay inputs, preserves the PDF SHA-256 and short page-located excerpts, detects an intentionally overgeneralized claim, and leaves all extracted rows `UNREVIEWED` for a human to confirm.
 
 ## Why the gates matter
 

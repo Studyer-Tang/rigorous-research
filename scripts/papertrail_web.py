@@ -17,6 +17,7 @@ FRONTEND_ASSETS = (
     "i18n.js",
     "integrity-network.js",
     "governed-review.js",
+    "human-review.js",
     "app.js",
 )
 

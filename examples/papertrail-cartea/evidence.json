@@ -1,0 +1,70 @@
+{
+  "sources": [
+    {
+      "id": "cartea2025",
+      "title": "The Limited Virtue of Complexity in a Noisy World",
+      "authors": [
+        "Álvaro Cartea",
+        "Qi Jin",
+        "Yuantao Shi"
+      ],
+      "year": 2025,
+      "doi": "10.2139/ssrn.5202064",
+      "openalex": "W4410096579",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5202064",
+      "publication_status": "active_with_coverage_limits",
+      "integrity_checked_at": "2026-08-31",
+      "integrity_url": "https://doi.org/10.2139/ssrn.5202064",
+      "version": "SSRN preprint / posted content",
+      "version_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5202064",
+      "version_conflict": null,
+      "version_notes": "Crossref identifies posted-content and OpenAlex identifies a preprint. The inspected file advertises an SSRN latest-version link; no version of record was established.",
+      "abstract": "Portfolio performance depends on the noise level in features, and more complex models do not necessarily lead to better performance when features are not perfectly observed.",
+      "data_availability": "unknown",
+      "code_availability": "unknown",
+      "source_file_sha256": "78dd7bb27875db6b5d12136e3634b4c50de423bbd46ad9b36f1f73a99fdaa037"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-C001",
+      "claim_id": "C001",
+      "source_id": "cartea2025",
+      "verdict": "UNREVIEWED",
+      "quote": "While complexity has the potential to enhance portfolio returns, its benefits depend on access to high-quality data and robust infrastructure.",
+      "locator": "PDF page 43, Conclusion",
+      "note": "AI-assisted extraction draft. Confirm against the source before assigning a verdict.",
+      "reviewer_id": "",
+      "reviewed_at": "",
+      "review_method": "ai_assisted",
+      "source_file_sha256": "78dd7bb27875db6b5d12136e3634b4c50de423bbd46ad9b36f1f73a99fdaa037"
+    },
+    {
+      "id": "E-C002",
+      "claim_id": "C002",
+      "source_id": "cartea2025",
+      "verdict": "UNREVIEWED",
+      "quote": "In fact, beyond a certain point, adding more features reduces out-of-sample prediction performance and portfolio Sharpe ratio.",
+      "locator": "PDF page 42, Section 5.3",
+      "note": "Negative-control excerpt. The AI draft may recommend contradiction, but only a human may confirm it.",
+      "reviewer_id": "",
+      "reviewed_at": "",
+      "review_method": "ai_assisted",
+      "source_file_sha256": "78dd7bb27875db6b5d12136e3634b4c50de423bbd46ad9b36f1f73a99fdaa037"
+    },
+    {
+      "id": "E-C003",
+      "claim_id": "C003",
+      "source_id": "cartea2025",
+      "verdict": "UNREVIEWED",
+      "quote": "As Figure 5 shows, the out-of-sample R2 and Sharpe ratio both increase as the feature dimension increases from low to moderate, but eventually decline once the model becomes more complex.",
+      "locator": "PDF page 42, Section 5.3 and Figure 5 on page 43",
+      "note": "The paper states that results are averaged across all stocks and five repetitions; retain that scope during review.",
+      "reviewer_id": "",
+      "reviewed_at": "",
+      "review_method": "ai_assisted",
+      "source_file_sha256": "78dd7bb27875db6b5d12136e3634b4c50de423bbd46ad9b36f1f73a99fdaa037"
+    }
+  ],
+  "review_history": []
+}

@@ -21,7 +21,11 @@ PROVIDERS = ("heuristic", "ollama", "openai-compatible")
 FORMAL_VERDICTS = {"SUPPORTED", "PARTIALLY_SUPPORTED", "CONTRADICTED", "UNVERIFIABLE"}
 DECISIVE_VERDICTS = FORMAL_VERDICTS - {"UNVERIFIABLE"}
 TOKEN = re.compile(r"[\w\u3400-\u9fff]+", re.UNICODE)
-NEGATION = re.compile(r"\b(?:no|not|never|without|failed)\b|不|未|无|没有", re.IGNORECASE)
+NEGATION = re.compile(
+    r"\b(?:no|not|never|without|failed|declin\w*|reduc\w*|diminish\w*|degrad\w*|worse|harm\w*|distrust\w*)\b"
+    r"|不|未|无|没有|下降|减少|降低|恶化|反驳",
+    re.IGNORECASE,
+)
 UNIVERSAL = re.compile(
     r"\b(?:all|always|every|everyone|entirely|guarantees?|proves?|never)\b|所有|全部|总是|必然|证明|绝不",
     re.IGNORECASE,
@@ -50,6 +54,20 @@ def _source_text(source: dict[str, Any], evidence: list[dict[str, Any]]) -> str:
     )
 
 
+def _source_passages(source: dict[str, Any], evidence: list[dict[str, Any]]) -> list[tuple[str, str]]:
+    source_id = str(source.get("id") or "")
+    passages: list[tuple[str, str]] = []
+    for field in ("title", "abstract", "version_notes"):
+        text = str(source.get(field) or "").strip()
+        passages.extend((field, part.strip()) for part in re.split(r"(?<=[.!?。！？])\s+", text) if part.strip())
+    passages.extend(
+        ("evidence_quote", str(item.get("quote") or "").strip())
+        for item in evidence
+        if item.get("source_id") == source_id and str(item.get("quote") or "").strip()
+    )
+    return passages
+
+
 def recommend_evidence(
     statement: str, sources: list[dict[str, Any]], evidence: list[dict[str, Any]], limit: int = 5
 ) -> list[dict[str, Any]]:
@@ -59,12 +77,17 @@ def recommend_evidence(
         source_id = str(source.get("id") or "").strip()
         if not source_id:
             continue
-        body = _source_text(source, evidence)
-        source_tokens = _tokens(body)
-        overlap = len(claim_tokens & source_tokens) / max(1, len(claim_tokens))
+        passages = _source_passages(source, evidence)
+        if not passages:
+            continue
+        matched_field, matched_text = max(
+            passages,
+            key=lambda passage: (len(claim_tokens & _tokens(passage[1])), len(_tokens(passage[1]))),
+        )
+        overlap = len(claim_tokens & _tokens(matched_text)) / max(1, len(claim_tokens))
         if not overlap:
             continue
-        opposite_polarity = bool(NEGATION.search(statement)) != bool(NEGATION.search(body))
+        opposite_polarity = bool(NEGATION.search(statement)) != bool(NEGATION.search(matched_text))
         ranked.append(
             (
                 overlap,
@@ -73,6 +96,7 @@ def recommend_evidence(
                     "relation": "potential_contradiction" if opposite_polarity else "potential_support",
                     "score": round(overlap, 4),
                     "reason": "lexical_overlap_with_opposite_polarity" if opposite_polarity else "lexical_overlap",
+                    "matched_field": matched_field,
                     "status": "SUGGESTION_NOT_A_VERDICT",
                 },
             )

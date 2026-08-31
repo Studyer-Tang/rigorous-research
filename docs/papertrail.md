@@ -66,7 +66,9 @@ Availability values should be `available`, `unavailable`, `not_applicable`, or `
 
 `version_conflict` must be `true`, `false`, or `null`/omitted. PaperTrail fails the checklist for a recorded conflict, warns when the field is unknown, and passes only when every cited source explicitly records `false`. A `retracted`, `withdrawn`, or `expression_of_concern` publication status also fails the integrity check. These are recorded checks—not live promises that a publisher has never changed the source.
 
-`review_method` can be `human`, `ai_assisted`, `automated`, or `unknown`. AI-assisted rows are drafts: PaperTrail rejects a decisive `SUPPORTED`, `PARTIALLY_SUPPORTED`, or `CONTRADICTED` verdict until a human or governed automated review takes responsibility. Multiple reviewers may record separate rows for one claim/source pair. Supporting and contradicting reviewer verdicts on the same pair fail the consensus checklist instead of being silently averaged.
+`review_method` can be `human`, `ai_assisted`, `automated`, or `unknown`. AI-assisted and automated rows may remain drafts or non-decisive records, but PaperTrail accepts a decisive `SUPPORTED`, `PARTIALLY_SUPPORTED`, or `CONTRADICTED` verdict only with `review_method: human`, a non-AI reviewer ID, an exact quote, and a locator. Multiple reviewers may record separate rows for one claim/source pair. Supporting and contradicting reviewer verdicts on the same pair fail the consensus checklist instead of being silently averaged.
+
+The browser human-review desk writes its decisions back to the local manifest and maintains a top-level `review_history` array. Each `created`, `updated`, or `revoked` event records its evidence ID, time, reviewer, prior state, resulting state when present, and the AI recommendation visible at confirmation time. Revocation removes the active evidence row but keeps its prior state in history. This local history is provenance, not authenticated identity; high-stakes workflows should additionally sign or externally bind the exported manifest.
 
 Browser-selected PDF evidence may include a portable anchor:
 
@@ -124,8 +126,8 @@ No server, database, JavaScript build system, or external font is required. The 
 ```text
 rigorous-research papertrail \
   --output-dir build/papertrail-site \
-  --demo-report examples/papertrail-demo/report.md \
-  --demo-manifest examples/papertrail-demo/evidence.json
+  --demo-report examples/papertrail-cartea/report.md \
+  --demo-manifest examples/papertrail-cartea/evidence.json
 ```
 
 This produces:
@@ -135,7 +137,7 @@ This produces:
 - `demo/audit.json`: its machine-readable evidence packet;
 - `.nojekyll`: a GitHub Pages compatibility marker.
 
-The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. The PDF workspace supports files up to 50 MB, renders pages, extracts embedded text, records the file SHA-256, and attaches selected passages to claim/source pairs as `UNREVIEWED` evidence. It turns each page into short passage cards: click a card once to select it, then attach it. Manual text dragging remains available in a collapsed precision editor. An explicit DOI lookup sends only the DOI to Crossref. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
+The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. The PDF workspace supports files up to 50 MB, renders pages, extracts embedded text, records the file SHA-256, and attaches selected passages to claim/source pairs as `UNREVIEWED` evidence. It turns each page into short passage cards: click a card once to select it, then attach it. Manual text dragging remains available in a collapsed precision editor. The human-review desk can promote an inspected excerpt to a decisive verdict, edit it, or revoke it while preserving history. An explicit DOI lookup sends only the DOI to Crossref, OpenAlex, and PubMed; the report text is not included. The Python CLI remains the release/CI authority.
 
 The playground source is intentionally separated by responsibility under `scripts/papertrail_frontend/`: HTML defines structure, CSS defines presentation, and JavaScript owns browser behavior. `papertrail_web.py` is only the static-site builder; it no longer contains the complete frontend as an embedded Python string.
 
@@ -160,12 +162,12 @@ For a project repository named `rigorous-research`, the normal address is `https
 
 The workflow is intentionally manual while PaperTrail is evolving. It can later be changed to publish on every push to `main` after the public content and release policy are stable.
 
-## Run the worked example
+## Run the real-paper experiment
 
 ```text
-rigorous-research audit examples/papertrail-demo/report.md \
-  --manifest examples/papertrail-demo/evidence.json \
-  --output-dir build/papertrail-demo
+rigorous-research audit examples/papertrail-cartea/report.md \
+  --manifest examples/papertrail-cartea/evidence.json \
+  --output-dir build/papertrail-cartea
 ```
 
-Open `build/papertrail-demo/index.html` locally. One claim is supported and two intentionally incorrect claims are contradicted.
+Open `build/papertrail-cartea/index.html` locally. The experiment includes one qualified claim, one intentionally overgeneralized negative control, and one Figure 5 claim. All source excerpts intentionally remain `UNREVIEWED`; use the browser human-review desk to confirm them after inspecting the source PDF.

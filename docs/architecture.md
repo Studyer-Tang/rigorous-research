@@ -12,6 +12,7 @@ Rigorous Research separates the public PaperTrail product from the deeper resear
 | `scripts/papertrail_frontend/app.js` | Browser interaction, local PDF/OCR handling, and live preview |
 | `scripts/papertrail_frontend/integrity-network.js` | Browser-only DOI integrity checks and coverage display |
 | `scripts/papertrail_frontend/governed-review.js` | Browser-only draft recommendations and scope warnings |
+| `scripts/papertrail_frontend/human-review.js` | Human-only manifest write-back, edit/revoke history, and AI/human difference display |
 | `scripts/papertrail_web.py` | Copy static assets and inject the worked demo |
 | `scripts/papertrail_audit.py` | Authoritative manifest validation, verdict aggregation, and static reports |
 | `scripts/papertrail_import.py` | Explicit PDF, URL, DOI, and assistance imports |
