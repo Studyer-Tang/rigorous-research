@@ -27,6 +27,12 @@ class PluginBuildTests(unittest.TestCase):
             self.assertTrue((output / "skills" / "rigorous-research" / "SKILL.md").is_file())
             self.assertEqual(list((output / "skills" / "rigorous-research" / "scripts").glob("*.egg-info")), [])
             self.assertFalse((output / "skills" / "rigorous-research" / "scripts" / "build_plugin.py").exists())
+            self.assertTrue(
+                (output / "skills" / "rigorous-research" / "scripts" / "papertrail_frontend" / "app.js").is_file()
+            )
+            self.assertTrue(
+                (output / "skills" / "rigorous-research" / "scripts" / "papertrail_frontend" / "i18n.js").is_file()
+            )
             self.assertTrue(archive.with_suffix(".zip").is_file())
 
     def test_existing_output_is_not_overwritten(self):

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>PaperTrail · Audit claims locally</title>
+    <link rel="stylesheet" href="assets/app.css" />
+  </head>
+  <body>
+    <main>
+      <div class="language-bar">
+        <label class="language-control" for="language-select"
+          ><span data-i18n="language">Language</span
+          ><select id="language-select">
+            <option value="en">English</option>
+            <option value="zh">简体中文</option>
+          </select></label
+        >
+      </div>
+      <header>
+        <div>
+          <div class="eyebrow" data-i18n="eyebrow">
+            PaperTrail public playground
+          </div>
+          <h1 data-i18n="headline">Audit the trail behind a claim.</h1>
+          <p class="lede" data-i18n="lede">
+            Paste or load a Markdown report and its evidence manifest.
+            PaperTrail maps conclusions to exact source excerpts and refuses to
+            turn an unchecked citation into support.
+          </p>
+        </div>
+        <aside class="privacy">
+          <strong data-i18n="privacy_title">Private by design</strong
+          ><br /><span class="muted" data-i18n="privacy_body"
+            >Reports stay in this browser. DOI lookup contacts Crossref only
+            when you request it; no report text is sent.</span
+          >
+        </aside>
+      </header>
+      <section class="product-outcomes" aria-label="PaperTrail capabilities">
+        <article>
+          <strong data-i18n="outcome_support">Claim support</strong>
+          <span data-i18n="outcome_support_detail"
+            >See the exact passage behind each verdict.</span
+          >
+        </article>
+        <article>
+          <strong data-i18n="outcome_integrity">Source integrity</strong>
+          <span data-i18n="outcome_integrity_detail"
+            >Expose retractions, corrections, and version conflicts.</span
+          >
+        </article>
+        <article>
+          <strong data-i18n="outcome_reproduce">Reproducibility</strong>
+          <span data-i18n="outcome_reproduce_detail"
+            >Export a portable checklist and evidence packet.</span
+          >
+        </article>
+      </section>
+
+      <section class="pdf-workspace" aria-labelledby="pdf-title">
+        <div class="section-title">
+          <div>
+            <h2 id="pdf-title" data-i18n="pdf_title">PDF evidence workspace</h2>
+            <p class="muted" data-i18n="pdf_privacy">
+              The PDF stays in this browser. PDF.js is downloaded only after you
+              choose a file; OCR runs only when you request it.
+            </p>
+          </div>
+          <span class="badge UNREVIEWED" data-i18n="local_only"
+            >Local only</span
+          >
+        </div>
+        <div class="pdf-upload">
+          <label class="button"
+            ><span data-i18n="load_pdf">Load PDF</span
+            ><input
+              id="pdf-file"
+              type="file"
+              accept="application/pdf,.pdf"
+              hidden /></label
+          ><span
+            id="pdf-status"
+            class="pdf-status"
+            role="status"
+            data-i18n="pdf_idle"
+            >No PDF loaded.</span
+          >
+        </div>
+        <div id="pdf-viewer" class="pdf-viewer" hidden>
+          <div class="pdf-nav">
+            <div class="pdf-nav-group">
+              <button class="button" id="pdf-prev" data-i18n="previous_page">
+                Previous</button
+              ><strong id="pdf-page-label">1 / 1</strong
+              ><button class="button" id="pdf-next" data-i18n="next_page">
+                Next
+              </button>
+            </div>
+            <button class="button" id="pdf-ocr" data-i18n="run_ocr">
+              Run local OCR on this page
+            </button>
+          </div>
+          <div class="pdf-grid">
+            <div class="pdf-canvas-wrap">
+              <canvas id="pdf-canvas" aria-label="Rendered PDF page"></canvas>
+            </div>
+            <div class="pdf-text-wrap">
+              <ol class="pdf-steps" aria-label="Evidence workflow">
+                <li data-i18n="step_target">Choose a claim and source</li>
+                <li data-i18n="step_passage">Click a suggested passage</li>
+                <li data-i18n="step_attach">Attach as unreviewed evidence</li>
+              </ol>
+              <div class="anchor-form">
+                <div class="anchor-field">
+                  <label for="anchor-claim" data-i18n="claim_target"
+                    >Claim</label
+                  ><select id="anchor-claim"></select>
+                </div>
+                <div class="anchor-field">
+                  <label for="anchor-source" data-i18n="source_target"
+                    >Source</label
+                  ><select id="anchor-source"></select>
+                </div>
+              </div>
+              <div class="passage-heading">
+                <strong data-i18n="suggested_passages"
+                  >Suggested passages</strong
+                >
+                <span class="muted" data-i18n="passage_hint"
+                  >Click once to select. No dragging required.</span
+                >
+              </div>
+              <div
+                id="pdf-passages"
+                class="passage-list"
+                aria-live="polite"
+              ></div>
+              <details class="manual-selection">
+                <summary data-i18n="manual_selection">
+                  Need a precise fragment? Use manual text selection
+                </summary>
+                <p class="muted" data-i18n="selection_help">
+                  Drag across the exact text below to refine the selected
+                  evidence.
+                </p>
+                <div id="pdf-text" class="pdf-text" tabindex="0"></div>
+              </details>
+              <div class="selection-bar">
+                <div>
+                  <small data-i18n="selected_passage">Selected passage</small>
+                  <p
+                    id="selected-quote"
+                    class="selected-quote muted"
+                    data-i18n="nothing_selected"
+                  >
+                    Nothing selected yet.
+                  </p>
+                </div>
+                <button
+                  class="button primary"
+                  id="attach-selection"
+                  data-i18n="attach_selection"
+                  disabled
+                >
+                  Attach selection
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="input-title">
+        <div class="section-title">
+          <h2 id="input-title" data-i18n="try_title">Try it locally</h2>
+          <a href="demo/" data-i18n="open_demo"
+            >Open the published demo report</a
+          >
+        </div>
+        <div class="doi-tool">
+          <div class="doi-field">
+            <label for="doi-input" data-i18n="doi_label"
+              >Optional DOI metadata lookup</label
+            ><input
+              id="doi-input"
+              inputmode="url"
+              placeholder="10.1234/example or https://doi.org/…"
+            />
+          </div>
+          <button class="button" id="doi-button" data-i18n="doi_button">
+            Add source from Crossref
+          </button>
+        </div>
+        <div class="editor-grid">
+          <div class="editor">
+            <div class="editor-actions">
+              <label for="report-input" data-i18n="report_label"
+                >Markdown report</label
+              ><label class="file-button"
+                ><span data-i18n="load_md">Load .md</span
+                ><input
+                  id="report-file"
+                  type="file"
+                  accept=".md,text/markdown,text/plain"
+              /></label>
+            </div>
+            <textarea id="report-input" spellcheck="false"></textarea>
+          </div>
+          <div class="editor">
+            <div class="editor-actions">
+              <label for="manifest-input" data-i18n="manifest_label"
+                >Evidence manifest</label
+              ><label class="file-button"
+                ><span data-i18n="load_json">Load .json</span
+                ><input
+                  id="manifest-file"
+                  type="file"
+                  accept=".json,application/json"
+              /></label>
+            </div>
+            <textarea id="manifest-input" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button
+            class="button primary"
+            id="audit-button"
+            data-i18n="audit_button"
+          >
+            Audit locally</button
+          ><button class="button" id="draft-button" data-i18n="draft_button">
+            Draft claim candidates</button
+          ><button class="button" id="reset-button" data-i18n="reset_button">
+            Restore demo</button
+          ><button
+            class="button"
+            id="json-button"
+            data-i18n="download_json"
+            disabled
+          >
+            Download JSON</button
+          ><button
+            class="button"
+            id="html-button"
+            data-i18n="download_html"
+            disabled
+          >
+            Download HTML report
+          </button>
+        </div>
+        <div class="error" id="error" role="alert"></div>
+      </section>
+
+      <section aria-labelledby="preview-title">
+        <h2 id="preview-title" data-i18n="preview_title">Audit preview</h2>
+        <div id="preview" class="preview-empty" data-i18n="preview_empty">
+          Run the included example or replace it with your own files.
+        </div>
+      </section>
+      <footer data-i18n="footer">
+        PaperTrail performs a structured evidence audit, not an automatic
+        guarantee of truth. High-stakes verdicts still require independent
+        review.
+      </footer>
+    </main>
+    <script type="application/json" id="demo-data">
+      __DEMO_DATA__
+    </script>
+    <script type="text/plain" id="app-css">
+      __APP_CSS__
+    </script>
+    <script src="assets/i18n.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

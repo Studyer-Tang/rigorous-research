@@ -14,6 +14,8 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 - Reviewer provenance, multi-review conflict detection, AI-assisted draft restrictions, local candidate-claim packets, and claim-to-source evidence graphs.
 - English and Simplified Chinese playground localization with automatic language selection, a persistent manual switch, and localized HTML exports.
 - A browser PDF evidence workspace with pinned PDF.js loading, page rendering, embedded-text extraction, file hashes, portable selection anchors, and explicit local OCR via pinned Tesseract.js.
+- Click-to-select PDF passage cards, with manual drag selection retained as an optional precision control.
+- A maintainable PaperTrail frontend split into dedicated HTML, CSS, and JavaScript assets instead of one embedded Python template.
 - A worked PaperTrail demo, user guide, behavioral tests, and a manual GitHub Pages publication workflow.
 
 ### Safety

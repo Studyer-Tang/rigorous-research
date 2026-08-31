@@ -4,7 +4,18 @@ A Codex skill and evidence-gated research laboratory for mathematics, statistics
 
 [![validate](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml/badge.svg)](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml)
 
-It supports the full path from a vague question to a reproducible research brief:
+The repository has one purpose: make important research claims traceable, testable, and releasable without hiding uncertainty.
+
+There are two user paths:
+
+| Path | Best for | Main entry point |
+|---|---|---|
+| **PaperTrail** | Anyone checking whether a report's claims are actually supported by its sources | [Public browser playground](https://studyer-tang.github.io/rigorous-research/) or `rigorous-research audit` |
+| **Research engine** | Researchers building mathematics, statistics, or quantitative-finance investigations | `rigorous-research workspace` and `rigorous-research case` |
+
+PaperTrail is the public product surface. The research engine is the deeper reproducibility and release-governance layer behind serious investigations. They share evidence rules, hashes, review provenance, and conservative verdicts, but can be used independently.
+
+The research engine supports the full path from a vague question to a reproducible research brief:
 
 ```text
 scope the claim
@@ -22,7 +33,7 @@ release a reproducible evidence packet
 
 The project does not assume that a completed computation confirms a hypothesis. `SUPPORTED`, `REFUTED`, `INCONCLUSIVE`, and `MISSPECIFIED` are distinct releasable outcomes.
 
-## Two layers
+## Core research engine
 
 ### Research workspace
 
@@ -47,6 +58,8 @@ The project does not assume that a completed computation confirms a hypothesis. 
 - calibrated release gates for proofs, statistical inference, and backtests.
 
 The workspace contains an inference case. A short, focused audit can use the inference case by itself.
+
+For code ownership and module boundaries, see [Architecture](docs/architecture.md).
 
 ## Verification stack
 

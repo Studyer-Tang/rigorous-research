@@ -135,7 +135,9 @@ This produces:
 - `demo/audit.json`: its machine-readable evidence packet;
 - `.nojekyll`: a GitHub Pages compatibility marker.
 
-The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. The PDF workspace supports files up to 50 MB, renders pages, extracts embedded text, records the file SHA-256, and attaches selected passages to claim/source pairs as `UNREVIEWED` evidence. An explicit DOI lookup sends only the DOI to Crossref. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
+The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. The PDF workspace supports files up to 50 MB, renders pages, extracts embedded text, records the file SHA-256, and attaches selected passages to claim/source pairs as `UNREVIEWED` evidence. It turns each page into short passage cards: click a card once to select it, then attach it. Manual text dragging remains available in a collapsed precision editor. An explicit DOI lookup sends only the DOI to Crossref. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
+
+The playground source is intentionally separated by responsibility under `scripts/papertrail_frontend/`: HTML defines structure, CSS defines presentation, and JavaScript owns browser behavior. `papertrail_web.py` is only the static-site builder; it no longer contains the complete frontend as an embedded Python string.
 
 PDF.js is downloaded from a pinned jsDelivr URL only after a PDF is selected. OCR is never automatic: its button downloads a pinned Tesseract.js runtime and the selected English or Chinese/English language data, then recognizes the rendered page locally. These optional downloads disclose network activity but do not transmit the PDF or page image. Self-hosters may vendor the pinned assets and replace the constants in `papertrail_web.py` when an offline deployment is required.
 
