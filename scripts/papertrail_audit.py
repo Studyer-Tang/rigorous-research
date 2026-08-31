@@ -21,6 +21,7 @@ VERDICTS = {
     "UNVERIFIABLE",
     "UNREVIEWED",
 }
+REVIEW_METHODS = {"human", "ai_assisted", "automated", "unknown"}
 VERDICT_LABELS = {
     "SUPPORTED": "Supported",
     "PARTIALLY_SUPPORTED": "Partially supported",
@@ -196,6 +197,10 @@ def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str,
             "quote": _text(raw.get("quote"), f"evidence[{index}].quote"),
             "locator": _text(raw.get("locator"), f"evidence[{index}].locator"),
             "note": _text(raw.get("note"), f"evidence[{index}].note"),
+            "reviewer_id": _text(raw.get("reviewer_id"), f"evidence[{index}].reviewer_id"),
+            "reviewed_at": _text(raw.get("reviewed_at"), f"evidence[{index}].reviewed_at"),
+            "review_method": _text(raw.get("review_method", "unknown"), f"evidence[{index}].review_method").lower(),
+            "review_receipt": _text(raw.get("review_receipt"), f"evidence[{index}].review_receipt"),
         }
         if not item["claim_id"] or not item["source_id"]:
             raise ValueError(f"evidence[{index}] requires claim_id and source_id")
@@ -203,6 +208,14 @@ def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str,
             not item["quote"] or not item["locator"]
         ):
             raise ValueError(f"evidence[{index}] verdict {verdict} requires quote and locator")
+        if item["review_method"] not in REVIEW_METHODS:
+            raise ValueError(f"evidence[{index}] has invalid review_method: {item['review_method']}")
+        if item["review_method"] == "ai_assisted" and verdict in {
+            "SUPPORTED",
+            "PARTIALLY_SUPPORTED",
+            "CONTRADICTED",
+        }:
+            raise ValueError(f"evidence[{index}] AI-assisted draft must remain UNREVIEWED or UNVERIFIABLE")
         evidence.append(item)
     return sources, evidence
 
@@ -268,6 +281,10 @@ def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
                         "quote": "",
                         "locator": "",
                         "note": "No human or automated evidence review has been recorded.",
+                        "reviewer_id": "",
+                        "reviewed_at": "",
+                        "review_method": "unknown",
+                        "review_receipt": "",
                     }
                 ]
             for item in matched:
@@ -277,6 +294,14 @@ def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
     resolved_sources = [sources[source_id] for source_id in cited_source_ids if source_id in sources]
     unresolved_sources = [source_id for source_id in cited_source_ids if source_id not in sources]
     reviewed = [item for item in evidence if item["verdict"] != "UNREVIEWED"]
+    provenance_complete = reviewed and all(
+        item["reviewer_id"] and item["reviewed_at"] and item["review_method"] != "unknown" for item in reviewed
+    )
+    conflicting_pairs: list[str] = []
+    for (claim_id, source_id), rows in evidence_by_pair.items():
+        row_verdicts = {row["verdict"] for row in rows}
+        if "CONTRADICTED" in row_verdicts and row_verdicts.intersection({"SUPPORTED", "PARTIALLY_SUPPORTED"}):
+            conflicting_pairs.append(f"{claim_id}/{source_id}")
     risky_sources = [
         source for source in resolved_sources if source["publication_status"] in HIGH_RISK_PUBLICATION_STATUSES
     ]
@@ -344,6 +369,18 @@ def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
             if resolved_sources and all(source["version_conflict"] is False for source in resolved_sources)
             else "At least one source has not been checked for version conflicts.",
         },
+        "review_provenance": {
+            "status": "PASS" if provenance_complete else "WARN",
+            "detail": "Every reviewed row records reviewer, time, and method."
+            if provenance_complete
+            else "Some reviewed evidence lacks reviewer, timestamp, or review method.",
+        },
+        "review_consensus": {
+            "status": "FAIL" if conflicting_pairs else "PASS",
+            "detail": f"Conflicting reviewer verdicts: {', '.join(conflicting_pairs)}."
+            if conflicting_pairs
+            else "No claim/source pair contains both supporting and contradicting reviewer verdicts.",
+        },
         "data_availability": _availability_check(resolved_sources, "data"),
         "code_availability": _availability_check(resolved_sources, "code"),
     }
@@ -385,12 +422,45 @@ def render_html(audit: dict[str, Any]) -> str:
     def esc(value: Any) -> str:
         return html.escape(str(value), quote=True)
 
+    def short_label(value: str, limit: int) -> str:
+        return value if len(value) <= limit else value[: limit - 1].rstrip() + "…"
+
     cards = "".join(
         f'<div class="metric {verdict.lower()}"><strong>{count}</strong><span>{esc(VERDICT_LABELS[verdict])}</span></div>'
         for verdict, count in audit["summary"]["verdicts"].items()
         if count
     )
     source_map = {source["id"]: source for source in audit["sources"]}
+    graph_height = max(180, max(len(audit["claims"]), len(audit["sources"])) * 82 + 36)
+    claim_gap = (graph_height - 56) / max(1, len(audit["claims"]))
+    source_gap = (graph_height - 56) / max(1, len(audit["sources"]))
+    claim_y = {claim["id"]: 28 + index * claim_gap for index, claim in enumerate(audit["claims"])}
+    source_y = {source["id"]: 28 + index * source_gap for index, source in enumerate(audit["sources"])}
+    graph_edges: list[str] = []
+    for claim in audit["claims"]:
+        for source_id in claim["citations"]:
+            if source_id in source_y:
+                graph_edges.append(
+                    f'<path class="graph-edge {claim["verdict"].lower()}" '
+                    f'd="M 330 {claim_y[claim["id"]] + 22:.1f} C 470 {claim_y[claim["id"]] + 22:.1f}, '
+                    f'510 {source_y[source_id] + 22:.1f}, 650 {source_y[source_id] + 22:.1f}" />'
+                )
+    claim_nodes = "".join(
+        f'<g class="graph-node" transform="translate(20 {claim_y[claim["id"]]:.1f})"><rect width="310" height="44" rx="9" />'
+        f'<text x="12" y="18">{esc(claim["id"])}</text><text class="graph-label" x="12" y="35">{esc(short_label(claim["statement"], 48))}</text></g>'
+        for claim in audit["claims"]
+    )
+    source_nodes = "".join(
+        f'<g class="graph-node" transform="translate(650 {source_y[source["id"]]:.1f})"><rect width="290" height="44" rx="9" />'
+        f'<text x="12" y="18">{esc(source["id"])}</text><text class="graph-label" x="12" y="35">{esc(short_label(source["title"], 44))}</text></g>'
+        for source in audit["sources"]
+    )
+    graph_markup = (
+        f'<div class="graph-wrap"><svg viewBox="0 0 960 {graph_height}" role="img" aria-labelledby="graph-title graph-desc">'
+        '<title id="graph-title">Claim-to-source evidence graph</title>'
+        '<desc id="graph-desc">Claims are shown on the left and cited sources on the right. Connector colors match claim verdicts.</desc>'
+        f"{''.join(graph_edges)}{claim_nodes}{source_nodes}</svg></div>"
+    )
     claim_sections: list[str] = []
     for claim in audit["claims"]:
         evidence_rows: list[str] = []
@@ -414,6 +484,7 @@ def render_html(audit: dict[str, Any]) -> str:
                 f'<td data-label="Assessment"><span class="badge {item["verdict"].lower()}">{esc(VERDICT_LABELS[item["verdict"]])}</span></td>'
                 f'<td data-label="Exact evidence">{quote}</td>'
                 f'<td data-label="Locator">{esc(item["locator"] or "Not recorded")}</td>'
+                f'<td data-label="Review">{esc(item["reviewer_id"] or "Unattributed")}<small>{esc(item["review_method"])} · {esc(item["reviewed_at"] or "time unknown")}</small></td>'
                 f'<td data-label="Review note">{esc(item["note"])}</td>'
                 "</tr>"
             )
@@ -430,7 +501,7 @@ def render_html(audit: dict[str, Any]) -> str:
             f"<h3>{esc(claim['statement'])}</h3>"
             f'<p class="muted">Report location: {esc(claim["locator"])}</p>'
             '<div class="table-wrap"><table class="evidence-table"><thead><tr><th>Source</th><th>Assessment</th><th>Exact evidence</th>'
-            f"<th>Locator</th><th>Review note</th></tr></thead><tbody>{''.join(evidence_rows)}</tbody></table></div>"
+            f"<th>Locator</th><th>Review</th><th>Review note</th></tr></thead><tbody>{''.join(evidence_rows)}</tbody></table></div>"
             "</article>"
         )
 
@@ -479,6 +550,9 @@ def render_html(audit: dict[str, Any]) -> str:
     blockquote {{ margin:0; padding-left:12px; border-left:3px solid var(--accent) }} .checklist {{ list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:10px }}
     .checklist li {{ display:flex; align-items:flex-start; gap:12px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:15px }} .checklist p {{ margin:3px 0 0 }} .check.pass {{ background:var(--supported) }} .check.warn {{ background:var(--partially) }} .check.fail {{ background:var(--contradicted) }}
     .notice {{ border-left:4px solid var(--partially); background:var(--panel); padding:14px 18px; border-radius:8px }} footer {{ color:var(--muted); margin-top:50px }} a {{ color:var(--accent) }}
+    .graph-wrap {{ overflow:auto; padding:6px 0 }} .graph-wrap svg {{ display:block; min-width:860px; width:100% }}
+    .graph-node rect {{ fill:var(--panel); stroke:var(--line) }} .graph-node text {{ fill:var(--ink); font:700 12px ui-monospace,monospace }} .graph-node .graph-label {{ fill:var(--muted); font:12px ui-sans-serif,system-ui,sans-serif }}
+    .graph-edge {{ fill:none; stroke-width:3; opacity:.76 }} .graph-edge.supported {{ stroke:var(--supported) }} .graph-edge.partially_supported {{ stroke:var(--partially) }} .graph-edge.contradicted {{ stroke:var(--contradicted) }} .graph-edge.not_found {{ stroke:var(--notfound) }} .graph-edge.unverifiable {{ stroke:var(--unverifiable) }} .graph-edge.unreviewed {{ stroke:var(--unreviewed) }}
     @media (max-width:640px) {{
       main {{ width:min(100% - 20px,1180px); padding:28px 0 56px }} header {{ padding-bottom:20px }} h2 {{ margin-top:36px }}
       .metric {{ min-width:0; flex:1 1 130px }} .claim {{ padding:15px }} .table-wrap {{ overflow:visible }}
@@ -499,6 +573,7 @@ def render_html(audit: dict[str, Any]) -> str:
   <section><h2>Claim audit</h2><div class="toolbar"><button class="active" data-filter="ALL">All claims</button>
     {"".join(f'<button data-filter="{verdict}">{esc(VERDICT_LABELS[verdict])}</button>' for verdict, count in audit["summary"]["verdicts"].items() if count)}</div>
     {"".join(claim_sections)}</section>
+  <section><h2>Evidence graph</h2>{graph_markup}</section>
   <section><h2>Reproducibility checklist</h2><ul class="checklist">{checklist_rows}</ul></section>
   <section><h2>Source registry</h2><div class="table-wrap"><table class="source-table"><thead><tr><th>ID</th><th>Title</th><th>Authors</th><th>Year</th><th>DOI</th><th>Version</th><th>Integrity</th><th>Conflict</th></tr></thead><tbody>{source_rows}</tbody></table></div></section>
   <section><h2>Interpretation limits</h2><div class="notice"><ul>{limitations}</ul></div></section>

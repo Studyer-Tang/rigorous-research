@@ -27,7 +27,10 @@
       "verdict": "SUPPORTED",
       "quote": "84% of respondents are using or planning to use AI tools in their development process, an increase over last year (76%).",
       "locator": "Section 3.1, AI tools in the development process",
-      "note": "The claim preserves the population and the use-or-plan-to-use qualification."
+      "note": "The claim preserves the population and the use-or-plan-to-use qualification.",
+      "reviewer_id": "demo-reviewer",
+      "reviewed_at": "2026-08-31",
+      "review_method": "human"
     },
     {
       "claim_id": "C002",
@@ -35,7 +38,10 @@
       "verdict": "CONTRADICTED",
       "quote": "More developers actively distrust the accuracy of AI tools (46%) than trust it (33%).",
       "locator": "Section 3.2, Accuracy of AI tools",
-      "note": "The report reverses the direction of the published comparison."
+      "note": "The report reverses the direction of the published comparison.",
+      "reviewer_id": "demo-reviewer",
+      "reviewed_at": "2026-08-31",
+      "review_method": "human"
     },
     {
       "claim_id": "C003",
@@ -43,7 +49,10 @@
       "verdict": "CONTRADICTED",
       "quote": "AI agents are not yet mainstream. A majority of developers (52%) either don't use agents or stick to simpler AI tools.",
       "locator": "Section 3.3, AI agents",
-      "note": "Universal adoption is much stronger than the survey supports."
+      "note": "Universal adoption is much stronger than the survey supports.",
+      "reviewer_id": "demo-reviewer",
+      "reviewed_at": "2026-08-31",
+      "review_method": "human"
     }
   ]
 }

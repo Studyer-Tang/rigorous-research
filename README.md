@@ -85,6 +85,24 @@ rigorous-research papertrail \
 
 Its homepage accepts pasted text or local `.md` and `.json` files, audits them entirely inside the browser, and downloads the result as JSON or a standalone HTML report. The page has no upload endpoint, analytics script, external runtime dependency, or account requirement.
 
+Import research material before auditing it:
+
+```text
+# Text PDF -> Markdown review draft (scanned PDFs need OCR first)
+rigorous-research import pdf paper.pdf --output paper-draft.md
+
+# Public webpage -> Markdown review draft
+rigorous-research import url https://example.org/article --output article-draft.md
+
+# DOI -> Crossref source metadata and recorded update/retraction status
+rigorous-research import doi 10.1234/example --output source.json
+
+# Candidate claim packet; every candidate remains UNREVIEWED
+rigorous-research import assist report.md --output assistance.json
+```
+
+Install PDF support with `python -m pip install -e ".[papertrail]"`. Public URL import blocks loopback, private, link-local, and reserved network destinations and limits response size. The browser playground may contact Crossref only after an explicit DOI lookup; report and evidence text remain local.
+
 ## Why the gates matter
 
 - A finite symbolic pattern cannot silently become an all-parameter theorem.
@@ -238,6 +256,7 @@ scripts/inference_case.py          inference ledger and release gates
 scripts/research_io.py             shared JSON, hashing, and portable-path primitives
 scripts/rigorous_research_cli.py    unified terminal entry point
 scripts/papertrail_audit.py         Markdown-to-HTML/JSON claim audit generator
+scripts/papertrail_import.py        PDF, public-web, DOI, and candidate-claim imports
 scripts/papertrail_web.py           browser-only static playground builder
 scripts/literature_search.py       five-provider retrieval and conservative deduplication
 scripts/math_backend.py            SymPy certificates and optional Lean checking

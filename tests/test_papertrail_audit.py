@@ -54,6 +54,9 @@ class PaperTrailAuditTests(unittest.TestCase):
                             "verdict": "SUPPORTED",
                             "quote": "The measured value increased by 18%.",
                             "locator": "Results, paragraph 2",
+                            "reviewer_id": "reviewer-a",
+                            "reviewed_at": "2026-08-31",
+                            "review_method": "human",
                         },
                         {
                             "claim_id": "C002",
@@ -61,6 +64,9 @@ class PaperTrailAuditTests(unittest.TestCase):
                             "verdict": "CONTRADICTED",
                             "quote": "Accuracy declined outside the evaluated sample.",
                             "locator": "Limitations",
+                            "reviewer_id": "reviewer-a",
+                            "reviewed_at": "2026-08-31",
+                            "review_method": "human",
                         },
                     ],
                 }
@@ -86,6 +92,7 @@ class PaperTrailAuditTests(unittest.TestCase):
         self.assertEqual(audit["reproducibility_checklist"]["sources_resolved"]["status"], "PASS")
         self.assertEqual(audit["reproducibility_checklist"]["data_availability"]["status"], "PASS")
         self.assertEqual(audit["reproducibility_checklist"]["version_conflicts"]["status"], "PASS")
+        self.assertEqual(audit["reproducibility_checklist"]["review_provenance"]["status"], "PASS")
 
     def test_missing_source_is_unverifiable(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -121,6 +128,34 @@ class PaperTrailAuditTests(unittest.TestCase):
         self.assertEqual(checklist["publication_status"]["status"], "FAIL")
         self.assertEqual(checklist["version_conflicts"]["status"], "FAIL")
 
+    def test_ai_assisted_draft_cannot_assign_decisive_verdict(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report, manifest = self.write_fixture(root)
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            data["evidence"][0]["review_method"] = "ai_assisted"
+            manifest.write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "must remain UNREVIEWED"):
+                papertrail.build_audit(report, manifest)
+
+    def test_conflicting_human_reviews_fail_consensus(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report, manifest = self.write_fixture(root)
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            conflict = dict(data["evidence"][0])
+            conflict.update(
+                {
+                    "verdict": "CONTRADICTED",
+                    "quote": "A second reviewer found the opposite result.",
+                    "reviewer_id": "reviewer-b",
+                }
+            )
+            data["evidence"].append(conflict)
+            manifest.write_text(json.dumps(data), encoding="utf-8")
+            audit = papertrail.build_audit(report, manifest)
+        self.assertEqual(audit["reproducibility_checklist"]["review_consensus"]["status"], "FAIL")
+
     def test_html_escapes_report_content(self):
         with tempfile.TemporaryDirectory() as directory:
             report, manifest = self.write_fixture(Path(directory))
@@ -129,6 +164,9 @@ class PaperTrailAuditTests(unittest.TestCase):
             rendered = papertrail.render_html(audit)
         self.assertNotIn("<script>alert(1)</script>", rendered)
         self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", rendered)
+        self.assertIn('class="graph-wrap"', rendered)
+        self.assertIn('role="img" aria-labelledby="graph-title graph-desc"', rendered)
+        self.assertIn("Claim-to-source evidence graph", rendered)
 
     def test_cli_writes_pages_ready_site(self):
         with tempfile.TemporaryDirectory() as directory:

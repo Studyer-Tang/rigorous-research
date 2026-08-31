@@ -23,6 +23,7 @@ classifiers = [
 [project.optional-dependencies]
 math = ["sympy>=1.13,<2"]
 dev = ["build>=1.2", "PyYAML>=6", "ruff==0.16.1"]
+papertrail = ["pypdf>=5,<7"]
 
 [project.scripts]
 rigorous-research = "rigorous_research_cli:main"
@@ -40,6 +41,7 @@ py-modules = [
   "literature_search",
   "math_backend",
   "papertrail_audit",
+  "papertrail_import",
   "papertrail_web",
   "research_io",
   "research_eval",

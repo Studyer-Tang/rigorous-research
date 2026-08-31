@@ -100,7 +100,7 @@
       "task_id": "W002",
       "label": "Frozen momentum-factor analysis",
       "command": [
-        "C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\.venv\\Scripts\\python.exe",
+        "python",
         "analyze_momentum.py",
         "--output",
         "artifacts/momentum-analysis.json",

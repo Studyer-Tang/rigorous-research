@@ -20,6 +20,7 @@ COMMANDS = {
     "case": Command("inference_case", "create and validate a focused inference case"),
     "data": Command("finance_data", "freeze and verify public financial-data vintages"),
     "eval": Command("research_eval", "run release-gate benchmark and mutation cases"),
+    "import": Command("papertrail_import", "import PDF, web, and DOI sources into PaperTrail drafts"),
     "literature": Command("literature_search", "search and deduplicate scholarly metadata"),
     "math": Command("math_backend", "run exact SymPy or optional Lean checks"),
     "papertrail": Command("papertrail_web", "build the browser-only PaperTrail playground"),

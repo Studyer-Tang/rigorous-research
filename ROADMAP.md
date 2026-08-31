@@ -11,8 +11,8 @@ The roadmap favors stronger evidence and easier independent reproduction over ad
 
 ## Next: 1.3
 
-- Promote PaperTrail from recorded integrity/version checks to a schema-versioned pipeline with live DOI metadata enrichment, provider-backed correction/retraction checks, and reusable GitHub Pages themes.
-- Add human-review provenance and portable review receipts to PaperTrail evidence rows without allowing citation presence to imply support.
+- Promote the initial Crossref DOI enrichment to a schema-versioned, multi-provider integrity pipeline with Crossmark/Retraction Watch checks and deterministic replay fixtures.
+- Bind PaperTrail reviewer provenance to signed portable review receipts and authenticated reviewer identities.
 - Add deterministic replay fixtures for every literature provider and explicit retry/backoff records.
 - Introduce JSON Schemas for inference cases, workspaces, receipts, review packets, and literature matrices.
 - Add signed review identities and optional Sigstore verification for released evidence packets.

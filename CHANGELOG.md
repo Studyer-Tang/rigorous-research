@@ -10,6 +10,8 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 - Self-contained HTML and JSON claim-to-source audits with verdict filters, exact excerpts, source metadata, input hashes, and a reproducibility checklist.
 - A privacy-preserving browser playground with paste/file input, live audit preview, JSON/HTML downloads, and no backend or external runtime dependency.
 - Recorded correction/retraction checks, source-version metadata, and explicit version-conflict failures.
+- PDF, public-web, and DOI import commands with page hashes, Crossref metadata, response limits, redirect validation, and private-network blocking.
+- Reviewer provenance, multi-review conflict detection, AI-assisted draft restrictions, local candidate-claim packets, and claim-to-source evidence graphs.
 - A worked PaperTrail demo, user guide, behavioral tests, and a manual GitHub Pages publication workflow.
 
 ### Safety
@@ -18,6 +20,7 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 - Supported, partially supported, and contradicted evidence rows require an exact quote and locator.
 - Generated reports escape report content and permit only HTTP(S) source links.
 - Browser inputs remain local and are rendered through text-safe DOM operations.
+- AI-assisted rows cannot issue decisive verdicts; conflicting human reviews fail consensus visibly.
 
 ## 1.2.0 - 2026-08-30
 

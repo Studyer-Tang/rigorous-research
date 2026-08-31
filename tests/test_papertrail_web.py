@@ -44,6 +44,9 @@ class PaperTrailWebTests(unittest.TestCase):
                             "verdict": "SUPPORTED",
                             "quote": "A checked claim.",
                             "locator": "Results",
+                            "reviewer_id": "reviewer-a",
+                            "reviewed_at": "2026-08-31",
+                            "review_method": "human",
                         }
                     ],
                 }
@@ -64,11 +67,17 @@ class PaperTrailWebTests(unittest.TestCase):
             output = root / "site"
             papertrail_web.build_site(output, report, manifest)
             app = (output / "index.html").read_text(encoding="utf-8")
+            demo_audit = json.loads((output / "demo" / "audit.json").read_text(encoding="utf-8"))
             self.assertTrue((output / "demo" / "index.html").is_file())
             self.assertTrue((output / "demo" / "audit.json").is_file())
             self.assertTrue((output / ".nojekyll").is_file())
         self.assertIn("Private by design", app)
         self.assertIn("Audit locally", app)
+        self.assertIn("Add source from Crossref", app)
+        self.assertIn("Draft claim candidates", app)
+        self.assertIn("Evidence graph", app)
+        self.assertIn("Claims on the left connected to cited sources on the right", app)
+        self.assertEqual(demo_audit["reproducibility_checklist"]["review_provenance"]["status"], "PASS")
 
     def test_cli_builds_pages_ready_site(self):
         with tempfile.TemporaryDirectory() as directory:

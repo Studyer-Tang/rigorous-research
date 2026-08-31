@@ -50,7 +50,11 @@ Create a JSON manifest:
       "verdict": "SUPPORTED",
       "quote": "The measured value increased by 18%.",
       "locator": "Results, paragraph 2",
-      "note": "The population and time window match the report claim."
+      "note": "The population and time window match the report claim.",
+      "reviewer_id": "reviewer-a",
+      "reviewed_at": "2026-08-31",
+      "review_method": "human",
+      "review_receipt": "optional portable receipt identifier"
     }
   ]
 }
@@ -61,6 +65,29 @@ Allowed verdicts are `SUPPORTED`, `PARTIALLY_SUPPORTED`, `CONTRADICTED`, `NOT_FO
 Availability values should be `available`, `unavailable`, `not_applicable`, or `unknown`. Publication status is deliberately free text so providers can preserve distinctions such as `active`, `corrected`, `retracted`, or `unknown`.
 
 `version_conflict` must be `true`, `false`, or `null`/omitted. PaperTrail fails the checklist for a recorded conflict, warns when the field is unknown, and passes only when every cited source explicitly records `false`. A `retracted`, `withdrawn`, or `expression_of_concern` publication status also fails the integrity check. These are recorded checks—not live promises that a publisher has never changed the source.
+
+`review_method` can be `human`, `ai_assisted`, `automated`, or `unknown`. AI-assisted rows are drafts: PaperTrail rejects a decisive `SUPPORTED`, `PARTIALLY_SUPPORTED`, or `CONTRADICTED` verdict until a human or governed automated review takes responsibility. Multiple reviewers may record separate rows for one claim/source pair. Supporting and contradicting reviewer verdicts on the same pair fail the consensus checklist instead of being silently averaged.
+
+## Import PDF, web, and DOI sources
+
+Install the optional PDF reader:
+
+```text
+python -m pip install -e ".[papertrail]"
+```
+
+Then use the import commands:
+
+```text
+rigorous-research import pdf paper.pdf --output paper-draft.md
+rigorous-research import url https://example.org/article --output article-draft.md
+rigorous-research import doi 10.1234/example --output source.json
+rigorous-research import assist report.md --output assistance.json
+```
+
+PDF extraction preserves page boundaries and records the input SHA-256. It does not perform OCR; image-only scans fail visibly. Web import removes scripts, styles, forms, navigation, and footers, restricts requests to public HTTP(S) destinations, rechecks redirects, limits response size, and never executes page code. DOI import queries Crossref and records its update metadata, but absence of a Crossref retraction notice is not proof that no integrity issue exists.
+
+The assistance command and browser candidate button use local claim signals to prepare drafts. Their output is explicitly `DRAFT_REQUIRES_HUMAN_REVIEW`; citations, exact excerpts, locators, and reviewer provenance must still be supplied.
 
 ## Generate the static report
 
@@ -93,7 +120,9 @@ This produces:
 - `demo/audit.json`: its machine-readable evidence packet;
 - `.nojekyll`: a GitHub Pages compatibility marker.
 
-The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, an AI model, or any third-party service. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
+The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. An explicit DOI lookup sends only the DOI to Crossref. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
+
+Both generated reports and the playground include an evidence graph linking claims on the left to cited sources on the right. The graph is an inspection aid; verdict text and the evidence table remain the authoritative accessible representation.
 
 ## Publish with GitHub Pages
 
