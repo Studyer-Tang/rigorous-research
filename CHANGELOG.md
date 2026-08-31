@@ -19,6 +19,7 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 - AI evidence direction is computed from the best-matching passage instead of unrelated text concatenated across a source.
 - GitHub Pages now opens with the real preprint experiment while keeping every extracted evidence row `UNREVIEWED`.
+- GitHub workflows use the current checkout and CodeQL action generations instead of deprecated Node runtimes.
 
 ### Safety
 
