@@ -29,6 +29,7 @@ VERDICT_LABELS = {
     "UNVERIFIABLE": "Unverifiable",
     "UNREVIEWED": "Unreviewed",
 }
+HIGH_RISK_PUBLICATION_STATUSES = {"retracted", "withdrawn", "expression_of_concern"}
 CLAIM_SECTIONS = {"claims", "key claims", "conclusions", "主要结论", "核心结论", "结论"}
 CITATION_PATTERN = re.compile(r"\[@([^\]]+)\]")
 HEADING_PATTERN = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
@@ -125,6 +126,14 @@ def _text(value: Any, field: str) -> str:
     return value.strip()
 
 
+def _optional_bool(value: Any, field: str) -> bool | None:
+    if value is None:
+        return None
+    if not isinstance(value, bool):
+        raise ValueError(f"{field} must be true, false, or null")
+    return value
+
+
 def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
     data = load_json_object(path)
     raw_sources = data.get("sources", [])
@@ -157,6 +166,12 @@ def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str,
             "publication_status": _text(
                 raw.get("publication_status", "unknown"), f"sources[{index}].publication_status"
             ).lower(),
+            "integrity_checked_at": _text(raw.get("integrity_checked_at"), f"sources[{index}].integrity_checked_at"),
+            "integrity_url": _text(raw.get("integrity_url"), f"sources[{index}].integrity_url"),
+            "version": _text(raw.get("version"), f"sources[{index}].version"),
+            "version_url": _text(raw.get("version_url"), f"sources[{index}].version_url"),
+            "version_conflict": _optional_bool(raw.get("version_conflict"), f"sources[{index}].version_conflict"),
+            "version_notes": _text(raw.get("version_notes"), f"sources[{index}].version_notes"),
             "data_availability": _text(
                 raw.get("data_availability", "unknown"), f"sources[{index}].data_availability"
             ).lower(),
@@ -262,6 +277,10 @@ def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
     resolved_sources = [sources[source_id] for source_id in cited_source_ids if source_id in sources]
     unresolved_sources = [source_id for source_id in cited_source_ids if source_id not in sources]
     reviewed = [item for item in evidence if item["verdict"] != "UNREVIEWED"]
+    risky_sources = [
+        source for source in resolved_sources if source["publication_status"] in HIGH_RISK_PUBLICATION_STATUSES
+    ]
+    conflicting_versions = [source for source in resolved_sources if source["version_conflict"] is True]
     checklist = {
         "claims_have_citations": {
             "status": "PASS" if all(claim["citations"] for claim in audited_claims) else "FAIL",
@@ -302,12 +321,28 @@ def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
             else "At least one source is missing authors, year, or a DOI/URL.",
         },
         "publication_status": {
-            "status": "PASS"
+            "status": "FAIL"
+            if risky_sources
+            else "PASS"
             if resolved_sources and all(source["publication_status"] != "unknown" for source in resolved_sources)
             else "WARN",
-            "detail": "Publication status is recorded for every resolved source."
+            "detail": f"High-risk publication status: {', '.join(source['id'] for source in risky_sources)}."
+            if risky_sources
+            else "Publication status is recorded for every resolved source."
             if resolved_sources and all(source["publication_status"] != "unknown" for source in resolved_sources)
             else "At least one source has unknown correction or retraction status.",
+        },
+        "version_conflicts": {
+            "status": "FAIL"
+            if conflicting_versions
+            else "PASS"
+            if resolved_sources and all(source["version_conflict"] is False for source in resolved_sources)
+            else "WARN",
+            "detail": f"Version conflicts require review: {', '.join(source['id'] for source in conflicting_versions)}."
+            if conflicting_versions
+            else "Every resolved source explicitly records no known version conflict."
+            if resolved_sources and all(source["version_conflict"] is False for source in resolved_sources)
+            else "At least one source has not been checked for version conflicts.",
         },
         "data_availability": _availability_check(resolved_sources, "data"),
         "code_availability": _availability_check(resolved_sources, "code"),
@@ -410,7 +445,9 @@ def render_html(audit: dict[str, Any]) -> str:
         f'<td data-label="Authors">{esc(", ".join(source["authors"]) or "Unknown")}</td>'
         f'<td data-label="Year">{esc(source["year"] or "Unknown")}</td>'
         f'<td data-label="DOI">{esc(source["doi"] or "—")}</td>'
-        f'<td data-label="Status">{esc(source["publication_status"])}</td>'
+        f'<td data-label="Version">{esc(source["version"] or "—")}</td>'
+        f'<td data-label="Integrity">{esc(source["publication_status"])}</td>'
+        f'<td data-label="Conflict">{esc("yes" if source["version_conflict"] is True else "no" if source["version_conflict"] is False else "unknown")}</td>'
         "</tr>"
         for source in audit["sources"]
     )
@@ -463,7 +500,7 @@ def render_html(audit: dict[str, Any]) -> str:
     {"".join(f'<button data-filter="{verdict}">{esc(VERDICT_LABELS[verdict])}</button>' for verdict, count in audit["summary"]["verdicts"].items() if count)}</div>
     {"".join(claim_sections)}</section>
   <section><h2>Reproducibility checklist</h2><ul class="checklist">{checklist_rows}</ul></section>
-  <section><h2>Source registry</h2><div class="table-wrap"><table class="source-table"><thead><tr><th>ID</th><th>Title</th><th>Authors</th><th>Year</th><th>DOI</th><th>Status</th></tr></thead><tbody>{source_rows}</tbody></table></div></section>
+  <section><h2>Source registry</h2><div class="table-wrap"><table class="source-table"><thead><tr><th>ID</th><th>Title</th><th>Authors</th><th>Year</th><th>DOI</th><th>Version</th><th>Integrity</th><th>Conflict</th></tr></thead><tbody>{source_rows}</tbody></table></div></section>
   <section><h2>Interpretation limits</h2><div class="notice"><ul>{limitations}</ul></div></section>
   <footer>Generated locally by PaperTrail. The report contains recorded assessments, not an automatic guarantee of truth.</footer>
 </main><script>

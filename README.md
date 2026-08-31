@@ -74,6 +74,17 @@ rigorous-research audit report.md \
 
 The result is a self-contained `index.html` plus machine-readable `audit.json`; neither needs a backend, database, account, or API key. Decisive assessments require an exact quote and locator. See the [PaperTrail guide](docs/papertrail.md) and [worked demo](examples/papertrail-demo/report.md).
 
+Build the public, browser-only playground locally:
+
+```text
+rigorous-research papertrail \
+  --output-dir build/papertrail-site \
+  --demo-report examples/papertrail-demo/report.md \
+  --demo-manifest examples/papertrail-demo/evidence.json
+```
+
+Its homepage accepts pasted text or local `.md` and `.json` files, audits them entirely inside the browser, and downloads the result as JSON or a standalone HTML report. The page has no upload endpoint, analytics script, external runtime dependency, or account requirement.
+
 ## Why the gates matter
 
 - A finite symbolic pattern cannot silently become an all-parameter theorem.
@@ -227,6 +238,7 @@ scripts/inference_case.py          inference ledger and release gates
 scripts/research_io.py             shared JSON, hashing, and portable-path primitives
 scripts/rigorous_research_cli.py    unified terminal entry point
 scripts/papertrail_audit.py         Markdown-to-HTML/JSON claim audit generator
+scripts/papertrail_web.py           browser-only static playground builder
 scripts/literature_search.py       five-provider retrieval and conservative deduplication
 scripts/math_backend.py            SymPy certificates and optional Lean checking
 scripts/statistics_backend.py      HAC, bootstrap, multiplicity, coverage simulation

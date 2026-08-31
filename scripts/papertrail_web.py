@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+"""Build the private-by-default, browser-only PaperTrail playground."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+from papertrail_audit import build_audit, render_html
+from research_io import atomic_write_json
+
+APP_TEMPLATE = r"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>PaperTrail · Audit claims locally</title>
+  <style>
+    :root{--bg:#f4f4ef;--panel:#fff;--ink:#18211c;--muted:#667168;--line:#d8ddd8;--accent:#155eef;--good:#18794e;--warn:#9a6700;--bad:#c9372c;--purple:#6f42c1;--shadow:0 12px 40px #0000000c}
+    @media(prefers-color-scheme:dark){:root{--bg:#101411;--panel:#181e1a;--ink:#eef2ef;--muted:#a9b2ac;--line:#354039;--accent:#79a6ff;--shadow:none}}
+    *{box-sizing:border-box}body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,sans-serif}button,input,textarea{font:inherit}a{color:var(--accent)}code{overflow-wrap:anywhere}
+    main{width:min(1180px,calc(100% - 32px));margin:auto;padding:46px 0 80px}header{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:30px}.eyebrow{color:var(--accent);font-weight:800;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(2.35rem,6vw,5rem);letter-spacing:-.055em;line-height:1;margin:.18em 0}.lede{max-width:760px;color:var(--muted);font-size:1.08rem}.privacy{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px 18px;max-width:310px;box-shadow:var(--shadow)}
+    h2{font-size:1.5rem;margin:42px 0 14px}.editor-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}.editor{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}.editor label{display:block;font-weight:800;margin-bottom:8px}.editor-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.file-button{color:var(--accent);cursor:pointer;font-weight:700}.file-button input{position:absolute;opacity:0;pointer-events:none}textarea{display:block;width:100%;min-width:0;min-height:290px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:13px;background:var(--bg);color:var(--ink);font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2}.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:16px 0}.button{border:1px solid var(--line);border-radius:999px;padding:9px 15px;background:var(--panel);color:var(--ink);cursor:pointer;font-weight:750}.button.primary{background:var(--accent);border-color:var(--accent);color:white}.button:disabled{cursor:not-allowed;opacity:.5}.error{display:none;border-left:4px solid var(--bad);background:var(--panel);padding:12px 15px;border-radius:8px;color:var(--bad);white-space:pre-wrap}.error.visible{display:block}
+    .preview-empty{border:1px dashed var(--line);border-radius:18px;padding:36px;text-align:center;color:var(--muted)}.preview-head{display:flex;justify-content:space-between;gap:20px;align-items:start}.preview-head h2{margin:0}.hashes{color:var(--muted);font-size:12px;overflow-wrap:anywhere;white-space:pre-line}.metrics{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}.metric{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:11px 14px;min-width:135px}.metric strong{display:block;font-size:1.55rem}.claims{display:grid;gap:12px}.claim{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow)}.claim-top{display:flex;justify-content:space-between;gap:12px}.claim h3{margin:10px 0 4px}.claim-id,.muted{color:var(--muted)}.claim-id{font:700 12px ui-monospace,monospace}.badge,.check{display:inline-block;border-radius:999px;padding:4px 9px;color:#fff;font-size:11px;font-weight:850}.SUPPORTED,.PASS{background:var(--good)}.PARTIALLY_SUPPORTED,.WARN{background:var(--warn)}.CONTRADICTED,.FAIL{background:var(--bad)}.NOT_FOUND{background:var(--purple)}.UNVERIFIABLE,.UNREVIEWED{background:#59636e}
+    .evidence{display:grid;gap:8px;margin-top:14px}.evidence-row{display:grid;grid-template-columns:minmax(150px,.8fr) minmax(110px,.45fr) minmax(240px,1.4fr) minmax(130px,.7fr);gap:12px;border-top:1px solid var(--line);padding-top:12px}.field small{display:block;color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}.quote{border-left:3px solid var(--accent);padding-left:10px}.checklist,.sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px}.check-card,.source-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}.check-card{display:flex;gap:10px}.check-card p,.source-card p{margin:3px 0;color:var(--muted)}.source-card h3{font-size:1rem;margin:0 0 5px}.source-meta{font-size:13px}.section-title{display:flex;justify-content:space-between;gap:12px;align-items:center}.integrity-alert{border-left:4px solid var(--bad);background:var(--panel);border-radius:8px;padding:12px 16px;margin:12px 0}
+    footer{margin-top:54px;color:var(--muted)}
+    @media(max-width:760px){main{width:min(100% - 20px,1180px);padding:28px 0 55px}header{grid-template-columns:1fr;gap:12px}.privacy{max-width:none}.editor-grid{grid-template-columns:1fr}textarea{min-height:235px}.preview-head{display:block}.evidence-row{grid-template-columns:1fr 1fr}.field.quote-field{grid-column:1/-1}.metric{flex:1 1 125px}}
+    @media(max-width:440px){.section-title{align-items:flex-start;flex-direction:column;gap:3px}.section-title h2{margin-bottom:2px}.evidence-row{grid-template-columns:1fr}.field.quote-field{grid-column:auto}.claim{padding:15px}}
+  </style>
+</head>
+<body><main>
+  <header>
+    <div><div class="eyebrow">PaperTrail public playground</div><h1>Audit the trail behind a claim.</h1><p class="lede">Paste or load a Markdown report and its evidence manifest. PaperTrail maps conclusions to exact source excerpts and refuses to turn an unchecked citation into support.</p></div>
+    <aside class="privacy"><strong>Private by design</strong><br><span class="muted">Files stay in this browser. There is no upload, account, analytics script, database, or API call.</span></aside>
+  </header>
+
+  <section aria-labelledby="input-title"><div class="section-title"><h2 id="input-title">Try it locally</h2><a href="demo/">Open the published demo report</a></div>
+    <div class="editor-grid">
+      <div class="editor"><div class="editor-actions"><label for="report-input">Markdown report</label><label class="file-button">Load .md<input id="report-file" type="file" accept=".md,text/markdown,text/plain"></label></div><textarea id="report-input" spellcheck="false"></textarea></div>
+      <div class="editor"><div class="editor-actions"><label for="manifest-input">Evidence manifest</label><label class="file-button">Load .json<input id="manifest-file" type="file" accept=".json,application/json"></label></div><textarea id="manifest-input" spellcheck="false"></textarea></div>
+    </div>
+    <div class="toolbar"><button class="button primary" id="audit-button">Audit locally</button><button class="button" id="reset-button">Restore demo</button><button class="button" id="json-button" disabled>Download JSON</button><button class="button" id="html-button" disabled>Download HTML report</button></div>
+    <div class="error" id="error" role="alert"></div>
+  </section>
+
+  <section aria-labelledby="preview-title"><h2 id="preview-title">Audit preview</h2><div id="preview" class="preview-empty">Run the included example or replace it with your own files.</div></section>
+  <footer>PaperTrail performs a structured evidence audit, not an automatic guarantee of truth. High-stakes verdicts still require independent review.</footer>
+</main>
+<script type="application/json" id="demo-data">__DEMO_DATA__</script>
+<script>
+  'use strict';
+  const demo=JSON.parse(document.getElementById('demo-data').textContent);
+  const reportInput=document.getElementById('report-input'),manifestInput=document.getElementById('manifest-input'),preview=document.getElementById('preview'),errorBox=document.getElementById('error');
+  const jsonButton=document.getElementById('json-button'),htmlButton=document.getElementById('html-button');
+  const verdictLabels={SUPPORTED:'Supported',PARTIALLY_SUPPORTED:'Partially supported',CONTRADICTED:'Contradicted',NOT_FOUND:'Not found',UNVERIFIABLE:'Unverifiable',UNREVIEWED:'Unreviewed'};
+  const verdicts=new Set(Object.keys(verdictLabels)),claimSections=new Set(['claims','key claims','conclusions','主要结论','核心结论','结论']),highRisk=new Set(['retracted','withdrawn','expression_of_concern']);
+  let currentAudit=null;
+  const text=(value)=>value==null?'':String(value).trim();
+  const node=(tag,className,content)=>{const item=document.createElement(tag);if(className)item.className=className;if(content!==undefined)item.textContent=content;return item};
+  const add=(parent,...children)=>{for(const child of children)parent.append(child);return parent};
+  const safeUrl=(value)=>{try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:''}catch{return''}};
+  const citationIds=(value)=>{const found=[];for(const match of value.matchAll(/\[@([^\]]+)\]/g))for(const part of match[1].split(/[;,]/)){const key=part.trim().replace(/^@/,'').trim();if(key&&!found.includes(key))found.push(key)}return found};
+  const cleanStatement=(value)=>value.replace(/\[@([^\]]+)\]/g,'').replace(/\s+/g,' ').trim();
+  function parseReport(markdown){
+    const lines=markdown.split(/\r?\n/),claims=[];let title='Untitled report',inClaims=false;
+    lines.forEach((line,index)=>{const heading=line.match(/^(#{1,6})\s+(.+?)\s*$/);if(heading){const headingText=heading[2].replace(/#+$/,'').trim();if(heading[1].length===1&&title==='Untitled report')title=headingText;inClaims=claimSections.has(headingText.toLowerCase());return}if(!inClaims)return;const listed=line.match(/^\s*(?:[-+*]|\d+[.)])\s+(.+?)\s*$/);if(!listed)return;const explicit=listed[1].match(/^\[(C[A-Za-z0-9_-]+)]\s*(.+)$/i),body=explicit?explicit[2]:listed[1],statement=cleanStatement(body);if(statement)claims.push({id:explicit?explicit[1].toUpperCase():`C${String(claims.length+1).padStart(3,'0')}`,statement,citations:citationIds(body),locator:`report.md#line-${index+1}`})});
+    if(!claims.length)throw new Error("No claims found. Add a '## Claims' or '## 结论' list.");
+    const ids=claims.map(x=>x.id),duplicate=ids.find((id,index)=>ids.indexOf(id)!==index);if(duplicate)throw new Error(`Duplicate claim ID: ${duplicate}`);return{title,claims};
+  }
+  function parseManifest(raw){
+    let data;try{data=JSON.parse(raw)}catch(exc){throw new Error(`Invalid evidence JSON: ${exc.message}`)}if(!data||typeof data!=='object'||Array.isArray(data))throw new Error('Manifest root must be an object.');
+    if(!Array.isArray(data.sources)||!Array.isArray(data.evidence))throw new Error('Manifest sources and evidence must be arrays.');
+    const sources=new Map();data.sources.forEach((source,index)=>{if(!source||typeof source!=='object'||Array.isArray(source))throw new Error(`sources[${index}] must be an object.`);const id=text(source.id),title=text(source.title);if(!id||!title)throw new Error(`sources[${index}] requires id and title.`);if(sources.has(id))throw new Error(`Duplicate source ID: ${id}`);if(source.version_conflict!==undefined&&source.version_conflict!==null&&typeof source.version_conflict!=='boolean')throw new Error(`sources[${index}].version_conflict must be true, false, or null.`);sources.set(id,{id,title,authors:Array.isArray(source.authors)?source.authors.map(text).filter(Boolean):text(source.authors)?[text(source.authors)]:[],year:source.year??'',doi:text(source.doi),url:text(source.url),publication_status:text(source.publication_status||'unknown').toLowerCase(),integrity_checked_at:text(source.integrity_checked_at),integrity_url:text(source.integrity_url),version:text(source.version),version_url:text(source.version_url),version_conflict:source.version_conflict??null,version_notes:text(source.version_notes),data_availability:text(source.data_availability||'unknown').toLowerCase(),data_url:text(source.data_url),code_availability:text(source.code_availability||'unknown').toLowerCase(),code_url:text(source.code_url)})});
+    const evidence=data.evidence.map((item,index)=>{if(!item||typeof item!=='object'||Array.isArray(item))throw new Error(`evidence[${index}] must be an object.`);const row={claim_id:text(item.claim_id).toUpperCase(),source_id:text(item.source_id),verdict:text(item.verdict||'UNREVIEWED').toUpperCase(),quote:text(item.quote),locator:text(item.locator),note:text(item.note)};if(!row.claim_id||!row.source_id)throw new Error(`evidence[${index}] requires claim_id and source_id.`);if(!verdicts.has(row.verdict))throw new Error(`evidence[${index}] has invalid verdict: ${row.verdict}`);if(['SUPPORTED','PARTIALLY_SUPPORTED','CONTRADICTED'].includes(row.verdict)&&(!row.quote||!row.locator))throw new Error(`evidence[${index}] verdict ${row.verdict} requires quote and locator.`);return row});return{sources,evidence};
+  }
+  const aggregate=(citations,rows)=>{if(!citations.length||rows.some(row=>!row.source_resolved))return'UNVERIFIABLE';const values=rows.map(row=>row.verdict);if(!values.length||values.every(x=>x==='UNREVIEWED'))return'UNREVIEWED';if(values.includes('CONTRADICTED'))return'CONTRADICTED';if(values.includes('PARTIALLY_SUPPORTED'))return'PARTIALLY_SUPPORTED';if(values.every(x=>x==='SUPPORTED'))return'SUPPORTED';if(values.every(x=>x==='NOT_FOUND'))return'NOT_FOUND';if(values.includes('UNVERIFIABLE'))return'UNVERIFIABLE';return'PARTIALLY_SUPPORTED'};
+  async function digest(value){const bytes=new TextEncoder().encode(value),hash=await crypto.subtle.digest('SHA-256',bytes);return[...new Uint8Array(hash)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+  function availability(sources,kind){if(!sources.length)return{status:'WARN',detail:'No resolved sources were available.'};const states=sources.map(x=>x[`${kind}_availability`]);if(states.every(x=>['available','not_applicable'].includes(x)))return{status:'PASS',detail:`Every source declares ${kind} availability.`};if(states.includes('unavailable'))return{status:'FAIL',detail:`At least one source declares ${kind} unavailable.`};return{status:'WARN',detail:`At least one source has unknown ${kind} availability.`}}
+  async function buildAudit(markdown,manifestRaw){
+    const report=parseReport(markdown),manifest=parseManifest(manifestRaw),claimIds=new Set(report.claims.map(x=>x.id));for(const row of manifest.evidence){if(!claimIds.has(row.claim_id))throw new Error(`Evidence references unknown claim: ${row.claim_id}`);if(!manifest.sources.has(row.source_id))throw new Error(`Evidence references unknown source: ${row.source_id}`)}
+    const pairs=new Map();for(const row of manifest.evidence){const key=`${row.claim_id}\u0000${row.source_id}`;if(!pairs.has(key))pairs.set(key,[]);pairs.get(key).push(row)}const cited=[],claims=report.claims.map(claim=>{const rows=[];for(const sourceId of claim.citations){if(!cited.includes(sourceId))cited.push(sourceId);const matched=pairs.get(`${claim.id}\u0000${sourceId}`)||[{claim_id:claim.id,source_id:sourceId,verdict:'UNREVIEWED',quote:'',locator:'',note:'No evidence review has been recorded.'}];for(const item of matched)rows.push({...item,source_resolved:manifest.sources.has(sourceId)})}return{...claim,verdict:aggregate(claim.citations,rows),evidence:rows}});
+    const sources=cited.filter(id=>manifest.sources.has(id)).map(id=>manifest.sources.get(id)),unresolved=cited.filter(id=>!manifest.sources.has(id)),reviewed=manifest.evidence.filter(x=>x.verdict!=='UNREVIEWED'),risky=sources.filter(x=>highRisk.has(x.publication_status)),conflicts=sources.filter(x=>x.version_conflict===true),allCited=claims.every(x=>x.citations.length),allKnown=sources.length&&sources.every(x=>x.publication_status!=='unknown'),versionsClear=sources.length&&sources.every(x=>x.version_conflict===false);
+    const checklist={claims_have_citations:{status:allCited?'PASS':'FAIL',detail:allCited?'Every claim has at least one citation.':'At least one claim has no citation.'},sources_resolved:{status:unresolved.length?'FAIL':'PASS',detail:unresolved.length?`Unresolved source IDs: ${unresolved.join(', ')}`:'Every citation resolves in the manifest.'},reviewed_evidence_has_quotes:{status:reviewed.length&&reviewed.every(x=>x.quote)?'PASS':'WARN',detail:'Decisive assessments require exact source text.'},reviewed_evidence_has_locators:{status:reviewed.length&&reviewed.every(x=>x.locator)?'PASS':'WARN',detail:'Decisive assessments require a page, section, paragraph, table, or URL locator.'},publication_status:{status:risky.length?'FAIL':allKnown?'PASS':'WARN',detail:risky.length?`High-risk publication status: ${risky.map(x=>x.id).join(', ')}.`:allKnown?'Publication status is recorded for every resolved source.':'At least one source has unknown correction or retraction status.'},version_conflicts:{status:conflicts.length?'FAIL':versionsClear?'PASS':'WARN',detail:conflicts.length?`Version conflicts require review: ${conflicts.map(x=>x.id).join(', ')}.`:versionsClear?'Every resolved source records no known version conflict.':'At least one source has not been checked for version conflicts.'},data_availability:availability(sources,'data'),code_availability:availability(sources,'code')};
+    const counts={};for(const key of verdicts)counts[key]=claims.filter(x=>x.verdict===key).length;return{schema_version:1,tool:'PaperTrail Web',generated_at:new Date().toISOString(),report:{title:report.title,file:'report.md',sha256:await digest(markdown)},manifest:{file:'evidence.json',sha256:await digest(manifestRaw)},summary:{claims:claims.length,sources:sources.length,unresolved_sources:unresolved.length,verdicts:counts},claims,sources,unresolved_source_ids:unresolved,reproducibility_checklist:checklist,limitations:['A citation match does not by itself establish that a source supports a claim.','Verdicts reflect recorded evidence rows and require independent review for high-stakes use.','Files were processed locally in this browser and were not uploaded by PaperTrail.']};
+  }
+  function renderAudit(audit){
+    preview.className='';preview.replaceChildren();const head=node('div','preview-head'),titleWrap=node('div');add(titleWrap,node('div','eyebrow','PaperTrail evidence audit'),node('h2','',audit.report.title));const hashes=node('div','hashes',`Report ${audit.report.sha256}\nManifest ${audit.manifest.sha256}`);add(head,titleWrap,hashes);preview.append(head);
+    const risky=audit.sources.filter(x=>highRisk.has(x.publication_status)||x.version_conflict===true);if(risky.length)preview.append(node('div','integrity-alert',`Integrity review required: ${risky.map(x=>x.id).join(', ')}`));
+    const metrics=node('div','metrics');for(const [verdict,count] of Object.entries(audit.summary.verdicts))if(count){const card=node('div','metric');add(card,node('strong','',String(count)),node('span','',verdictLabels[verdict]));metrics.append(card)}preview.append(metrics);
+    preview.append(node('h2','','Claims'));const claims=node('div','claims');for(const claim of audit.claims){const card=node('article','claim'),top=node('div','claim-top');add(top,node('span','claim-id',claim.id),node('span',`badge ${claim.verdict}`,verdictLabels[claim.verdict]));add(card,top,node('h3','',claim.statement),node('div','muted',claim.locator));const rows=node('div','evidence');if(!claim.evidence.length)rows.append(node('p','muted','No citations were recorded.'));for(const item of claim.evidence){const source=audit.sources.find(x=>x.id===item.source_id),row=node('div','evidence-row'),sourceField=node('div','field');sourceField.append(node('small','','Source'));const href=source&&safeUrl(source.url);if(href){const link=node('a','',source.title);link.href=href;link.rel='noreferrer';sourceField.append(link)}else sourceField.append(node('div','',source?source.title:`Unresolved: ${item.source_id}`));sourceField.append(node('div','muted',item.source_id));const verdictField=node('div','field');add(verdictField,node('small','','Assessment'),node('span',`badge ${item.verdict}`,verdictLabels[item.verdict]));const quoteField=node('div','field quote-field');add(quoteField,node('small','','Exact evidence'),node('div',item.quote?'quote':'muted',item.quote||'No quote recorded.'));const locatorField=node('div','field');add(locatorField,node('small','','Locator'),node('div','',item.locator||'Not recorded'),node('p','muted',item.note));add(row,sourceField,verdictField,quoteField,locatorField);rows.append(row)}card.append(rows);claims.append(card)}preview.append(claims);
+    preview.append(node('h2','','Reproducibility checklist'));const checklist=node('div','checklist');for(const [name,item] of Object.entries(audit.reproducibility_checklist)){const card=node('div','check-card');add(card,node('span',`check ${item.status}`,item.status));const body=node('div');add(body,node('strong','',name.replaceAll('_',' ').replace(/\b\w/g,x=>x.toUpperCase())),node('p','',item.detail));add(card,body);checklist.append(card)}preview.append(checklist);
+    preview.append(node('h2','','Source registry'));const sources=node('div','sources');for(const source of audit.sources){const card=node('article','source-card');add(card,node('h3','',source.title),node('div','source-meta',`${source.authors.join(', ')||'Unknown'} · ${source.year||'Unknown'}`),node('p','',`ID: ${source.id} · DOI: ${source.doi||'—'}`),node('p','',`Version: ${source.version||'unknown'} · Integrity: ${source.publication_status} · Conflict: ${source.version_conflict===null?'unknown':source.version_conflict?'yes':'no'}`));if(source.version_notes)card.append(node('p','',source.version_notes));sources.append(card)}preview.append(sources);
+  }
+  function setError(message=''){errorBox.textContent=message;errorBox.classList.toggle('visible',Boolean(message))}
+  function restore(){reportInput.value=demo.report;manifestInput.value=demo.manifest;currentAudit=null;jsonButton.disabled=true;htmlButton.disabled=true;preview.className='preview-empty';preview.textContent='Run the included example or replace it with your own files.';setError()}
+  async function run(){setError();try{currentAudit=await buildAudit(reportInput.value,manifestInput.value);renderAudit(currentAudit);jsonButton.disabled=false;htmlButton.disabled=false;preview.scrollIntoView({behavior:'smooth',block:'start'})}catch(exc){currentAudit=null;jsonButton.disabled=true;htmlButton.disabled=true;preview.className='preview-empty';preview.textContent='No audit was produced. Correct the input error and run it again.';setError(exc instanceof Error?exc.message:String(exc))}}
+  function download(name,content,type){const url=URL.createObjectURL(new Blob([content],{type})),link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+  document.getElementById('audit-button').addEventListener('click',run);document.getElementById('reset-button').addEventListener('click',restore);jsonButton.addEventListener('click',()=>currentAudit&&download('audit.json',JSON.stringify(currentAudit,null,2)+'\n','application/json'));htmlButton.addEventListener('click',()=>{if(!currentAudit)return;const title=currentAudit.report.title.replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x])),css=document.querySelector('style').textContent,body=preview.outerHTML;download('papertrail-report.html',`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · PaperTrail</title><style>${css}</style></head><body><main>${body}<footer>Generated locally by PaperTrail.</footer></main></body></html>`,'text/html')});
+  for(const [fileId,input] of [['report-file',reportInput],['manifest-file',manifestInput]])document.getElementById(fileId).addEventListener('change',async event=>{const file=event.target.files[0];if(file)input.value=await file.text()});restore();
+</script></body></html>"""
+
+
+def render_app_html(demo_report: str, demo_manifest: str) -> str:
+    payload = json.dumps(
+        {"report": demo_report, "manifest": demo_manifest},
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).replace("</", "<\\/")
+    return APP_TEMPLATE.replace("__DEMO_DATA__", payload)
+
+
+def build_site(output_dir: Path, demo_report: Path, demo_manifest: Path) -> None:
+    report_text = demo_report.read_text(encoding="utf-8")
+    manifest_text = demo_manifest.read_text(encoding="utf-8")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / "index.html").write_text(render_app_html(report_text, manifest_text), encoding="utf-8", newline="\n")
+    (output_dir / ".nojekyll").write_text("", encoding="utf-8")
+
+    demo_dir = output_dir / "demo"
+    demo_dir.mkdir(exist_ok=True)
+    audit = build_audit(demo_report.resolve(), demo_manifest.resolve())
+    atomic_write_json(demo_dir / "audit.json", audit)
+    (demo_dir / "index.html").write_text(render_html(audit), encoding="utf-8", newline="\n")
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=Path("papertrail-site"))
+    parser.add_argument("--demo-report", required=True, type=Path)
+    parser.add_argument("--demo-manifest", required=True, type=Path)
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    try:
+        build_site(args.output_dir, args.demo_report, args.demo_manifest)
+    except (OSError, ValueError) as exc:
+        print(f"ERROR: {exc}")
+        return 2
+    print(f"site={args.output_dir / 'index.html'}")
+    print(f"demo={args.output_dir / 'demo' / 'index.html'}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

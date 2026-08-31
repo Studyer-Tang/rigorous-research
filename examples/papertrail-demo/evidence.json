@@ -9,6 +9,12 @@
       "year": 2025,
       "url": "https://survey.stackoverflow.co/2025/ai",
       "publication_status": "active",
+      "integrity_checked_at": "2026-08-31",
+      "integrity_url": "https://survey.stackoverflow.co/2025/ai",
+      "version": "2025 web edition",
+      "version_url": "https://survey.stackoverflow.co/2025/ai",
+      "version_conflict": false,
+      "version_notes": "The audit uses the named 2025 survey page.",
       "data_availability": "available",
       "data_url": "https://survey.stackoverflow.co/2025/ai",
       "code_availability": "not_applicable"

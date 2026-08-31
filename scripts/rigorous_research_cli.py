@@ -22,6 +22,7 @@ COMMANDS = {
     "eval": Command("research_eval", "run release-gate benchmark and mutation cases"),
     "literature": Command("literature_search", "search and deduplicate scholarly metadata"),
     "math": Command("math_backend", "run exact SymPy or optional Lean checks"),
+    "papertrail": Command("papertrail_web", "build the browser-only PaperTrail playground"),
     "quality": Command("skill_quality", "validate the portable skill package"),
     "review": Command("review_protocol", "prepare and verify blinded review packets"),
     "seal": Command("research_seal", "seal plans and verify computation receipts"),

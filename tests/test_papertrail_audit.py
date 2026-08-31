@@ -39,6 +39,9 @@ class PaperTrailAuditTests(unittest.TestCase):
                             "year": 2026,
                             "url": "https://example.org/study",
                             "publication_status": "active",
+                            "integrity_checked_at": "2026-08-31",
+                            "version": "version of record",
+                            "version_conflict": False,
                             "data_availability": "available",
                             "data_url": "https://example.org/data",
                             "code_availability": "not_applicable",
@@ -82,6 +85,7 @@ class PaperTrailAuditTests(unittest.TestCase):
         self.assertEqual([claim["verdict"] for claim in audit["claims"]], ["SUPPORTED", "CONTRADICTED"])
         self.assertEqual(audit["reproducibility_checklist"]["sources_resolved"]["status"], "PASS")
         self.assertEqual(audit["reproducibility_checklist"]["data_availability"]["status"], "PASS")
+        self.assertEqual(audit["reproducibility_checklist"]["version_conflicts"]["status"], "PASS")
 
     def test_missing_source_is_unverifiable(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -103,6 +107,19 @@ class PaperTrailAuditTests(unittest.TestCase):
             manifest.write_text(json.dumps(data), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "requires quote and locator"):
                 papertrail.build_audit(report, manifest)
+
+    def test_retraction_and_version_conflict_fail_checklist(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report, manifest = self.write_fixture(root)
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            data["sources"][0]["publication_status"] = "retracted"
+            data["sources"][0]["version_conflict"] = True
+            manifest.write_text(json.dumps(data), encoding="utf-8")
+            audit = papertrail.build_audit(report, manifest)
+        checklist = audit["reproducibility_checklist"]
+        self.assertEqual(checklist["publication_status"]["status"], "FAIL")
+        self.assertEqual(checklist["version_conflicts"]["status"], "FAIL")
 
     def test_html_escapes_report_content(self):
         with tempfile.TemporaryDirectory() as directory:

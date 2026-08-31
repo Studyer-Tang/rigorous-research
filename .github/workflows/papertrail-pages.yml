@@ -1,4 +1,4 @@
-name: Publish PaperTrail demo
+name: Publish PaperTrail site
 
 on:
   workflow_dispatch:
@@ -23,12 +23,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Build PaperTrail demo
+      - name: Build PaperTrail site
         run: |
           python -m pip install .
-          rigorous-research audit examples/papertrail-demo/report.md \
-            --manifest examples/papertrail-demo/evidence.json \
-            --output-dir build/papertrail-demo
+          rigorous-research papertrail \
+            --output-dir build/papertrail-demo \
+            --demo-report examples/papertrail-demo/report.md \
+            --demo-manifest examples/papertrail-demo/evidence.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
