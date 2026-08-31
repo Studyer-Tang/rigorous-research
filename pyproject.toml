@@ -39,6 +39,7 @@ py-modules = [
   "inference_case",
   "literature_search",
   "math_backend",
+  "papertrail_audit",
   "research_io",
   "research_eval",
   "research_seal",

@@ -16,6 +16,7 @@ class Command:
 
 
 COMMANDS = {
+    "audit": Command("papertrail_audit", "audit report claims against exact source evidence"),
     "case": Command("inference_case", "create and validate a focused inference case"),
     "data": Command("finance_data", "freeze and verify public financial-data vintages"),
     "eval": Command("research_eval", "run release-gate benchmark and mutation cases"),

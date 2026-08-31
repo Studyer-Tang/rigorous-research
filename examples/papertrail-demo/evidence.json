@@ -1,0 +1,43 @@
+{
+  "sources": [
+    {
+      "id": "stackoverflow-2025",
+      "title": "2025 Stack Overflow Developer Survey: AI",
+      "authors": [
+        "Stack Overflow"
+      ],
+      "year": 2025,
+      "url": "https://survey.stackoverflow.co/2025/ai",
+      "publication_status": "active",
+      "data_availability": "available",
+      "data_url": "https://survey.stackoverflow.co/2025/ai",
+      "code_availability": "not_applicable"
+    }
+  ],
+  "evidence": [
+    {
+      "claim_id": "C001",
+      "source_id": "stackoverflow-2025",
+      "verdict": "SUPPORTED",
+      "quote": "84% of respondents are using or planning to use AI tools in their development process, an increase over last year (76%).",
+      "locator": "Section 3.1, AI tools in the development process",
+      "note": "The claim preserves the population and the use-or-plan-to-use qualification."
+    },
+    {
+      "claim_id": "C002",
+      "source_id": "stackoverflow-2025",
+      "verdict": "CONTRADICTED",
+      "quote": "More developers actively distrust the accuracy of AI tools (46%) than trust it (33%).",
+      "locator": "Section 3.2, Accuracy of AI tools",
+      "note": "The report reverses the direction of the published comparison."
+    },
+    {
+      "claim_id": "C003",
+      "source_id": "stackoverflow-2025",
+      "verdict": "CONTRADICTED",
+      "quote": "AI agents are not yet mainstream. A majority of developers (52%) either don't use agents or stick to simpler AI tools.",
+      "locator": "Section 3.3, AI agents",
+      "note": "Universal adoption is much stronger than the survey supports."
+    }
+  ]
+}

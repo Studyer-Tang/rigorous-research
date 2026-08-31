@@ -57,9 +57,22 @@ The workspace contains an inference case. A short, focused audit can use the inf
 | Statistical inference | Computes IID and Newey-West uncertainty, circular block-bootstrap intervals, Holm/BH corrections, and DGP coverage grids | A standard estimator name does not establish finite-sample validity |
 | Financial data | Freezes raw Kenneth French or FRED responses with vintage, schema, units, calendar, adjustments, license, and SHA-256 | Latest-revised data is not point-in-time information |
 | Governance | Seals preregistered plans, binds backend receipts to inputs and versions, and creates blind independent-review packets | Self-authored evidence labels and stale review receipts cannot clear a strict release gate |
+| PaperTrail | Turns Markdown claims plus exact source excerpts into static HTML and JSON audits | A nearby citation is not treated as support, and missing review stays `UNREVIEWED` |
 
 The strict path is tamper-evident: changing a claim input, dependency lock, certificate, raw data file, author case, or review packet invalidates the corresponding receipt.
 Reviewer identity is self-declared locally; high-stakes use still needs an authenticated external identity or signature bound to the receipt hash.
+
+## Audit a report with PaperTrail
+
+PaperTrail is the public-facing claim audit layer. It maps each conclusion to its cited sources, records whether the source supports or contradicts it, exposes publication/data/code metadata, and produces a reproducibility checklist.
+
+```text
+rigorous-research audit report.md \
+  --manifest evidence.json \
+  --output-dir papertrail-site
+```
+
+The result is a self-contained `index.html` plus machine-readable `audit.json`; neither needs a backend, database, account, or API key. Decisive assessments require an exact quote and locator. See the [PaperTrail guide](docs/papertrail.md) and [worked demo](examples/papertrail-demo/report.md).
 
 ## Why the gates matter
 
@@ -177,6 +190,11 @@ python scripts/finance_data.py fetch --help
 
 # Prepare a packet that hides the author's answer from the reviewer
 python scripts/review_protocol.py prepare --help
+
+# Generate a static claim-to-source audit
+rigorous-research audit examples/papertrail-demo/report.md \
+  --manifest examples/papertrail-demo/evidence.json \
+  --output-dir build/papertrail-demo
 ```
 
 ## Outputs
@@ -188,6 +206,7 @@ Depending on the question, the skill can produce:
 - a statistical design with estimand, identification, uncertainty, and sensitivity analysis;
 - a point-in-time factor or backtest audit;
 - a checksum-linked computation ledger;
+- a browsable PaperTrail claim-to-source audit and reproducibility checklist;
 - a paper-ready research brief stating the strongest supported and unsupported claims.
 
 It cannot manufacture novelty, infer the truth of an unchecked prose proof, obtain proprietary data, or turn a weak design into identification. Those obligations remain visible rather than hidden behind fluent prose.
@@ -207,6 +226,7 @@ scripts/research_workspace.py      planning, sources, runs, recovery, briefs
 scripts/inference_case.py          inference ledger and release gates
 scripts/research_io.py             shared JSON, hashing, and portable-path primitives
 scripts/rigorous_research_cli.py    unified terminal entry point
+scripts/papertrail_audit.py         Markdown-to-HTML/JSON claim audit generator
 scripts/literature_search.py       five-provider retrieval and conservative deduplication
 scripts/math_backend.py            SymPy certificates and optional Lean checking
 scripts/statistics_backend.py      HAC, bootstrap, multiplicity, coverage simulation
@@ -217,6 +237,7 @@ scripts/research_eval.py           release fixtures and adversarial mutations
 scripts/skill_quality.py            portable package and privacy checks
 scripts/build_plugin.py             Agent Plugin distribution builder
 assets/                            reusable research templates
+examples/papertrail-demo/          static audit input and evidence manifest
 examples/                          complete released workspaces and small audits
 evals/                             deterministic release-gate benchmark manifest
 tests/                             behavioral and integrity tests

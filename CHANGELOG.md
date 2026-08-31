@@ -2,6 +2,20 @@
 
 All notable changes are recorded here. Versions follow Semantic Versioning for the Python toolkit and compatible `major.minor` metadata in `SKILL.md`.
 
+## Unreleased
+
+### Added
+
+- PaperTrail Markdown claim extraction and evidence-manifest validation.
+- Self-contained HTML and JSON claim-to-source audits with verdict filters, exact excerpts, source metadata, input hashes, and a reproducibility checklist.
+- A worked PaperTrail demo, user guide, behavioral tests, and a manual GitHub Pages publication workflow.
+
+### Safety
+
+- Citation presence never implies source support; absent review remains `UNREVIEWED`.
+- Supported, partially supported, and contradicted evidence rows require an exact quote and locator.
+- Generated reports escape report content and permit only HTTP(S) source links.
+
 ## 1.2.0 - 2026-08-30
 
 ### Added
