@@ -83,7 +83,9 @@ rigorous-research papertrail \
   --demo-manifest examples/papertrail-demo/evidence.json
 ```
 
-Its homepage accepts pasted text or local `.md` and `.json` files, audits them entirely inside the browser, and downloads the result as JSON or a standalone HTML report. The English/简体中文 interface follows the browser language by default, can be switched manually, and exports the HTML report in the selected language. The page has no upload endpoint, analytics script, external runtime dependency, or account requirement.
+Its homepage accepts pasted text or local `.md`, `.json`, and `.pdf` files, audits them inside the browser, and downloads the result as JSON or a standalone HTML report. The PDF workspace renders pages, extracts embedded text, hashes the file, and attaches selected passages to claims as `UNREVIEWED` evidence with page and selection anchors. The English/简体中文 interface follows the browser language by default, can be switched manually, and exports the HTML report in the selected language. The page has no upload endpoint, analytics script, account requirement, or embedded API key.
+
+PDF.js is fetched from a pinned jsDelivr URL only after the user selects a PDF. Optional OCR fetches a pinned Tesseract.js runtime and language data only after the user explicitly requests OCR; the PDF and rendered page stay in the browser. The ordinary Markdown/JSON audit path does not load either dependency.
 
 Import research material before auditing it:
 

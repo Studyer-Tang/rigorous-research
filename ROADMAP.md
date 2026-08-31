@@ -12,6 +12,7 @@ The roadmap favors stronger evidence and easier independent reproduction over ad
 ## Next: 1.3
 
 - Promote the initial Crossref DOI enrichment to a schema-versioned, multi-provider integrity pipeline with Crossmark/Retraction Watch checks and deterministic replay fixtures.
+- Vendor optional PDF.js/OCR assets for fully offline deployments and add deterministic browser fixtures for scanned documents.
 - Bind PaperTrail reviewer provenance to signed portable review receipts and authenticated reviewer identities.
 - Add deterministic replay fixtures for every literature provider and explicit retry/backoff records.
 - Introduce JSON Schemas for inference cases, workspaces, receipts, review packets, and literature matrices.

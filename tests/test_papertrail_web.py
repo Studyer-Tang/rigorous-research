@@ -82,6 +82,13 @@ class PaperTrailWebTests(unittest.TestCase):
         self.assertIn("追溯每一个结论背后的证据", app)
         self.assertIn("papertrail-language", app)
         self.assertIn("checklistLabels[language]", app)
+        self.assertIn('id="pdf-file"', app)
+        self.assertIn('id="attach-selection"', app)
+        self.assertIn("pdfjs-dist@4.10.38", app)
+        self.assertIn("tesseract.js@6.0.1", app)
+        self.assertIn("file_sha256:pdfFileHash", app)
+        self.assertIn("kind:pdfExtractionKind", app)
+        self.assertIn("PDF 证据工作区", app)
         self.assertEqual(demo_audit["reproducibility_checklist"]["review_provenance"]["status"], "PASS")
 
     def test_cli_builds_pages_ready_site(self):

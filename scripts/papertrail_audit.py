@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import math
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -135,6 +136,55 @@ def _optional_bool(value: Any, field: str) -> bool | None:
     return value
 
 
+def _evidence_anchor(value: Any, field: str) -> dict[str, Any] | None:
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError(f"{field} must be an object or null")
+    kind = _text(value.get("kind"), f"{field}.kind")
+    if kind not in {"pdf_text", "pdf_ocr"}:
+        raise ValueError(f"{field}.kind must be pdf_text or pdf_ocr")
+    file_sha256 = _text(value.get("file_sha256"), f"{field}.file_sha256").lower()
+    if not re.fullmatch(r"[0-9a-f]{64}", file_sha256):
+        raise ValueError(f"{field}.file_sha256 must be a SHA-256 digest")
+    page = value.get("page")
+    start = value.get("start")
+    end = value.get("end")
+    if not isinstance(page, int) or isinstance(page, bool) or page < 1:
+        raise ValueError(f"{field}.page must be a positive integer")
+    if not isinstance(start, int) or isinstance(start, bool) or start < 0:
+        raise ValueError(f"{field}.start must be a non-negative integer")
+    if not isinstance(end, int) or isinstance(end, bool) or end <= start:
+        raise ValueError(f"{field}.end must be greater than start")
+    raw_rects = value.get("rects", [])
+    if not isinstance(raw_rects, list) or len(raw_rects) > 100:
+        raise ValueError(f"{field}.rects must be an array with at most 100 items")
+    rects: list[dict[str, float]] = []
+    for rect_index, raw_rect in enumerate(raw_rects):
+        if not isinstance(raw_rect, dict):
+            raise ValueError(f"{field}.rects[{rect_index}] must be an object")
+        rect: dict[str, float] = {}
+        for name in ("x", "y", "width", "height"):
+            raw_number = raw_rect.get(name)
+            if (
+                not isinstance(raw_number, (int, float))
+                or isinstance(raw_number, bool)
+                or not math.isfinite(raw_number)
+                or not 0 <= raw_number <= 1
+            ):
+                raise ValueError(f"{field}.rects[{rect_index}].{name} must be between 0 and 1")
+            rect[name] = round(float(raw_number), 6)
+        rects.append(rect)
+    return {
+        "kind": kind,
+        "file_sha256": file_sha256,
+        "page": page,
+        "start": start,
+        "end": end,
+        "rects": rects,
+    }
+
+
 def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
     data = load_json_object(path)
     raw_sources = data.get("sources", [])
@@ -201,6 +251,7 @@ def load_manifest(path: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str,
             "reviewed_at": _text(raw.get("reviewed_at"), f"evidence[{index}].reviewed_at"),
             "review_method": _text(raw.get("review_method", "unknown"), f"evidence[{index}].review_method").lower(),
             "review_receipt": _text(raw.get("review_receipt"), f"evidence[{index}].review_receipt"),
+            "anchor": _evidence_anchor(raw.get("anchor"), f"evidence[{index}].anchor"),
         }
         if not item["claim_id"] or not item["source_id"]:
             raise ValueError(f"evidence[{index}] requires claim_id and source_id")
@@ -285,6 +336,7 @@ def build_audit(report_path: Path, manifest_path: Path) -> dict[str, Any]:
                         "reviewed_at": "",
                         "review_method": "unknown",
                         "review_receipt": "",
+                        "anchor": None,
                     }
                 ]
             for item in matched:
@@ -478,19 +530,25 @@ def render_html(audit: dict[str, Any]) -> str:
                 if item["quote"]
                 else '<p class="muted">No quote recorded.</p>'
             )
+            anchor = item.get("anchor")
+            anchor_markup = (
+                f"<small>PDF page {anchor['page']} · {esc(anchor['kind'])} · SHA-256 {esc(anchor['file_sha256'][:12])}…</small>"
+                if anchor
+                else ""
+            )
             evidence_rows.append(
                 "<tr>"
                 f'<td data-label="Source">{source_markup}<small>{esc(item["source_id"])}</small></td>'
                 f'<td data-label="Assessment"><span class="badge {item["verdict"].lower()}">{esc(VERDICT_LABELS[item["verdict"]])}</span></td>'
                 f'<td data-label="Exact evidence">{quote}</td>'
-                f'<td data-label="Locator">{esc(item["locator"] or "Not recorded")}</td>'
+                f'<td data-label="Locator">{esc(item["locator"] or "Not recorded")}{anchor_markup}</td>'
                 f'<td data-label="Review">{esc(item["reviewer_id"] or "Unattributed")}<small>{esc(item["review_method"])} · {esc(item["reviewed_at"] or "time unknown")}</small></td>'
                 f'<td data-label="Review note">{esc(item["note"])}</td>'
                 "</tr>"
             )
         if not evidence_rows:
             evidence_rows.append(
-                '<tr><td colspan="5" class="muted">No citations were recorded for this claim.</td></tr>'
+                '<tr><td colspan="6" class="muted">No citations were recorded for this claim.</td></tr>'
             )
         claim_sections.append(
             f'<article class="claim" data-verdict="{esc(claim["verdict"])}">'

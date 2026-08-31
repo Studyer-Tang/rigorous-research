@@ -156,6 +156,42 @@ class PaperTrailAuditTests(unittest.TestCase):
             audit = papertrail.build_audit(report, manifest)
         self.assertEqual(audit["reproducibility_checklist"]["review_consensus"]["status"], "FAIL")
 
+    def test_pdf_anchor_is_validated_and_preserved(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report, manifest = self.write_fixture(root)
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            data["evidence"][0]["anchor"] = {
+                "kind": "pdf_text",
+                "file_sha256": "a" * 64,
+                "page": 3,
+                "start": 12,
+                "end": 30,
+                "rects": [{"x": 0.1, "y": 0.2, "width": 0.3, "height": 0.04}],
+            }
+            manifest.write_text(json.dumps(data), encoding="utf-8")
+            audit = papertrail.build_audit(report, manifest)
+            rendered = papertrail.render_html(audit)
+        self.assertEqual(audit["claims"][0]["evidence"][0]["anchor"]["page"], 3)
+        self.assertIn("PDF page 3", rendered)
+        self.assertIn("SHA-256 aaaaaaaaaaaa…", rendered)
+
+    def test_pdf_anchor_rejects_invalid_digest(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report, manifest = self.write_fixture(root)
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            data["evidence"][0]["anchor"] = {
+                "kind": "pdf_text",
+                "file_sha256": "not-a-digest",
+                "page": 1,
+                "start": 0,
+                "end": 4,
+            }
+            manifest.write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "must be a SHA-256 digest"):
+                papertrail.build_audit(report, manifest)
+
     def test_html_escapes_report_content(self):
         with tempfile.TemporaryDirectory() as directory:
             report, manifest = self.write_fixture(Path(directory))

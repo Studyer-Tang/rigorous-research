@@ -68,6 +68,21 @@ Availability values should be `available`, `unavailable`, `not_applicable`, or `
 
 `review_method` can be `human`, `ai_assisted`, `automated`, or `unknown`. AI-assisted rows are drafts: PaperTrail rejects a decisive `SUPPORTED`, `PARTIALLY_SUPPORTED`, or `CONTRADICTED` verdict until a human or governed automated review takes responsibility. Multiple reviewers may record separate rows for one claim/source pair. Supporting and contradicting reviewer verdicts on the same pair fail the consensus checklist instead of being silently averaged.
 
+Browser-selected PDF evidence may include a portable anchor:
+
+```json
+{
+  "kind": "pdf_text",
+  "file_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "page": 3,
+  "start": 120,
+  "end": 188,
+  "rects": [{"x": 0.1, "y": 0.2, "width": 0.3, "height": 0.04}]
+}
+```
+
+The anchor is stored in the evidence row as `anchor`. `kind` is `pdf_text` for embedded text or `pdf_ocr` for locally recognized text. Normalized rectangles are inspection hints; the exact quote, page locator, and PDF SHA-256 remain the portable verification record. OCR-derived quotes require especially careful human comparison with the rendered page.
+
 ## Import PDF, web, and DOI sources
 
 Install the optional PDF reader:
@@ -120,7 +135,9 @@ This produces:
 - `demo/audit.json`: its machine-readable evidence packet;
 - `.nojekyll`: a GitHub Pages compatibility marker.
 
-The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. An explicit DOI lookup sends only the DOI to Crossref. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
+The interactive page reads selected files with the browser file API. It does not send them to this project, GitHub, or an AI model. The PDF workspace supports files up to 50 MB, renders pages, extracts embedded text, records the file SHA-256, and attaches selected passages to claim/source pairs as `UNREVIEWED` evidence. An explicit DOI lookup sends only the DOI to Crossref. The Python CLI remains the release/CI path; the playground is designed for exploration and drafting evidence manifests.
+
+PDF.js is downloaded from a pinned jsDelivr URL only after a PDF is selected. OCR is never automatic: its button downloads a pinned Tesseract.js runtime and the selected English or Chinese/English language data, then recognizes the rendered page locally. These optional downloads disclose network activity but do not transmit the PDF or page image. Self-hosters may vendor the pinned assets and replace the constants in `papertrail_web.py` when an offline deployment is required.
 
 The playground supports English and Simplified Chinese. It initially follows the browser language, provides a manual language selector, remembers that preference locally, and uses the selected language for the live audit and downloaded HTML report. Markdown claim headings may use either `Claims`/`Conclusions` or `结论`/`主要结论`/`核心结论`; report content is never machine-translated.
 
