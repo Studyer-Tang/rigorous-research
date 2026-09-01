@@ -22,7 +22,7 @@ classifiers = [
 
 [project.optional-dependencies]
 math = ["sympy>=1.13,<2"]
-dev = ["build>=1.2", "PyYAML>=6", "ruff==0.16.1"]
+dev = ["build>=1.2", "PyYAML>=6", "ruff==0.16.5"]
 papertrail = ["pypdf>=5,<7"]
 
 [project.scripts]
