@@ -262,6 +262,91 @@ class ResearchWorkspaceTests(unittest.TestCase):
         self.assertEqual(result, 1)
         self.assertIn("task entries require string IDs", output.getvalue())
 
+    def test_next_actions_respects_dependencies_and_preserves_files(self):
+        workspace = self.workspace()
+        first = self.add_task(workspace)
+        second = self.add_task(workspace, depends_on=[first])
+        original = workspace.read_bytes()
+        journal = (workspace.parent / "research-journal.jsonl").read_bytes()
+        _, data = rw.load(workspace)
+        result = rw.next_actions(data, workspace)
+        self.assertEqual(
+            [(item["task_id"], item["action"]) for item in result["actions"]],
+            [(first, "EXECUTE_READY_TASK"), (second, "WAIT_FOR_DEPENDENCIES")],
+        )
+        self.assertEqual(result["actions"][1]["blocked_by"], [first])
+        self.assertFalse(result["release_ready"])
+        self.assertTrue(result["release_gaps"])
+        self.assertEqual(workspace.read_bytes(), original)
+        self.assertEqual((workspace.parent / "research-journal.jsonl").read_bytes(), journal)
+        data["tasks"] = [None]
+        self.assertEqual(rw.next_actions(data, workspace)["status"], "REPAIR_REQUIRED")
+
+    def test_failed_launch_is_recorded_and_followup_identifies_failure(self):
+        workspace = self.workspace()
+        task = self.add_task(workspace)
+        result = rw.main(
+            [
+                "run",
+                str(workspace),
+                "--task",
+                task,
+                "--label",
+                "missing tool",
+                "--complete",
+                "--",
+                str(self.root / "missing-executable"),
+            ]
+        )
+        self.assertEqual(result, 127)
+        _, data = rw.load(workspace)
+        self.assertEqual(data["tasks"][0]["status"], "PLANNED")
+        self.assertTrue(data["runs"][0]["launch_error"])
+        self.assertEqual(rw.validate_workspace(data, workspace)[0], [])
+        self.assertEqual(rw.next_actions(data, workspace)["actions"][0]["action"], "INVESTIGATE_FAILED_RUN")
+        # A later attempt uses a fresh run ID and retains the failure evidence.
+        result = rw.main(
+            [
+                "run",
+                str(workspace),
+                "--task",
+                task,
+                "--label",
+                "retry",
+                "--",
+                sys.executable,
+                "-c",
+                "print('recovered')",
+            ]
+        )
+        self.assertEqual(result, 0)
+        _, data = rw.load(workspace)
+        self.assertEqual([run["id"] for run in data["runs"]], ["R001", "R002"])
+        self.assertEqual(rw.next_actions(data, workspace)["actions"][0]["action"], "RESUME_AND_CHECK_ACCEPTANCE")
+
+    def test_invalid_workspace_does_not_launch_a_command(self):
+        workspace = self.workspace()
+        task = self.add_task(workspace)
+        _, data = rw.load(workspace)
+        data["sources"] = [None]
+        rw.atomic_json(workspace, data)
+        result = rw.main(
+            [
+                "run",
+                str(workspace),
+                "--task",
+                task,
+                "--label",
+                "blocked",
+                "--",
+                sys.executable,
+                "-c",
+                "raise RuntimeError('must not execute')",
+            ]
+        )
+        self.assertEqual(result, 2)
+        self.assertFalse((workspace.parent / "artifacts" / "runs").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

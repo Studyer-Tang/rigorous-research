@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If this software supports your research, cite the repository and the exact released version used."
 title: "Rigorous Research"
 type: software
-version: 1.6.0
-date-released: 2026-08-31
+version: 1.7.0
+date-released: 2026-09-05
 license: MIT
 authors:
   - name: "Rigorous Research contributors"

@@ -370,6 +370,68 @@ def task_ready(task: dict[str, Any], tasks: list[dict[str, Any]]) -> bool:
     return task.get("status") == "PLANNED" and all(statuses.get(dep) == "DONE" for dep in task.get("depends_on", []))
 
 
+def next_actions(data: dict[str, Any], workspace_path: Path) -> dict[str, Any]:
+    """Produce a read-only handoff for the next research step and release obligations."""
+    errors, warnings = validate_workspace(data, workspace_path)
+    result: dict[str, Any] = {
+        "schema_version": 1,
+        "workspace_id": data.get("workspace_id"),
+        "integrity_errors": errors,
+        "warnings": warnings,
+        "actions": [],
+        "release_ready": False,
+        "release_gaps": [],
+        "policy": "Proposals do not execute commands, mark acceptance conditions satisfied, or change scientific verdicts.",
+    }
+    if errors:
+        result["status"] = "REPAIR_REQUIRED"
+        return result
+    statuses = {task["id"]: task["status"] for task in data["tasks"]}
+    latest_runs = {run["task_id"]: run for run in data["runs"]}
+    for task in data["tasks"]:
+        if task["status"] == "DONE":
+            continue
+        dependencies = [value for value in task.get("depends_on", []) if statuses[value] != "DONE"]
+        latest = latest_runs.get(task["id"])
+        if dependencies:
+            action = "WAIT_FOR_DEPENDENCIES"
+        elif task["status"] == "BLOCKED":
+            action = "RESOLVE_BLOCKER"
+        elif latest and latest.get("returncode") != 0:
+            action = "INVESTIGATE_FAILED_RUN"
+        elif task["status"] == "IN_PROGRESS" or latest:
+            action = "RESUME_AND_CHECK_ACCEPTANCE"
+        else:
+            action = "EXECUTE_READY_TASK"
+        result["actions"].append(
+            {
+                "task_id": task["id"],
+                "action": action,
+                "title": task["title"],
+                "kind": task["kind"],
+                "acceptance": task["acceptance"],
+                "deliverable": task.get("deliverable", ""),
+                "blocked_by": dependencies,
+                "note": task.get("note", ""),
+                "latest_run": latest["id"] if latest else None,
+            }
+        )
+    priority = {
+        "INVESTIGATE_FAILED_RUN": 0,
+        "RESOLVE_BLOCKER": 1,
+        "RESUME_AND_CHECK_ACCEPTANCE": 2,
+        "EXECUTE_READY_TASK": 3,
+        "WAIT_FOR_DEPENDENCIES": 4,
+    }
+    result["actions"].sort(key=lambda item: priority[item["action"]])
+    release_errors, release_warnings = validate_workspace(data, workspace_path, release=True)
+    result["release_gaps"] = release_errors
+    result["warnings"] = list(dict.fromkeys(warnings + release_warnings))
+    result["release_ready"] = not release_errors
+    result["status"] = "READY_FOR_RELEASE" if not release_errors else "WORK_REMAINS"
+    return result
+
+
 def render_brief(data: dict[str, Any], workspace_path: Path) -> str:
     lines = [
         f"# Research workspace: {data['workspace_id']}",
@@ -484,6 +546,9 @@ def build_parser() -> argparse.ArgumentParser:
     status.add_argument("workspace", type=Path)
     status.add_argument("--release", action="store_true", help="show release-gate gaps")
 
+    next_step = commands.add_parser("next", help="propose next research actions and list release gaps as JSON")
+    next_step.add_argument("workspace", type=Path)
+
     validate = commands.add_parser("validate", help="validate workspace structure and evidence integrity")
     validate.add_argument("workspace", type=Path)
     validate.add_argument("--release", action="store_true")
@@ -496,6 +561,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 def execute_run(args: argparse.Namespace) -> int:
     workspace_path, data = load(args.workspace)
+    errors, _ = validate_workspace(data, workspace_path)
+    if errors:
+        raise WorkspaceError("; ".join(errors))
+    if args.timeout <= 0:
+        raise WorkspaceError("run timeout must be positive")
     task = find(data["tasks"], args.task, "task")
     statuses = {item["id"]: item.get("status") for item in data["tasks"]}
     incomplete = [dep for dep in task.get("depends_on", []) if statuses.get(dep) != "DONE"]
@@ -518,6 +588,7 @@ def execute_run(args: argparse.Namespace) -> int:
     run_dir.mkdir(parents=True, exist_ok=False)
     started = timestamp()
     timed_out = False
+    launch_error = ""
     try:
         completed = subprocess.run(
             command,
@@ -538,6 +609,11 @@ def execute_run(args: argparse.Namespace) -> int:
         stdout = exc.stdout.decode("utf-8", "replace") if isinstance(exc.stdout, bytes) else (exc.stdout or "")
         stderr = exc.stderr.decode("utf-8", "replace") if isinstance(exc.stderr, bytes) else (exc.stderr or "")
         stderr += f"\nTimed out after {args.timeout} seconds.\n"
+    except OSError as exc:
+        returncode = 127
+        stdout = ""
+        launch_error = str(exc)
+        stderr = f"Command could not start: {launch_error}\n"
     stdout_path = run_dir / "stdout.txt"
     stderr_path = run_dir / "stderr.txt"
     stdout_path.write_text(stdout, encoding="utf-8", newline="\n")
@@ -569,6 +645,7 @@ def execute_run(args: argparse.Namespace) -> int:
         "finished_at": timestamp(),
         "returncode": returncode,
         "timed_out": timed_out,
+        "launch_error": launch_error,
         "environment": {
             "python": sys.version.split()[0],
             "platform": platform.platform(),
@@ -619,6 +696,11 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "run":
             return execute_run(args)
+        if args.command == "next":
+            path, data = load(args.workspace)
+            result = next_actions(data, path)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 1 if result["integrity_errors"] else 0
         if args.command == "validate":
             path, data = load(args.workspace)
             errors, warnings = validate_workspace(data, path, release=args.release)

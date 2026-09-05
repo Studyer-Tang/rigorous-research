@@ -16,7 +16,11 @@ If the design must change, retain the old seal, create a new protocol version, e
 
 ## Mathematical backends
 
-`math_backend.py sympy-identity` is decisive only when the difference reduces to an exact zero polynomial, or to a zero rational numerator with the denominator exceptional set stated. General `simplify` success remains diagnostic because branch cuts, domains, and modeling semantics may be absent.
+`math_backend.py sympy-identity` is decisive only for rational arithmetic when the difference reduces to an exact zero polynomial, with every original denominator exceptional set stated. Restrictions survive cancellation, including `x/x`, zero numerators, both sides of the equation, and matrix entries. General `simplify` success remains diagnostic because branch cuts, domains, and modeling semantics may be absent. Check `domain_analysis_complete` before treating `exceptional_set: none` as complete domain coverage.
+
+Expressions accept declared symbols, integer literals, explicit `+ - * / **`, and one-argument `sin`, `cos`, `tan`, `exp`, `log`, `sqrt`, and `Abs`, with constants `pi`, `E`, and `I`. Use `1/10` rather than `0.1` for exact arithmetic. Python attributes, indexing, arbitrary function calls, undeclared symbols, and reserved symbol names are rejected. Expression size, nesting, and integer powers are bounded, but expensive symbolic computations still need an external process timeout.
+
+Use `math_backend.py sympy-counterexample --lhs "x**2" --rhs "x" --symbols x --values 0 1 1/2 --output witness.json` to find a reproducible exact witness. This command supports rational arithmetic with integer powers, filters positive/integer assumptions and original denominator restrictions, and records tested/excluded points and the search budget. The Cartesian grid is traversed in input order. Exit code 0 means a witness was found, 1 means inconclusive, and 2 means invalid input. A witness refutes the specified identity only; it does not resolve unrelated assumptions or modeling questions. A finite grid without a witness never proves the universal claim. The witness is not an established identity certificate and does not pass `verify-receipt --require-established`; register and review counterexample evidence separately under the inference case contract.
 
 `math_backend.py lean-check` records compiler output and rejects files containing `sorry`, `admit`, or user-declared axioms as closed certificates. Lean is optional. If it is unavailable, report that the formal check was not run; never imitate a compiler transcript.
 

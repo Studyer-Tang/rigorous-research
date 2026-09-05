@@ -61,6 +61,19 @@ The workspace contains an inference case. A short, focused audit can use the inf
 
 For code ownership and module boundaries, see [Architecture](docs/architecture.md).
 
+### Exact falsification and research continuation
+
+Version 1.7 preserves original denominator restrictions in algebraic certificates, including after cancellation in an identity or matrix determinant. Mathematical expressions use explicit arithmetic and exact fractions; write `1/10` instead of `0.1`.
+
+```text
+rigorous-research math sympy-counterexample --lhs "x**2" --rhs "x" --symbols x --values 0 1 1/2 --max-points 100 --output witness.json
+rigorous-research workspace next cases/my-research/workspace.json
+```
+
+The first command finds an exact witness at `x = 1/2`, with `lhs = 1/4` and `rhs = 1/2`. Search excludes undefined points and respects declared positive/integer assumptions. Exhausting the grid without a witness remains `INCONCLUSIVE`.
+
+The second command produces a read-only JSON handoff: dependency-ready tasks, failure investigations, acceptance checks, and release gaps. It helps an agent choose its next authorized step while preserving the inference-case verdict and independent-review requirements. Failed executable launches are retained as hashed run records so a later attempt can be traced. See [verification backends](references/verification-backends.md) and [research workflow](references/research-workflow.md) for limits and exit codes.
+
 ## Verification stack
 
 | Layer | What it does | What it refuses to claim |

@@ -2,12 +2,13 @@
 
 The roadmap favors stronger evidence and easier independent reproduction over adding broad but weak automation.
 
-## Current release: 1.5
+## Current release: 1.7
 
 - One installable CLI for cases, workspaces, literature, research integrity, governed AI review, mathematics, statistics, data, sealing, review, evaluation, and repository quality.
 - Five literature metadata providers with conservative deduplication and visible retrieval gaps.
 - Positive release fixtures and adversarial release-gate mutations.
 - Python 3.10-3.12 CI, Agent Plugin packaging, SBOM generation, provenance attestation, and security scanning.
+- Domain-preserving rational identity checks, exact bounded counterexample search, and read-only research continuation proposals with durable launch-failure records.
 
 ## Delivered in 1.4–1.5
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rigorous-research"
-version = "1.6.0"
+version = "1.7.0"
 description = "Evidence-gated research workspaces for mathematics, statistics, and quantitative finance"
 readme = "README.md"
 requires-python = ">=3.10"

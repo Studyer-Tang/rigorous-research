@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.6"
+  version: "1.7"
   skill-author: Rigorous Research contributors
 ---
 
@@ -17,6 +17,8 @@ Treat every research result as an **inference contract**: a scoped claim joined 
 - For research spanning literature, dependent tasks, computations, revisions, or a paper-quality output, use `scripts/research_workspace.py` and read [references/research-workflow.md](references/research-workflow.md). The workspace initializes and validates an inference case inside it.
 
 After installation, the same tools are available through `rigorous-research case ...` and `rigorous-research workspace ...`. For command selection, optional dependencies, and direct-script fallbacks, read [references/tool-routing.md](references/tool-routing.md).
+
+When resuming an investigation, use `rigorous-research workspace next workspace.json` to inspect dependency-ready work, failed runs, acceptance conditions, and release gaps. Carry out the applicable next step within the user's scope; the generated proposal does not satisfy acceptance conditions or set a verdict. For rational identities, use `rigorous-research math sympy-counterexample` to search a bounded exact grid before investing in a proof. Preserve the original domain restrictions; a search with no witness remains inconclusive.
 
 Do not create a managed workspace for a short explanation or an answer that has no persistent artifacts.
 

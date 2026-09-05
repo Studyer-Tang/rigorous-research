@@ -54,6 +54,10 @@ Set this stage only after every planned work item is complete and both the works
 
 ## Commands
 
+For a continuation handoff, run `rigorous-research workspace next workspace.json`. Its JSON lists runnable tasks with acceptance conditions, unresolved dependencies, explicit blockers, the most recent failed run, and release-gate gaps. Repair integrity errors before resuming work. Review a failed run before retrying; after a successful run, check acceptance instead of repeating the computation automatically. The proposal is read-only and does not infer that a completed command proves a claim. It does not invent commands or run an unattended research loop.
+
+Command launch failures are recorded with return code 127, the error message, and hashed captures. A retry receives a new run ID; prior failures remain visible and still block strict release under the existing release policy. Non-positive timeouts and invalid workspaces are rejected before execution. This continuation support does not provide process isolation or crash recovery for a forcibly killed parent process.
+
 Initialize both layers:
 
 ```text

@@ -4,8 +4,18 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.7.0 - 2026-09-05
+
+### Added
+
+- Bounded exact rational counterexample search with reproducible assignments, assumption/domain filtering, and explicit search coverage; no witness remains `INCONCLUSIVE`.
+- Read-only `workspace next` JSON proposals for ready tasks, dependency blockers, failed runs, acceptance checks, and release gaps.
+
 ### Fixed
 
+- Identity and determinant certificates retain original denominator exclusions after cancellation and keep non-rational simplifications diagnostic.
+- Mathematical input is parsed as explicit arithmetic without Python evaluation; undeclared symbols and floating-point literals are rejected with actionable errors.
+- Failed command launches produce hashed execution records and preserve retry history; invalid workspaces are rejected before launching a process.
 - Workspace validation reports malformed collections, IDs, dependency links, source links, and output lists instead of raising unexpected exceptions.
 - Dependency cycle detection uses an iterative traversal so long research plans do not hit Python's recursion limit.
 
