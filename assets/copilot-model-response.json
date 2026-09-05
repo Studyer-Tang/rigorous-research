@@ -1,0 +1,23 @@
+{
+  "actions": [
+    {
+      "task_id": "",
+      "claim_id": "C001",
+      "objective": "Verify the closed-interval polynomial bound with exact arithmetic.",
+      "rationale": "The proposed expression is x*(1-x), with the claimed real interval [0,1]. Check that this translation matches the research question before registering evidence.",
+      "falsifier": "Any exact rational point in [0,1] with x*(1-x) < 0 would refute the bound.",
+      "search_queries": [],
+      "tests": [
+        {
+          "operation": "bound",
+          "lhs": "x*(1-x)",
+          "rhs": "0",
+          "symbols": ["x"],
+          "lower": "0",
+          "upper": "1",
+          "values": []
+        }
+      ]
+    }
+  ]
+}

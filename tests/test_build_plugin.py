@@ -25,6 +25,10 @@ class PluginBuildTests(unittest.TestCase):
             manifest = json.loads((output / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["version"], plugin.project_version(ROOT))
             self.assertTrue((output / "skills" / "rigorous-research" / "SKILL.md").is_file())
+            self.assertTrue((output / "skills" / "rigorous-research" / "references" / "research-copilot.md").is_file())
+            self.assertTrue(
+                (output / "skills" / "rigorous-research" / "assets" / "copilot-model-response.json").is_file()
+            )
             self.assertEqual(list((output / "skills" / "rigorous-research" / "scripts").glob("*.egg-info")), [])
             self.assertFalse((output / "skills" / "rigorous-research" / "scripts" / "build_plugin.py").exists())
             self.assertTrue(

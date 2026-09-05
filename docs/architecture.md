@@ -24,6 +24,7 @@ The browser is a drafting surface. The Python audit implementation remains the r
 | Component | Responsibility |
 |---|---|
 | `research_workspace.py` | Work packages, execution records, artifacts, and release validation |
+| `research_copilot.py` | Portable model context, allowlisted research proposals, and bounded mathematical subclaim checks |
 | `inference_case.py` | Claims, assumptions, falsifiers, evidence roles, and calibrated verdicts |
 | `research_seal.py` | Plan seals and computation receipts |
 | `review_protocol.py` | Blind review packets and adjudication |

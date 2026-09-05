@@ -16,6 +16,47 @@ SPEC.loader.exec_module(mb)
 
 
 class MathBackendTests(unittest.TestCase):
+    def test_interval_bound_has_exact_bernstein_certificate(self):
+        result = mb.polynomial_bound_certificate("x*(1-x)", "0", "x", "0", "1")
+        self.assertTrue(result["bound_established"])
+        self.assertEqual(result["certified_intervals"][0]["bernstein_coefficients"], ["0", "1/2", "0"])
+
+    def test_subdivision_certificates_reconstruct_the_polynomial(self):
+        sympy = mb.load_sympy()
+        t = sympy.Symbol("t")
+        result = mb.polynomial_bound_certificate("x**2", "0", "x", "-1", "1", max_depth=1)
+        intervals = result["certified_intervals"]
+        self.assertEqual(intervals[0]["lower"], "-1")
+        self.assertEqual(intervals[-1]["upper"], "1")
+        self.assertEqual(intervals[0]["upper"], intervals[1]["lower"])
+        for interval in intervals:
+            a, b = sympy.Rational(interval["lower"]), sympy.Rational(interval["upper"])
+            coefficients = list(map(sympy.Rational, interval["bernstein_coefficients"]))
+            reconstructed = sum(
+                value * sympy.binomial(2, k) * t**k * (1 - t) ** (2 - k) for k, value in enumerate(coefficients)
+            )
+            self.assertEqual(sympy.expand(reconstructed - (a + (b - a) * t) ** 2), 0)
+
+    def test_negative_coefficient_alone_is_not_a_refutation(self):
+        result = mb.polynomial_bound_certificate("x**2", "0", "x", "-1", "1", max_depth=0)
+        self.assertEqual(result["status"], "INCONCLUSIVE")
+        self.assertIsNone(result["witness"])
+        result = mb.polynomial_bound_certificate("x**2", "0", "x", "-1", "1", max_depth=1)
+        self.assertTrue(result["bound_established"])
+        self.assertEqual(len(result["certified_intervals"]), 2)
+
+    def test_false_interval_bound_has_exact_negative_witness(self):
+        result = mb.polynomial_bound_certificate("x*(1-x)", "0", "x", "0", "2")
+        self.assertEqual(result["status"], "REFUTED")
+        self.assertEqual(result["witness"]["difference"], "-2")
+
+    def test_interval_bound_rejects_erased_domain_and_nonpolynomials(self):
+        for lhs in ("x/x", "sin(x)", "sqrt(x)", "x**41"):
+            with self.subTest(lhs=lhs), self.assertRaises(ValueError):
+                mb.polynomial_bound_certificate(lhs, "0", "x", "0", "1")
+        result = mb.polynomial_bound_certificate("0", "0", "x", "-1/2", "1/2")
+        self.assertTrue(result["bound_established"])
+
     def test_exact_polynomial_identity_is_decisive(self):
         result = mb.identity_certificate("(x + 1)**3", "x**3 + 3*x**2 + 3*x + 1", ["x"])
         self.assertTrue(result["identity_established"])

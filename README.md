@@ -1,5 +1,7 @@
 # Rigorous Research
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 A Codex skill and evidence-gated research laboratory for mathematics, statistics, and quantitative finance.
 
 [![validate](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml/badge.svg)](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml)
@@ -32,6 +34,29 @@ release a reproducible evidence packet
 ```
 
 The project does not assume that a completed computation confirms a hypothesis. `SUPPORTED`, `REFUTED`, `INCONCLUSIVE`, and `MISSPECIFIED` are distinct releasable outcomes.
+
+## Start with AI-assisted research
+
+Version 1.8 adds **Research Copilot**: export the current question, inference contract, sources, and remaining work; ask a model for falsifiable next steps; then check proposed mathematical subclaims with local exact arithmetic. You can use a normal chat by attaching the packet, an OpenAI Responses model, a compatible chat endpoint, or local Ollama. The model ID is user-selected, so the workflow is not tied to a particular model generation.
+
+```text
+python -m pip install -e ".[math]"
+rigorous-research copilot prepare cases/my-research/workspace.json --output packet.json
+rigorous-research copilot advise packet.json --response model-response.json --output advice.json
+rigorous-research copilot verify cases/my-research/workspace.json --packet packet.json --advice advice.json --output verification.json
+```
+
+`packet.json` contains the instructions and response schema for the model; save its JSON reply as `model-response.json`. No network request is made in this workflow. For API mode, choose `--provider openai-responses`, `openai-compatible`, or `ollama`, and supply your endpoint and model. API keys are read from `RESEARCH_AI_API_KEY` by default. See the [Copilot guide](references/research-copilot.md) for an end-to-end offline example and API setup.
+
+The verifier accepts only built-in identity, counterexample, and polynomial-bound checks. It rejects stale packets, limits check counts and execution time, and records failures without changing the workspace or scientific verdict. A model-proposed expression may still misrepresent the question: translating the research claim into mathematics remains an explicit review obligation. This is a CLI and agent workflow, not a new browser chat interface.
+
+### Prove a polynomial bound over an interval
+
+```text
+rigorous-research math sympy-bound --lhs "x*(1-x)" --rhs 0 --symbol x --lower 0 --upper 1 --output bound.json
+```
+
+This proves `x(1-x) >= 0` for every real `x` in `[0,1]` using exact rational Bernstein coefficients. Subdivision can prove bounds whose initial coefficients are inconclusive. A negative coefficient alone never refutes a bound; refutation requires an exact negative value at an admissible point. Degree and subdivision limits are explicit, and unsupported or unfinished checks remain errors or `INCONCLUSIVE`.
 
 ## Core research engine
 
@@ -333,7 +358,7 @@ pyproject.toml                     package, CLI, optional dependencies, and Ruff
 - Codex for skill invocation
 - Python 3.10+ for the optional local tools
 - standard-library core; SymPy is the only optional mathematical dependency
-- network access only for examples that explicitly download public data
+- network access only when explicitly retrieving live sources/data, loading optional browser assets, or calling a model endpoint
 
 Install the exact-mathematics backend with `pip install -r requirements-math.txt`. Lean 4 is optional and is invoked only when present; the project never substitutes a simulated formal check.
 

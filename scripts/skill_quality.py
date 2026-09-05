@@ -34,6 +34,7 @@ SECRET_PATTERNS = (
 DOC_ROOTS = (
     "SKILL.md",
     "README.md",
+    "README.zh-CN.md",
     "CONTRIBUTING.md",
     "SECURITY.md",
     "CHANGELOG.md",

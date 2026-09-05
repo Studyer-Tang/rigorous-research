@@ -4,6 +4,20 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.8.0 - 2026-09-06
+
+### Added
+
+- Exact Bernstein subdivision certificates for one-variable polynomial inequalities on closed rational intervals, with rational counterexamples and explicit inconclusive results.
+- Research Copilot context export, offline model-response import, and adapters for OpenAI Responses structured output, compatible chat endpoints, and local Ollama.
+- Allowlisted mathematical proposal checks in child processes, with per-test timeouts, stale-workspace rejection, bounded grids, and no automatic claim or task mutation.
+- English and Simplified Chinese README entry points and a reproducible offline copilot example.
+
+### Trust boundaries
+
+- Model suggestions remain drafts. A successful subclaim check cannot establish its translation into the original scientific claim.
+- Remote requests are explicit, use environment-only keys, reject redirects, and have no automatic paid retries. Adapter validation uses offline replay tests; provider/model compatibility must be checked against the user's endpoint.
+
 ## 1.7.0 - 2026-09-05
 
 ### Added

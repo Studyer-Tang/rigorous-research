@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.7"
+  version: "1.8"
   skill-author: Rigorous Research contributors
 ---
 
@@ -19,6 +19,8 @@ Treat every research result as an **inference contract**: a scoped claim joined 
 After installation, the same tools are available through `rigorous-research case ...` and `rigorous-research workspace ...`. For command selection, optional dependencies, and direct-script fallbacks, read [references/tool-routing.md](references/tool-routing.md).
 
 When resuming an investigation, use `rigorous-research workspace next workspace.json` to inspect dependency-ready work, failed runs, acceptance conditions, and release gaps. Carry out the applicable next step within the user's scope; the generated proposal does not satisfy acceptance conditions or set a verdict. For rational identities, use `rigorous-research math sympy-counterexample` to search a bounded exact grid before investing in a proof. Preserve the original domain restrictions; a search with no witness remains inconclusive.
+
+For model-assisted research planning, use `rigorous-research copilot prepare` to export a bounded research packet, `copilot advise` to import a chat response or call a user-selected model, and `copilot verify` to check the proposed mathematical subclaims. Read [references/research-copilot.md](references/research-copilot.md) for the response contract, provider setup, and replay workflow. For one-variable polynomial bounds on closed rational intervals, use `math sympy-bound`. Check that the tested expression and interval represent the original claim before promoting any result; a model's translation is an open obligation.
 
 Do not create a managed workspace for a short explanation or an answer that has no persistent artifacts.
 

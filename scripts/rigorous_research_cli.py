@@ -16,6 +16,9 @@ class Command:
 
 
 COMMANDS = {
+    "copilot": Command(
+        "research_copilot", "prepare research context, obtain model proposals, and verify mathematical subclaims"
+    ),
     "ai-review": Command("governed_ai_reviewer", "draft AI-assisted reviews under mandatory human control"),
     "audit": Command("papertrail_audit", "audit report claims against exact source evidence"),
     "case": Command("inference_case", "create and validate a focused inference case"),

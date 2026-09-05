@@ -266,7 +266,7 @@ def counterexample_search(
         raise ValueError("counterexample search currently requires rational arithmetic with integer powers")
     grid = []
     for value in values:
-        if not re.fullmatch(r"[+-]?\d+(?:/[1-9]\d*)?", value):
+        if not isinstance(value, str) or not re.fullmatch(r"[+-]?\d+(?:/[1-9]\d*)?", value):
             raise ValueError(f"grid values must be exact integers or fractions: {value}")
         number = sympy.Rational(value)
         if number not in grid:
@@ -314,6 +314,81 @@ def counterexample_search(
         "status": "COUNTEREXAMPLE_FOUND" if witness else "INCONCLUSIVE",
         "recommended_evidence_role": "decisive" if witness else "diagnostic",
         "warning": "A witness refutes only the stated identity under the recorded assumptions. Finite search cannot prove a universal identity; case verdict and release review remain separate.",
+    }
+
+
+def polynomial_bound_certificate(
+    lhs_text: str, rhs_text: str, symbol: str, lower: str, upper: str, max_depth: int = 8
+) -> dict[str, Any]:
+    """Certify lhs >= rhs on a closed rational interval using exact Bernstein coefficients."""
+    sympy = load_sympy()
+    if type(max_depth) is not int or not 0 <= max_depth <= 10:
+        raise ValueError("max-depth must be between 0 and 10")
+    if any(
+        not isinstance(value, str) or not re.fullmatch(r"[+-]?\d+(?:/[1-9]\d*)?", value) for value in (lower, upper)
+    ):
+        raise ValueError("interval endpoints must be exact integers or fractions")
+    a, b = sympy.Rational(lower), sympy.Rational(upper)
+    if a >= b:
+        raise ValueError("lower must be smaller than upper")
+    table = symbol_table(sympy, [symbol], {symbol}, set(), set())
+    lhs, left_guards, left_rational = parse_expression(lhs_text, table)
+    rhs, right_guards, right_rational = parse_expression(rhs_text, table)
+    if not left_rational or not right_rational or any(guard.free_symbols for guard in left_guards + right_guards):
+        raise ValueError("bound certificates require polynomial expressions without variable denominators")
+    x = table[symbol]
+    try:
+        polynomial = sympy.Poly(lhs - rhs, x, domain="QQ")
+    except (sympy.PolynomialError, sympy.polys.polyerrors.CoercionFailed) as exc:
+        raise ValueError("bound certificates require a polynomial over the rationals") from exc
+    degree = 0 if polynomial.is_zero else int(polynomial.degree())
+    if degree > 40:
+        raise ValueError("bound certificates support degree at most 40")
+    pending = [(a, b, 0)]
+    certified, unresolved = [], []
+    witness = None
+    while pending:
+        start, end, depth = pending.pop()
+        midpoint = (start + end) / 2
+        for point in (start, midpoint, end):
+            value = polynomial.eval(point)
+            if value < 0:
+                witness = {"assignment": {symbol: str(point)}, "difference": str(value)}
+                break
+        if witness:
+            break
+        shifted = polynomial.compose(sympy.Poly(start + (end - start) * x, x, domain="QQ"))
+        coefficients = [
+            sum(shifted.nth(j) * sympy.binomial(k, j) / sympy.binomial(degree, j) for j in range(k + 1))
+            for k in range(degree + 1)
+        ]
+        if all(value >= 0 for value in coefficients):
+            certified.append(
+                {"lower": str(start), "upper": str(end), "bernstein_coefficients": list(map(str, coefficients))}
+            )
+        elif depth == max_depth:
+            unresolved.append({"lower": str(start), "upper": str(end)})
+        else:
+            pending.extend([(midpoint, end, depth + 1), (start, midpoint, depth + 1)])
+    established = not witness and not unresolved
+    return {
+        "schema_version": 1,
+        "backend": "sympy",
+        "backend_version": sympy.__version__,
+        "created_at": timestamp(),
+        "operation": "polynomial-interval-bound",
+        "claim": {"lhs": lhs_text, "rhs": rhs_text, "relation": ">=", "symbol": symbol, "lower": lower, "upper": upper},
+        "method": "exact-rational-Bernstein-subdivision",
+        "polynomial": str(polynomial.as_expr()),
+        "degree": degree,
+        "max_depth": max_depth,
+        "bound_established": established,
+        "status": "ESTABLISHED" if established else "REFUTED" if witness else "INCONCLUSIVE",
+        "certified_intervals": certified,
+        "unresolved_intervals": unresolved,
+        "witness": witness,
+        "recommended_evidence_role": "decisive" if established or witness else "diagnostic",
+        "warning": "Nonnegative Bernstein coefficients prove the stated closed-interval polynomial bound. A negative coefficient alone is not a counterexample. This certificate does not prove that a model-proposed bound represents the research claim.",
     }
 
 
@@ -408,12 +483,24 @@ def build_parser() -> argparse.ArgumentParser:
     search.add_argument("--lhs", required=True)
     search.add_argument("--rhs", required=True)
     search.add_argument("--symbols", nargs="+", required=True)
-    search.add_argument("--values", nargs="+", default=["-2", "-1", "0", "1", "2"])
+    grid_input = search.add_mutually_exclusive_group()
+    grid_input.add_argument("--values", nargs="+", default=["-2", "-1", "0", "1", "2"])
+    grid_input.add_argument(
+        "--grid-file", type=Path, help="JSON array of exact rational strings, including negative fractions"
+    )
     search.add_argument("--max-points", type=int, default=1000)
     search.add_argument("--real", nargs="*", default=[])
     search.add_argument("--positive", nargs="*", default=[])
     search.add_argument("--integer", nargs="*", default=[])
     search.add_argument("--output", type=Path, required=True)
+    bound = commands.add_parser("sympy-bound", help="certify a polynomial inequality on a closed rational interval")
+    bound.add_argument("--lhs", required=True)
+    bound.add_argument("--rhs", default="0")
+    bound.add_argument("--symbol", required=True)
+    bound.add_argument("--lower", required=True)
+    bound.add_argument("--upper", required=True)
+    bound.add_argument("--max-depth", type=int, default=8)
+    bound.add_argument("--output", type=Path, required=True)
     lean = commands.add_parser("lean-check")
     lean.add_argument("--file", type=Path, required=True)
     lean.add_argument("--lean", default="")
@@ -426,6 +513,13 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "sympy-bound":
+            result = polynomial_bound_certificate(
+                args.lhs, args.rhs, args.symbol, args.lower, args.upper, args.max_depth
+            )
+            write_json(args.output, result)
+            print(f"status={result['status']} method={result['method']}")
+            return 0 if result["bound_established"] else 1
         if args.command in {"sympy-identity", "sympy-matrix-det", "sympy-counterexample"}:
             assumption_args = {
                 "real": set(args.real),
@@ -433,8 +527,11 @@ def main(argv: list[str] | None = None) -> int:
                 "integer": set(args.integer),
             }
             if args.command == "sympy-counterexample":
+                values = json.loads(args.grid_file.read_text(encoding="utf-8")) if args.grid_file else args.values
+                if not isinstance(values, list):
+                    raise ValueError("grid file must contain a JSON array of exact rational strings")
                 result = counterexample_search(
-                    args.lhs, args.rhs, args.symbols, args.values, args.max_points, **assumption_args
+                    args.lhs, args.rhs, args.symbols, values, args.max_points, **assumption_args
                 )
                 write_json(args.output, result)
                 print(f"status={result['status']} tested={result['tested_points']}")
