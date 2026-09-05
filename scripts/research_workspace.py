@@ -8,6 +8,7 @@ import json
 import platform
 import subprocess
 import sys
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -161,6 +162,8 @@ def validate_workspace(
         values = [item.get("id") for item in items if isinstance(item, dict)]
         if len(values) != len(items) or any(not isinstance(value, str) for value in values):
             errors.append(f"{label} entries require string IDs")
+            id_sets[label] = set()
+            continue
         malformed = [
             value
             for value in values
@@ -169,7 +172,7 @@ def validate_workspace(
         ]
         if malformed:
             errors.append(f"malformed {label} IDs: {', '.join(sorted(malformed))}")
-        duplicates = {value for value in values if values.count(value) > 1}
+        duplicates = {value for value, count in Counter(values).items() if count > 1}
         if duplicates:
             errors.append(f"duplicate {label} IDs: {', '.join(sorted(duplicates))}")
         overlap = all_ids.intersection(value for value in values if isinstance(value, str))
@@ -177,6 +180,26 @@ def validate_workspace(
             errors.append(f"IDs reused across workspace collections: {', '.join(sorted(overlap))}")
         id_sets[label] = {value for value in values if isinstance(value, str)}
         all_ids.update(id_sets[label])
+
+    # Reject malformed collections before dereferencing entries or hashing IDs.
+    if errors:
+        return errors, warnings
+    for task in data["tasks"]:
+        dependencies = task.get("depends_on", [])
+        if not isinstance(dependencies, list) or any(not isinstance(value, str) for value in dependencies):
+            errors.append(f"{task['id']}: depends_on must be a list of task IDs")
+    for source in data["sources"]:
+        supports = source.get("supports", [])
+        if not isinstance(supports, list) or any(not isinstance(value, str) for value in supports):
+            errors.append(f"{source['id']}: supports must be a list of claim IDs")
+    for run in data["runs"]:
+        if not isinstance(run.get("task_id"), str):
+            errors.append(f"{run['id']}: task_id must be a string")
+        outputs = run.get("outputs", [])
+        if not isinstance(outputs, list) or any(not isinstance(output, dict) for output in outputs):
+            errors.append(f"{run['id']}: outputs must be a list of objects")
+    if errors:
+        return errors, warnings
 
     task_ids = id_sets.get("task", set())
     for task in data["tasks"]:
@@ -202,7 +225,7 @@ def validate_workspace(
             if not artifact.is_file():
                 errors.append(f"{task_id}: completed deliverable is missing: {deliverable}")
 
-    # Detect dependency cycles with a small depth-first traversal.
+    # Iterative traversal also handles long dependency chains without recursion limits.
     graph = {
         task.get("id"): task.get("depends_on", [])
         for task in data["tasks"]
@@ -211,21 +234,19 @@ def validate_workspace(
     visiting: set[str] = set()
     visited: set[str] = set()
 
-    def visit(node: str) -> None:
-        if node in visiting:
-            errors.append(f"dependency cycle includes {node}")
-            return
-        if node in visited:
-            return
-        visiting.add(node)
-        for parent in graph.get(node, []):
-            if parent in graph:
-                visit(parent)
-        visiting.remove(node)
-        visited.add(node)
-
-    for node in graph:
-        visit(node)
+    for start in graph:
+        stack = [(start, False)]
+        while stack:
+            node, exiting = stack.pop()
+            if exiting:
+                visiting.remove(node)
+                visited.add(node)
+            elif node in visiting:
+                errors.append(f"dependency cycle includes {node}")
+            elif node not in visited:
+                visiting.add(node)
+                stack.append((node, True))
+                stack.extend((parent, False) for parent in graph[node] if parent in graph)
 
     for source in data["sources"]:
         source_id = source.get("id", "?")

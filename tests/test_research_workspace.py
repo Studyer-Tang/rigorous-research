@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import contextlib
+import copy
 import importlib.util
+import io
 import sys
 import tempfile
 import unittest
@@ -189,6 +192,75 @@ class ResearchWorkspaceTests(unittest.TestCase):
         self.assertEqual(data["sources"][0]["supports"], ["C001"])
         errors, _ = rw.validate_workspace(data, workspace)
         self.assertEqual(errors, [])
+
+    def test_malformed_collections_are_reported_without_crashing(self):
+        workspace = self.workspace()
+        _, original = rw.load(workspace)
+        for collection in ("tasks", "sources", "runs"):
+            for value in (None, {}, "invalid", [None], ["invalid"], [{"id": []}], [{"id": None}]):
+                for release in (False, True):
+                    with self.subTest(collection=collection, value=value, release=release):
+                        data = copy.deepcopy(original)
+                        data[collection] = value
+                        errors, _ = rw.validate_workspace(data, workspace, release=release)
+                        self.assertTrue(errors)
+                        self.assertEqual(data[collection], value)
+
+    def test_malformed_relationships_and_outputs_are_rejected(self):
+        workspace = self.workspace()
+        _, original = rw.load(workspace)
+        cases = (
+            ("tasks", "W001", "depends_on", "list of task IDs"),
+            ("sources", "S001", "supports", "list of claim IDs"),
+            ("runs", "R001", "outputs", "list of objects"),
+            ("runs", "R001", "task_id", "must be a string"),
+        )
+        for collection, item_id, field, message in cases:
+            for value in (None, {}, 1, [None], ["invalid"] if field == "outputs" else [{}]):
+                with self.subTest(field=field, value=value):
+                    data = copy.deepcopy(original)
+                    data[collection] = [{"id": item_id, field: value}]
+                    errors, _ = rw.validate_workspace(data, workspace)
+                    self.assertTrue(any(message in error for error in errors), errors)
+
+    def test_duplicate_ids_return_a_diagnostic(self):
+        workspace = self.workspace()
+        task = self.add_task(workspace)
+        _, data = rw.load(workspace)
+        data["tasks"].append(copy.deepcopy(data["tasks"][0]))
+        errors, _ = rw.validate_workspace(data, workspace)
+        self.assertIn(f"duplicate task IDs: {task}", errors)
+
+    def test_long_dependency_chain_and_cycle(self):
+        workspace = self.workspace()
+        _, data = rw.load(workspace)
+        data["tasks"] = [
+            {
+                "id": f"W{number:03d}",
+                "title": "Check a lemma",
+                "kind": "proof",
+                "acceptance": "Proof checked",
+                "status": "PLANNED",
+                "depends_on": [f"W{number + 1:03d}"] if number < 999 else [],
+            }
+            for number in range(1, 1000)
+        ]
+        errors, _ = rw.validate_workspace(data, workspace)
+        self.assertEqual(errors, [])
+        data["tasks"][-1]["depends_on"] = ["W001"]
+        errors, _ = rw.validate_workspace(data, workspace)
+        self.assertTrue(any("dependency cycle" in error for error in errors))
+
+    def test_validate_cli_reports_malformed_workspace(self):
+        workspace = self.workspace()
+        _, data = rw.load(workspace)
+        data["tasks"] = [None]
+        rw.atomic_json(workspace, data)
+        output = io.StringIO()
+        with contextlib.redirect_stderr(output):
+            result = rw.main(["validate", str(workspace)])
+        self.assertEqual(result, 1)
+        self.assertIn("task entries require string IDs", output.getvalue())
 
 
 if __name__ == "__main__":

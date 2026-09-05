@@ -4,6 +4,15 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+### Fixed
+
+- Workspace validation reports malformed collections, IDs, dependency links, source links, and output lists instead of raising unexpected exceptions.
+- Dependency cycle detection uses an iterative traversal so long research plans do not hit Python's recursion limit.
+
+### Changed
+
+- Duplicate workspace IDs are counted in one pass instead of repeatedly scanning each collection.
+
 ## 1.6.0 - 2026-08-31
 
 ### Added
