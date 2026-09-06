@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "backend": "sympy",
+  "backend_version": "1.14.0",
+  "created_at": "2026-09-06T01:33:35.699232+00:00",
+  "operation": "polynomial-interval-bound",
+  "claim": {
+    "lhs": "x**2",
+    "rhs": "0",
+    "relation": ">=",
+    "symbol": "x",
+    "lower": "-1",
+    "upper": "1"
+  },
+  "method": "exact-rational-Bernstein-subdivision",
+  "polynomial": "x**2",
+  "degree": 2,
+  "max_depth": 1,
+  "bound_established": true,
+  "status": "ESTABLISHED",
+  "certified_intervals": [
+    {
+      "lower": "-1",
+      "upper": "0",
+      "bernstein_coefficients": [
+        "1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "lower": "0",
+      "upper": "1",
+      "bernstein_coefficients": [
+        "0",
+        "0",
+        "1"
+      ]
+    }
+  ],
+  "unresolved_intervals": [],
+  "witness": null,
+  "recommended_evidence_role": "decisive",
+  "warning": "Nonnegative Bernstein coefficients prove the stated closed-interval polynomial bound. A negative coefficient alone is not a counterexample. This certificate does not prove that a model-proposed bound represents the research claim."
+}

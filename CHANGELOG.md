@@ -4,6 +4,22 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.9.0 - 2026-09-06
+
+### Added
+
+- Schema 4 proof-obligation graphs with domain dependencies, targeted falsification tasks, evidence-bound resolutions, and visible derived states in case/workspace reports and Copilot context.
+- Independent exact checking of rational identities, matrix determinants, rational witnesses, and Bernstein interval certificates. Strict SymPy receipt verification recomputes mathematical content, including established bounds.
+- Statistical applicability contracts for Student-t means, IID mean CLTs, Newey-West means, Holm, and Benjamini-Hochberg, with checksummed condition evidence and finite-sample/asymptotic separation.
+- Adversarial regression cases for forged certificates, omitted domains, interval gaps, false witnesses, inappropriate guarantees, and selection assumptions.
+
+### Changed
+
+- Lean compilation is always diagnostic: compiler success and source scanning do not establish the target theorem or imported axiom closure. Strict established receipts reject these records.
+- Schema 3 cases retain legacy validation with a warning. New schema 4 supported statistics/finance cases require a registered applicable statistical contract; unsupported methods remain outside this gate's coverage.
+- Proof-graph changes invalidate recorded resolutions. Human reviews are explicitly local attestations, not authenticated identities or machine proofs. Copilot producer and independent checker share a bounded per-test timeout.
+- Holm validates the significance level, and mean summaries expose their unverified assumptions and asymptotic limits.
+
 ## 1.8.0 - 2026-09-06
 
 ### Added

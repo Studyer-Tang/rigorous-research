@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rigorous-research"
-version = "1.8.0"
+version = "1.9.0"
 description = "Evidence-gated research workspaces for mathematics, statistics, and quantitative finance"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -37,6 +37,7 @@ Issues = "https://github.com/Studyer-Tang/rigorous-research/issues"
 package-dir = { "" = "scripts" }
 packages = ["papertrail_frontend"]
 py-modules = [
+  "certificate_verifier",
   "finance_data",
   "governed_ai_reviewer",
   "inference_case",
@@ -45,6 +46,7 @@ py-modules = [
   "papertrail_audit",
   "papertrail_import",
   "papertrail_web",
+  "proof_contracts",
   "research_io",
   "research_copilot",
   "research_eval",
@@ -55,6 +57,7 @@ py-modules = [
   "rigorous_research_cli",
   "skill_quality",
   "statistics_backend",
+  "statistical_contract",
 ]
 
 [tool.setuptools.package-data]

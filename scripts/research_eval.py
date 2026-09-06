@@ -30,6 +30,16 @@ def set_pointer(document: Any, pointer: str, value: Any) -> None:
 
 
 def validate_artifact(kind: str, path: Path) -> list[str]:
+    if kind == "certificate":
+        from certificate_verifier import verify
+
+        result = verify(json.loads(path.read_text(encoding="utf-8")))
+        return [] if result["status"] in ("ESTABLISHED", "REFUTED") else result["errors"] or [result["status"]]
+    if kind == "statistical-contract":
+        from statistical_contract import audit
+
+        result = audit(json.loads(path.read_text(encoding="utf-8")), path.parent)
+        return [] if result["applicable"] else result["errors"] or [result["status"]]
     if kind == "case":
         data = json.loads(path.read_text(encoding="utf-8"))
         errors, _ = ic.validate_case(data, path, release=True)

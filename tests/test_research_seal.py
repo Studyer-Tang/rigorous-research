@@ -13,6 +13,7 @@ SPEC = importlib.util.spec_from_file_location("research_seal", MODULE)
 assert SPEC and SPEC.loader
 seal = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(seal)
+import math_backend as mb
 
 
 class ResearchSealTests(unittest.TestCase):
@@ -46,10 +47,7 @@ class ResearchSealTests(unittest.TestCase):
         output = self.root / "certificate.json"
         lock = self.root / "requirements.txt"
         source.write_text("x*(x+1)=x^2+x", encoding="utf-8")
-        output.write_text(
-            '{"backend":"sympy","backend_version":"1.14.0","identity_established":true,"recommended_evidence_role":"decisive"}',
-            encoding="utf-8",
-        )
+        seal.write_json(output, mb.identity_certificate("x*(x+1)", "x**2+x", ["x"]))
         lock.write_text("sympy==1.14.0", encoding="utf-8")
         receipt_path = self.root / "receipt.json"
         receipt = seal.make_receipt(
@@ -92,6 +90,28 @@ class ResearchSealTests(unittest.TestCase):
         )
         seal.write_json(receipt_path, receipt)
         self.assertTrue(any("does not establish" in error for error in seal.verify_receipt(receipt_path, True)[0]))
+
+    def test_rehashed_false_certificate_cannot_pass_receipt(self):
+        source, output, receipt_path = (self.root / name for name in ("claim.txt", "certificate.json", "receipt.json"))
+        source.write_text("x=x+1", encoding="utf-8")
+        certificate = mb.identity_certificate("x", "x", ["x"])
+        certificate["claim"]["rhs"] = "x+1"
+        seal.write_json(output, certificate)
+        receipt = seal.make_receipt(
+            [source],
+            [output],
+            [],
+            command="claimed successful check",
+            backend="sympy",
+            backend_version=certificate["backend_version"],
+            semantic_domain="Q[x]",
+            returncode=0,
+            result="ESTABLISHED",
+            base_dir=self.root,
+        )
+        seal.write_json(receipt_path, receipt)
+        errors, _ = seal.verify_receipt(receipt_path, True)
+        self.assertTrue(any("false under exact recomputation" in error for error in errors), errors)
 
 
 if __name__ == "__main__":

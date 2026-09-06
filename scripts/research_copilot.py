@@ -10,6 +10,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -19,6 +20,7 @@ from typing import Any
 import inference_case as ic
 import research_workspace as rw
 from research_io import canonical_hash, load_json_object, sha256, utc_timestamp, write_json
+from statistical_contract import audit_case
 
 PROVIDERS = ("openai-responses", "openai-compatible", "ollama")
 TEST_FIELDS = {
@@ -86,6 +88,11 @@ def prepare(workspace: Path) -> dict[str, Any]:
             "claims": case["claims"],
             "assumptions": case["assumptions"],
             "checks": case["checks"],
+            "proof_obligations": case.get("proof_obligations", []),
+            "proof_audit": ic.pc.evaluate(case, case_path.parent),
+            "statistical_audit": audit_case(case, case_path.parent)
+            if case["domain"] in ("statistics", "finance")
+            else None,
             "continuation": continuation,
             "sources": [
                 {key: source.get(key, "") for key in ("id", "citation", "role", "supports")}
@@ -333,6 +340,7 @@ def verify(workspace: Path, packet: dict[str, Any], advice: dict[str, Any], time
                     "specification": spec,
                 }
                 try:
+                    started = time.monotonic()
                     completed = subprocess.run(
                         command,
                         capture_output=True,
@@ -348,6 +356,26 @@ def verify(workspace: Path, packet: dict[str, Any], advice: dict[str, Any], time
                         "CHECKED" if row["certificate"] and completed.returncode in (0, 1) else "ERROR"
                     )
                     row["diagnostic"] = (completed.stdout + completed.stderr)[-2000:]
+                    if row["execution_status"] == "CHECKED":
+                        remaining = timeout - (time.monotonic() - started)
+                        if remaining <= 0:
+                            raise subprocess.TimeoutExpired(command, timeout)
+                        checked = subprocess.run(
+                            [sys.executable, str(Path(__file__).with_name("certificate_verifier.py")), str(output)],
+                            capture_output=True,
+                            text=True,
+                            encoding="utf-8",
+                            errors="replace",
+                            timeout=remaining,
+                            check=False,
+                        )
+                        if checked.returncode not in (0, 1):
+                            row["execution_status"] = "ERROR"
+                            row["diagnostic"] = (checked.stdout + checked.stderr)[-2000:]
+                        else:
+                            row["independent_check"] = json.loads(checked.stdout)
+                            if row["independent_check"]["status"] == "INVALID":
+                                row["execution_status"] = "ERROR"
                 except subprocess.TimeoutExpired:
                     row.update({"execution_status": "TIMEOUT", "certificate": None, "returncode": 124})
                 results.append(row)
@@ -358,6 +386,7 @@ def verify(workspace: Path, packet: dict[str, Any], advice: dict[str, Any], time
         "packet_hash": packet["packet_hash"],
         "advice_hash": canonical_hash(advice),
         "verifier_sha256": sha256(Path(__file__).with_name("math_backend.py")),
+        "independent_checker_sha256": sha256(Path(__file__).with_name("certificate_verifier.py")),
         "per_test_timeout_seconds": timeout,
         "results": results,
         "governance": {

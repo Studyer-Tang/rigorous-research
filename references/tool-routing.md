@@ -10,10 +10,12 @@ Use the unified `rigorous-research` command after installing the project. Direct
 | Research integrity and versions | `rigorous-research integrity` | `research_integrity.py` | network for live checks; fixtures support replay |
 | Governed AI review draft | `rigorous-research ai-review` | `governed_ai_reviewer.py` | none locally; optional Ollama or user endpoint |
 | Exact mathematics | `rigorous-research math` | `math_backend.py` | SymPy; Lean is optional |
+| Independent certificate check | `rigorous-research verify-certificate` | `certificate_verifier.py` | SymPy |
+| Statistical theorem conditions | `rigorous-research statistical-contract` | `statistical_contract.py` | none |
 | Statistical stress tests | `rigorous-research statistics` | `statistics_backend.py` | none for bundled methods |
 | Financial-data vintage | `rigorous-research data` | `finance_data.py` | network for live retrieval |
-| Release-gate benchmark | `rigorous-research eval` | `research_eval.py` | none |
-| Plan and receipt sealing | `rigorous-research seal` | `research_seal.py` | none |
+| Release-gate benchmark | `rigorous-research eval` | `research_eval.py` | SymPy for exact certificate fixtures |
+| Plan and receipt sealing | `rigorous-research seal` | `research_seal.py` | SymPy for strict exact receipts |
 | Blind review | `rigorous-research review` | `review_protocol.py` | none |
 | Repository quality | `rigorous-research quality` | `skill_quality.py` | none |
 

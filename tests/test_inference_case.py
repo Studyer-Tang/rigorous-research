@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -10,9 +11,21 @@ SPEC = importlib.util.spec_from_file_location("inference_case", MODULE_PATH)
 assert SPEC and SPEC.loader
 ic = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(ic)
+import statistical_contract as sc
 
 
 class InferenceCaseTests(unittest.TestCase):
+    def review_obligations(self, data):
+        evidence = next(item for item in data["evidence"] if item["id"] == data["decision"]["evidence_ids"][0])
+        for node in data["proof_obligations"]:
+            node["resolution"] = {
+                "method": "review",
+                "evidence_id": evidence["id"],
+                "reviewer_id": "fixture-reviewer",
+                "note": "Fixture review of the stated derivation and its exact scope.",
+                "binding": ic.pc.review_binding(data, node, evidence),
+            }
+
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
@@ -93,6 +106,23 @@ class InferenceCaseTests(unittest.TestCase):
             "limitations": "The conclusion is conditional on A001.",
             "reproduction": "Run the recorded derivation and release validator.",
         }
+        if domain in ("statistics", "finance"):
+            contract = sc.template("iid-mean-clt", "C001")
+            contract["target"] = "Fixture population mean"
+            source = self.root / "condition-argument.txt"
+            source.write_text("Fixture theorem/design argument, reviewed separately.", encoding="utf-8")
+            for item in contract["conditions"].values():
+                item.update(
+                    status="JUSTIFIED",
+                    basis="derivation",
+                    statement="Condition supplied by the fixture design.",
+                    evidence_file=str(source),
+                    evidence_sha256=ic.sha256(source),
+                )
+            contract_path = self.root / "statistical-contract.json"
+            ic.atomic_json(contract_path, contract)
+            data["statistical_contract"] = {"locator": str(contract_path), "sha256": ic.sha256(contract_path)}
+        self.review_obligations(data)
         return path, data
 
     def test_init_builds_domain_specific_contract(self):
@@ -123,6 +153,23 @@ class InferenceCaseTests(unittest.TestCase):
         errors, _ = ic.validate_case(data, path, release=True)
         self.assertEqual(errors, [])
 
+    def test_statistical_release_rejects_rehashed_finite_sample_overclaim(self):
+        path, data = self.support_case("statistics")
+        contract_path = Path(data["statistical_contract"]["locator"])
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["guarantee"] = "finite-sample"
+        ic.atomic_json(contract_path, contract)
+        data["statistical_contract"]["sha256"] = ic.sha256(contract_path)
+        errors, _ = ic.validate_case(data, path, release=True)
+        self.assertTrue(any("cannot supply" in error for error in errors), errors)
+        self.assertIn("INAPPLICABLE", ic.render(data, path))
+
+    def test_report_shows_open_proof_obligations(self):
+        path, data = self.case()
+        report = ic.render(data, path)
+        self.assertIn("P001 | OPEN", report)
+        self.assertIn("P002 | BLOCKED", report)
+
     def test_decisive_memory_text_cannot_support_release(self):
         path, data = self.support_case("mathematics")
         decisive = data["decision"]["evidence_ids"][0]
@@ -145,6 +192,7 @@ class InferenceCaseTests(unittest.TestCase):
         data["assumptions"] = []
         data["claims"][0]["assumption_ids"] = []
         data["decision"]["limitations"] = "No limitations beyond the exact contract and quantifiers."
+        self.review_obligations(data)
         errors, _ = ic.validate_case(data, path, release=True)
         self.assertEqual(errors, [])
 
@@ -201,6 +249,8 @@ class InferenceCaseTests(unittest.TestCase):
                 "evidence_ids": [evidence],
             }
         )
+        data["proof_obligations"][1]["kind"] = "counterexample"
+        self.review_obligations(data)
         errors, _ = ic.validate_case(data, path, release=True)
         self.assertEqual(errors, [])
 

@@ -437,7 +437,6 @@ def lean_certificate(file: Path, executable: str, project: Path | None, timeout:
         check=False,
     )
     compiled = completed.returncode == 0
-    trusted = compiled and bool(scan["trust_clean"])
     certificate = {
         "schema_version": 1,
         "backend": "lean",
@@ -451,9 +450,10 @@ def lean_certificate(file: Path, executable: str, project: Path | None, timeout:
         "stderr": completed.stderr,
         "trust_scan": scan,
         "compiled": compiled,
-        "trusted_certificate": trusted,
-        "recommended_evidence_role": "decisive" if trusted else "diagnostic",
-        "warning": "Compilation with sorry, admit, or declared axioms is not a closed proof certificate.",
+        "trusted_certificate": False,
+        "recommended_evidence_role": "diagnostic",
+        "open_obligations": ["target theorem identity", "transitive axiom dependencies", "pinned import environment"],
+        "warning": "Compilation and source scanning alone do not verify the target theorem or its imported axioms.",
     }
     return certificate, 0 if compiled else 1
 

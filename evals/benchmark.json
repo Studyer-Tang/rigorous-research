@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "name": "release-gate-regression-v1",
+  "name": "release-and-assurance-regression-v2",
   "cases": [
     {
       "id": "released-math-refutation",
@@ -64,6 +64,114 @@
       "mutation": {
         "pointer": "/tasks/0/status",
         "value": "PLANNED"
+      }
+    },
+    {
+      "id": "exact-bound",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/bound.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-forged-bernstein-coefficients",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/bound.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/certified_intervals/0/bernstein_coefficients",
+        "value": [
+          "1",
+          "1",
+          "1"
+        ]
+      }
+    },
+    {
+      "id": "reject-interval-gap",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/bound.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/certified_intervals/1/lower",
+        "value": "1/2"
+      }
+    },
+    {
+      "id": "reject-changed-bound-claim",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/bound.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/claim/lhs",
+        "value": "x**2-1"
+      }
+    },
+    {
+      "id": "exact-domain-identity",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/identity.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-lost-denominator-domain",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/identity.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/domain_restrictions",
+        "value": []
+      }
+    },
+    {
+      "id": "exact-counterexample",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/witness.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-false-witness-value",
+      "validator": "certificate",
+      "source": "evals/fixtures/assurance/witness.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/witness/lhs",
+        "value": "3/4"
+      }
+    },
+    {
+      "id": "recorded-statistical-contract",
+      "validator": "statistical-contract",
+      "source": "evals/fixtures/assurance/statistical.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-asymptotic-finite-sample-overclaim",
+      "validator": "statistical-contract",
+      "source": "evals/fixtures/assurance/statistical.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/guarantee",
+        "value": "finite-sample"
+      }
+    },
+    {
+      "id": "reject-simulation-as-theorem",
+      "validator": "statistical-contract",
+      "source": "evals/fixtures/assurance/statistical.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/conditions/iid_sampling/basis",
+        "value": "simulation"
+      }
+    },
+    {
+      "id": "reject-unresolved-selection",
+      "validator": "statistical-contract",
+      "source": "evals/fixtures/assurance/statistical.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/conditions/no_outcome_selection/status",
+        "value": "UNTESTED"
       }
     }
   ]

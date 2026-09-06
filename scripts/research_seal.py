@@ -154,6 +154,8 @@ def verify_receipt(receipt_path: Path, require_established: bool = False) -> tup
                 errors.append(f"receipt-bound {collection} file changed: {path}")
     if not receipt.get("inputs") or not receipt.get("outputs"):
         errors.append("receipt must bind at least one input and one output")
+    if errors:
+        return errors, receipt
     if require_established and (receipt.get("returncode") != 0 or receipt.get("result") != "ESTABLISHED"):
         errors.append("receipt does not establish the claim")
     if require_established and receipt.get("outputs"):
@@ -170,16 +172,25 @@ def verify_receipt(receipt_path: Path, require_established: bool = False) -> tup
             if backend_name == "sympy":
                 if output.get("backend") != "sympy" or output.get("backend_version") != backend.get("version"):
                     errors.append("SymPy output/backend version does not match receipt")
-                if (
-                    output.get("identity_established") is not True
-                    or output.get("recommended_evidence_role") != "decisive"
-                ):
+                if output.get("recommended_evidence_role") != "decisive":
                     errors.append("SymPy output is not a decisive exact certificate")
+                from certificate_verifier import verify
+
+                try:
+                    checked = verify(
+                        output, [resolve_locator(record["file"], receipt_path.parent) for record in receipt["inputs"]]
+                    )
+                except RuntimeError as exc:
+                    errors.append(f"independent checker unavailable: {exc}")
+                    continue
+                if checked["status"] != "ESTABLISHED":
+                    errors.extend(checked["errors"] or ["independent checker did not establish the mathematical claim"])
             elif backend_name == "lean":
                 if output.get("backend") != "lean" or output.get("backend_version") != backend.get("version"):
                     errors.append("Lean output/backend version does not match receipt")
-                if output.get("trusted_certificate") is not True or output.get("returncode") != 0:
-                    errors.append("Lean output is not a closed trusted certificate")
+                errors.append(
+                    "Lean compilation records do not establish target theorem identity or imported axiom closure"
+                )
     return errors, receipt
 
 

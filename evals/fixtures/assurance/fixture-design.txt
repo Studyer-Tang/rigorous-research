@@ -1,0 +1,1 @@
+Synthetic fixture for binding and status tests only. These recorded conditions are not a scientific study or an independently established theorem.

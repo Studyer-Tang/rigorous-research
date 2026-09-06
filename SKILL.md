@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.8"
+  version: "1.9"
   skill-author: Rigorous Research contributors
 ---
 
@@ -23,6 +23,8 @@ When resuming an investigation, use `rigorous-research workspace next workspace.
 For model-assisted research planning, use `rigorous-research copilot prepare` to export a bounded research packet, `copilot advise` to import a chat response or call a user-selected model, and `copilot verify` to check the proposed mathematical subclaims. Read [references/research-copilot.md](references/research-copilot.md) for the response contract, provider setup, and replay workflow. For one-variable polynomial bounds on closed rational intervals, use `math sympy-bound`. Check that the tested expression and interval represent the original claim before promoting any result; a model's translation is an open obligation.
 
 Do not create a managed workspace for a short explanation or an answer that has no persistent artifacts.
+
+For proof obligations, independently checked certificates, or statistical theorem applicability, read [references/proof-assurance.md](references/proof-assurance.md). New cases use schema 4: separate translation, domain conditions, and the proof or counterexample; derive closure from evidence rather than model confidence. Declare division, inversion, limit interchange, and generalization operations explicitly. Never invent a human reviewer or record an AI review as human. Leave unproved steps open and continue independently useful research.
 
 For literature retrieval, machine-checkable mathematics, statistical stress tests, financial-data snapshots, sealed plans, or independent review, read [references/verification-backends.md](references/verification-backends.md). Use the supplied scripts instead of inventing an untracked workflow.
 
@@ -84,7 +86,7 @@ When one evidence type supports another, write the bridge explicitly.
 ## Use backends conservatively
 
 - Retrieve candidates from Crossref, arXiv, OpenAlex, Semantic Scholar, or PubMed with `literature_search.py`; read [references/literature-providers.md](references/literature-providers.md) when choosing coverage. Merge automatically only on a shared DOI, a shared arXiv identifier, or compatible title-author-year metadata. Send fuzzy and conflicting matches to `REVIEW_REQUIRED`, and preserve provider failures as coverage gaps.
-- Use `math_backend.py` for exact polynomial or rational identities and optional Lean compilation. SymPy simplification of a general transcendental expression is diagnostic. A Lean file containing `sorry`, `admit`, or a declared axiom is not a closed proof certificate.
+- Use `math_backend.py` for exact polynomial or rational identities and optional Lean compilation; recheck certificates with `certificate_verifier.py`. SymPy simplification of a general transcendental expression is diagnostic. Lean compilation remains diagnostic until target-theorem identity, transitive axiom dependencies, and the imported environment are verified.
 - Bind decisive machine evidence to its inputs, outputs, backend version, command, environment locks, semantic domain, and return code with `research_seal.py`. Changed inputs invalidate the receipt.
 - Use `statistics_backend.py` to compare IID and dependence-aware uncertainty, run circular block bootstrap, control Holm or BH multiplicity, and test empirical coverage under prespecified data-generating processes.
 - Fetch financial series through `finance_data.py` when an adapter exists. Preserve the raw response, retrieval time, as-of meaning, revision policy, units, calendar, identifiers, adjustments, license, and SHA-256. A latest-revised FRED series is not point-in-time data.

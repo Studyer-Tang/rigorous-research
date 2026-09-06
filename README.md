@@ -2,6 +2,12 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**1.9 adds proof and statistical assurance:** explicit proof obligations, independent exact certificate checks, theorem applicability contracts, and adversarial regression cases. Reports expose unfinished steps; changing the claim, assumptions, or proof graph invalidates existing resolutions. See the [assurance workflow](references/proof-assurance.md).
+
+The independent checker recomputes rational identities and witnesses, recomputes matrix determinants from original inputs, and reconstructs Bernstein interval certificates. Statistical contracts distinguish finite-sample guarantees from asymptotic conclusions and reject simulation results as substitutes for theorem conditions. Copilot supplies unresolved obligations to the model and checks its mathematical outputs in a second process within the same time budget.
+
+These checks improve evidence discipline; they do not make an arbitrary model as capable as a frontier model or guarantee hallucination-free research. Human reviews are locally recorded attestations, and mathematical checks cover the written subclaim rather than its translation from prose. Lean compilation records remain diagnostic. Existing schema 3 examples retain legacy validation with an explicit warning; schema 4 activates the new release requirements.
+
 A Codex skill and evidence-gated research laboratory for mathematics, statistics, and quantitative finance.
 
 [![validate](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml/badge.svg)](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml)

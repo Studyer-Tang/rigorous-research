@@ -466,7 +466,7 @@ def render_brief(data: dict[str, Any], workspace_path: Path) -> str:
         )
     case_path = resolve(str(data["case_file"]), workspace_path.parent)
     _, case_data = ic.load_case(case_path)
-    lines.extend(["", "---", "", ic.render(case_data)])
+    lines.extend(["", "---", "", ic.render(case_data, case_path)])
     return "\n".join(lines)
 
 

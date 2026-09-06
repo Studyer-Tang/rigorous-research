@@ -16,6 +16,8 @@ class Command:
 
 
 COMMANDS = {
+    "statistical-contract": Command("statistical_contract", "audit theorem, design, and implementation conditions"),
+    "verify-certificate": Command("certificate_verifier", "independently recheck an exact mathematical certificate"),
     "copilot": Command(
         "research_copilot", "prepare research context, obtain model proposals, and verify mathematical subclaims"
     ),

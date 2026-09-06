@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "backend": "sympy",
+  "backend_version": "1.14.0",
+  "created_at": "2026-09-06T01:33:35.702244+00:00",
+  "operation": "rational-counterexample-search",
+  "claim": {
+    "lhs": "x**2",
+    "rhs": "x",
+    "symbols": [
+      "x"
+    ]
+  },
+  "assumptions": {
+    "real": [],
+    "positive": [],
+    "integer": []
+  },
+  "grid": [
+    "1/2"
+  ],
+  "max_points": 1000,
+  "total_grid_points": 1,
+  "visited_points": 1,
+  "tested_points": 1,
+  "excluded_points": 0,
+  "grid_exhausted": true,
+  "counterexample_found": true,
+  "witness": {
+    "assignment": {
+      "x": "1/2"
+    },
+    "lhs": "1/4",
+    "rhs": "1/2",
+    "difference": "-1/4"
+  },
+  "status": "COUNTEREXAMPLE_FOUND",
+  "recommended_evidence_role": "decisive",
+  "warning": "A witness refutes only the stated identity under the recorded assumptions. Finite search cannot prove a universal identity; case verdict and release review remain separate."
+}

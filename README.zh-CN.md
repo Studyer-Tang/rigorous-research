@@ -2,6 +2,12 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**1.9 版增强数学证明与统计严谨性**：新增证明义务、独立精确证书检查、统计定理适用条件和对抗回归测试。报告会显示未完成的证明步骤；命题、假设或证明依赖改变后，已有复核失效。操作细节见[证明与统计保障流程](references/proof-assurance.md)。
+
+独立检查器会重新计算有理恒等式和反例，从原始矩阵重算行列式，并重建 Bernstein 区间证书。统计契约区分有限样本保证与渐近结论，拒绝用模拟结果替代理论条件。Copilot 将未解决的证明义务提供给模型，并在同一时间预算内用第二个进程复核数学输出。
+
+这些机制约束证据与结论之间的关系，不能保证任何模型达到前沿模型水平，也不能保证完全没有幻觉。人工复核是本地记录的声明；机器验证覆盖写出的数学子命题，原文是否被正确翻译仍须审查。Lean 编译记录只作诊断证据。旧 schema 3 示例保留原校验并显示警告；schema 4 启用新增发布要求。
+
 面向数学、统计和量化金融的科研工具与 Codex 技能，用证据约束结论，让研究过程可追溯、可复核、可继续推进。
 
 [![validate](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml/badge.svg)](https://github.com/Studyer-Tang/rigorous-research/actions/workflows/ci.yml)

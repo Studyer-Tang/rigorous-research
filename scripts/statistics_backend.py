@@ -68,8 +68,8 @@ def circular_block_bootstrap_ci(
 
 
 def holm(p_values: list[float], alpha: float = 0.05) -> list[dict[str, Any]]:
-    if not p_values or any(not 0 <= value <= 1 for value in p_values):
-        raise ValueError("p-values must lie in [0,1]")
+    if not p_values or any(not 0 <= value <= 1 for value in p_values) or not 0 < alpha < 1:
+        raise ValueError("p-values must lie in [0,1] and alpha in (0,1)")
     m = len(p_values)
     ordered = sorted(enumerate(p_values), key=lambda item: (item[1], item[0]))
     adjusted_sorted: list[float] = []
@@ -142,7 +142,13 @@ def analyze(values: list[float], hac_lags: int, block_length: int, replications:
                 "percentile_ci95": list(block_ci),
             },
         },
-        "warning": "Intervals target a mean and are only valid under the corresponding dependence and stationarity assumptions.",
+        "validity": {
+            "finite_sample_guarantee": False,
+            "assumptions_verified": False,
+            "iid_interval": "normal approximation using estimated standard error, not an exact Student-t interval",
+            "required_contracts": ["iid-mean-clt", "newey-west-mean"],
+        },
+        "warning": "Intervals target a mean. Computing them does not verify dependence, moment, stationarity, selection, or coverage assumptions.",
     }
 
 

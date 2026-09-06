@@ -15,6 +15,11 @@ SPEC.loader.exec_module(stats)
 
 
 class StatisticsBackendTests(unittest.TestCase):
+    def test_holm_rejects_invalid_significance_levels(self):
+        for alpha in (0, 1, -0.1, float("nan")):
+            with self.subTest(alpha=alpha), self.assertRaises(ValueError):
+                stats.holm([0.01], alpha)
+
     def test_iid_and_hac_agree_at_zero_lags(self):
         values = [1.0, 2.0, 4.0, 8.0, 16.0]
         expected = math.sqrt(sum((x - stats.mean(values)) ** 2 for x in values) / len(values) ** 2)

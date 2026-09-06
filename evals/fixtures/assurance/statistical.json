@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "method": "iid-mean-clt",
+  "claim_id": "C001",
+  "target": "Synthetic fixture population mean",
+  "guarantee": "asymptotic",
+  "conditions": {
+    "iid_sampling": {
+      "status": "JUSTIFIED",
+      "basis": "derivation",
+      "statement": "Synthetic recorded condition; tests bookkeeping, not scientific truth.",
+      "evidence_file": "fixture-design.txt",
+      "evidence_sha256": "bc6c49fb0e05dc4c59bbb5b6740df58d16dbe1714abd49988fce55dca4c64295"
+    },
+    "finite_positive_variance": {
+      "status": "JUSTIFIED",
+      "basis": "derivation",
+      "statement": "Synthetic recorded condition; tests bookkeeping, not scientific truth.",
+      "evidence_file": "fixture-design.txt",
+      "evidence_sha256": "bc6c49fb0e05dc4c59bbb5b6740df58d16dbe1714abd49988fce55dca4c64295"
+    },
+    "no_outcome_selection": {
+      "status": "JUSTIFIED",
+      "basis": "derivation",
+      "statement": "Synthetic recorded condition; tests bookkeeping, not scientific truth.",
+      "evidence_file": "fixture-design.txt",
+      "evidence_sha256": "bc6c49fb0e05dc4c59bbb5b6740df58d16dbe1714abd49988fce55dca4c64295"
+    },
+    "clt_implementation": {
+      "status": "JUSTIFIED",
+      "basis": "derivation",
+      "statement": "Synthetic recorded condition; tests bookkeeping, not scientific truth.",
+      "evidence_file": "fixture-design.txt",
+      "evidence_sha256": "bc6c49fb0e05dc4c59bbb5b6740df58d16dbe1714abd49988fce55dca4c64295"
+    }
+  }
+}

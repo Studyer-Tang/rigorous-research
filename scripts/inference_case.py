@@ -13,10 +13,11 @@ from typing import Any
 SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
+import proof_contracts as pc
 import research_seal as rs
 from research_io import atomic_write_json as atomic_json, contained_locator, sha256, utc_timestamp as timestamp
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 DOMAINS = ("mathematics", "statistics", "finance")
 VERDICTS = ("OPEN", "SUPPORTED", "REFUTED", "INCONCLUSIVE", "MISSPECIFIED")
 CLAIM_STATUSES = ("OPEN", "SUPPORTED", "REFUTED", "INCONCLUSIVE", "MISSPECIFIED")
@@ -192,6 +193,7 @@ def initialize(root: Path, slug: str, domain: str, question: str, claim: str) ->
         "assumptions": [],
         "checks": [],
         "evidence": [],
+        "proof_obligations": pc.initial_obligations(),
         "decision": {
             "verdict": "OPEN",
             "claim_id": "C001",
@@ -233,7 +235,7 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
     missing_top = [key for key in required if key not in data]
     if missing_top:
         return [f"missing top-level field: {key}" for key in missing_top], warnings
-    if data["schema_version"] != SCHEMA_VERSION:
+    if data["schema_version"] not in (3, SCHEMA_VERSION):
         errors.append(f"unsupported schema_version: {data['schema_version']!r}")
     domain = data["domain"]
     if domain not in DOMAINS:
@@ -371,6 +373,36 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
     if unknown:
         errors.append(f"decision references unknown evidence: {', '.join(unknown)}")
 
+    if data["schema_version"] == SCHEMA_VERSION or "proof_obligations" in data:
+        try:
+            if "proof_obligations" not in data:
+                raise ValueError("schema 4 requires proof_obligations")
+            proof_report = pc.evaluate(data, case_path.parent)
+            (errors if release else warnings).extend(f"proof: {error}" for error in proof_report["errors"])
+            if release:
+                errors.extend(pc.release_errors(data, proof_report))
+        except (ValueError, KeyError, TypeError) as exc:
+            errors.append(f"invalid proof contract: {exc}")
+    else:
+        warnings.append(
+            "legacy case has no proof-obligation or statistical-applicability gate; migrate before claiming the new assurance level"
+        )
+    if (
+        release
+        and data["schema_version"] == SCHEMA_VERSION
+        and domain in ("statistics", "finance")
+        and decision["verdict"] == "SUPPORTED"
+    ):
+        from statistical_contract import audit_case
+
+        applicability = audit_case(data, case_path.parent)
+        errors.extend(applicability["errors"])
+        if not applicability["applicable"]:
+            errors.append(
+                "statistical theorem conditions are unresolved or violated: "
+                + ", ".join(applicability["unresolved_conditions"] + applicability["violated_conditions"])
+            )
+
     if not release:
         return errors, warnings
 
@@ -454,6 +486,10 @@ def validate_case(data: dict[str, Any], case_path: Path, release: bool = False) 
         triggered = [item for item in target_checks if item.get("outcome") == "TRIGGERED" and item.get("evidence_ids")]
         if not triggered:
             errors.append("REFUTED release requires a triggered falsifier of the headline claim")
+        if domain == "statistics" and triggered and all(item.get("kind") == "identification" for item in triggered):
+            errors.append(
+                "failed identification alone does not refute a parameter or establish an opposite causal effect"
+            )
         if not decisive_decision_evidence:
             errors.append("REFUTED release requires decisive decision evidence")
     elif verdict in {"INCONCLUSIVE", "MISSPECIFIED"}:
@@ -474,12 +510,12 @@ def escape(value: Any) -> str:
     return str(value).replace("|", "\\|").replace("\n", " ")
 
 
-def render(data: dict[str, Any]) -> str:
+def render(data: dict[str, Any], case_path: Path | None = None) -> str:
     lines = [
         f"# Inference case: {data.get('case_id', 'untitled')}",
         "",
         f"- Domain: `{data.get('domain', '-')}`",
-        f"- Verdict: `{data.get('decision', {}).get('verdict', '-')}`",
+        f"- Recorded verdict: `{data.get('decision', {}).get('verdict', '-')}` (release requires validation)",
         f"- Question: {data.get('question', '')}",
         "",
         "## Domain contract",
@@ -537,6 +573,27 @@ def render(data: dict[str, Any]) -> str:
         lines.append(
             f"- **{item['id']}** `{item['kind']}` `{item.get('role', 'unclassified')}` ({independence}) — {item['summary']} [{item['locator']}]"
         )
+    if case_path and "proof_obligations" in data:
+        report = pc.evaluate(data, case_path.parent)
+        lines.extend(["", "## Proof obligations", "", "| ID | Derived state | Statement |", "|---|---|---|"])
+        for node in data["proof_obligations"]:
+            lines.append(f"| {node['id']} | {report['states'][node['id']]} | {escape(node['statement'])} |")
+        lines.extend(["", report["warning"]])
+    if case_path and data.get("schema_version") == SCHEMA_VERSION and data.get("domain") in ("statistics", "finance"):
+        from statistical_contract import audit_case
+
+        applicability = audit_case(data, case_path.parent)
+        lines.extend(["", "## Statistical applicability", "", f"Recorded-condition audit: `{applicability['status']}`"])
+        lines.extend(
+            f"- {escape(item)}"
+            for item in applicability["errors"]
+            + applicability["unresolved_conditions"]
+            + applicability["violated_conditions"]
+        )
+        if applicability.get("warning"):
+            lines.extend(["", applicability["warning"]])
+    if data.get("schema_version") != SCHEMA_VERSION:
+        lines.extend(["", "Legacy case: proof-obligation and statistical-applicability gates have not been applied."])
     decision = data.get("decision", {})
     lines.extend(
         [
@@ -651,6 +708,20 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("case", type=Path)
     validate.add_argument("--release", action="store_true")
 
+    proof = commands.add_parser("set-proof", help="attach a proof-obligation graph and adopt schema 4")
+    proof.add_argument("case", type=Path)
+    proof.add_argument("--file", type=Path, required=True)
+    resolve = commands.add_parser("resolve-proof", help="bind an obligation to a certificate or explicit human review")
+    resolve.add_argument("case", type=Path)
+    resolve.add_argument("--id", required=True)
+    resolve.add_argument("--evidence", required=True)
+    resolve.add_argument("--method", choices=("certificate", "review"), required=True)
+    resolve.add_argument("--reviewer", default="")
+    resolve.add_argument("--note", default="")
+    statistical = commands.add_parser("set-statistical-contract")
+    statistical.add_argument("case", type=Path)
+    statistical.add_argument("--file", type=Path, required=True)
+
     report = commands.add_parser("report", help="validate the case and write report.md")
     report.add_argument("case", type=Path)
     report.add_argument("--release", action="store_true", help="require the release gate before writing")
@@ -683,11 +754,44 @@ def main(argv: list[str] | None = None) -> int:
             if errors:
                 raise ContractError("; ".join(errors))
             destination = path.parent / "report.md"
-            destination.write_text(render(data), encoding="utf-8", newline="\n")
+            destination.write_text(render(data, path), encoding="utf-8", newline="\n")
             print(destination)
             return 0
 
-        if args.command == "set-contract":
+        if args.command == "set-proof":
+
+            def set_proof(data: dict[str, Any]) -> dict[str, Any]:
+                document = json.loads(args.file.read_text(encoding="utf-8"))
+                data["proof_obligations"] = document["obligations"]
+                data["schema_version"] = SCHEMA_VERSION
+                return {"obligations": len(data["proof_obligations"])}
+
+            mutate(args.case, set_proof, "proof-contract-updated")
+        elif args.command == "resolve-proof":
+
+            def resolve_proof(data: dict[str, Any]) -> dict[str, Any]:
+                node = find(data.get("proof_obligations", []), args.id, "proof obligation")
+                evidence = find(data["evidence"], args.evidence, "evidence")
+                node["resolution"] = {
+                    "method": args.method,
+                    "evidence_id": args.evidence,
+                    "reviewer_id": args.reviewer,
+                    "note": args.note,
+                    "binding": pc.review_binding(data, node, evidence),
+                }
+                pc.resolve_obligation(data, node, args.case.resolve().parent)
+                return {"obligation_id": args.id, "method": args.method}
+
+            mutate(args.case, resolve_proof, "proof-resolution-recorded")
+        elif args.command == "set-statistical-contract":
+
+            def attach_statistical(data: dict[str, Any]) -> dict[str, Any]:
+                locator, checksum = file_record(args.file, args.case.resolve().parent)
+                data["statistical_contract"] = {"locator": locator, "sha256": checksum}
+                return data["statistical_contract"]
+
+            mutate(args.case, attach_statistical, "statistical-contract-attached")
+        elif args.command == "set-contract":
 
             def change_contract(data: dict[str, Any]) -> dict[str, Any]:
                 if args.field not in CONTRACT_FIELDS[data["domain"]]:
@@ -880,7 +984,7 @@ def main(argv: list[str] | None = None) -> int:
             mutate(args.case, record_decision, "decision-recorded")
         print("OK")
         return 0
-    except ContractError as exc:
+    except (ValueError, OSError, KeyError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
 

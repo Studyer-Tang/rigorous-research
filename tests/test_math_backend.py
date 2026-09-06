@@ -6,6 +6,8 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from subprocess import CompletedProcess
+from unittest.mock import patch
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "math_backend.py"
 sys.path.insert(0, str(MODULE_PATH.parent))
@@ -16,6 +18,17 @@ SPEC.loader.exec_module(mb)
 
 
 class MathBackendTests(unittest.TestCase):
+    def test_clean_lean_compilation_does_not_prove_target_or_imported_axioms(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "Claim.lean"
+            source.write_text("import UncheckedDependency\nexample : True := True.intro\n", encoding="utf-8")
+            with patch.object(mb.subprocess, "run", return_value=CompletedProcess([], 0, "test compiler", "")):
+                certificate, code = mb.lean_certificate(source, "lean", None, 10)
+            self.assertEqual(code, 0)
+            self.assertTrue(certificate["compiled"])
+            self.assertFalse(certificate["trusted_certificate"])
+            self.assertEqual(certificate["recommended_evidence_role"], "diagnostic")
+
     def test_interval_bound_has_exact_bernstein_certificate(self):
         result = mb.polynomial_bound_certificate("x*(1-x)", "0", "x", "0", "1")
         self.assertTrue(result["bound_established"])
