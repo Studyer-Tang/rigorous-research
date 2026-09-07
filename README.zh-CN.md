@@ -2,6 +2,10 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**1.10 版加入真实未解猜想实测**：[Erdős–Straus 研究报告与复现流程](examples/erdos-straus/REPORT.md)。验证了 9,998 个互异正整数分母见证，严格证明一条自然的贪心证明路线在 `n=49` 时失败，同时把原猜想保留为 **INCONCLUSIVE（证据不足）**。这不是解决了原猜想，也不声称刷新了数学结果或计算纪录。实测推动项目补齐整数证书，并区分“科研结果不确定”与“程序运行失败”。
+
+运行 `rigorous-research egyptian --start 3 --stop 10000 --distinct --output finite.json`，再用 `rigorous-research verify-certificate finite.json` 独立检查。整数搜索和检查只依赖标准库；示例中的符号恒等式另需 SymPy。预算不足时保留未解决输入，不将其冒充反例。范围和预算说明见[整数搜索指南](references/integer-search.md)。
+
 **1.9 版增强数学证明与统计严谨性**：新增证明义务、独立精确证书检查、统计定理适用条件和对抗回归测试。报告会显示未完成的证明步骤；命题、假设或证明依赖改变后，已有复核失效。操作细节见[证明与统计保障流程](references/proof-assurance.md)。
 
 独立检查器会重新计算有理恒等式和反例，从原始矩阵重算行列式，并重建 Bernstein 区间证书。统计契约区分有限样本保证与渐近结论，拒绝用模拟结果替代理论条件。Copilot 将未解决的证明义务提供给模型，并在同一时间预算内用第二个进程复核数学输出。

@@ -34,6 +34,8 @@ jobs:
         run: |
           python scripts/research_workspace.py validate examples/toeplitz-determinant/workspace.json --release
           python scripts/research_workspace.py validate examples/momentum-factor/workspace.json --release
+          python scripts/research_workspace.py validate examples/erdos-straus/workspace.json --release
+          python examples/erdos-straus/reproduce.py --output build/erdos-straus-replay
           python scripts/research_seal.py verify-plan --seal examples/momentum-factor/artifacts/plan-seal.json
           python scripts/research_seal.py verify-receipt --receipt examples/toeplitz-determinant/artifacts/sympy-receipt-n6.json --require-established
           python scripts/finance_data.py verify --manifest examples/momentum-factor/snapshots/Kenneth-French-Data-Library/F-F-Momentum-Factor-monthly-archive/2026-08-30-f405ee2d47a5/manifest.json

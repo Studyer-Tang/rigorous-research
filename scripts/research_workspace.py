@@ -19,6 +19,7 @@ import review_protocol as rp
 from research_io import (
     atomic_write_json as atomic_json,
     contained_locator as locator,
+    portable_locator,
     resolve_locator as resolve,
     utc_timestamp as timestamp,
 )
@@ -270,6 +271,13 @@ def validate_workspace(
 
     for run in data["runs"]:
         run_id = run.get("id", "?")
+        accepted = run.get("accepted_returncodes", [0])
+        if (
+            not isinstance(accepted, list)
+            or not accepted
+            or any(type(code) is not int or not 0 <= code <= 255 for code in accepted)
+        ):
+            errors.append(f"{run_id}: accepted_returncodes must be a nonempty list of exit codes 0..255")
         if run.get("task_id") not in task_ids:
             errors.append(f"{run_id}: unknown task")
         if not isinstance(run.get("command"), list) or not run.get("command"):
@@ -315,7 +323,7 @@ def validate_workspace(
         unfinished = [task["id"] for task in data["tasks"] if task.get("status") != "DONE"]
         if unfinished:
             errors.append(f"release has unfinished tasks: {', '.join(unfinished)}")
-        failed_runs = [run["id"] for run in data["runs"] if run.get("returncode") != 0]
+        failed_runs = [run["id"] for run in data["runs"] if not run_succeeded(run)]
         if failed_runs:
             errors.append(f"release includes failed runs: {', '.join(failed_runs)}")
         if data["domain"] in {"statistics", "finance"} and not any(
@@ -370,6 +378,17 @@ def task_ready(task: dict[str, Any], tasks: list[dict[str, Any]]) -> bool:
     return task.get("status") == "PLANNED" and all(statuses.get(dep) == "DONE" for dep in task.get("depends_on", []))
 
 
+def run_succeeded(run: dict[str, Any]) -> bool:
+    """Execution acceptance is separate from scientific support; never accept operational failures."""
+    accepted = run.get("accepted_returncodes", [0])
+    return (
+        isinstance(accepted, list)
+        and type(run.get("returncode")) is int
+        and run["returncode"] in accepted
+        and not any(run.get(key) for key in ("timed_out", "launch_error", "missing_outputs", "acceptance_error"))
+    )
+
+
 def next_actions(data: dict[str, Any], workspace_path: Path) -> dict[str, Any]:
     """Produce a read-only handoff for the next research step and release obligations."""
     errors, warnings = validate_workspace(data, workspace_path)
@@ -397,7 +416,7 @@ def next_actions(data: dict[str, Any], workspace_path: Path) -> dict[str, Any]:
             action = "WAIT_FOR_DEPENDENCIES"
         elif task["status"] == "BLOCKED":
             action = "RESOLVE_BLOCKER"
-        elif latest and latest.get("returncode") != 0:
+        elif latest and not run_succeeded(latest):
             action = "INVESTIGATE_FAILED_RUN"
         elif task["status"] == "IN_PROGRESS" or latest:
             action = "RESUME_AND_CHECK_ACCEPTANCE"
@@ -461,7 +480,7 @@ def render_brief(data: dict[str, Any], workspace_path: Path) -> str:
     lines.extend(["", "## Reproducible runs", ""])
     for run in data["runs"]:
         lines.append(
-            f"- **{run['id']}** task `{run['task_id']}`, return code `{run.get('returncode')}` — "
+            f"- **{run['id']}** task `{run['task_id']}`, return code `{run.get('returncode')}`, accepted codes `{run.get('accepted_returncodes', [0])}` — "
             f"{run['label']}; outputs: {', '.join(item['file'] for item in run.get('outputs', [])) or 'none'}"
         )
     case_path = resolve(str(data["case_file"]), workspace_path.parent)
@@ -537,6 +556,15 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--output", action="append", default=[])
     run.add_argument("--timeout", type=int, default=300)
     run.add_argument("--complete", action="store_true")
+    run.add_argument(
+        "--accept-returncode",
+        type=int,
+        choices=range(256),
+        action="append",
+        default=[0],
+        metavar="CODE",
+        help="accept a documented semantic exit code in addition to 0; preserves the actual code",
+    )
 
     rehash_run = commands.add_parser("rehash-run", help="accept intentional revisions to captured run files")
     rehash_run.add_argument("workspace", type=Path)
@@ -582,6 +610,10 @@ def execute_run(args: argparse.Namespace) -> int:
     cwd = cwd.resolve()
     if not cwd.is_dir():
         raise WorkspaceError(f"run directory does not exist: {cwd}")
+    try:
+        recorded_cwd = portable_locator(cwd, workspace_path.parent)
+    except ValueError:  # Different Windows drives have no relative path.
+        recorded_cwd = str(cwd)
 
     run_id = next_id(data["runs"], "R")
     run_dir = workspace_path.parent / "artifacts" / "runs" / run_id
@@ -614,6 +646,7 @@ def execute_run(args: argparse.Namespace) -> int:
         stdout = ""
         launch_error = str(exc)
         stderr = f"Command could not start: {launch_error}\n"
+    process_returncode = None if timed_out or launch_error else returncode
     stdout_path = run_dir / "stdout.txt"
     stderr_path = run_dir / "stderr.txt"
     stdout_path.write_text(stdout, encoding="utf-8", newline="\n")
@@ -628,7 +661,7 @@ def execute_run(args: argparse.Namespace) -> int:
             missing_outputs.append(str(value))
             continue
         outputs.append({"file": locator(path, workspace_path.parent), "sha256": ic.sha256(path)})
-    if missing_outputs and returncode == 0:
+    if missing_outputs and returncode in args.accept_returncode:
         returncode = 3
         stderr_path.write_text(
             stderr_path.read_text(encoding="utf-8") + f"Declared outputs missing: {', '.join(missing_outputs)}\n",
@@ -640,10 +673,13 @@ def execute_run(args: argparse.Namespace) -> int:
         "task_id": args.task,
         "label": args.label.strip(),
         "command": command,
-        "cwd": locator(cwd, workspace_path.parent),
+        "cwd": recorded_cwd,
         "started_at": started,
         "finished_at": timestamp(),
         "returncode": returncode,
+        "process_returncode": process_returncode,
+        "accepted_returncodes": sorted(set(args.accept_returncode)),
+        "missing_outputs": missing_outputs,
         "timed_out": timed_out,
         "launch_error": launch_error,
         "environment": {
@@ -655,11 +691,12 @@ def execute_run(args: argparse.Namespace) -> int:
         "outputs": outputs,
     }
     data["runs"].append(record)
-    if args.complete and returncode == 0:
+    if args.complete and run_succeeded(record):
         deliverable = str(task.get("deliverable", "")).strip()
         if deliverable and not resolve(deliverable, workspace_path.parent).is_file():
             returncode = 3
             record["returncode"] = returncode
+            record["acceptance_error"] = "Task deliverable is missing"
             with stderr_path.open("a", encoding="utf-8", newline="\n") as stream:
                 stream.write(f"Task deliverable is missing: {deliverable}\n")
         else:
@@ -677,7 +714,7 @@ def execute_run(args: argparse.Namespace) -> int:
         {"run_id": run_id, "task_id": args.task, "returncode": returncode},
     )
     print(run_id)
-    return returncode
+    return 0 if run_succeeded(record) else returncode or 1
 
 
 def main(argv: list[str] | None = None) -> int:

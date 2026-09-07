@@ -161,19 +161,21 @@ def verify_receipt(receipt_path: Path, require_established: bool = False) -> tup
     if require_established and receipt.get("outputs"):
         backend = receipt.get("backend", {})
         backend_name = backend.get("name") if isinstance(backend, dict) else None
-        if backend_name not in {"sympy", "lean"}:
-            errors.append("decisive machine receipt requires a supported semantic verifier (sympy or lean)")
+        if backend_name not in {"sympy", "exact-integer", "lean"}:
+            errors.append(
+                "decisive machine receipt requires a supported semantic verifier (sympy, exact-integer, or lean)"
+            )
         for record in receipt.get("outputs", []):
             try:
                 output = load_object(resolve_locator(str(record["file"]), receipt_path.parent))
             except (OSError, ValueError, KeyError, json.JSONDecodeError) as exc:
                 errors.append(f"cannot inspect backend output semantics: {exc}")
                 continue
-            if backend_name == "sympy":
-                if output.get("backend") != "sympy" or output.get("backend_version") != backend.get("version"):
-                    errors.append("SymPy output/backend version does not match receipt")
+            if backend_name in {"sympy", "exact-integer"}:
+                if output.get("backend") != backend_name or output.get("backend_version") != backend.get("version"):
+                    errors.append(f"{backend_name} output/backend version does not match receipt")
                 if output.get("recommended_evidence_role") != "decisive":
-                    errors.append("SymPy output is not a decisive exact certificate")
+                    errors.append(f"{backend_name} output is not a decisive exact certificate")
                 from certificate_verifier import verify
 
                 try:

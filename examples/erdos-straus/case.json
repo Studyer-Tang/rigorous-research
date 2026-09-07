@@ -1,0 +1,162 @@
+{
+  "schema_version": 4,
+  "case_id": "erdos-straus",
+  "domain": "mathematics",
+  "question": "For every integer n >= 2, can 4/n be written as three positive unit fractions?",
+  "created_at": "2026-09-07T08:27:24.271494+00:00",
+  "updated_at": "2026-09-07T08:44:01.269893+00:00",
+  "contract": {
+    "ambient_object": "Positive integer triples x < y < z and integer n >= 3",
+    "coefficient_domain": "Exact rational arithmetic; denominators are positive integers",
+    "quantifiers": "For every n >= 3 there exist x < y < z; finite searches do not cover the universal quantifier",
+    "equality_semantics": "Literal equality 4xyz = n(xy+xz+yz); no floating-point tolerance"
+  },
+  "claims": [
+    {
+      "id": "C001",
+      "statement": "For every integer n >= 3 there exist positive integers x < y < z with 4/n = 1/x + 1/y + 1/z.",
+      "scope": "Distinct-denominator formulation of Erdos Problem 242; all integers n >= 3.",
+      "status": "INCONCLUSIVE",
+      "assumption_ids": [],
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004"
+      ]
+    }
+  ],
+  "assumptions": [],
+  "checks": [
+    {
+      "id": "K001",
+      "target_claim": "C001",
+      "kind": "typecheck",
+      "target": "Positive distinct integer witnesses and exact equality",
+      "falsifier": "A nonpositive, repeated, nonintegral denominator or false cross product",
+      "coverage": "Every recorded finite witness; universal translation review remains open",
+      "outcome": "CLEARED",
+      "result": "Independent checker confirms all recorded witnesses satisfy their integer domain and equality",
+      "evidence_ids": [
+        "E001"
+      ]
+    },
+    {
+      "id": "K002",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "All remaining primes p = 1 mod 24",
+      "falsifier": "A proof step assumes existence for an uncovered prime or silently extrapolates finite data",
+      "coverage": "Four elementary infinite families and a reduction leave this infinite residue class open",
+      "outcome": "UNRESOLVED",
+      "result": "The greedy route fails at 49; finite successes and residue families do not establish the universal quantifier",
+      "evidence_ids": [
+        "E002"
+      ]
+    },
+    {
+      "id": "K003",
+      "target_claim": "C001",
+      "kind": "counterexample",
+      "target": "The original distinct-denominator conjecture",
+      "falsifier": "An integer n >= 3 with a proof that no positive distinct triple exists",
+      "coverage": "Witness search for n=3..10000 with max_x=64 and shared work budget=1000000",
+      "outcome": "UNRESOLVED",
+      "result": "All finite inputs have witnesses; the infinite complement remains unsearched and unproved",
+      "evidence_ids": [
+        "E001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "9998 independently verified finite distinct witnesses; no universal conclusion",
+      "locator": "artifacts/finite-search.json",
+      "sha256": "0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab",
+      "independent": false
+    },
+    {
+      "id": "E002",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Attempted proof routes, exact greedy obstruction, residue families and remaining gap",
+      "locator": "REPORT.md",
+      "sha256": "3faa1076adb96b23832a7a8c641aa7329fc484279e5b39aedb025ed944edf99f",
+      "independent": false
+    },
+    {
+      "id": "E003",
+      "kind": "source",
+      "role": "diagnostic",
+      "summary": "Bounded public-source audit: conjecture still listed open; novelty not claimed",
+      "locator": "sources/status.md",
+      "sha256": "409a73edfcb576040a23a069a27882e67b2c64c2ef929f6d1ad065e41d1897e8",
+      "independent": false
+    },
+    {
+      "id": "E004",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "Narrow modular certificate: 4/49 minus 1/13 has no two-unit-fraction completion",
+      "locator": "artifacts/greedy-obstruction.json",
+      "sha256": "18809c704980208373fa664bda45d0a1edbcd91d3479d36ef8a8792b4f1cb259",
+      "independent": false
+    }
+  ],
+  "proof_obligations": [
+    {
+      "id": "P001",
+      "target_claim": "C001",
+      "kind": "translation",
+      "statement": "Check the original claim's types, domain, quantifiers, assumptions, and scope against the proposed derivation.",
+      "coverage": "full",
+      "depends_on": [],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    },
+    {
+      "id": "P002",
+      "target_claim": "C001",
+      "kind": "proof",
+      "statement": "Establish the scoped claim or replace this obligation with an admissible counterexample.",
+      "coverage": "full",
+      "depends_on": [
+        "P001",
+        "P003"
+      ],
+      "assumption_ids": [],
+      "operation": "generalization",
+      "side_conditions": {
+        "exhaustive_argument": "P003"
+      }
+    },
+    {
+      "id": "P003",
+      "target_claim": "C001",
+      "kind": "domain",
+      "statement": "Supply an exhaustive argument covering every remaining prime p = 1 mod 24, with positivity, integrality and distinctness.",
+      "coverage": "full",
+      "depends_on": [],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    }
+  ],
+  "decision": {
+    "verdict": "INCONCLUSIVE",
+    "claim_id": "C001",
+    "reason": "Finite witnesses and elementary residue families verified; no proof or counterexample to the universal conjecture. A narrower greedy proof route is refuted at n=49.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E004"
+    ],
+    "limitations": "No novelty claimed. Existing public computational records are much stronger. Primes p=1 mod24 and prose translation review remain open.",
+    "reproduction": "Run python examples/erdos-straus/reproduce.py --output build/erdos-straus-replay and independently verify the generated certificates."
+  }
+}

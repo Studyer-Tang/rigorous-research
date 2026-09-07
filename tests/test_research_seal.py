@@ -13,10 +13,37 @@ SPEC = importlib.util.spec_from_file_location("research_seal", MODULE)
 assert SPEC and SPEC.loader
 seal = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(seal)
+import egyptian_fractions as ef
 import math_backend as mb
 
 
 class ResearchSealTests(unittest.TestCase):
+    def test_integer_receipt_recomputes_witness_after_rehash(self):
+        source, output, receipt_path = (
+            self.root / name for name in ("integer-claim.txt", "integer.json", "integer-receipt.json")
+        )
+        source.write_text("4/3 has three distinct positive unit fractions", encoding="utf-8")
+        certificate = ef.search(4, 3, 3, True)
+        for forged in (False, True):
+            if forged:
+                certificate["witnesses"][0]["z"] += 1
+            seal.write_json(output, certificate)
+            receipt = seal.make_receipt(
+                [source],
+                [output],
+                [],
+                command="recorded integer check",
+                backend="exact-integer",
+                backend_version="1",
+                semantic_domain="positive integers; finite n=3; distinct",
+                returncode=0,
+                result="ESTABLISHED",
+                base_dir=self.root,
+            )
+            seal.write_json(receipt_path, receipt)
+            errors, _ = seal.verify_receipt(receipt_path, True)
+            self.assertEqual(bool(errors), forged)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)

@@ -1,0 +1,21 @@
+{"time": "2026-09-07T08:27:24.271494+00:00", "event": "initialized", "domain": "mathematics"}
+{"time": "2026-09-07T08:30:13.316398+00:00", "event": "claim-updated", "claim_id": "C001"}
+{"time": "2026-09-07T08:30:13.426227+00:00", "event": "contract-set", "field": "ambient_object"}
+{"time": "2026-09-07T08:30:13.533708+00:00", "event": "contract-set", "field": "coefficient_domain"}
+{"time": "2026-09-07T08:30:13.638718+00:00", "event": "contract-set", "field": "quantifiers"}
+{"time": "2026-09-07T08:30:13.749097+00:00", "event": "contract-set", "field": "equality_semantics"}
+{"time": "2026-09-07T08:42:48.939911+00:00", "event": "evidence-added", "evidence_id": "E001"}
+{"time": "2026-09-07T08:42:49.064004+00:00", "event": "evidence-added", "evidence_id": "E002"}
+{"time": "2026-09-07T08:42:49.179567+00:00", "event": "evidence-added", "evidence_id": "E003"}
+{"time": "2026-09-07T08:42:49.296437+00:00", "event": "evidence-added", "evidence_id": "E004"}
+{"time": "2026-09-07T08:44:00.009704+00:00", "event": "check-added", "check_id": "K001"}
+{"time": "2026-09-07T08:44:00.125607+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E001"}
+{"time": "2026-09-07T08:44:00.236560+00:00", "event": "check-updated", "check_id": "K001", "outcome": "CLEARED"}
+{"time": "2026-09-07T08:44:00.349181+00:00", "event": "check-added", "check_id": "K002"}
+{"time": "2026-09-07T08:44:00.464778+00:00", "event": "evidence-linked", "target": "K002", "evidence_id": "E002"}
+{"time": "2026-09-07T08:44:00.589073+00:00", "event": "check-updated", "check_id": "K002", "outcome": "UNRESOLVED"}
+{"time": "2026-09-07T08:44:00.700159+00:00", "event": "check-added", "check_id": "K003"}
+{"time": "2026-09-07T08:44:00.815430+00:00", "event": "evidence-linked", "target": "K003", "evidence_id": "E001"}
+{"time": "2026-09-07T08:44:00.925749+00:00", "event": "check-updated", "check_id": "K003", "outcome": "UNRESOLVED"}
+{"time": "2026-09-07T08:44:01.154942+00:00", "event": "proof-contract-updated", "obligations": 3}
+{"time": "2026-09-07T08:44:01.269893+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "INCONCLUSIVE"}

@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "query": "Erdos Straus conjecture",
+  "retrieved_at": "2026-09-07T08:27:27.541639+00:00",
+  "requests": [
+    {
+      "provider": "crossref",
+      "url": "https://api.crossref.org/works?query.bibliographic=Erdos+Straus+conjecture&rows=5&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Ccreated%2CURL%2Ctype%2Ccontainer-title%2Cabstract",
+      "records": 5,
+      "status": "OK"
+    }
+  ],
+  "request_errors": [],
+  "fuzzy_threshold": 0.94,
+  "raw_count": 5,
+  "unique_count": 4,
+  "records": [
+    {
+      "title": "E. Straus 1921-83",
+      "authors": [
+        "Paul Erdos"
+      ],
+      "year": 1985,
+      "doi": "10.1216/rmj-1985-15-2-331",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.1216/rmj-1985-15-2-331",
+      "venue": "Rocky Mountain Journal of Mathematics",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        5
+      ],
+      "id": "L001",
+      "normalized_title": "e straus 1921 83"
+    },
+    {
+      "title": "Understanding the Erdos Straus Conjecture and Its Path toward Possible Resolution",
+      "authors": [
+        "Abhijit Manohar"
+      ],
+      "year": 2025,
+      "doi": "10.21275/sr251204121358",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.21275/sr251204121358",
+      "venue": "International Journal of Science and Research (IJSR)",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        2,
+        1
+      ],
+      "id": "L002",
+      "normalized_title": "understanding the erdos straus conjecture and its path toward possible resolution"
+    },
+    {
+      "title": "A new approach to the Erdős–Straus Conjecture",
+      "authors": [
+        "Christopher Farah"
+      ],
+      "year": 2025,
+      "doi": "10.2139/ssrn.5378462",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2139/ssrn.5378462",
+      "venue": "",
+      "abstract": "",
+      "record_type": "posted-content",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        4
+      ],
+      "id": "L003",
+      "normalized_title": "a new approach to the erdős straus conjecture"
+    },
+    {
+      "title": "A SIMPLE DIRECT PROOF OF THE ERDOS–STRAUS CONJECTURE",
+      "authors": [
+        "Mohammad W. Alomari"
+      ],
+      "year": 2023,
+      "doi": "10.31219/osf.io/gecwa",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.31219/osf.io/gecwa",
+      "venue": "",
+      "abstract": "In this note, we give full complete positive proof of the celebrated unsolved Erd¨os–Strausconjecture. Similarly, the Sierpinski conjecture follows. A relaxed extension of the restricted Hagedornequation is presented.",
+      "record_type": "posted-content",
+      "providers": [
+        "crossref"
+      ],
+      "merged_from": [
+        3
+      ],
+      "id": "L004",
+      "normalized_title": "a simple direct proof of the erdos straus conjecture"
+    }
+  ],
+  "dedup_decisions": [
+    {
+      "source_record": 1,
+      "target_record": 2,
+      "reason": "same-title-author-year",
+      "disposition": "AUTO_MERGED",
+      "source_title": "Understanding the Erdos Straus Conjecture and Its Path toward Possible Resolution",
+      "target_title": "Understanding the Erdos Straus Conjecture and Its Path toward Possible Resolution"
+    }
+  ],
+  "raw_records": [
+    {
+      "title": "Understanding the Erdos Straus Conjecture and Its Path toward Possible Resolution",
+      "authors": [
+        "Abhijit Manohar"
+      ],
+      "year": 2025,
+      "doi": "10.21275/sr251206125822",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.21275/sr251206125822",
+      "venue": "International Journal of Science and Research (IJSR)",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "Understanding the Erdos Straus Conjecture and Its Path toward Possible Resolution",
+      "authors": [
+        "Abhijit Manohar"
+      ],
+      "year": 2025,
+      "doi": "10.21275/sr251204121358",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.21275/sr251204121358",
+      "venue": "International Journal of Science and Research (IJSR)",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "A SIMPLE DIRECT PROOF OF THE ERDOS–STRAUS CONJECTURE",
+      "authors": [
+        "Mohammad W. Alomari"
+      ],
+      "year": 2023,
+      "doi": "10.31219/osf.io/gecwa",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.31219/osf.io/gecwa",
+      "venue": "",
+      "abstract": "In this note, we give full complete positive proof of the celebrated unsolved Erd¨os–Strausconjecture. Similarly, the Sierpinski conjecture follows. A relaxed extension of the restricted Hagedornequation is presented.",
+      "record_type": "posted-content",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "A new approach to the Erdős–Straus Conjecture",
+      "authors": [
+        "Christopher Farah"
+      ],
+      "year": 2025,
+      "doi": "10.2139/ssrn.5378462",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.2139/ssrn.5378462",
+      "venue": "",
+      "abstract": "",
+      "record_type": "posted-content",
+      "providers": [
+        "crossref"
+      ]
+    },
+    {
+      "title": "E. Straus 1921-83",
+      "authors": [
+        "Paul Erdos"
+      ],
+      "year": 1985,
+      "doi": "10.1216/rmj-1985-15-2-331",
+      "arxiv_id": "",
+      "url": "https://doi.org/10.1216/rmj-1985-15-2-331",
+      "venue": "Rocky Mountain Journal of Mathematics",
+      "abstract": "",
+      "record_type": "journal-article",
+      "providers": [
+        "crossref"
+      ]
+    }
+  ]
+}

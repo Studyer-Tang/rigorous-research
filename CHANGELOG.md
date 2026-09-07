@@ -4,6 +4,15 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.10.0 - 2026-09-07
+
+- Exercised the toolkit on the publicly open Erdős–Straus conjecture: 9,998 exact distinct witnesses, a checked obstruction to the greedy first-denominator route at 49, four elementary residue families, sourced status, and an explicitly inconclusive original claim. No novelty or larger verification record is claimed.
+- Added budgeted, standard-library three-unit-fraction search and a separate integer certificate verifier. Finite quantifiers, positivity, integrality, ordering, distinctness, coverage gaps, and a narrow modular noncompletion argument are checked independently of the producer.
+- Added `--output` to independent checking and exact-integer support to strict receipts. Unsupported universal extensions of finite certificates fail validation.
+- Workspace runs can explicitly accept documented semantic exit codes with `--accept-returncode`; actual codes remain recorded, scientific verdicts remain separate, and operational failures cannot be accepted this way.
+- Added replayable adversarial evaluations, bilingual entry-point documentation, and LF rules for checksummed example artifacts.
+- Record run working directories relatively where possible, so a repository-parent working directory does not leak the author's home path into a shared example.
+
 ## 1.9.0 - 2026-09-06
 
 ### Added

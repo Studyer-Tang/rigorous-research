@@ -1,0 +1,15 @@
+{"time": "2026-09-07T08:27:24.278876+00:00", "event": "workspace-initialized", "domain": "mathematics"}
+{"time": "2026-09-07T08:27:24.433848+00:00", "event": "task-added", "task_id": "W001"}
+{"time": "2026-09-07T08:27:24.571880+00:00", "event": "task-added", "task_id": "W002"}
+{"time": "2026-09-07T08:27:24.717022+00:00", "event": "task-added", "task_id": "W003"}
+{"time": "2026-09-07T08:38:39.865480+00:00", "event": "run-recorded", "run_id": "R001", "task_id": "W002", "returncode": 0}
+{"time": "2026-09-07T08:38:40.219678+00:00", "event": "run-recorded", "run_id": "R002", "task_id": "W003", "returncode": 0}
+{"time": "2026-09-07T08:38:40.599595+00:00", "event": "run-recorded", "run_id": "R003", "task_id": "W002", "returncode": 1}
+{"time": "2026-09-07T08:42:48.511256+00:00", "event": "run-recorded", "run_id": "R004", "task_id": "W002", "returncode": 0}
+{"time": "2026-09-07T08:42:48.669597+00:00", "event": "source-added", "source_id": "S001"}
+{"time": "2026-09-07T08:42:48.822983+00:00", "event": "source-added", "source_id": "S002"}
+{"time": "2026-09-07T08:44:01.419229+00:00", "event": "task-updated", "task_id": "W001", "status": "DONE"}
+{"time": "2026-09-07T08:44:01.583585+00:00", "event": "task-updated", "task_id": "W002", "status": "DONE"}
+{"time": "2026-09-07T08:44:01.740901+00:00", "event": "task-updated", "task_id": "W003", "status": "DONE"}
+{"time": "2026-09-07T08:44:01.884088+00:00", "event": "stage-updated", "stage": "RELEASED"}
+{"time": "2026-09-07T08:51:56.463864+00:00", "event": "equivalent-relative-working-directories", "run_ids": ["R001", "R002", "R003", "R004"], "note": "Preserved the executed directories while replacing absolute local paths with equivalent relative locators for sharing."}

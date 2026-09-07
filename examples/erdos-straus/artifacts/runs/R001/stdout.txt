@@ -1,0 +1,1 @@
+{"status": "ESTABLISHED", "errors": [], "output": "examples\\erdos-straus\\artifacts\\finite-search.json"}

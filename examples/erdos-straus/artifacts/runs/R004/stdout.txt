@@ -1,0 +1,1 @@
+finite_witnesses=9998 greedy_route_refuted_at=49 original_conjecture=INCONCLUSIVE novelty=NOT_CLAIMED

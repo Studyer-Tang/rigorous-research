@@ -1,0 +1,42 @@
+{
+  "obligations": [
+    {
+      "id": "P001",
+      "target_claim": "C001",
+      "kind": "translation",
+      "statement": "Check the original claim's types, domain, quantifiers, assumptions, and scope against the proposed derivation.",
+      "coverage": "full",
+      "depends_on": [],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    },
+    {
+      "id": "P002",
+      "target_claim": "C001",
+      "kind": "proof",
+      "statement": "Establish the scoped claim or replace this obligation with an admissible counterexample.",
+      "coverage": "full",
+      "depends_on": [
+        "P001",
+        "P003"
+      ],
+      "assumption_ids": [],
+      "operation": "generalization",
+      "side_conditions": {
+        "exhaustive_argument": "P003"
+      }
+    },
+    {
+      "id": "P003",
+      "target_claim": "C001",
+      "kind": "domain",
+      "statement": "Supply an exhaustive argument covering every remaining prime p = 1 mod 24, with positivity, integrality and distinctness.",
+      "coverage": "full",
+      "depends_on": [],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    }
+  ]
+}

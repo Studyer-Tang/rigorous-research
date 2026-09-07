@@ -1,0 +1,46 @@
+{
+  "main_conjecture": "INCONCLUSIVE",
+  "novelty": "NOT_CLAIMED",
+  "finite_domain": [
+    3,
+    10000
+  ],
+  "verified_witnesses": 9998,
+  "unresolved_inputs": [],
+  "strategies": {
+    "construction": 9165,
+    "divisor_search": 833
+  },
+  "budget": {
+    "max_x_per_n": 64,
+    "max_work": 1000000,
+    "used_work": 248271
+  },
+  "greedy_failures_in_3_to_49": [
+    49
+  ],
+  "n49_witness": {
+    "n": 49,
+    "x": 14,
+    "y": 99,
+    "z": 9702
+  },
+  "remaining_prime_residue_mod_24": [
+    1
+  ],
+  "remaining_obligations": [
+    "cover all remaining primes, not just a finite sample",
+    "human review of prose translations and domain arguments",
+    "no novelty established by this investigation"
+  ],
+  "artifacts": {
+    "budget-limited.json": "1ed2c52ece58e42fc262e566d471ee4ec356a1496bd3f158607f791ba7f936b4",
+    "finite-search.json": "0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab",
+    "greedy-obstruction-check.json": "6dfb257d08efcb42b00464b51870d4b0d27b4db2d7af0adb49ed6a33755d75ba",
+    "greedy-obstruction.json": "18809c704980208373fa664bda45d0a1edbcd91d3479d36ef8a8792b4f1cb259",
+    "greedy-reduction.json": "0c231f9a35541ea5fed700b4b5d8b0f1f289c9eac43b8342f07c2000723463d8",
+    "independent-check.json": "c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2",
+    "residue-families.json": "7d09aa59b3be053f238dab9beae5e265c3b43f775fab65f163790d56690a8070"
+  },
+  "reproducer_sha256": "8bd75406a5aaa179950418cbd6c86a05620389e39b3ac3147cb030fe0384d462"
+}

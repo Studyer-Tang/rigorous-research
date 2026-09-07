@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "backend": "exact-integer",
+  "backend_version": "1",
+  "operation": "two-unit-fractions-obstruction",
+  "claim": {
+    "numerator": 4,
+    "denominator": 49,
+    "first_denominator": 13
+  },
+  "denominator_factorization": [
+    {
+      "prime": 7,
+      "exponent": 2
+    },
+    {
+      "prime": 13,
+      "exponent": 1
+    }
+  ],
+  "recommended_evidence_role": "decisive"
+}

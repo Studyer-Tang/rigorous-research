@@ -1,0 +1,11 @@
+# Statement and public status audit
+
+Accessed 2026-09-07. This is a bounded public-source check, not a comprehensive review of every proof claim.
+
+1. T. F. Bloom, [Erdős Problem #242](https://www.erdosproblems.com/242). The retrieved page labels the problem “Open, but could be disproved with a finite counterexample.” Its statement is: for every integer `n > 2`, there are distinct positive integers `x < y < z` such that `4/n = 1/x + 1/y + 1/z`. The page records its last edit as 2026-05-07. It reports verification through `10^18`, citing `[MiDu25]`, and stronger residue restrictions than those explored here. We have not independently reproduced that computational record or inspected its full primary source.
+2. Eric W. Weisstein, [Erdős–Straus Conjecture, MathWorld](https://mathworld.wolfram.com/Erdos-StrausConjecture.html). The retrieved page classifies it under Unsolved Problems and lists historical references, including Obláth (1950), Rosati (1954), and Vaughan (1970). Some displayed formulas are images and were not recovered by text stripping; the exact working statement therefore follows source 1.
+3. The project's Crossref query `Erdos Straus conjecture`, limit 5, returned the attached [candidate matrix](literature.md), [raw metadata](literature.json), and [BibTeX](literature.bib). A result entitled “A SIMPLE DIRECT PROOF OF THE ERDOS–STRAUS CONJECTURE” is a metadata candidate, not evidence that the conjecture is solved. Its argument was not adjudicated in this investigation. No accusation about its author or definitive judgment about that paper is made.
+
+Source 1 is a curated problem directory; source 2 is an encyclopedia. Both are secondary sources. The metadata search is incomplete and not restricted to refereed publications. We claim only that these retrieved public sources still present the problem as open. The elementary residue constructions and finite verification in this example are not presented as new mathematics.
+
+The initial scoping question used the usual positive-denominator version with `n >= 2`. The working claim was explicitly refined to the source's distinct-denominator version with `n >= 3`; those two formulations must not be silently interchanged. At `n=2`, repeated denominators admit `(1,2,2)`, while three distinct positive denominators cannot sum to 2 because their maximum sum is `1+1/2+1/3 < 2`.

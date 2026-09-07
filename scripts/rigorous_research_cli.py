@@ -16,6 +16,7 @@ class Command:
 
 
 COMMANDS = {
+    "egyptian": Command("egyptian_fractions", "search finite integer unit-fraction domains with exact witnesses"),
     "statistical-contract": Command("statistical_contract", "audit theorem, design, and implementation conditions"),
     "verify-certificate": Command("certificate_verifier", "independently recheck an exact mathematical certificate"),
     "copilot": Command(

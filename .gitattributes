@@ -1,2 +1,3 @@
 # Keep checksummed regression evidence identical across Windows and Linux.
 /evals/fixtures/** text eol=lf
+/examples/erdos-straus/** text eol=lf

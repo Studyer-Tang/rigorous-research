@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "kind": "independent-certificate-check",
+  "status": "ESTABLISHED",
+  "errors": [],
+  "certificate_hash": "2f8788a1d4220dc653041a0b290740a6ef8d60b3c72074eb0ec8f283b18807de",
+  "scope": "Only the explicit finite domain or fixed-first-denominator obstruction; no universal conjecture or novelty claim."
+}

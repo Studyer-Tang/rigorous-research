@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from math_backend import load_sympy, parse_expression, symbol_table
-from research_io import canonical_hash, load_json_object, sha256
+from research_io import canonical_hash, load_json_object, sha256, write_json
 
 
 def rational(value: Any) -> Any:
@@ -155,6 +155,10 @@ def check_identity(
 
 
 def verify(certificate: dict[str, Any], inputs: list[Path] | None = None) -> dict[str, Any]:
+    if certificate.get("backend") == "exact-integer":
+        from integer_certificate_verifier import verify as verify_integer
+
+        return verify_integer(certificate)
     sympy = load_sympy()
     try:
         if certificate.get("backend") != "sympy" or certificate.get("schema_version") != 1:
@@ -197,9 +201,12 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("certificate", type=Path)
     parser.add_argument("--input", type=Path, action="append", default=[])
+    parser.add_argument("--output", type=Path, help="save the independently derived result")
     args = parser.parse_args(argv)
     try:
         result = verify(load_json_object(args.certificate), args.input)
+        if args.output:
+            write_json(args.output, result)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0 if result["status"] in ("ESTABLISHED", "REFUTED") else 1
     except (ValueError, OSError, RuntimeError) as exc:

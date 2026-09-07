@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "name": "release-and-assurance-regression-v2",
+  "name": "release-and-assurance-regression-v3",
   "cases": [
     {
       "id": "released-math-refutation",
@@ -173,6 +173,73 @@
         "pointer": "/conditions/no_outcome_selection/status",
         "value": "UNTESTED"
       }
+    },
+    {
+      "id": "released-inconclusive-open-conjecture",
+      "validator": "workspace",
+      "source": "examples/erdos-straus/workspace.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-finite-to-universal-promotion",
+      "validator": "case",
+      "source": "examples/erdos-straus/case.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/decision/verdict",
+        "value": "SUPPORTED"
+      }
+    },
+    {
+      "id": "integer-finite-coverage",
+      "validator": "certificate",
+      "source": "examples/erdos-straus/artifacts/finite-search.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-forged-integer-witness",
+      "validator": "certificate",
+      "source": "examples/erdos-straus/artifacts/finite-search.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/witnesses/0/z",
+        "value": 13
+      }
+    },
+    {
+      "id": "reject-extended-finite-domain",
+      "validator": "certificate",
+      "source": "examples/erdos-straus/artifacts/finite-search.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/claim/stop",
+        "value": 10001
+      }
+    },
+    {
+      "id": "fixed-denominator-obstruction",
+      "validator": "certificate",
+      "source": "examples/erdos-straus/artifacts/greedy-obstruction.json",
+      "expect_valid": true
+    },
+    {
+      "id": "reject-composite-factor-as-prime",
+      "validator": "certificate",
+      "source": "examples/erdos-straus/artifacts/greedy-obstruction.json",
+      "expect_valid": false,
+      "mutation": {
+        "pointer": "/denominator_factorization/0",
+        "value": {
+          "prime": 49,
+          "exponent": 1
+        }
+      }
+    },
+    {
+      "id": "keep-budget-exhaustion-inconclusive",
+      "validator": "certificate",
+      "source": "examples/erdos-straus/artifacts/budget-limited.json",
+      "expect_valid": false
     }
   ]
 }

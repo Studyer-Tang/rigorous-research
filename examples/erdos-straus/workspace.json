@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "workspace_id": "erdos-straus",
+  "domain": "mathematics",
+  "question": "For every integer n >= 2, can 4/n be written as three positive unit fractions?",
+  "stage": "RELEASED",
+  "created_at": "2026-09-07T08:27:24.278876+00:00",
+  "updated_at": "2026-09-07T08:51:56.463864+00:00",
+  "case_file": "case.json",
+  "tasks": [
+    {
+      "id": "W001",
+      "title": "Check public statement and open status",
+      "kind": "literature",
+      "acceptance": "Record retrieved sources, exact statement, date and coverage limitations",
+      "depends_on": [],
+      "deliverable": "sources/status.md",
+      "status": "DONE",
+      "note": "Completed bounded public-source audit; not a comprehensive novelty review"
+    },
+    {
+      "id": "W002",
+      "title": "Attempt constructive proof and bounded exact search",
+      "kind": "proof",
+      "acceptance": "Verify every witness exactly; distinguish universal claim, residue families and finite coverage",
+      "depends_on": [],
+      "deliverable": "REPORT.md",
+      "status": "DONE",
+      "note": "Completed the planned proof attempt and documented its remaining gap; original conjecture not solved"
+    },
+    {
+      "id": "W003",
+      "title": "Independently check arithmetic and audit project weaknesses",
+      "kind": "replication",
+      "acceptance": "Reject tampered, missing and out-of-domain witnesses; record unresolved proof obligations",
+      "depends_on": [],
+      "deliverable": "artifacts/independent-check.json",
+      "status": "DONE",
+      "note": "Independent checks and adversarial regression tests completed; no human review fabricated"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S001",
+      "citation": "T. F. Bloom, Erdos Problem 242, accessed 2026-09-07",
+      "role": "secondary",
+      "url": "https://www.erdosproblems.com/242",
+      "file": "sources/status.md",
+      "sha256": "409a73edfcb576040a23a069a27882e67b2c64c2ef929f6d1ad065e41d1897e8",
+      "accessed_at": "2026-09-07T08:42:48.661933+00:00",
+      "note": "Public statement and open-status evidence; not a proof of the conjecture",
+      "supports": [
+        "C001"
+      ]
+    },
+    {
+      "id": "S002",
+      "citation": "Eric W. Weisstein, Erdos-Straus Conjecture, MathWorld, accessed 2026-09-07",
+      "role": "secondary",
+      "url": "https://mathworld.wolfram.com/Erdos-StrausConjecture.html",
+      "file": "",
+      "sha256": null,
+      "accessed_at": "2026-09-07T08:42:48.813437+00:00",
+      "note": "Secondary status corroboration; some formula images not extracted",
+      "supports": [
+        "C001"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "R001",
+      "task_id": "W002",
+      "label": "Exact distinct unit-fraction search for n=3..10000",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/egyptian_fractions.py",
+        "--start",
+        "3",
+        "--stop",
+        "10000",
+        "--distinct",
+        "--output",
+        "examples/erdos-straus/artifacts/finite-search.json"
+      ],
+      "cwd": "../..",
+      "started_at": "2026-09-07T08:38:39.574942+00:00",
+      "finished_at": "2026-09-07T08:38:39.776039+00:00",
+      "returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R001/stdout.txt",
+      "stderr": "artifacts/runs/R001/stderr.txt",
+      "outputs": [
+        {
+          "file": "artifacts/finite-search.json",
+          "sha256": "0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab"
+        }
+      ],
+      "stdout_sha256": "781d45bada3545fc8eeb16e9c7a733be06ea4bd7486e1d63dfc5b61c242dc7fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "R002",
+      "task_id": "W003",
+      "label": "Independent integer cross-multiplication verification",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/certificate_verifier.py",
+        "examples/erdos-straus/artifacts/finite-search.json",
+        "--output",
+        "examples/erdos-straus/artifacts/independent-check.json"
+      ],
+      "cwd": "../..",
+      "started_at": "2026-09-07T08:38:40.018308+00:00",
+      "finished_at": "2026-09-07T08:38:40.141179+00:00",
+      "returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R002/stdout.txt",
+      "stderr": "artifacts/runs/R002/stderr.txt",
+      "outputs": [
+        {
+          "file": "artifacts/independent-check.json",
+          "sha256": "c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2"
+        }
+      ],
+      "stdout_sha256": "c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "R003",
+      "task_id": "W002",
+      "label": "Prespecified one-work-unit budget: expected inconclusive result",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/egyptian_fractions.py",
+        "--start",
+        "3",
+        "--stop",
+        "100",
+        "--distinct",
+        "--max-work",
+        "1",
+        "--output",
+        "examples/erdos-straus/artifacts/budget-limited.json"
+      ],
+      "cwd": "../..",
+      "started_at": "2026-09-07T08:38:40.379815+00:00",
+      "finished_at": "2026-09-07T08:38:40.456808+00:00",
+      "returncode": 1,
+      "accepted_returncodes": [
+        0,
+        1
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R003/stdout.txt",
+      "stderr": "artifacts/runs/R003/stderr.txt",
+      "outputs": [
+        {
+          "file": "artifacts/budget-limited.json",
+          "sha256": "1ed2c52ece58e42fc262e566d471ee4ec356a1496bd3f158607f791ba7f936b4"
+        }
+      ],
+      "stdout_sha256": "d29b058788ba0c7f623d0ab7ad67c727366edb45744f665b9fc1f92be0aa2a62",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "R004",
+      "task_id": "W002",
+      "label": "Reproduce residue families and exact greedy obstruction",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "examples/erdos-straus/reproduce.py",
+        "--output",
+        "examples/erdos-straus/artifacts"
+      ],
+      "cwd": "../..",
+      "started_at": "2026-09-07T08:42:47.576167+00:00",
+      "finished_at": "2026-09-07T08:42:48.394898+00:00",
+      "returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R004/stdout.txt",
+      "stderr": "artifacts/runs/R004/stderr.txt",
+      "outputs": [
+        {
+          "file": "artifacts/summary.json",
+          "sha256": "01308c1e009c0d34d1d471b592b12c397d44c06102c880565161a9b7cf92591b"
+        },
+        {
+          "file": "artifacts/residue-families.json",
+          "sha256": "7d09aa59b3be053f238dab9beae5e265c3b43f775fab65f163790d56690a8070"
+        },
+        {
+          "file": "artifacts/greedy-obstruction.json",
+          "sha256": "18809c704980208373fa664bda45d0a1edbcd91d3479d36ef8a8792b4f1cb259"
+        },
+        {
+          "file": "artifacts/greedy-obstruction-check.json",
+          "sha256": "6dfb257d08efcb42b00464b51870d4b0d27b4db2d7af0adb49ed6a33755d75ba"
+        }
+      ],
+      "stdout_sha256": "617ce91cea4814a9e9e9a21baae0813f912d7879c6d52c8e9d6b2796023dc740",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "release_policy": {
+    "plan_seal_required": false,
+    "data_snapshot_required": false,
+    "independent_review_required": true
+  },
+  "plan_seal": "",
+  "data_snapshots": [],
+  "review_adjudication": ""
+}

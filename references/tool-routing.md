@@ -10,7 +10,8 @@ Use the unified `rigorous-research` command after installing the project. Direct
 | Research integrity and versions | `rigorous-research integrity` | `research_integrity.py` | network for live checks; fixtures support replay |
 | Governed AI review draft | `rigorous-research ai-review` | `governed_ai_reviewer.py` | none locally; optional Ollama or user endpoint |
 | Exact mathematics | `rigorous-research math` | `math_backend.py` | SymPy; Lean is optional |
-| Independent certificate check | `rigorous-research verify-certificate` | `certificate_verifier.py` | SymPy |
+| Integer unit-fraction existence | `rigorous-research egyptian` | `egyptian_fractions.py` | none; separate integer checker |
+| Independent certificate check | `rigorous-research verify-certificate` | `certificate_verifier.py` | SymPy for symbolic certificates; none for exact integers |
 | Statistical theorem conditions | `rigorous-research statistical-contract` | `statistical_contract.py` | none |
 | Statistical stress tests | `rigorous-research statistics` | `statistics_backend.py` | none for bundled methods |
 | Financial-data vintage | `rigorous-research data` | `finance_data.py` | network for live retrieval |

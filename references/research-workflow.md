@@ -82,6 +82,8 @@ The command runner does not expand the user's authorization. Run only local or e
 
 If an artifact is intentionally regenerated, use `rehash-run` and `rehash-evidence` only after reviewing the substantive diff. These commands journal the accepted revision. Never use them merely to silence an unexplained integrity failure.
 
+Some tools return 1 for a completed but inconclusive mathematical check. For a tool whose documented exit semantics you have checked, declare `workspace run ... --accept-returncode 1 -- ...` before execution. The ledger preserves the actual return code and allowed codes, while the wrapper returns 0 for accepted execution. This does not validate the scientific result or set a claim verdict. Missing outputs, missing task deliverables, timeouts, and launch failures remain failures even if their numeric codes were listed. Legacy runs accept only 0 by default; do not retroactively relabel unexplained failures.
+
 Resume or release with:
 
 ```text

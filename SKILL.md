@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.9"
+  version: "1.10"
   skill-author: Rigorous Research contributors
 ---
 
@@ -23,6 +23,8 @@ When resuming an investigation, use `rigorous-research workspace next workspace.
 For model-assisted research planning, use `rigorous-research copilot prepare` to export a bounded research packet, `copilot advise` to import a chat response or call a user-selected model, and `copilot verify` to check the proposed mathematical subclaims. Read [references/research-copilot.md](references/research-copilot.md) for the response contract, provider setup, and replay workflow. For one-variable polynomial bounds on closed rational intervals, use `math sympy-bound`. Check that the tested expression and interval represent the original claim before promoting any result; a model's translation is an open obligation.
 
 Do not create a managed workspace for a short explanation or an answer that has no persistent artifacts.
+
+For integer existence problems involving three unit fractions, use `rigorous-research egyptian` and read [references/integer-search.md](references/integer-search.md). Declare distinctness and the exact finite input interval, independently check every witness, and keep budget exhaustion inconclusive. When investigating an open conjecture, record its sourced statement and public status, distinguish a failed proof route from a conjecture counterexample, and make no novelty claim without an appropriate literature review.
 
 For proof obligations, independently checked certificates, or statistical theorem applicability, read [references/proof-assurance.md](references/proof-assurance.md). New cases use schema 4: separate translation, domain conditions, and the proof or counterexample; derive closure from evidence rather than model confidence. Declare division, inversion, limit interchange, and generalization operations explicitly. Never invent a human reviewer or record an AI review as human. Leave unproved steps open and continue independently useful research.
 
@@ -97,7 +99,7 @@ When one evidence type supports another, write the bridge explicitly.
 Use one verdict per headline claim:
 
 - `SUPPORTED`: the exact claim passes every required domain gate.
-- `REFUTED`: a valid contradiction, counterexample, or failed identifying condition defeats it.
+- `REFUTED`: a valid contradiction or counterexample defeats the exact claim; failed identification alone does not refute an effect.
 - `INCONCLUSIVE`: evidence is informative but at least one decisive gate remains open.
 - `MISSPECIFIED`: the claim has no stable truth condition or estimand as written.
 

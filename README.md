@@ -2,6 +2,10 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**1.10 includes a real open-conjecture investigation:** [Erdős–Straus report and replay](examples/erdos-straus/REPORT.md). It checks 9,998 distinct integer witnesses, proves that a natural greedy proof route fails at `n=49`, and leaves the original conjecture **INCONCLUSIVE**. No new theorem or computational record is claimed. This use exposed and fixed missing integer-certificate support and the conflation of inconclusive scientific outcomes with failed processes.
+
+Use `rigorous-research egyptian --start 3 --stop 10000 --distinct --output finite.json`, then `rigorous-research verify-certificate finite.json`. Integer search and independent checking use only the standard library; the example's symbolic families additionally require SymPy. See the [integer-search guide](references/integer-search.md) for scope and budget semantics.
+
 **1.9 adds proof and statistical assurance:** explicit proof obligations, independent exact certificate checks, theorem applicability contracts, and adversarial regression cases. Reports expose unfinished steps; changing the claim, assumptions, or proof graph invalidates existing resolutions. See the [assurance workflow](references/proof-assurance.md).
 
 The independent checker recomputes rational identities and witnesses, recomputes matrix determinants from original inputs, and reconstructs Bernstein interval certificates. Statistical contracts distinguish finite-sample guarantees from asymptotic conclusions and reject simulation results as substitutes for theorem conditions. Copilot supplies unresolved obligations to the model and checks its mathematical outputs in a second process within the same time budget.

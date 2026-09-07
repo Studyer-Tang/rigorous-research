@@ -2,7 +2,7 @@
 
 The roadmap favors stronger evidence and easier independent reproduction over adding broad but weak automation.
 
-## Current release: 1.9
+## Current release: 1.10
 
 - One installable CLI for cases, workspaces, literature, research integrity, governed AI review, mathematics, statistics, data, sealing, review, evaluation, and repository quality.
 - Five literature metadata providers with conservative deduplication and visible retrieval gaps.
@@ -11,6 +11,7 @@ The roadmap favors stronger evidence and easier independent reproduction over ad
 - Domain-preserving rational identity checks, exact bounded counterexample search, and read-only research continuation proposals with durable launch-failure records.
 - Exact polynomial interval bounds and a model-to-verifier copilot workflow with explicit translation obligations and offline replay.
 - Evidence-bound proof graphs, independently reconstructed exact certificates, and statistical applicability contracts with adversarial regressions.
+- An honest open-conjecture case study, bounded integer witness searches, independently checked modular obstructions, and separate execution/scientific outcomes.
 
 ## Delivered in 1.4–1.5
 

@@ -113,6 +113,98 @@ class ResearchWorkspaceTests(unittest.TestCase):
         errors, _ = rw.validate_workspace(data, workspace)
         self.assertEqual(errors, [])
 
+    def test_documented_inconclusive_exit_is_preserved_without_claim_promotion(self):
+        workspace = self.workspace()
+        task = self.add_task(workspace, deliverable="result.json")
+        result = rw.main(
+            [
+                "run",
+                str(workspace),
+                "--task",
+                task,
+                "--label",
+                "inconclusive result",
+                "--accept-returncode",
+                "1",
+                "--output",
+                "result.json",
+                "--complete",
+                "--",
+                sys.executable,
+                "-c",
+                "from pathlib import Path; Path('result.json').write_text('{\"status\":\"INCONCLUSIVE\"}'); raise SystemExit(1)",
+            ]
+        )
+        self.assertEqual(result, 0)
+        _, data = rw.load(workspace)
+        self.assertEqual(data["runs"][0]["returncode"], 1)
+        self.assertEqual(data["runs"][0]["process_returncode"], 1)
+        self.assertEqual(data["runs"][0]["accepted_returncodes"], [0, 1])
+        self.assertEqual(data["tasks"][0]["status"], "DONE")
+        _, case = rw.ic.load_case(workspace.parent / "case.json")
+        self.assertEqual(case["decision"]["verdict"], "OPEN")
+        errors, _ = rw.validate_workspace(data, workspace, release=True)
+        self.assertFalse(any("failed runs" in error for error in errors))
+        self.assertTrue(errors)  # Research release obligations still apply.
+
+    def test_accepting_exit_code_does_not_accept_missing_outputs_or_operational_failures(self):
+        workspace = self.workspace()
+        task = self.add_task(workspace)
+        result = rw.main(
+            [
+                "run",
+                str(workspace),
+                "--task",
+                task,
+                "--label",
+                "missing output",
+                "--accept-returncode",
+                "1",
+                "--accept-returncode",
+                "3",
+                "--output",
+                "absent.json",
+                "--complete",
+                "--",
+                sys.executable,
+                "-c",
+                "raise SystemExit(1)",
+            ]
+        )
+        self.assertNotEqual(result, 0)
+        _, data = rw.load(workspace)
+        self.assertFalse(rw.run_succeeded(data["runs"][0]))
+        self.assertEqual(data["runs"][0]["process_returncode"], 1)
+        self.assertEqual(data["tasks"][0]["status"], "PLANNED")
+        for flag in ("timed_out", "launch_error", "acceptance_error"):
+            with self.subTest(flag=flag):
+                self.assertFalse(rw.run_succeeded({"returncode": 124, "accepted_returncodes": [124], flag: True}))
+
+    def test_repository_parent_cwd_is_recorded_portably(self):
+        workspace = self.workspace()
+        task = self.add_task(workspace)
+        self.assertEqual(
+            rw.main(
+                [
+                    "run",
+                    str(workspace),
+                    "--task",
+                    task,
+                    "--label",
+                    "portable working directory",
+                    "--cwd",
+                    "..",
+                    "--",
+                    sys.executable,
+                    "-c",
+                    "print('complete')",
+                ]
+            ),
+            0,
+        )
+        _, data = rw.load(workspace)
+        self.assertEqual(data["runs"][0]["cwd"], "..")
+
     def test_output_tampering_is_detected(self):
         workspace = self.workspace()
         task = self.add_task(workspace, deliverable="result.txt")
