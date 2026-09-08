@@ -1,0 +1,1827 @@
+{
+  "schema_version": 3,
+  "case_id": "goldbach-conjecture",
+  "domain": "mathematics",
+  "question": "Can the strong Goldbach conjecture be proved: every even integer n >= 4 is the sum of two primes?",
+  "created_at": "2026-09-02T06:30:59.616309+00:00",
+  "updated_at": "2026-09-04T21:04:07.130353+00:00",
+  "contract": {
+    "ambient_object": "Integers Z with the standard set of positive primes P.",
+    "coefficient_domain": "Integer arithmetic over Z; primality means positive integer greater than 1 with exactly two positive divisors.",
+    "quantifiers": "For all n in Z, n >= 4 and n congruent to 0 mod 2; there exist p,q in P.",
+    "equality_semantics": "Literal equality in Z: n = p + q."
+  },
+  "claims": [
+    {
+      "id": "C001",
+      "statement": "For every integer n >= 4, if n is even, then there exist primes p and q such that n = p + q.",
+      "scope": "Strong (binary) Goldbach conjecture, all even integers n >= 4, unconditional.",
+      "status": "INCONCLUSIVE",
+      "assumption_ids": [],
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E015",
+        "E016",
+        "E017",
+        "E018",
+        "E019",
+        "E020",
+        "E021",
+        "E022",
+        "E023",
+        "E024",
+        "E025",
+        "E026",
+        "E027",
+        "E028",
+        "E029",
+        "E030",
+        "E031",
+        "E032",
+        "E033",
+        "E034",
+        "E035",
+        "E036",
+        "E037",
+        "E038",
+        "E039",
+        "E040",
+        "E041",
+        "E042",
+        "E043",
+        "E044",
+        "E045",
+        "E046",
+        "E047",
+        "E048",
+        "E049",
+        "E050",
+        "E051",
+        "E052",
+        "E066",
+        "E067",
+        "E068",
+        "E069",
+        "E070",
+        "E071",
+        "E072",
+        "E073",
+        "E074",
+        "E075",
+        "E076",
+        "E077",
+        "E078",
+        "E079",
+        "E080",
+        "E081",
+        "E082",
+        "E083",
+        "E084",
+        "E085",
+        "E086",
+        "E087",
+        "E088",
+        "E089",
+        "E090",
+        "E091",
+        "E092",
+        "E093",
+        "E094",
+        "E095",
+        "E096",
+        "E097",
+        "E098",
+        "E099",
+        "E100",
+        "E101",
+        "E102",
+        "E103",
+        "E104",
+        "E105",
+        "E106",
+        "E107",
+        "E108",
+        "E109",
+        "E110",
+        "E111",
+        "E112",
+        "E119",
+        "E120",
+        "E121",
+        "E122",
+        "E123",
+        "E124",
+        "E125",
+        "E126",
+        "E127",
+        "E128",
+        "E129",
+        "E130",
+        "E131",
+        "E132",
+        "E139",
+        "E141"
+      ]
+    }
+  ],
+  "assumptions": [],
+  "checks": [
+    {
+      "id": "K001",
+      "target_claim": "C001",
+      "kind": "typecheck",
+      "target": "Definitions, domains, quantifiers, and equality semantics are coherent.",
+      "falsifier": "Any undefined object, illegal quantifier, or mismatch between positive primes and integer equality.",
+      "coverage": "Full literal statement.",
+      "outcome": "CLEARED",
+      "result": "The statement is well-defined over Z with standard positive primes and literal equality.",
+      "evidence_ids": [
+        "E006"
+      ]
+    },
+    {
+      "id": "K002",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "A derivation gives a positive Goldbach representation count for every even n >= 4.",
+      "falsifier": "An unproved uniform error bound, parity-barrier step, average-to-pointwise inference, circular assumption, or uncovered range remains.",
+      "coverage": "Universal claim; analytic tail and finite initial range must overlap.",
+      "outcome": "UNRESOLVED",
+      "result": "小d正幂端点及Maynard增长-a相位已闭合；Li programmable权的(q,N)=1可逐因子传播，Lichtman Prop5.2据此覆盖nu<alpha/2的部分大d HB盒。平衡rough triple-divisor盒的Prop11.1模数指数有正裕量，但完整uniform路由仍缺Lemmas8.9/13.9/19.2、Props7.3/10.1及小M处理；Prop8.3的BFI互素传播仍是首要解析缺口。最终奇偶桥梁和其余Li数值端点也未闭合。",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005",
+        "E007",
+        "E008",
+        "E077",
+        "E083",
+        "E088",
+        "E089",
+        "E090",
+        "E091",
+        "E092",
+        "E093",
+        "E099",
+        "E100",
+        "E101",
+        "E102",
+        "E107",
+        "E108",
+        "E109",
+        "E115",
+        "E116",
+        "E121",
+        "E122",
+        "E124",
+        "E125"
+      ]
+    },
+    {
+      "id": "K003",
+      "target_claim": "C001",
+      "kind": "counterexample",
+      "target": "Search for an even n without a prime-pair representation.",
+      "falsifier": "One even n >= 4 with no primes p,q satisfying n=p+q.",
+      "coverage": "Local independent exhaustive search through 2,000,000; published computation through 4×10^18 assessed separately.",
+      "outcome": "CLEARED",
+      "result": "No counterexample through 2,000,000 locally and through 4×10^18 in the published computation; coverage is finite and does not prove the universal claim.",
+      "evidence_ids": [
+        "E001",
+        "E004",
+        "E009"
+      ]
+    },
+    {
+      "id": "K004",
+      "target_claim": "C001",
+      "kind": "counterexample",
+      "target": "Proposed strengthening: after sieving reflected complements through floor(N^(1/3)), prime survivors outnumber semiprime survivors for every even N>=4.",
+      "falsifier": "One even N with semiprime survivors at least as numerous as prime survivors.",
+      "coverage": "Every even N in 4..9,998.",
+      "outcome": "TRIGGERED",
+      "result": "The strengthening is false at N=68: prime survivors=2 and semiprime survivors=3.",
+      "evidence_ids": [
+        "E014"
+      ]
+    },
+    {
+      "id": "K005",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Pointwise log(2) constant separation: a deep-rough lower bound for T(N) and semiprime upper bound for S(N) leave a uniform positive remainder P(N).",
+      "falsifier": "Either bound is average-only, ineffective, loses at least the 1-log(2) constant margin, or assumes a parity-sensitive prime correlation equivalent to the target.",
+      "coverage": "Analytic tail for every sufficiently large even N; finite prefix handled separately.",
+      "outcome": "UNRESOLVED",
+      "result": "最弱正向桥梁已精确化为P_N=(T_N-C_N)/2：有T_N>=L_N后只需C_N<L_N，特别是T_N>0且C_N<=0足够。效率比u/ell<2.442695含统一余量也足够，但当前theta=19101/32000在立方根筛深只给s=1.79071875<2，一次Buchstab显示预算为-6.377541；无权主角色负号尚未提升到fixed-N反射素数相关。",
+      "evidence_ids": [
+        "E010",
+        "E012",
+        "E013",
+        "E015",
+        "E016",
+        "E017",
+        "E018",
+        "E077",
+        "E083",
+        "E088",
+        "E089",
+        "E090",
+        "E091",
+        "E092",
+        "E093",
+        "E099",
+        "E100",
+        "E101",
+        "E102",
+        "E107",
+        "E108",
+        "E109",
+        "E115",
+        "E116"
+      ]
+    },
+    {
+      "id": "K006",
+      "target_claim": "C001",
+      "kind": "counterexample",
+      "target": "Proxy propagation claim: every bottom-1% normalized count in 10,000..100,000 has at least half of its twenty nearest even neighbors in the bottom 10%.",
+      "falsifier": "One bottom-1% point whose bottom-10% neighbor fraction is below one half.",
+      "coverage": "Every even N in 10,000..100,000.",
+      "outcome": "TRIGGERED",
+      "result": "The proxy fails at N=10484: it is bottom 1% while none of the twenty nearest even neighbors is bottom 10%; lag-2 correlation is about 0.114.",
+      "evidence_ids": [
+        "E011"
+      ]
+    },
+    {
+      "id": "K007",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Central trilinear dispersion core after Vaughan/Heath-Brown decomposition of the deep semiprime correction.",
+      "falsifier": "The proposed estimate is average-only in N, loses the main term on any point of C_{1/2}, requires an unavailable general distribution level, or uses absolute values that exhaust the constant margin.",
+      "coverage": "All fixed even N above an effective threshold; parameters 1/3<u<1/2 and 1/2-u<=alpha<=(1-u)/2 after removing standard nonbalanced regions.",
+      "outcome": "UNRESOLVED",
+      "result": "Exact decomposition removes prime powers, small p, shrinking endpoint layers, and nonbalanced Type I/II regions. The residual core C_{1/2} is nonempty for every 1/3<u<1/2; one Cauchy-Schwarz plus the classical large sieve, and even an optimistic 4/7 level, does not give a summable pointwise saving there.",
+      "evidence_ids": [
+        "E016",
+        "E018"
+      ]
+    },
+    {
+      "id": "K008",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Two-sided symmetric switching and quotient-weight dispersion bridge for the fixed-N reflected-prime sequence.",
+      "falsifier": "Direction weights are not genuinely distinct, quotient-dependent weights fall outside cited distribution theorems, the Type-II core retains full factor-band projection, or any invoked parity-breaking theorem has unverified hypotheses.",
+      "coverage": "Every fixed even N above an effective threshold; all u in [1/3,1/2] and all switched quotient-weight blocks.",
+      "outcome": "UNRESOLVED",
+      "result": "The symmetric identity and first-layer bound ell*m<=sqrt(N) are valid, but all admissible direction weights equal C_z/2 pointwise. Expanding the quotient weight creates C_sym with full u-projection; FI (R),(B), Ford-Maynard wide Type I/II, and SD are unproved for a_N.",
+      "evidence_ids": [
+        "E019",
+        "E020",
+        "E021"
+      ]
+    },
+    {
+      "id": "K009",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Fixed-N spectral/Kloosterman closure of the quotient-weight dispersion bridge, including the rough Titchmarsh interface.",
+      "falsifier": "The actual spectral modulus includes quotient factors up to N^(3/4), coefficients fail separation or factorability hypotheses, zero-frequency/diagonal terms exhaust the margin, only an average-in-N result is obtained, or the deep shell has lower-sieve parameter at most 2.",
+      "coverage": "All fixed even N above an effective threshold; every dyadic block with kappa in [1/2,3/4], including gcd-degenerate layers and the shell N^(1/4-epsilon)<ell<=N^(1/3).",
+      "outcome": "UNRESOLVED",
+      "result": "W049证明e(ah/[nq])保留相位可用Fourier-inert权送入Lemma18.5，且排除错误删除centered坏模数主项与普通角色大筛路线；programmable支撑绕行只闭合一部分HB盒。当前首个不可引用的估计是Prop8.3 BFI分支中(q,N)=1随色散传播，或等价的有效尺度R而非delta R的progression-sensitive Lemma18.5。",
+      "evidence_ids": [
+        "E022",
+        "E023",
+        "E024",
+        "E025",
+        "E026",
+        "E121",
+        "E122",
+        "E124",
+        "E125"
+      ]
+    },
+    {
+      "id": "K010",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Exact or uniformly controlled separable factorization of the real switching quotient weights, followed by a fixed-N spectral closure of every central Type-II block.",
+      "falsifier": "The exact aggregation fails under necessary labels, the staircase remainder is not o(N/log^2 N) in the actual prime-weighted norm, the terminal quotient coefficient remains coupled, an invoked theorem only performs a reduction or requires q-independence, or the modulus budget forces a missing factor above N^(1/66).",
+      "coverage": "All fixed sufficiently large even N; complete switching label sum, every dyadic central block, u in [1/3,1/2], and all terminal roughness factors through z=floor(N^(1/3)).",
+      "outcome": "UNRESOLVED",
+      "result": "Minimum-prime-factor uniqueness exactly aggregates the unweighted first switching labels, and multiplicative staircases have polylog rank with divisor-type L2 norms. But Vaughan/HB creates a second terminal quotient weight v_((N-ab)/d); no audited theorem closes it. In addition, the formal Fouvry-Radziwill thin layer does not literally satisfy its |shift|<=X hypothesis on blocks with N>CAB. Expanding the rough endpoint changes r to rt, while the 17/33 window above r~N^(1/2) allows only t<=N^(1/66+o(1)).",
+      "evidence_ids": [
+        "E027",
+        "E028",
+        "E029",
+        "E030",
+        "E031"
+      ]
+    },
+    {
+      "id": "K011",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "One-sided upper-bound sieve closure of the separable near-balanced semiprime-reflection layer with a constant compatible with the Goldbach subtraction.",
+      "falsifier": "The available convolution theorem fails the fixed large-shift hypothesis, does not control every squarefree Rosser modulus, the beta-sieve parity constant exceeds the slice's geometric main mass by a fixed amount, or remaining bands would need an upper bound below their own expected main term.",
+      "coverage": "Every sufficiently large fixed even N; unordered prime factors with 55/112<log(a)/log(N)<=1/2 and N/2<=ab<=N-2, including local factors, small reflected primes, endpoints, diagonal, and all sieve moduli through the claimed level.",
+      "outcome": "UNRESOLVED",
+      "result": "The one-sided sieve correctly removes the terminal quotient weight and has dimension one. Formally combining a level N^(1-u) with beta-sieve constants gives the thin-layer bound [4/57+2 log(57/55)]M(N)=0.14161...M(N), versus true geometric mass 0.03572...M(N). This is too loose for BL2, and Fouvry-Radziwill as stated also requires |shift|<=X, which fails for N>CAB blocks; Li 2024 only supplies a specialized near-N large-shift interface.",
+      "evidence_ids": [
+        "E032",
+        "E033",
+        "E034",
+        "E035",
+        "E036"
+      ]
+    },
+    {
+      "id": "K012",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Signed Chen/Buchstab switching with a genuine large-shift distribution input that covers the full semiprime hyperbola and separates prime from strict-semiprime reflections.",
+      "falsifier": "Li's prime-product boxes cover only ab=N(1-o(1)) under direct mapping, modified sieve weights fail the upstream theorem, negative terms have lower-sieve parameter at most 2, local normalizations differ, the argument proves only prime+P2, or any uncovered positive-measure (u,t) region remains.",
+      "coverage": "Every fixed sufficiently large even N; t=ab/N in [1/2,1], u in [1/3,1/2], all three switching layers, every well-factorable branch, degenerate factors dividing N, small reflected primes, and common Goldbach normalization.",
+      "outcome": "UNRESOLVED",
+      "result": "The three-step Buchstab identity and +,-,+,- sieve directions are exact, and a conditional continuous F/f functional is available. Direct application of Li Lemma 2.2 only covers ab in (N/Delta^2,N], an endpoint shell of vanishing relative width; no full-hyperbola map for its modified Iwaniec weights is proved. Moreover theta=19101/32000 gives cube-root parameter s=1.79071875<2, so direct BL1 remains zero, while Li's 1.9728 conclusion still mixes P1 and P2.",
+      "evidence_ids": [
+        "E037",
+        "E038",
+        "E039",
+        "E040",
+        "E041",
+        "E042"
+      ]
+    },
+    {
+      "id": "K013",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Uniform large-residue upgrade of Lichtman 2025 programmable-factorable and modified-Iwaniec-weight prime-product estimates at x=tN,a=N.",
+      "falsifier": "Any programmable-factorability or anatomy branch violates the uniform large-shift hypotheses, loses the 19101/32000 modulus level, retains an implied constant depending on growing a, fails coprimality/degenerate-factor control, or supplies only a prime-plus-P2 statement without pointwise P1/P2 separation.",
+      "coverage": "Every fixed k narrow prime-product box needed by Li-style switching, t in [1/2,1], a=N, all modulus-factorization branches and endpoint/degenerate cases.",
+      "outcome": "UNRESOLVED",
+      "result": "The compact-t bare Type-II transfer is valid with positive level margin, and Lichtman 2025 supplies the fixed-a programmable-factorable prime-product template. The printed theorem remains nonuniform in a; its proof must be rebuilt branchwise with the 2023 uniform large-shift inputs. Proposition 3.2 reaches Li level only when the residual short group has exponent at most 6697/64000. Even a successful upgrade would not yet separate prime from strict semiprime terms.",
+      "evidence_ids": [
+        "E043",
+        "E044",
+        "E045",
+        "E046",
+        "E047",
+        "E048"
+      ]
+    },
+    {
+      "id": "K014",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Sequence-level uniformly programmable factorization and fixed-k prime-product distribution for modified Iwaniec weights with 0<|a|<x^(1+eta).",
+      "falsifier": "The actual anatomy weight cannot be decomposed at a triple satisfying the large-residue inequalities; Proposition 6.1 margins cannot pay the 8epsilon/15epsilon losses and support inflation; HB terms violate 1-bounded, Siegel-Walfisz, rough-support, one-long or two-long hypotheses; or the resulting theorem remains fixed-a.",
+      "coverage": "Level 19101/32000; all short-variable exponents, fixed-k narrow prime-product boxes, every modified-weight anatomy branch, t in [1/2,1], and all coprimality and boundary cases.",
+      "outcome": "UNRESOLVED",
+      "result": "The pure exponent systems are compatible: two independent explicit parameter families leave positive uniform-large-residue margins throughout the full short-variable range. The first unresolved step is sequence-level: Definition 2.4 does not authorize an arbitrary numerically admissible triple for a given modified weight. Rebuilding via Proposition 6.1 requires rho>(80/3)epsilon_u, payment of a 2rho level loss and support inflation, plus a complete fixed-k HB coefficient and Type-I/II ledger.",
+      "evidence_ids": [
+        "E049",
+        "E050",
+        "E051",
+        "E052"
+      ]
+    },
+    {
+      "id": "K015",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Stable sequence-level anatomy factorization and fixed-k Heath-Brown closure for the uniform growing-residue modified-Iwaniec-weight estimate.",
+      "falsifier": "A box requires a p-dependent partition, repeated boxes break exact convolution normalization, support inflation exhausts level, merged Heath-Brown coefficients violate the stated 1-bounded class, or any anatomy/HB branch remains uncovered.",
+      "coverage": "Level 19101/32000; every nonempty modified-weight anatomy box, both layers of support inflation, repeated boxes, fixed-k prime-product expansions, all medium/one-long/two-long branches, and 0<|a|<x^(1+eta).",
+      "outcome": "UNRESOLVED",
+      "result": "The exponent budget is feasible and one representative can algebraically freeze a box partition after explicit support inflation. However the current proof does not establish uniform analytic inequalities for every box partition; repeated boxes require an internal multinomial normalization; and merged medium-branch Heath-Brown coefficients are generally divisor-bounded, while the growing-residue Proposition 5.2 is stated only for 1-bounded coefficients. Full anatomy coverage and the coefficient-class extension remain open.",
+      "evidence_ids": [
+        "E053",
+        "E054",
+        "E055",
+        "E056",
+        "E057"
+      ]
+    },
+    {
+      "id": "K016",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Complete variable-level dilation transfer for every modified-weight anatomy cell, with fixed-partition support certificates and fixed-k prime-product Heath-Brown closure.",
+      "falsifier": "Any proof uses the global maximum level for all anatomy boxes, lacks upper-corner or psi-boundary stability, cannot absorb D^(1+tau+epsilon), violates short-side SW/rough support, or loses the positive sieve constant after lowering the endpoint level.",
+      "coverage": "All r>=0 anatomy branches used in Li 2024, t in [1/2,1], a=N, anatomy-specific levels, repeated boxes, fixed k, and every medium/one-long/two-long branch.",
+      "outcome": "UNRESOLVED",
+      "result": "The fixed-order divisor-bounded growing-residue Type-II coefficient bridge is closed, including the actual HB medium branch. Exact rational witnesses refute only the stronger uniform-maximum-level reading: r=1,t1=1/5 and r=3,t_i=1/20 require lower anatomy-specific levels. The smooth u=1/500 endpoint reaches 19101/32000 with zero fixed slack, so a valid dilation transfer must lower each actual level, certify upper-corner/polyhedral partitions, and recheck the final sieve constants under that loss.",
+      "evidence_ids": [
+        "E058",
+        "E059",
+        "E060",
+        "E061",
+        "E062"
+      ]
+    },
+    {
+      "id": "K017",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "A strict-loss variable-level x=tN,a=N transfer of Li 2024 prime-product distribution, with a certified positive sieve constant after lowering every anatomy level.",
+      "falsifier": "Exact-v scaling exceeds the x-based modulus level, any anatomy cell lacks a fixed upper-corner partition, re-scaled prime-product boxes violate HB Type I/II hypotheses, or interval-certified sieve constants lose the required positive margin.",
+      "coverage": "All t in [1/2,1], r>=0 Li anatomy branches, re-scaled fixed-k prime-product boxes, every HB branch, all level-boundary strips, and Li equations (13)-(34) with directed numerical errors.",
+      "outcome": "TRIGGERED",
+      "result": "已严格闭合数值节点(13),(22),(23)-(25),(28)-(31)，且(21)条件于Li(17)的H表闭合；R048纠正式(25)的增强level门条件后仍以S10/M>0.960459919194349603越线。R045则独立确认按印刷式(20)有I20>0.272302682186493>0.272301，触发数值链检查；式(19)也高目标约1.712438e-6。当前未闭合端点为14,16,19,20,33,34，另有H/h来源与variable-level/HB解析接口。",
+      "evidence_ids": [
+        "E063",
+        "E064",
+        "E065",
+        "E066",
+        "E067",
+        "E068",
+        "E069",
+        "E070",
+        "E071",
+        "E072",
+        "E073",
+        "E074",
+        "E075",
+        "E076",
+        "E078",
+        "E079",
+        "E080",
+        "E081",
+        "E082",
+        "E084",
+        "E085",
+        "E086",
+        "E087",
+        "E094",
+        "E095",
+        "E096",
+        "E097",
+        "E098",
+        "E103",
+        "E104",
+        "E105",
+        "E106",
+        "E110",
+        "E111",
+        "E112",
+        "E113",
+        "E114",
+        "E117",
+        "E118",
+        "E119",
+        "E120",
+        "E123",
+        "E126",
+        "E127",
+        "E128",
+        "E129",
+        "E130",
+        "E131",
+        "E132",
+        "E133",
+        "E134",
+        "E135",
+        "E136",
+        "E137",
+        "E138",
+        "E140",
+        "E142"
+      ]
+    },
+    {
+      "id": "K018",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Prove fixed-N parity reflection coherence PRC: for some fixed B,eta>0 and every sufficiently large even N, the high-frequency von Mangoldt reflection correlation relative to the primorial residue-class projection is at least -(1-eta) times its positive local main term.",
+      "falsifier": "An unbounded sequence of even N saturates or exceeds full negative reflection cancellation, or the proposed argument supplies only average-in-N, one-point progression, or unsigned L2 control and therefore cannot improve the trivial -N log N scale to the required -O(N) one-sided bound.",
+      "coverage": "Every sufficiently large even N; primorial W<=log^B N with w tending to infinity; the actual truncated von Mangoldt vector; explicit prime-power removal and the full high-frequency reflection term.",
+      "outcome": "UNRESOLVED",
+      "result": "PRC's local projection main term, explicit prime-power removal, and almost-all-N form are established, but the required every-even-N one-sided high-frequency reflection bound remains open. Trivial unitarity is -N log N while PRC needs -O(N), and a reflection-oriented pseudoprime model rules out closing it from one-point AP data alone.",
+      "evidence_ids": [
+        "E139",
+        "E141"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "numerical-computation",
+      "role": "diagnostic",
+      "summary": "Independent exhaustive local verification found prime-pair witnesses for every even n from 4 through 2,000,000; finite evidence only.",
+      "locator": "artifacts/finite-verification.json",
+      "sha256": "78c89209e1ced305d01a68a69aa81fb698999f7fd6d2f10fabe753e23471ef8a",
+      "independent": true
+    },
+    {
+      "id": "E002",
+      "kind": "source",
+      "role": "suggestive",
+      "summary": "Helfgott proves the ternary/weak conjecture by explicit circle-method estimates, not the binary conjecture.",
+      "locator": "literature/papers/Helfgott_2013_Ternary_Goldbach_is_true.pdf",
+      "sha256": "2b40a3e0772dd30d5ff8415240b5e60da3986467aa2eabbe95588c5ac4147179",
+      "independent": false
+    },
+    {
+      "id": "E003",
+      "kind": "source",
+      "role": "suggestive",
+      "summary": "Wu's double-sieve paper records the binary representation function and quantitative prime-plus-P2 results while the lower bound for two primes remains open.",
+      "locator": "literature/papers/Wu_2007_Chen_double_sieve.pdf",
+      "sha256": "41d432dd63da6d1fe7836ba3beda8b601ce6e64420e50501d26d79f7d971043e",
+      "independent": false
+    },
+    {
+      "id": "E004",
+      "kind": "numerical-computation",
+      "role": "diagnostic",
+      "summary": "Published empirical verification covers all even integers through 4×10^18, but cannot close the unbounded quantifier.",
+      "locator": "literature/papers/Oliveira_e_Silva_Herzog_Pardi_2014_Empirical_verification.pdf",
+      "sha256": "ea31c7601aefa47b939b508b1048344cbdca234cd945a5bfbe736b7dd26be821",
+      "independent": false
+    },
+    {
+      "id": "E005",
+      "kind": "source",
+      "role": "suggestive",
+      "summary": "Explicit Chen theorem gives prime plus square-free P2 for N>exp(exp(32.7)); the prime-plus-prime strengthening remains open and parity-limited.",
+      "locator": "literature/papers/bordignon-johnston-starichkova-2022-explicit-chen.pdf",
+      "sha256": "669a8e9f26298ca5d5d2558171847e1d7e7515318a794de0f2b88a85bf6aac4c",
+      "independent": false
+    },
+    {
+      "id": "E006",
+      "kind": "derivation",
+      "role": "decisive",
+      "summary": "Definition and type audit fixes the ambient integers, prime domain, universal quantifiers, and literal equality semantics.",
+      "locator": "notes/known-boundaries.md",
+      "sha256": "0c7eb192548c06e1fc9eac5d64b6651b02032c3147b10b58f14f75ca55fec036",
+      "independent": false
+    },
+    {
+      "id": "E007",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent analytic-route audit identifies the precise missing pointwise minor-arc bound and parity-sensitive sieve obligations.",
+      "locator": "agent-drafts/analytic-routes.md",
+      "sha256": "46361ae2a6415e118418539c35e876193ceafa0eb9012dac1353c166a488df89",
+      "independent": true
+    },
+    {
+      "id": "E008",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Counterexample-first proof-gap audit lists the fatal inference errors that any candidate proof must clear.",
+      "locator": "audit/proof-gap-audit.md",
+      "sha256": "c59074f849cfdc615c6aec393bcd427d4edf045f03b5315739365b56ddfbdd4f",
+      "independent": true
+    },
+    {
+      "id": "E009",
+      "kind": "numerical-computation",
+      "role": "decisive",
+      "summary": "Decisive for the explicitly finite subclaim 4<=N<=2,000,000 only: all 999,999 even inputs have a prime-pair witness.",
+      "locator": "artifacts/finite-verification.json",
+      "sha256": "78c89209e1ced305d01a68a69aa81fb698999f7fd6d2f10fabe753e23471ef8a",
+      "independent": true
+    },
+    {
+      "id": "E010",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Reflection-cover reduction and multiscale log(2) constant-separation program; proof obligation remains open.",
+      "locator": "notes/reflection-cover-route.md",
+      "sha256": "73ceffe9d84946c213180464e1bbc1dac17cfe353d562f84bf8645e983c70683",
+      "independent": false
+    },
+    {
+      "id": "E011",
+      "kind": "numerical-computation",
+      "role": "decisive",
+      "summary": "Finite prespecified propagation proxies are refuted in 10,000..100,000; adjacent normalized correlation is about 0.114 and N=10484 has zero low-decile neighbors.",
+      "locator": "artifacts/propagation-experiment.json",
+      "sha256": "d1c8c40a0f912c14881cdc19a7e6add972fc7a1c07dc2ea5034270748a7b0b43",
+      "independent": false
+    },
+    {
+      "id": "E012",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "Residue-unbiased exhaustive deep-sieve census for every even N in 10,000..100,000; minimum prime fraction 170/306 at N=23678.",
+      "locator": "artifacts/deep-sieve-exhaustive.json",
+      "sha256": "843f8a90e0712107ecc347014b2f37e72183b826984f644af6ede3e2107f3a47",
+      "independent": true
+    },
+    {
+      "id": "E013",
+      "kind": "numerical-computation",
+      "role": "diagnostic",
+      "summary": "Fixed-seed residue-diverse sample of 3,998 even values through 2,000,000; worst semiprime/prime ratio 0.68395, near the log(2) heuristic.",
+      "locator": "artifacts/deep-sieve-large-sample.json",
+      "sha256": "22c5f59b12dd298e09d782cafc8dfc01dfb4396d96c97d47dd6d3247bc635698",
+      "independent": false
+    },
+    {
+      "id": "E014",
+      "kind": "counterexample",
+      "role": "decisive",
+      "summary": "The universal deep-sieve prime-majority strengthening is false: at N=68 there are 2 prime and 3 semiprime survivors.",
+      "locator": "artifacts/deep-sieve-small.json",
+      "sha256": "433f170a2ff4a78e7a55db44ceaef5bb697dfca016cee71e0b8662974dd9e8a2",
+      "independent": false
+    },
+    {
+      "id": "E015",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Constructive proof attempt proves the cube-root classification, exact prime-selecting weight, Buchstab identity, log(2) constant subtraction, and finite-tail splice; the sole unresolved analytic input is the pointwise joint bridge BL1-BL2.",
+      "locator": "PROOF_ATTEMPT.zh-CN.md",
+      "sha256": "14b4823c4932b87a245d520860de837b24cdb254ad66231844523197fac1e1d1",
+      "independent": false
+    },
+    {
+      "id": "E016",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "BL bridge refinement gives the exact exponent-band decomposition, finite-scale I_N(q) correction, endpoint budget, shallow-sieve cumulative identity, and the remaining trilinear core C_{1/2}; ordinary and optimistic 4/7 large-sieve inputs do not cover a full factor band.",
+      "locator": "BL_BRIDGE.zh-CN.md",
+      "sha256": "73d4fdcf6e1733288fad8c4b18346a4a93a917e7f661c7e8c6fc49540a9e7944",
+      "independent": false
+    },
+    {
+      "id": "E017",
+      "kind": "numerical-computation",
+      "role": "diagnostic",
+      "summary": "Fixed-seed profile of 999 even inputs through 2,000,000 partitions the deep semiprime correction into six smaller-factor exponent bands; the first five track the geometric integrals and the highest band shows the predicted finite boundary suppression.",
+      "locator": "artifacts/deep-sieve-band-profile.json",
+      "sha256": "fcf53c4d8e9c61404d26296e19b2884dde05d3e99213f8c6dbba838e08265610",
+      "independent": false
+    },
+    {
+      "id": "E018",
+      "kind": "source",
+      "role": "suggestive",
+      "summary": "Li proves the pointwise Chen-type lower bound D_{1,2}(N)>=1.9728 C(N)N/log^2N using special weighted distribution exponent 19101/32000, but does not separate prime and semiprime reflections; at z=N^(1/3) the direct linear-sieve parameter remains below 2.",
+      "locator": "literature/papers/li-2024-chen-goldbach-almost-prime-twins-II.pdf",
+      "sha256": "e62adef510c1e0a695769e03be1f7fe787cc2b30ea1f8761e87a9039efdf3f2c",
+      "independent": false
+    },
+    {
+      "id": "E019",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Symmetric ordered-factor identity, direction-weight rigidity, two-sided Buchstab switching, and the migrated quotient-weight Type-II core are derived explicitly; the SD bridge remains unproved.",
+      "locator": "SYMMETRIC_WEIGHT.zh-CN.md",
+      "sha256": "fd583ab68d154e92082cc0d7a7c4dc3f4ccd310272d051aba7ac4ba09bae5f40",
+      "independent": false
+    },
+    {
+      "id": "E020",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R008 checks all symmetric pointwise and summed identities on 1,797,533 reflected inputs through N=10,000; finite verification does not establish the analytic bridge.",
+      "locator": "artifacts/symmetric-weight-audit.json",
+      "sha256": "f42b5e76cc6fceb6212168129b3f64e14136c5efb581b38dc4257c6e54d437e2",
+      "independent": true
+    },
+    {
+      "id": "E021",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent theorem-applicability audit finds that FI asymptotic sieve and Ford-Maynard prime-producing criteria are conditionally sufficient but require unproved Mobius-twisted or arbitrary-coefficient Type-II estimates on the fixed-N reflected-prime sequence.",
+      "locator": "agent-drafts/parity-breaking-sources.md",
+      "sha256": "0255e9d6b3459a1c9c5126dcd187897f804205e167009a6d3747c3e930ab2077",
+      "independent": true
+    },
+    {
+      "id": "E022",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W017 derives the exact Titchmarsh interface C_z=tau-2, identifies the reduced inverse phase from Vaughan/HB congruences, and isolates the unproved structured Kloosterman quotient-weight bridge KSD.",
+      "locator": "SPECTRAL_DISPERSION.zh-CN.md",
+      "sha256": "cca390e51daa47910e74e8796be426961685b399c09ef17b64e22997385b330e",
+      "independent": false
+    },
+    {
+      "id": "E023",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R009 checks the gcd reduction, reduced congruence, and additive-character detector on 100,000 deterministic samples; it does not estimate the spectral off-diagonal.",
+      "locator": "artifacts/spectral-reduction-audit.json",
+      "sha256": "795838f896349b7c2bef2a93b02e56dc5b4671da5f91e37a5ef8bc8f1692db53",
+      "independent": true
+    },
+    {
+      "id": "E024",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent parameter derivation finds genuine raw Bettin-Chandee cancellation and a narrow Fouvry-Radziwill candidate window kappa<17/33, but the actual spectral modulus reaches N^(3/4) and the rough quotient weight remains coupled.",
+      "locator": "agent-drafts/spectral-dispersion.md",
+      "sha256": "c741ba9de6252498b167f83b559b568d5dc4e956dd9c6dbcbfc7425c51733645",
+      "independent": true
+    },
+    {
+      "id": "E025",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent source audit verifies large-shift AP and uniform Titchmarsh theorems, including Lichtman level 153/256 and ABL for Lambda(p)tau(N-p), while finding none that admits the actual q-dependent rough quotient weights.",
+      "locator": "agent-drafts/spectral-sources.md",
+      "sha256": "3efa5ab02527334b8dc1accfd718531e4ff608ad19c9b82e9f895b2aff85998b",
+      "independent": true
+    },
+    {
+      "id": "E026",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Independent anti-circularity audit preserves q-dependent weights, fixed N, all zero-frequency and diagonal terms, and shows why generic BFI/Kuznetsov invocations would overreach their coefficient hypotheses.",
+      "locator": "agent-drafts/spectral-dispersion-audit.md",
+      "sha256": "f459f8f4d7f5197231ef2e52f77cce135244118a0de9088ae5890461b063ba53",
+      "independent": true
+    },
+    {
+      "id": "E027",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W018 proves exact minimum-prime-factor label aggregation for the unweighted switching sum, separates the prime-indicator and von Mangoldt analogues, quantifies the separable Fouvry-Radziwill thin layer and the N^(1/66) terminal-factor budget, while leaving the true terminal quotient weight unresolved.",
+      "locator": "QUOTIENT_WEIGHT_FACTORIZATION.zh-CN.md",
+      "sha256": "4f3b7a8469d18d780bb859c92e8618bab90a9efa16c2e73952fc47e7262c4f95",
+      "independent": false
+    },
+    {
+      "id": "E028",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R010 verifies on a deterministic finite grid that the threshold matrix has full row rank, the minimum-prime-factor shell identity holds, all 100000 sampled double-label aggregations agree, and L_y,z never exceeds 1; this does not prove a spectral estimate.",
+      "locator": "artifacts/quotient-factorization-audit.json",
+      "sha256": "9e65be3e6d5bdf0ba92394743ad82caa9c8319a55189af45fed9e0632c15ca37",
+      "independent": true
+    },
+    {
+      "id": "E029",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent analytic route derives polylogarithmic multiplicative staircase separation and divisor-type L2 coefficient bounds, then locates failure before the Bettin-Chandee interface and the terminal-factor limit t<=N^(1/66) in the Fouvry-Radziwill modulus window.",
+      "locator": "agent-drafts/quotient-factorization.md",
+      "sha256": "071836c5ca9928a6e5a0c2af20143dde054d425d7d55b112a959ff10c688ee18",
+      "independent": true
+    },
+    {
+      "id": "E030",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent literature audit through 2026-09-03 finds no closed four- or five-linear dispersion theorem accepting the terminal quotient weight; Maynard/Lichtman allow joint weights only in reduction steps, while Yang 2026 still requires separated outer weights and inner variables.",
+      "locator": "agent-drafts/quotient-factorization-sources.md",
+      "sha256": "fe3e5546016e39848e2f7606b2c6feffb088a13e805888545f4cab252bd6a623",
+      "independent": true
+    },
+    {
+      "id": "E031",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Independent pressure audit gives growing exact-rank and singular-value lower bounds, tracks coefficient-norm and label-collision losses, and shows that unweighted low-rank error cannot control the fixed-N prime-weighted remainder.",
+      "locator": "agent-drafts/quotient-factorization-audit.md",
+      "sha256": "b52cbe55662898efb1cbc79d17b8d71b83b4c41e8c406651d451e875dc201246",
+      "independent": true
+    },
+    {
+      "id": "E032",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W019 replaces the terminal Lambda expansion by a one-dimensional upper sieve for N-ab, derives the local density and the formal 55/112 thin-layer constant 4/57+2 log(57/55), and records that the literal large-shift hypothesis and the parity constant prevent closure.",
+      "locator": "ONE_SIDED_UPPER_SIEVE.zh-CN.md",
+      "sha256": "3628e90f6b8da4a8dcb0d3a23d69dec05541dd7f185bcbddc08deb95546b354e",
+      "independent": false
+    },
+    {
+      "id": "E033",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R011 exactly checks the 1/112 width, 55/112 matching identity, 1/66 exponent identity, and numerically evaluates the thin-layer true mass 0.0357181, upper-sieve bound 0.141612, and excess 0.105894; arithmetic only, not a sieve theorem.",
+      "locator": "artifacts/upper-sieve-constants.json",
+      "sha256": "6e4417e7229635cd3424de63dee9b8874b9fc0cd8442cca1acfd965b05a19a40",
+      "independent": true
+    },
+    {
+      "id": "E034",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent route derives the dimension-one beta-sieve normalization and shows the near-balanced level would yield constant 0.14161 M(N), about 3.96 times the slice's predicted mass, so it cannot improve the sharp BL2 log(2) target.",
+      "locator": "agent-drafts/one-sided-upper-sieve.md",
+      "sha256": "42b0f28a217682f0c7bc7740847750894b0ac2af1bc156ae5c45b8f9fc8e2f0d",
+      "independent": true
+    },
+    {
+      "id": "E035",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent source audit verifies Fouvry-Radziwill controls 1-bounded Rosser weights only when the fixed shift satisfies |a|<=X; the present N>CX blocks are not covered. Li 2024 supplies a specialized large-shift interface near product N, not a full absolute-discrepancy theorem for the whole hyperbola.",
+      "locator": "agent-drafts/one-sided-upper-sieve-sources.md",
+      "sha256": "f70134b2609e6b11c3556420c1b5715a63e976507769ed948c969571d477b497",
+      "independent": true
+    },
+    {
+      "id": "E036",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Independent pressure audit confirms the upper-sieve normalization and thin-layer integral, while listing unresolved fixed-N large-shift, epsilon-level, squarefree-modulus, small-prime, noncoprime, endpoint, and diagonal obligations.",
+      "locator": "agent-drafts/one-sided-upper-sieve-audit.md",
+      "sha256": "8d5171d6bb45d87c69657560c6b9882f9dbe88b9098110dd5cd0c7e73690b160",
+      "independent": true
+    },
+    {
+      "id": "E037",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W020 gives an exact three-step Buchstab identity with +,-,+,- signs, a conditional F/f switching functional, and isolates two simultaneous obligations: dilation-uniform large-shift distribution and parity-sensitive separation. Direct Li boxes cover only ab=N(1-o(1)); Li's maximum level also leaves the cube-root lower sieve at s<2.",
+      "locator": "SIGNED_CHEN_SWITCHING.zh-CN.md",
+      "sha256": "026ca3096503fca8e205d446b82757a7ba1fbd03ef09caa7e1ed47b6a379bf07",
+      "independent": false
+    },
+    {
+      "id": "E038",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R012 checks the endpoint width of Li-style product boxes at fixed finite parameters and the formal 19101/32000 beta-sieve factor; the output explicitly warns that incompatible populations cannot be subtracted as a proof.",
+      "locator": "artifacts/signed-switching-budget.json",
+      "sha256": "72579d41728db31acab5ae4e32ee5063da374e7ea668b39771d906631ea03cbb",
+      "independent": true
+    },
+    {
+      "id": "E039",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R013 exactly computes 3*(19101/32000)=57303/32000<2 and the level gap 2/3-19101/32000=6697/96000, showing the cube-root linear lower sieve remains nonpositive at the known level.",
+      "locator": "artifacts/deep-sieve-level-gap.json",
+      "sha256": "1769be04a2aa05673fbf3d9dafc50ce4dd25ca8d1a2c11c653e3e6d1f8af2bd8",
+      "independent": true
+    },
+    {
+      "id": "E040",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent analytic derivation supplies the four signed Buchstab terms, well-factorable constraints, conditional continuous functional, and shows the uncovered pair-volume after W019 is about 94.85 percent of the original region.",
+      "locator": "agent-drafts/signed-chen-switching.md",
+      "sha256": "2c095ed4b4a9f1dd6e7a32c864eacb103a6bee721199ee90442ebb444f2a7878",
+      "independent": true
+    },
+    {
+      "id": "E041",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Independent source audit verifies Li Lemma 2.2's exponent-sum-one boxes and modified Iwaniec weights, identifies Lichtman reparameterization as a possible but unproved transfer, and finds no existing wide-hyperbola plus large-shift plus signed-weight black box.",
+      "locator": "agent-drafts/signed-chen-switching-sources.md",
+      "sha256": "dae580830442caa1797865f1c6ea593b6d4c231688477bfc649461c45a8baa9e",
+      "independent": true
+    },
+    {
+      "id": "E042",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Independent adversarial review validates the signed identity and functional form after revision, while preserving unresolved theorem-domain, f(s)>0, local-normalization, degeneracy, factor-two, and P1/P2 separation obligations.",
+      "locator": "agent-drafts/signed-chen-switching-audit.md",
+      "sha256": "5a7d7b6af1061b7857b59f8d2f1453bcd46cc4a4ece904605ffbf929980fdfcf",
+      "independent": true
+    },
+    {
+      "id": "E043",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W021主稿严格证明x=tN、a=N在t属于[1/2,1]时可统一嵌入Lichtman 2023的裸triply-well-factorable Type-II估计，并给出19101/32000 level的正裕量；同时定位修改Iwaniec权与uniform-a prime-product推论的未闭合义务。",
+      "locator": "DILATION_TRANSFER.zh-CN.md",
+      "sha256": "6a70f2f3d054d44c0671c2ecf33ae45e9a62691aaaa80cd42515099ffc3072d3",
+      "independent": false
+    },
+    {
+      "id": "E044",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R015以精确有理数核算eta与epsilon联合约束后的level裕量12793/51200000，并给出Proposition 3.2达到Li level所需的短组阈值6697/64000；该计算只审计指数，不证明筛权转移。",
+      "locator": "artifacts/dilation-transfer-audit-v2.json",
+      "sha256": "ca6c41c8619506c14ea2466118a07af0e1b6653af65e38c80ea9b8b7d0128200",
+      "independent": true
+    },
+    {
+      "id": "E045",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立解析智能体验证compact-t尺度转移、well-factorability尺度不变性与polylog分箱框架，并定位Proposition 6.6的非一致余数常数和两长变量分支缺口。",
+      "locator": "agent-drafts/dilation-transfer.md",
+      "sha256": "a7b4b252c78bd956af24118391b032d0047b288b679ae355513c66afc319803f",
+      "independent": true
+    },
+    {
+      "id": "E046",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "独立反证审计纠正了eta与epsilon必须联立的量词错误，证明Proposition 3.2不能自动覆盖19101/32000，并列出修改权anatomy、互素退化和P1/P2分离的未决义务。",
+      "locator": "agent-drafts/dilation-transfer-audit.md",
+      "sha256": "b99688a5cc00576ff926d1f492dec10df689e6aa70bc38722154c2e9a2ab749d",
+      "independent": true
+    },
+    {
+      "id": "E047",
+      "kind": "source",
+      "role": "diagnostic",
+      "summary": "Lichtman 2025 Proposition 5.5与Corollary 5.6明文把programmable factorability和修改Iwaniec权推进到固定k个窄素数乘积盒，但陈述只对固定余数a成立且误差常数依赖a。",
+      "locator": "https://arxiv.org/abs/2109.02851",
+      "sha256": null,
+      "independent": false
+    },
+    {
+      "id": "E048",
+      "kind": "source",
+      "role": "diagnostic",
+      "summary": "独立来源审计逐字核对Lichtman 2025 Definition 2.4、Theorem 2.5、(5.17)-(5.18)、Proposition 5.5与Corollary 5.6，记录fixed-a误差、prime-product盒及修改权anatomy调用链，并列出uniform-a移植义务。",
+      "locator": "agent-drafts/dilation-transfer-sources.md",
+      "sha256": "8be67f3c1e043ba49e42d2ad5edcc7d9f5f83aacb8e4e5ed1584c934d1f11dfa",
+      "independent": true
+    },
+    {
+      "id": "E049",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W022主稿证明19101/32000 level下存在同时满足2025 programmable-factorability数值系统与2023 uniform-large-shift Type-II数值系统的显式三因子尺度，并把剩余障碍定位到实际修改权卷积分解与HB分支。",
+      "locator": "UNIFORM_PROGRAMMABLE_FACTORABILITY.zh-CN.md",
+      "sha256": "7caccad74d7d38a5a3755f7054d9bbc29dbb813dc4e849893bd91fd7e17aea63",
+      "independent": false
+    },
+    {
+      "id": "E050",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R016以精确有理数验证显式候选在完整短变量区间的全部数值不等式、非负端点与严格裕量；输出明确声明不认证实际筛权卷积或HB覆盖。",
+      "locator": "artifacts/uniform-programmable-factorability-audit.json",
+      "sha256": "d9ceed47f3a6638a21f598891ad6e3a718f25c1b4dc852b2884450705a944b6c",
+      "independent": true
+    },
+    {
+      "id": "E051",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立解析推导给出d=3delta/2、s=5delta/2的另一统一可行族，追踪支撑膨胀损失，并证明数值可行性不能替代Definition 2.4的存在性卷积见证。",
+      "locator": "agent-drafts/uniform-programmable-factorability.md",
+      "sha256": "f212b34df780a08a736fbaa2f14ce20e565414e4e0b438967c05ee34c2d8642e",
+      "independent": true
+    },
+    {
+      "id": "E052",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "独立压力审计复核R016并纠正HB共同区间，发现Proposition 5.2的1-bounded系数义务和Proposition 6.1参数映射rho>(80/3)epsilon_u，确认首个断点仍是实际anatomy权的卷积分解。",
+      "locator": "agent-drafts/uniform-programmable-factorability-audit.md",
+      "sha256": "134c6dd23443cfd4819bc025134298e531122e60a3e2f4d154dc6e60a70a256b",
+      "independent": true
+    },
+    {
+      "id": "E053",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W023主稿精确验证rho>(80/3)epsilon_u及正level预算，同时记录固定box分区、重复box重数和HB系数类三个未闭合接口。",
+      "locator": "ANATOMY_WITNESS_HB_CLOSURE.zh-CN.md",
+      "sha256": "0e165aeee7198b235d2e9756cf7ad5277eb36dcc6efbb595d0225d188bf54738",
+      "independent": false
+    },
+    {
+      "id": "E054",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R017以精确参数预算验证Proposition 6.1到5.2及固定k=2的一长两长指数不等式均有正裕量；不认证序列卷积或全anatomy覆盖。",
+      "locator": "artifacts/anatomy-hb-budget.json",
+      "sha256": "b8f55cac217934f079c43c11dac45427f16e8eb0e5edea0693e80564fa3aecb4",
+      "independent": false
+    },
+    {
+      "id": "E055",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立解析稿推出参数映射、单变量窄窗和HB三分支候选；其固定box及1-bounded闭合主张已被后续反证审计收窄。",
+      "locator": "agent-drafts/anatomy-witness-hb.md",
+      "sha256": "bf27021797064ae242403cd99f53e64a0e9248ea88dd9f669d6012b212f12532",
+      "independent": false
+    },
+    {
+      "id": "E056",
+      "kind": "source",
+      "role": "diagnostic",
+      "summary": "独立来源核验逐字确认Proposition 6.1的实际greedy分组、两层support膨胀、重复box外层阶乘校正及growing-residue Proposition 5.2的1-bounded明文假设。",
+      "locator": "agent-drafts/anatomy-witness-hb-sources.md",
+      "sha256": "2f9cecc192d580e9ea84af81640c0dc2c65c556b3584d98af2cf6d93bfef437e",
+      "independent": true
+    },
+    {
+      "id": "E057",
+      "kind": "counterexample",
+      "role": "diagnostic",
+      "summary": "独立反证审计以D1=D2=x^(25/128)给出未归一化卷积重数2，并证明HB合并系数通常仅divisor-bounded；同时排除level预算的纯数值矛盾。",
+      "locator": "agent-drafts/anatomy-witness-hb-audit.md",
+      "sha256": "ea0d1c51016eadc96d726ed2748ccf56a36df1d7c4b0f7763577aa1c561f974c",
+      "independent": true
+    },
+    {
+      "id": "E058",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W024主稿证明固定阶divisor-bounded的growing-residue Proposition 5.2扩展，给出HB短侧SW/rough接口，并以精确见证排除全anatomy统一最大level的误读。",
+      "locator": "ANATOMY_COVERAGE_DIVISOR_TYPEII.zh-CN.md",
+      "sha256": "7d36789e1377a318957d9d3fd0730b347efa8eee1d75aa0159e657289c6d512e",
+      "independent": false
+    },
+    {
+      "id": "E059",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R018以有理数认证最大单变量level窗口、r=1与r=3的uniform-max-level未覆盖见证及smooth端点零裕量；明确不构成变量-level覆盖证书。",
+      "locator": "artifacts/anatomy-coverage-witnesses.json",
+      "sha256": "61f26eafd1eb631de0f1a184c33210ebd27491fabfab3b197a8347bfe61562ec",
+      "independent": true
+    },
+    {
+      "id": "E060",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立解析审计逐项证明固定阶divisor-bounded系数可经tau截断、SW保持和归一化进入growing-residue Type-II；首要附加条件是短侧SW与rough支撑。",
+      "locator": "agent-drafts/divisor-bounded-typeii.md",
+      "sha256": "7a5d34479917feb01bd029de64fd2196ca613fd289f6991f146c90d9778b640d",
+      "independent": true
+    },
+    {
+      "id": "E061",
+      "kind": "source",
+      "role": "diagnostic",
+      "summary": "独立来源覆盖表核对Maynard与Lichtman各命题的余数量词、系数类、rough/SW、level和prime-product范围，确认2023 Proposition 3.1已含uniform divisor-bounded截断桥。",
+      "locator": "agent-drafts/anatomy-divisor-typeii-sources.md",
+      "sha256": "df6ec6b3f49fc1d6dcecc2ef7c10ed5516a19adda14d0fe52cb0b0b414d6796d",
+      "independent": true
+    },
+    {
+      "id": "E062",
+      "kind": "counterexample",
+      "role": "diagnostic",
+      "summary": "独立反证审计给出r=1,t1=1/5及r=3,t_i=1/20的精确uniform-max-level漏区，证明smooth端点无固定slack并定位upper-corner与psi边界风险。",
+      "locator": "agent-drafts/anatomy-full-coverage-audit.md",
+      "sha256": "5ad58e6eb2d371bd0acafa36e62005db16aee89f7385ecfe133852b8829af8e2",
+      "independent": true
+    },
+    {
+      "id": "E063",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W025阶段稿证明exact-v dilation因N^v>x^v而失败，给出降level后逐cell统一尺度公式，并记录重新定标prime-product重证和Li区间积分证书两个剩余缺口。",
+      "locator": "VARIABLE_LEVEL_SIEVE_STABILITY.zh-CN.md",
+      "sha256": "bacc8e1556f39af0138fc857d911e9bb29a73b6932736a7cde3f5ca9baabf527",
+      "independent": false
+    },
+    {
+      "id": "E064",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立解析稿在尺度几何层构造lambda_C^*及统一sigma，计入2rho、底数漂移和D^(1+tau+epsilon)支撑，并用upper-corner单调性冻结分区。",
+      "locator": "agent-drafts/variable-level-transfer.md",
+      "sha256": "581333c493afd2b9df0c315963407e94c1c885fb323e2dff80e158aff606f763",
+      "independent": true
+    },
+    {
+      "id": "E065",
+      "kind": "counterexample",
+      "role": "diagnostic",
+      "summary": "独立反证审计严格排除exact-v转移，给出psi分区跳变例并重组Li印刷常数为1.9728165，显示保护1.9728的可见余量仅1.65e-5。",
+      "locator": "agent-drafts/variable-level-stability-audit.md",
+      "sha256": "853c28387c3926b43463b236b563217e97f464737aaca424fe54dae95c8fe9be",
+      "independent": true
+    },
+    {
+      "id": "E066",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "修订后的盒局部尺度稿严格区分几何上端尺度Y与解析下端尺度X，修正medium窗及一长/两长公式，并把首个未闭合接口定位为Proposition 3.2的双坐标子区间、单项式约束与多重partial summation一致版本。",
+      "locator": "BOX_LOCAL_SCALE_PRIME_PRODUCT.zh-CN.md",
+      "sha256": "9e3bb33bb460d3eae56fb09bbec8e5c36ae794018242ad05f74eae95b5718391",
+      "independent": false
+    },
+    {
+      "id": "E067",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "独立严格性审计确认盒局部尺度思想未被证伪，但反驳候选闭合：斜边界盒不是完整盒，上下端尺度不可混用，原HB参数少因子2，two-long的统一端点版本未由印刷命题提供。",
+      "locator": "agent-drafts/box-local-scale-proof-audit.md",
+      "sha256": "ac1607622ba56cc0e1f62b1fc4d5b5766bec687b0b43d82dce80e00ec64ce5b9",
+      "independent": true
+    },
+    {
+      "id": "E068",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R020以精确有理数按medium下界2rho重算k<=500的HB覆盖预算；无medium无long排除、一长fundamental-lemma及两长Proposition 3.2算术裕量均为正，但不认证解析统一区间引理或Li积分。",
+      "locator": "artifacts/variable-level-parameter-witness.json",
+      "sha256": "2744010de59c414fcb956b94bcc000c77965458f756064748e3bce78df228377",
+      "independent": false
+    },
+    {
+      "id": "E069",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Maynard 2020 Proposition 5.2完整证明明文给出任意I1,I2,IM矩形端点；配合Lemma 6.2、delta=4epsilon^2重参数化及固定维Abel求和，关闭two-long高模数段的任意子区间、单项式截断与多log边界接口，小模数仍需接既有工具。",
+      "locator": "PROP32_RECTANGULAR_EXTENSION.zh-CN.md",
+      "sha256": "034273a51fac73d428cfc0f9e6e055e5745690cc084a4a3b2b6e0acfacfee123",
+      "independent": false
+    },
+    {
+      "id": "E070",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "独立复核建立sup_a l1(q)范数下的two-long矩形定理与Hardy-Krause端点控制，发现并修复来源证明的小参数复用，并限定结论为高模数dyadic段。",
+      "locator": "agent-drafts/prop32-uniform-subinterval.md",
+      "sha256": "0024e82d7368e42c33d1ce8ecd1f27a536889643596cefc79c5e5365d2682886",
+      "independent": true
+    },
+    {
+      "id": "E071",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Li公式(13)-(34)硬约束逐项清单将条件分为单项式、总乘积、排序及其它；确认Maynard完整证明关闭two-long矩形缺口，并把剩余义务定位到cell实例化、排序对角线、外权、rough-SW、one-long与数值稳定性。",
+      "locator": "agent-drafts/li-hard-constraint-inventory.md",
+      "sha256": "a13a0d81949a4fea43d8d5a6c2f9d708b1132382771ba4dbe1e9f4a70f84cf0b",
+      "independent": true
+    },
+    {
+      "id": "E072",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立小质量集合引理在加权绝对模数范数中关闭Li固定正坐标下的strict-order等号对角线与原prime坐标prime powers，分别给出X^(1-eta+o(1))及X^(1-eta/2+o(1))+X^(1-kappa+o(1))，同时控制同余项、主项与growing residue。",
+      "locator": "agent-drafts/prime-power-order-diagonal.md",
+      "sha256": "26c89c5725415203e773626808f0e12463d493de09abb05933c96e13237b5b90",
+      "independent": true
+    },
+    {
+      "id": "E073",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "Li(13)-(34)全部印刷积分与常数被逐式重建，最终复算(P-M)/4=1.9728165；Lichtman补齐vartheta定义。未发现作者代码，严格区间证明仍缺单向舍入、函数包围、非光滑域剖分和向外舍入求积证书。",
+      "locator": "agent-drafts/li-integral-reconstruction.md",
+      "sha256": "d09be16ad594ab58472bc35e720edd25df184f046de142042b3cd6ba2b0cc7df",
+      "independent": true
+    },
+    {
+      "id": "E074",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立审计用Rosser上下权中点L1夹逼严格处理μ/1的rough cutoff，关闭medium rough-SW任意子区间；并以Lemma 3.4、调和外权范数和移动端点之差关闭one-long接口。结论以预先冻结且内层独立的outer weight为条件。",
+      "locator": "agent-drafts/rough-sw-onelong.md",
+      "sha256": "c5406245ea40dbf095912c26af881cd8eca210635e589170e2159b420057645e",
+      "independent": true
+    },
+    {
+      "id": "E075",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立有理H-cell审计枚举Li (33)-(34)的theta/Dwell分支；(33)可冻结，(34)含t4>25/128且增强level严格超过合法base level的正测度cell，并给出精确见证。",
+      "locator": "agent-drafts/dwell-cell-certificate.md",
+      "sha256": "4f4aa0a8e8818576c69eaf49bb49c323b848a953b05157ec3bf4982f9e4781fb",
+      "independent": true
+    },
+    {
+      "id": "E076",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R023以Fraction精确认证Li (34) bad Dwell点：t4越过25/128，D5 gate、crossover、四个Dwell余量均为正，印刷增强level比合法base level高19/6400；不认证积分损失或Goldbach。",
+      "locator": "artifacts/li34-bad-cell-certificate.json",
+      "sha256": "7e4e695d093475f89549bef7a84c3ae3960739728fa5a407eb4728ddaa5b2d16",
+      "independent": false
+    },
+    {
+      "id": "E077",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立强Goldbach桥梁审计证明效率比条件u/ell<(1+log2)/log2及反射覆盖下降引理；同时把圆法最小缺口定位为固定N单边有符号minor-arc界、转移缺口定位为平方频谱逐点相位。未跨越奇偶障碍。",
+      "locator": "agent-drafts/strong-goldbach-bridge.md",
+      "sha256": "0b385fe016d86aa4b3a8e5d56a2713543e3245f4e696a87c5487703d1ef48d75",
+      "independent": true
+    },
+    {
+      "id": "E078",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立Perron审计用半整数阈值、T=X^(2Omega+1)和对任意1-bounded复系数的一致估计，严格外置固定q1q2q3<=K硬截断，仅损失O(log X)；不构造卷积本身。",
+      "locator": "agent-drafts/hard-cutoff-perron.md",
+      "sha256": "4d74a6b8a0531d9bb0dd0915fe761c810d9c998d904ab87f45b7a2911ee20dd1",
+      "independent": true
+    },
+    {
+      "id": "E079",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "正向outer-weight报告对full extensions构造固定三重卷积和，显式处理重复盒multinomial、smooth块和两层support inflation；原Lemma 4.2硬截断说明由E078的Perron证明替代。",
+      "locator": "agent-drafts/outer-weight-sequence-proof.md",
+      "sha256": "aa4aea9414feb1cc47a98772c69de8c12da229b337ef3d526cbd8d280ce1a643",
+      "independent": true
+    },
+    {
+      "id": "E080",
+      "kind": "counterexample",
+      "role": "diagnostic",
+      "summary": "反证优先outer-weight审计以delta1+delta2+delta30否定点态分组自动升级为序列卷积，并以重复盒1对2系数反例定位multinomial归一化；给出统一正余量有限盒分区的条件引理。",
+      "locator": "agent-drafts/outer-weight-sequence-falsifier.md",
+      "sha256": "aebf15185f1be322906b019e4f20a78f593884abcfd7c2c5150233a4a2924679",
+      "independent": true
+    },
+    {
+      "id": "E081",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R024以Fraction和4096分片单调向上Riemann和认证：将Li (34) bad cell退回Q(t4)后的纯有理损失majorant小于6.1215537e-5，低于重建中心值相对7.8912的6.6e-5显示裕量；原积分舍入方向仍未知。",
+      "locator": "artifacts/bad-cell-repair-certificate.json",
+      "sha256": "36762dd872d8df8efd275a898b38f0b31ede840af6c1bc3f0f4ce7d7f152a956",
+      "independent": false
+    },
+    {
+      "id": "E082",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立正向修复将Li (34) t4>25/128 bad Dwell域精确约化为D5的A/C两支，退回合法Q(t4)，并以纯有理函数支配新旧integrand差；R024认证损失majorant。最终小数仍缺定向区间。",
+      "locator": "agent-drafts/bad-cell-repair.md",
+      "sha256": "95da671506baa199dd88c9b527b0e2a4bb169db9c80c9182f059f97343fd3891",
+      "independent": true
+    },
+    {
+      "id": "E083",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "立方根粗糙数上逐整数证明1_P(n)=(1-lambda(n))/2，从而精确得到G(N)=(T_z-C_z)/2；把奇偶障碍集中为固定平移prime-Liouville有符号相关严格小于粗糙总质量。该逐点相关估计尚未证明。",
+      "locator": "PARITY_LIOUVILLE_BRIDGE.zh-CN.md",
+      "sha256": "f2e71320a04e01d386b1562cece72ae3f434c1bfdb5f5aa1f370b01a3cc761bd",
+      "independent": false
+    },
+    {
+      "id": "E084",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立区间证书报告以纯有理 atanh 尾界严格闭合 Li 式(22)：8 log(110/57)<5.259433，裕量>2.16e-7；同时给出筛函数粗包围并把首个数值瓶颈定位为 G1<6.06932 的相关分片 Taylor 上界。不是式(13)-(34)全证书。",
+      "locator": "agent-drafts/li-interval-certificate.md",
+      "sha256": "169a3eac7d7a1d60e06825da6af9912ac6b0c9da43cc35fed591978262dbfb25",
+      "independent": true
+    },
+    {
+      "id": "E085",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R025 的 Fraction/有理级数证书认证 Li 式(22) 位于 (5.259432783662928,5.259432783662929)。其附带 G1 粗下界后来因把首个 F 自变量误写为 19037/64 而撤回；粗上界及 Li(22) 不受影响。运行不认证尖锐 G1 上界或 Goldbach。",
+      "locator": "artifacts/li-interval-certificate.json",
+      "sha256": "ce66f6667c34cee1d0684c256c546361bd3fcc834a0da802191be08b4988d226",
+      "independent": false
+    },
+    {
+      "id": "E086",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立 upper-cap 报告证明 Li 四类 prefix 的 full extensions 可由有限参数模板覆盖；重复盒须同时保留 gamma^-1 与 multinomial M^-1，small-prime beta 块固定放第三槽，bad-cell base-level 修复与接口相容。",
+      "locator": "agent-drafts/extension-upper-caps.md",
+      "sha256": "c8aab597d3d2abb2d57a5be939a2551593cd089ca7841c36aee20b45bb2acdb9",
+      "independent": true
+    },
+    {
+      "id": "E087",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R026 以精确有理算术认证 smooth beta 块放槽1或3时四个 after-inflation 余量为正、放槽2时 residue/spectral 余量为负；r=0 最紧 level 仍余约9.99517e-9。",
+      "locator": "artifacts/extension-upper-cap-certificate.json",
+      "sha256": "79432c244279c68142eb6d45c413f93799b9edf2025ab6128bd0cd2b30c06985",
+      "independent": false
+    },
+    {
+      "id": "E088",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立立方根有符号筛审计核验 Liouville 桥梁，证明 signed Buchstab 的负号被 lambda(p)=-1 逐层抵消并把首个缺口定位为 fixed-N 两线性形式 Liouville 相关；另构造局部扁平化权并给出条件 JSD-FM 路线，其最小 Type-II 窗为 [3101/16000,1/3]。",
+      "locator": "agent-drafts/cube-root-signed-sieve.md",
+      "sha256": "f6b5d29a5633991b38282a1397dfa3d9e67846a410cd892c05f6a95d7d718297",
+      "independent": true
+    },
+    {
+      "id": "E089",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立局部扁平化Type-I/II审计修正p|N时h_N(p)=-1，证明完整Ford-Maynard Type-I无条件达到N^(1/2-epsilon)，把目标Type-I缺口压到任意权区间(1/2,19101/32000]；任意quotient系数导致不可分离kappa_((N-r)/m)，并导出大模数行L1必要估计。",
+      "locator": "agent-drafts/flattened-weight-typeii.md",
+      "sha256": "62ae63a19e93782718081698a6be8d9a9d463d06ee668fa2122cc54af1a0d511",
+      "independent": true
+    },
+    {
+      "id": "E090",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R028以Fraction认证Ford-Maynard参数、A1有限审计、A2端点与奇素数幂局部扁平化恒等式；R027曾因脚本把整数项p-2误写为比例而失败，修正后通过。运行不认证Type-I/II解析估计。",
+      "locator": "artifacts/runs/R028/stdout.txt",
+      "sha256": "154a22b9db44358ede84367abe9332adadd87e9b81fd2c5945bbddd8aa079f3b",
+      "independent": false
+    },
+    {
+      "id": "E091",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "主审计证明局部扁平化序列a_N、b_N总质量均为N/2加任意次对数节省；同时纠正试图在R为空时完全删除Type-I的想法，定位Ford-Maynard Lemma 7.14的结构化Heath-Brown替换为不可删除残核。",
+      "locator": "agent-drafts/structured-fm-no-typei.md",
+      "sha256": "45be0ac03441649292af8423c90a4ed9e1974a84dff27385aee9c56eebbd8386",
+      "independent": false
+    },
+    {
+      "id": "E092",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立fixed-N Liouville核审计证明立方根粗糙窗中共享大素因子的值对对Gram算子范数仅贡献O(N^(2/3))，精确求出primitive两形式p进局部因子1-4/(p^e(p+1))，并把逐对Chowla强化弱化为互素非对角Gram矩阵的对数谱节省CSC。",
+      "locator": "agent-drafts/liouville-kernel-attack.md",
+      "sha256": "42445a521efa38adb39a85589091c7e64a2b1e1247d2f9ed513d3023f3441048",
+      "independent": true
+    },
+    {
+      "id": "E093",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R029以有理残数枚举和显式尾界核验8组primitive两形式p进Liouville局部相关，均符合1-4/(p^e(p+1))；该有限局部证书不提供完整Liouville全局抵消。",
+      "locator": "artifacts/liouville-kernel-local-factor.json",
+      "sha256": "bba1b47c475a2fa8ca6ac53ac6b918375d0b8e7ee3c001aa88afd86704061d0b",
+      "independent": false
+    },
+    {
+      "id": "E094",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R030用正确首自变量19101/64、稳定相消恒等式、s<=300的16次分片Taylor及有理simplex盒把Li式(29)严格压到(5.900027494736498,6.263634397451608)；未低于6.06932，三重积分占几乎全部宽度。",
+      "locator": "artifacts/g1-taylor-certificate.json",
+      "sha256": "71c9f76118b63c9a919d6e9592b322d23899ba2e97bb4e23534e5fdb9961e0d0",
+      "independent": false
+    },
+    {
+      "id": "E095",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R031在R030基础上对每个ordered simplex盒的正权dt1/t1 dt2/t2 dt3/t3^2作定向精确积分，将G1区间收紧为(5.936530689648490,6.210979864571974)，宽0.274449174923484；仍高门槛0.141659864571974。",
+      "locator": "artifacts/g1-taylor-certificate-v2.json",
+      "sha256": "b7df318f7d661ab46603e4b11f724d5b32b35c8ec0295c6d348d6afea2a027b0",
+      "independent": false
+    },
+    {
+      "id": "E096",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立G1证书报告构造稳定相消恒等式与s<=300的严格分片delay-equation Taylor模型，纠正首自变量为19101/64；R030-R031将G1收紧到(5.936530689648490,6.210979864571974)，并把首个剩余误差定位为三重积分的一阶分支盒外包。",
+      "locator": "agent-drafts/g1-taylor-certificate.md",
+      "sha256": "d852905bb8b5baa2249f0fe56bb25122e17450c5e938bd17909d07cf945423a8",
+      "independent": true
+    },
+    {
+      "id": "E097",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "主审计在a<=v<=u<=t<=25/128上严格把Lichtman的八候选max/min/psi定义化为六个分段仿射候选：删除phi(u)与第二w分支，并证明三个psi门在可能影响最大值时自动开启；该局部引理减少G1切胞复杂度但不认证最终常数。",
+      "locator": "agent-drafts/g1-exact-branch-reduction.md",
+      "sha256": "a6b934e0a7396513a1031f61344bdf3be49ab2ab84bead5e267b6b33d855da0f",
+      "independent": false
+    },
+    {
+      "id": "E098",
+      "kind": "numerical-computation",
+      "role": "diagnostic",
+      "summary": "R033在96/144/192网格上普查G1有序simplex活跃分支；192网格的s<=4部分贡献约0.933128，质量主要来自phi(t)与phi(u+v)。中点浮点与省略s>4尾项使其只能指导切胞，不能作为G1界。",
+      "locator": "artifacts/g1-active-branch-diagnostic.json",
+      "sha256": "c2ad990cba3b72ac146ad92b72f9ee5d67a1aad239c92953939f6266ed77a8b9",
+      "independent": false
+    },
+    {
+      "id": "E099",
+      "kind": "counterexample",
+      "role": "diagnostic",
+      "summary": "独立谱审计将完整CSC弱化为实际HB系数方向上的单边RCSC，并证明乘法角色是product kernel的正确谱基；非主角色模型具有平方根级加性Fourier却产生秩一Gram尖峰，故普通大筛、局部因子与无权行平均均不足。arbitrary bounded内权CSC为假，自然冻结权RCSC仍开放。",
+      "locator": "agent-drafts/csc-spectral-attack.md",
+      "sha256": "20fc27888f34b6ec35c0abeecef6a61197365a8db72cdde55e57504d890e8934",
+      "independent": true
+    },
+    {
+      "id": "E100",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立审计重建Ford-Maynard Lemmas 7.12/7.14，证明完整Type-I仅用于HB大-f分支，并将本案缩为k<=7,J=6,l=18,u=1的HB-LF接口；平方根以下已闭合。大素数原子反例证明固定阶HB卷积不自动成为triply或programmably factorable，首个缺口位于平方根以上不可统一三分组的分支。",
+      "locator": "agent-drafts/structured-typei-interface.md",
+      "sha256": "d22033a1b57b3b83598f4e9d50a69fc5b2c6e437d6c545e78b06f7fe1a7f0f7a",
+      "independent": true
+    },
+    {
+      "id": "E101",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立HB审计证明单一非distinguished大原子q>=x^(1/2+2eta)的所有固定幂盒可改用互补模数m=n/q落回已证Type-I，并完整保留移动区间、Möbius/log权及tau(m)^84表示重数。残核缩至M,Q=N^(1/2+o(1))端点层，m=st且s<=N^(3101/32000+o(1))。",
+      "locator": "agent-drafts/goldbach-hb-lf-one-large-atom.md",
+      "sha256": "ec9013810dd6f9a1479150c27923dc9d2b4a254f5cd0de336a3f8515e01d0184",
+      "independent": true
+    },
+    {
+      "id": "E102",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立角色投影审计冻结真实rough Möbius HB系数，证明polylog-conductor投影的任意对数节省及imprimitive零值稀疏误差；但最大kernel角色尖峰需要sqrt(M)级而非M/log^A投影。首个RCSC缺口可在主角色出现，SW只关闭尖峰<=N/sqrt(M)乘polylog的范围，并留下fixed-N高导数/窗口能量接口。",
+      "locator": "agent-drafts/rcsc-bad-character-projection.md",
+      "sha256": "f3e4166d1601f1d582161ba7d012f6bd585d57db36964a3da8f412e9a49d17ef",
+      "independent": true
+    },
+    {
+      "id": "E103",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R034以六分支精确约化、固定分支二阶加权Taylor cubature和有序域递归分解，将Li式(29)收紧为6.020069303857944<G1<6.108688007590307；上端较R031降低约0.10229，但仍高6.06932门槛0.039368007590307。",
+      "locator": "artifacts/g1-branch-cubature-certificate.json",
+      "sha256": "749e9718407de620266a7d4bb59a55d4c5812f1328ae9d82407407303249de16",
+      "independent": false
+    },
+    {
+      "id": "E104",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立G1报告严格把八候选level约成六个无门分段仿射候选，推导固定分支加权二阶Taylor cubature与有序域递归分解。R034给6.020069303857944<G1<6.108688007590307；剩余宽度主因max_surface、phi(u+v)折面和对角固定分支普通range。",
+      "locator": "agent-drafts/g1-branch-cubature.md",
+      "sha256": "5394cb0b35e3b70613711c2e483a8534413a1ed938de5c67f22eb658a54014f5",
+      "independent": true
+    },
+    {
+      "id": "E105",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R035以exact-rational六分支多面体切胞、108个初始四面体和20000次误差优先二分，精确验证总体积覆盖并认证6.054768378154791<G1<6.077885919151475；仍高于6.06932门槛0.008565919151475。",
+      "locator": "artifacts/g1-rational-polytope-cuts.json",
+      "sha256": "316e5f648c2ba1f06d8967d68079256df9da088de79a6d76ee0f639896cf54f7",
+      "independent": false
+    },
+    {
+      "id": "E106",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "独立G1报告沿全部phi折面、六候选比较面及s=2接缝切出14个满维有理多面体，精确覆盖有序域；R035将G1上端压至6.077885919151475，剩余宽度来自四面体Hessian包围盒相关性损失。",
+      "locator": "agent-drafts/g1-rational-polytope-cuts.md",
+      "sha256": "6da7250e5c83e4576831e718f31c82a4ff4fc2de1cd22f2b7a15d8a10327e7e7",
+      "independent": true
+    },
+    {
+      "id": "E107",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "平方根端点审计把真实HB残核严格缩至sqrt(N)/log^L<m=st<=sqrt(N)、q=sqrt(N)log^O(1)，并写出保留Möbius/log/cell权的精确余和；共同首障碍是quotient-cell权同时依赖素数变量和外模数。",
+      "locator": "agent-drafts/endpoint-hb-st-dispersion.md",
+      "sha256": "fe90b45d59a70bae167e4a646456dd602b79f848b39a00d4c2ec1b4d9489d7f2",
+      "independent": true
+    },
+    {
+      "id": "E108",
+      "kind": "counterexample",
+      "role": "diagnostic",
+      "summary": "主角色尖峰审计证明立方根粗糙product kernel在真实dyadic窗上有-(1-log2)N/(4logN)+O(N/log^2N)主系数，严格否定逐kernel消去超临界主角色尖峰的充分条件；RCSC的系数-核联合能量仍开放。",
+      "locator": "agent-drafts/rcsc-principal-kernel-spike.md",
+      "sha256": "c503e298608fb7b42a2457604dc6ff3c23760a3cd21a0bc69603a9805e742c85",
+      "independent": true
+    },
+    {
+      "id": "E109",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "端点换序审计用log(kℓ)=log(N-p)-log s-log t和二维Abel消去quotient-cell联合权，将余和化为模sk的progression-restricted Titchmarsh形式；Assing-Blomer-Li Thm 2.1闭合任意固定s<=log^S N，余下(log N)^S<s<=N^(3101/32000+o(1))的真实HB有符号估计。",
+      "locator": "agent-drafts/endpoint-reordered-fixedN.md",
+      "sha256": "4ab9980ce10f79c1532a318c9c7dd646cea4fa8327d2a8a5c78bf59fdf79b0f9",
+      "independent": true
+    },
+    {
+      "id": "E110",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R037以exact-rational多面体分区、完整重心二次Taylor积分、显式三阶偏导区间与25000次误差优先细分，严格认证6.063951743978670<G1<6.068764992155771<6.06932，门槛裕量约5.55007844229e-4；该证书仅闭合Li式(29)的G1常数。",
+      "locator": "artifacts/g1-third-order-certificate.json",
+      "sha256": "da4ed47c4b78bd6791220a3a1aad362e72b5f2a7e044f0b7e64f3f8560157103",
+      "independent": false
+    },
+    {
+      "id": "E111",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "三阶G1方法报告在R035精确分区上逐四面体积掉完整重心二次Taylor项，以27个三阶偏导和精确二阶矩控制余项；R037严格得到G1<6.068764992155771，跨过6.06932门槛。",
+      "locator": "agent-drafts/g1-high-order-certificate.md",
+      "sha256": "eb71a25e08208f927ce76a2b66255e43ee6a3d91449fc40dfb64bcee44755015",
+      "independent": false
+    },
+    {
+      "id": "E112",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "独立对抗式审计手推b三阶导、s偏导、三阶链式/乘积法则与vol/20矩公式，并以独立SymPy核检查9个二阶和27个三阶偏导、压测跨s=3/4区间；ACCEPT，Fatal 0、Major 0、Minor 3。",
+      "locator": "agent-drafts/g1-third-order-independent-audit.md",
+      "sha256": "c98b1fd64bda6e47d824c9cbb736fe7f03387b5a69cb18380aa533d072650976",
+      "independent": true
+    },
+    {
+      "id": "E113",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R039合并Li式(13)-(34)定向覆盖账本并新增式(31)证书：2.832499292335576<S13/M<2.834906637442905<2.835087；式(22)+(31)严格节省扣R024修复后净余量>1.19363357167e-4。全链仍有13个未认证端点，首个为式(13)。",
+      "locator": "artifacts/li-full-directed-chain.json",
+      "sha256": "daeec2832b3916437b712f9668430c5552a6855785cdb54cbc93b7aae60979fd",
+      "independent": false
+    },
+    {
+      "id": "E114",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Li全定向链报告逐式列出(13)-(34)的证明方向与状态，严格闭合(22)、(29)、(31)并计入(34) bad-cell修复；首个数值缺口是式(13)所依赖的式(11) 0至3维F/f定向cubature，另有variable-level解析接口。",
+      "locator": "agent-drafts/li-full-directed-chain.md",
+      "sha256": "12b65da4409f159f314d3bc1449d985eaebd1b7439f5636d4d1c4f129147a164",
+      "independent": true
+    },
+    {
+      "id": "E115",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "固定N正向桥梁审计证明P_N=(T_N-C_N)/2，给定T_N>=L_N时最弱分离条件为C_N<L_N；效率比u/ell<2.442695连同统一误差确实充分，但当前level在立方根深度仅s=1.79071875<2，且一次Buchstab显示预算为-6.377541，现有输入不给ell>0或fixed-N的C_N<=0。",
+      "locator": "agent-drafts/positive-fixedN-bridge.md",
+      "sha256": "c5b5b6bb262112d42b9b0abe675db3bdb452790c64287767afaf914f87460eb3",
+      "independent": true
+    },
+    {
+      "id": "E116",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "ABL-HB审计按primitive conductor分组，把全部low-conductor项降为模dρ<N^.1polylog的加权maximal BV并在s<=N^(3101/32000+o(1))全范围闭合；唯一余项为high-conductor fixed-N hybrid d-v角色能量，逐d使用ABL会强迫R>=D^11，最坏R>=N^1.06596875而失败。",
+      "locator": "agent-drafts/abl-hb-low-conductor.md",
+      "sha256": "da2ae5123c26edd816ceb683ff5ea4a6b0311a5cacbbd2a66f5f3a9a2c8dfe9c",
+      "independent": true
+    },
+    {
+      "id": "E117",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R040用精确一维约化、前两段Buchstab显式分支和有理向外求积，认证Li式(28)系数<1.306441970990390108<1.30656及式(30)系数<3.912078108771048420<3.912436，严格裕量分别1.18029e-4与3.57891e-4。",
+      "locator": "artifacts/li-equations28-30-directed.json",
+      "sha256": "1e2e6990f8e20fb0168e3c273704cff192e2dbcef4ec66ab43f2bbe6eb2681d2",
+      "independent": false
+    },
+    {
+      "id": "E118",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Li式(28),(30)报告将两个Buchstab双积分以u=(1-t1-t2)/t2精确降到一维，自变量仅1<=u<=400/183<3，使用显式Buchstab前两分支并与R037 G1区间合并，闭合两个数值系数义务。",
+      "locator": "agent-drafts/li-equations28-30-directed.md",
+      "sha256": "ee02d257b7df6d1359ba14bfe2d83ba2187907a2af615a6a623584e192d33327",
+      "independent": false
+    },
+    {
+      "id": "E119",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R041以全有理定向delay表、解析正权积分和100000次误差优先细分认证Li式(13)：12.902115927812976449<S1/M<12.902200062089020781，严格超过12.902021，系数下端裕量>9.4927812976449e-5。",
+      "locator": "artifacts/li-equation13-certificate.json",
+      "sha256": "c0fa565048b7e0b401cc7d4a71a96b079d56b57e1ad848536b73e97e787f7f75",
+      "independent": false
+    },
+    {
+      "id": "E120",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Li式(13)报告核对PDF符号与末项无500因子，使用Fbar/fbar稳定恒等式消除Euler常数宽度，并记录R041几何覆盖、向外舍入和来源边界；仅闭合数值泛函。",
+      "locator": "agent-drafts/li-equation13-directed.md",
+      "sha256": "c2c04457c8abf9a895264475a6e8e1acab14eb3391b0ebbd5583d74fa3370210",
+      "independent": false
+    },
+    {
+      "id": "E121",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "平方根端点两区间拼接：对d~D的小正幂段，本原角色正交把power-R低导数投影重组为w_{d,k}=O(log(2R/k))的模dk AP误差；高导数按c=rad(d)约化类调用ABL付d^2，取R=D^33 log^K并选eta<min(delta0/34,1/68)严格闭合D<=N^eta。大d段Maynard三指数完全匹配，只余增长剩余类a=N升级。",
+      "locator": "agent-drafts/maynard-growing-residue-upgrade.md",
+      "sha256": "e629bf529cebadf63861a2fd74cf9d25d4fed0a2ebd59c5338f2d3b8107464af",
+      "independent": false
+    },
+    {
+      "id": "E122",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "独立复审接受小d正幂闭合：核对cφ(c)<=d^2、primitive角色正交、w权对数界、q=dk的divisor重数、R=D^33对D^3的消去及delta0→eta→A→K(A)→N0(A)量词顺序；Maynard增长a仍需多变量权传播与互素反演修复。",
+      "locator": "agent-drafts/maynard-growing-residue-upgrade-audit.md",
+      "sha256": "e09f3b6f309a61d1e85c6848b04b844b7b71a26e3d3cdd55d967b048ea8a5c9e",
+      "independent": true
+    },
+    {
+      "id": "E123",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R044复用Li式(13)稳定恒等式并将外端点精确改为1/6.18=50/309；100000次有理自适应细分严格得到6.471117775965498440<S2/M<6.588531288795063072。目标6.533916仍位于区间内，故这是一份定位三重积分宽度的部分证书，不认证式(14)。",
+      "locator": "artifacts/li-equation14-certificate.json",
+      "sha256": "ee38bf0522764d75ca7b7ae04399f2327de5e131da71c9005e9dd699fe928fad",
+      "independent": false
+    },
+    {
+      "id": "E124",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W049闭合Maynard Lemma18.4增长余数相位的Fourier-inert分离，证明整体互素截断保持Li programmable factorability，并定位centered主项、BFI progression尺度的首个未证接口；Lichtman Prop5.2仅覆盖nu<alpha/2子盒。对平衡rough triple-divisor盒核对Prop11.1三指数为7/2+2alpha、9/2-8alpha、1/2，但完整增长-a路由仍条件于uniform Lemmas8.9/13.9/19.2及Props7.3/10.1。",
+      "locator": "agent-drafts/maynard-growing-residue-phase-coprime.md",
+      "sha256": "9a8d0616803a27f9de6e75e4c62e0853a60448eeebb052f2dd0677714f0fbb23",
+      "independent": false
+    },
+    {
+      "id": "E125",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "独立复审先以REVISE发现Prop11.1的M>=x^eps、Ni范围、Prop7.4额外依赖7.3/10.1及Lemma20.7→13.9→8.7固定平移链；主稿逐项降格修订后复审ACCEPT，确认只保留§20主核指数可行而不宣称平衡盒或Goldbach闭合。",
+      "locator": "agent-drafts/maynard-prop11-growing-a-audit.md",
+      "sha256": "190a030209d459a9fbec708f3a31dd75ba495d2655095f7c05ccac38efe60cce",
+      "independent": true
+    },
+    {
+      "id": "E126",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W047重构Li式(19)-(21)：式(21)条件于Li(17)的H表严格得I21<2.659311270884<2.659313；式(19)最佳上界3.311306712438仍未过3.311305；并以A=sFbar/2消去式(20)的连续k分支，证明其印刷积分两分支逐点相同。",
+      "locator": "agent-drafts/li-equations19-21-directed.md",
+      "sha256": "6b73e31a422072c343c866255e34fd58b0de198080439a1fee717e93ddde19b5",
+      "independent": false
+    },
+    {
+      "id": "E127",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R045以有向delay区间认证式(21)条件上界，并给式(20)不依赖H/Taylor/浮点的全有理下界I20>0.272302682186493>0.272301，严格余量>1.682186493e-6；故按所印公式，式(20)显示上界不能成立。",
+      "locator": "artifacts/li-equations19-21-directed.json",
+      "sha256": "1750e0e3455429bd900425801abdc6eb85829e2cd609e6bdd8032fd456e7a914",
+      "independent": false
+    },
+    {
+      "id": "E128",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "独立对抗审计ACCEPT局部结论：逐页核对式(19)-(21)，独立重推k消去并以Fraction复算式(20)反向分数及余量，复现R045辅助参数；同时确认式(21)仍条件于未独立取得的Wu 2008 H表，且式(19)未闭合。",
+      "locator": "agent-drafts/li-equations19-21-audit.md",
+      "sha256": "5d5c28be1835c316232b51fb657160fdba95eff4bd331fb93945c3e4c61bc6ae",
+      "independent": true
+    },
+    {
+      "id": "E129",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "W046/R048以精确theta分支多边形、delay格切割、三角形二阶Taylor有符号矩和h阶梯Jensen下界闭合Li式(23)-(25)。式(25)纠正原R046越出t1<=25/128门槛的问题，强制回退theta1(t1)=57/64-3t1/2；R046保留为撤回历史，R047仅启动失败。",
+      "locator": "agent-drafts/li-equations23-25-directed.md",
+      "sha256": "3e8d6cfb10ae13cce15431c9236d9fb99d03074b42f3305c2b3f2d0be1a2d02a",
+      "independent": false
+    },
+    {
+      "id": "E130",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R048 v2全有理证书严格得S8/M>2.421466602358066153、S9/M>1.382532307003417546、S10/M>0.960459919194349603，分别超过2.421452、1.382532、0.960457；最窄裕量为S9的3.07003417546e-7。",
+      "locator": "artifacts/li-equations23-25-directed-v2.json",
+      "sha256": "2be4427c26991e1ad64cd3c392686aa510adfe86695c192f81527e1b0c632fe7",
+      "independent": false
+    },
+    {
+      "id": "E131",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "独立审计先在R046发现式(25)增强level门条件Fatal并促成撤回；对R048复核PDF积分域、S8/S9六候选、S10一变量分支、Hessian定向、h Jensen、精确端点与运行哈希，终态Fatal/Major/Minor均0并ACCEPT三个局部数值节点。",
+      "locator": "agent-drafts/li-equations23-25-audit.md",
+      "sha256": "d7c237a525ee9f0bda8c32cab82657766909b5e0fc39b659871c80a0724f21f9",
+      "independent": true
+    },
+    {
+      "id": "E132",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "式(25)专项独立审计确认Li三变量增强式仅允许t1<=25/128，修正一变量分支的80位双算法诊断总值约0.9604603367；随后核对R048严格下界0.960459919194349603及哈希，判旧R046 REVISE、修正路径ACCEPT。",
+      "locator": "agent-drafts/li-equation25-domain-audit.md",
+      "sha256": "037e4720e5b0425e6376c160bb198332cdce6cef26943d0dc2d4f702d6dcdf43",
+      "independent": true
+    },
+    {
+      "id": "E133",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "R049 exact polytope/delay coverage passed, but direct three-dimensional second-order Taylor/Young enclosure widened to roughly [-29827.94,29823.97], identifying small-z derivative inflation as a failed certificate route rather than a property of the integral.",
+      "locator": "artifacts/li-equation14-polytope-taylor-d0-smoke.json",
+      "sha256": "8610b596e6ec42329bc53a902f8b4ba81e981fa16ebb6c48633a8f541b9ce9e8",
+      "independent": false
+    },
+    {
+      "id": "E134",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "On every affine theta winner branch, s=e+D(x,y)/z and ds=-D z^-2 dz, so the z^-2 factor in Li equation (14)'s triple integral cancels exactly and reduces the term to a two-dimensional fibre integral.",
+      "locator": "agent-drafts/li-equation14-fiber-reduction.md",
+      "sha256": "62aad5fbd060103c894e1252784d084fbd7977e71e483fd70fd9817a22c3a3db",
+      "independent": false
+    },
+    {
+      "id": "E135",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R050 exact rational enumeration verifies all 12 nonempty theta winner polytopes, their full ordered-domain volume, the fibre identity at every vertex, and D>=53/206 on the actual winner regions.",
+      "locator": "artifacts/li-equation14-fiber-identity.json",
+      "sha256": "a7be29d213da427664bed379b748c45f0ce6d1e67ea61ca82f9ff6e58f36abc9",
+      "independent": false
+    },
+    {
+      "id": "E136",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "Independent W050 audit accepts R049's exact geometry/Hessian directions and R050's fibre identity, endpoint orientation, and D>0 bounds; it derives the explicit primitive P(s)=q s-2b(s+1) for s>=1 and retains REVISE for the unfinished equation (14) numerical bound.",
+      "locator": "agent-drafts/li-equation14-polytope-taylor-audit.md",
+      "sha256": "3ff07c9d3fcb05be6468c7001f4a22de11cd395c11d1e724b2bf7f34211fd45b",
+      "independent": true
+    },
+    {
+      "id": "E137",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "R051 sharpened the direct three-dimensional equation (14) certificate with local range/Taylor intersection and 2000 adaptive splits, but the triple interval remained about [-68.246,67.773]; this confirms that refinement without exact fibre cancellation is quantitatively unsuitable.",
+      "locator": "artifacts/li-equation14-polytope-taylor-adaptive-smoke.json",
+      "sha256": "ddd6c75d7bebb95ae36a0b75d630f219000a442e62a505e1530ff1f6bcbe542b",
+      "independent": false
+    },
+    {
+      "id": "E138",
+      "kind": "numerical-computation",
+      "role": "suggestive",
+      "summary": "R052 non-rigorous fibre-reduced Gauss-Legendre diagnostics stabilize near S2/M=6.5339278 through order 256, about 1.18e-5 above Li equation (14)'s threshold; this guides the strict error target but is not a proof.",
+      "locator": "artifacts/li-equation14-fiber-gauss-diagnostic.json",
+      "sha256": "28a217d6033009ca158cf24b1bd0b509c1919d7d6eff7916bc14d3ec9b3c5625",
+      "independent": false
+    },
+    {
+      "id": "E139",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "A direct fixed-N parity bridge reduces strong Goldbach to the one-sided scalar PRC inequality. The local projection main term and prime-power removal are proved, almost-all N satisfy a quantitative form, and a reflection-oriented pseudoprime model shows why one-point AP data cannot close the remaining O(N log N) to O(N) gap.",
+      "locator": "agent-drafts/parity-bridge-next.md",
+      "sha256": "3c2e5cd206d762bf22fad6629070baa88f2f77690ee8517a423ea5932b8b8bd2",
+      "independent": false
+    },
+    {
+      "id": "E140",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R055 exactly partitions Li equation (14)'s 12 theta winner polytopes into 28 active vertical-fibre cells and 47 rational triangles; every branch fibre volume and the total ordered-domain volume match. Its independent primitive endpoint ranges remain too wide, so only the geometry—not the numerical lower bound—is certified.",
+      "locator": "artifacts/li-equation14-fiber-primitive-smoke.json",
+      "sha256": "d7521c6f72908d110c1ef0d02b0388bd655c2418a135ffa36bc1ce3b6c01ae41",
+      "independent": false
+    },
+    {
+      "id": "E141",
+      "kind": "replication",
+      "role": "diagnostic",
+      "summary": "Independent audit accepts the PRC reflection decomposition, truncated singular-series main term, prime-power removal, almost-all quantifier, and reflection-oriented pseudoprime obstruction; two minor uniformity details were added to the main draft. PRC itself remains unproved.",
+      "locator": "agent-drafts/parity-bridge-next-audit.md",
+      "sha256": "c1c49e620e87dcc9cb4df50325235a6ab0b209b4f635b21ae6c50b6ccc3b05f6",
+      "independent": true
+    },
+    {
+      "id": "E142",
+      "kind": "exact-computation",
+      "role": "diagnostic",
+      "summary": "R056 combines exact fibre geometry with a centred second-order two-dimensional Taylor enclosure. After 2000 adaptive splits it rigorously narrows Li equation (14) to 6.516134800674578668<S2/M<6.551398375323379573, a major convergence improvement but still not enough for the 6.533916 lower threshold.",
+      "locator": "artifacts/li-equation14-fiber-taylor-smoke.json",
+      "sha256": "7fd45469393a6610eef011bf55ebf311b25024a7536d467fc6fc9b13b6c61a2a",
+      "independent": false
+    }
+  ],
+  "decision": {
+    "verdict": "INCONCLUSIVE",
+    "claim_id": "C001",
+    "reason": "本轮取得可复核的局部推进：Li式(13)和纠正适用域后的式(23)-(25)均有全有理严格证书；平方根端点的小d正幂区间闭合，Maynard增长余数相位被压缩为可分离inert权，且部分大d HB盒可由逐因子互素支持覆盖。与此同时，独立全有理审计证明按Li印刷式(20)其积分严格大于0.272301，触发全数值链检查；式(14)、(16)、(19)、(33)、(34)、大d BFI互素传播及最终奇偶敏感prime-prime桥梁仍未闭合。",
+    "evidence_ids": [
+      "E119",
+      "E120",
+      "E121",
+      "E122",
+      "E123",
+      "E124",
+      "E125",
+      "E126",
+      "E127",
+      "E128",
+      "E129",
+      "E130",
+      "E131",
+      "E132"
+    ],
+    "limitations": "这些证据只认证局部积分、参数区间和条件性分布接口。Li的H/h表尚未从Wu 2008独立重算；式(20)矛盾可能来自印刷、版本或未披露端点，但在查明前不能使用该常数。R048不证明上游variable-level sieve；Maynard Proposition8.3的BFI互素传播和若干uniform-a依赖仍开。即使Li的P1+P2常数链完全修复，也仍需突破筛法奇偶障碍，才能得到每个充分大偶数的两个素数表示，并还需有限范围核验。",
+    "reproduction": "复核R041、R045、R048及其JSON/审计；阅读maynard-growing-residue-upgrade.md、maynard-growing-residue-phase-coprime.md及独立审计；运行workspace validate并检查K002、K009、K017。"
+  }
+}

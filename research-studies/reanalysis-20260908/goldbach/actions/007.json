@@ -1,0 +1,37 @@
+{
+  "id": 7,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved.\nArtifacts: {\"record-audit.json\": \"61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1\", \"subdivision-probe.json\": \"a907d20398d368256700f39ccb0012ff9631a8127f70f97ebfcbc87e9c07e6ba\"}"
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "falsifier": "Recheck exact claims against artifacts; a changed hash, wrong domain or missing analytic assumption invalidates the associated conclusion.",
+    "rationale": "Integrate the observed results and precise limitations into the live Agent record."
+  },
+  "fingerprint": "c884b7252d9c46a7909a3bff5c0a58b3785872f255718ff8ad48859457854562",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved.\nArtifacts: {\"record-audit.json\": \"61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1\", \"subdivision-probe.json\": \"a907d20398d368256700f39ccb0012ff9631a8127f70f97ebfcbc87e9c07e6ba\"}",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "55d4da31bfa7c67c497fb1bcbf6b2007d9f3bd9b72e499614f577be58e902f3d",
+  "created": 1788848984.8312647
+}

@@ -1,0 +1,85 @@
+{
+  "id": 6,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "lhs": "4/(120*s+97)",
+        "rhs": "1/(30*s+25)+1/(2*(120*s+97)*(6*s+5))+1/(10*(120*s+97)*(6*s+5))",
+        "symbols": [
+          "s"
+        ]
+      },
+      "tool": "identity"
+    },
+    "evidence": [
+      5
+    ],
+    "falsifier": "Check rational identity; separately require s an integer >=0 and strict denominator ordering.",
+    "rationale": "Specialize q=5 to a family inside the previously uncovered residue 1 mod 24."
+  },
+  "fingerprint": "5711b1689880941513e7799c856ae3521dcc939313dd551f7c48232912400bf4",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "assumptions": {
+        "integer": [],
+        "positive": [],
+        "real": []
+      },
+      "backend": "sympy",
+      "backend_version": "1.14.0",
+      "claim": {
+        "lhs": "4/(120*s+97)",
+        "rhs": "1/(30*s+25)+1/(2*(120*s+97)*(6*s+5))+1/(10*(120*s+97)*(6*s+5))",
+        "symbols": [
+          "s"
+        ]
+      },
+      "classification": "exact-rational-on-domain",
+      "created_at": "2026-09-08T06:12:34.994725+00:00",
+      "domain_analysis_complete": true,
+      "domain_restrictions": [
+        "10*(6*s + 5)*(120*s + 97) != 0",
+        "120*s + 97 != 0",
+        "2*(6*s + 5)*(120*s + 97) != 0",
+        "5*(6*s + 5) != 0"
+      ],
+      "exceptional_set": "10*(6*s + 5)*(120*s + 97) = 0 or 120*s + 97 = 0 or 2*(6*s + 5)*(120*s + 97) = 0 or 5*(6*s + 5) = 0",
+      "identity_established": true,
+      "normalized": {
+        "denominator": "1",
+        "difference": "0",
+        "lhs": "4/(120*s + 97)",
+        "numerator": "0",
+        "rhs": "(1/(30*s + 25) + 1/((6*s + 5)*(2*(120*s + 97)))) + 1/((6*s + 5)*(10*(120*s + 97)))"
+      },
+      "numerator_coefficients": [
+        "0"
+      ],
+      "polynomial_numerator": true,
+      "recommended_evidence_role": "decisive",
+      "schema_version": 1,
+      "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+    },
+    "elapsed_seconds": 1.172,
+    "independent_check": {
+      "certificate_hash": "3930a5caab98bf2643dcec51a74ad5f4eccc41da924d63e1f47e21666c679961",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    }
+  },
+  "result_hash": "07b657dd1c12dc9e45ec58e9c2048ca358c53f03d33899943bca508e33ded3a7",
+  "created": 1788847954.4392638
+}

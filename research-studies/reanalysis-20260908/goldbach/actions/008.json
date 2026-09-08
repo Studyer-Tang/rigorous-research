@@ -1,0 +1,34 @@
+{
+  "id": 8,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Scoped reanalysis report delivered: goldbach\\REPORT.zh-CN.md; SHA256=6f0a28583e697bbbc592803296250a031a15565fa8420a9f6eb54c43205c38fe. Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review."
+      },
+      "tool": "finish"
+    },
+    "evidence": [
+      7
+    ],
+    "falsifier": "Delivery is not a proof verdict. General proof, analytic certificate and model applicability require their stated separate obligations.",
+    "rationale": "Deliver the completed research report and retain unresolved original goals."
+  },
+  "fingerprint": "549b51414ffa68123753ba176b750b9ed824051b288fb969483e5a8ddbded36a",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Scoped reanalysis report delivered: goldbach\\REPORT.zh-CN.md; SHA256=6f0a28583e697bbbc592803296250a031a15565fa8420a9f6eb54c43205c38fe. Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "ebb47b3953d54cee3965a21a9831dd24ddd3b52bba1b2fdcb391bca81a4e7d38",
+  "created": 1788848984.8637507
+}

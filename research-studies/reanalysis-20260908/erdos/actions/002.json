@@ -1,0 +1,92 @@
+{
+  "id": 2,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "lhs": "4/(24*t+1)-1/(6*t+1)",
+        "rhs": "3/((24*t+1)*(6*t+1))",
+        "symbols": [
+          "t"
+        ],
+        "values": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "10",
+          "100"
+        ]
+      },
+      "tool": "counterexample"
+    },
+    "evidence": [
+      1
+    ],
+    "falsifier": "Any admissible nonzero difference invalidates the reduction.",
+    "rationale": "Attack the residual formula at positive-integer boundaries before using it."
+  },
+  "fingerprint": "810ac754200b1ca64a3792568fc3a659f8f852a62805644c20defa4f1fc55e2b",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "assumptions": {
+        "integer": [],
+        "positive": [],
+        "real": []
+      },
+      "backend": "sympy",
+      "backend_version": "1.14.0",
+      "claim": {
+        "lhs": "4/(24*t+1)-1/(6*t+1)",
+        "rhs": "3/((24*t+1)*(6*t+1))",
+        "symbols": [
+          "t"
+        ]
+      },
+      "counterexample_found": false,
+      "created_at": "2026-09-08T06:10:19.084515+00:00",
+      "excluded_points": 0,
+      "grid": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "10",
+        "100"
+      ],
+      "grid_exhausted": true,
+      "max_points": 1000,
+      "operation": "rational-counterexample-search",
+      "recommended_evidence_role": "diagnostic",
+      "schema_version": 1,
+      "status": "INCONCLUSIVE",
+      "tested_points": 7,
+      "total_grid_points": 7,
+      "visited_points": 7,
+      "warning": "A witness refutes only the stated identity under the recorded assumptions. Finite search cannot prove a universal identity; case verdict and release review remain separate.",
+      "witness": null
+    },
+    "elapsed_seconds": 1.406,
+    "independent_check": {
+      "certificate_hash": "b7ad010998f5917c6526b0aa770ce6afd7be3b97a5fe02ca2f552fe4182f939a",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+      "status": "INCONCLUSIVE"
+    },
+    "status": "INCONCLUSIVE",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    }
+  },
+  "result_hash": "f27be98e860da88c84d9d0fabc42cf95e4b896418725772e414383fcb79d5c0a",
+  "created": 1788847818.3031735
+}

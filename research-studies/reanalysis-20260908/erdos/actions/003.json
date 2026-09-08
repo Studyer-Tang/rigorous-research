@@ -1,0 +1,84 @@
+{
+  "id": 3,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "lhs": "(3*y-b)*(3*z-b)-b**2",
+        "rhs": "3*(3*y*z-b*(y+z))",
+        "symbols": [
+          "b",
+          "y",
+          "z"
+        ]
+      },
+      "tool": "identity"
+    },
+    "evidence": [
+      1
+    ],
+    "falsifier": "A nonzero cleared polynomial difference rejects the claimed equivalence.",
+    "rationale": "Verify the Diophantine factorization underlying necessity and sufficiency."
+  },
+  "fingerprint": "ae7ced89ddcb902269d562245f4755f1befdbdbde3ba9ba3ce49066b9b3db063",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "assumptions": {
+        "integer": [],
+        "positive": [],
+        "real": []
+      },
+      "backend": "sympy",
+      "backend_version": "1.14.0",
+      "claim": {
+        "lhs": "(3*y-b)*(3*z-b)-b**2",
+        "rhs": "3*(3*y*z-b*(y+z))",
+        "symbols": [
+          "b",
+          "y",
+          "z"
+        ]
+      },
+      "classification": "exact-polynomial",
+      "created_at": "2026-09-08T06:10:20.228994+00:00",
+      "domain_analysis_complete": true,
+      "domain_restrictions": [],
+      "exceptional_set": "none",
+      "identity_established": true,
+      "normalized": {
+        "denominator": "1",
+        "difference": "-b**2 + 3*b*(y + z) - 9*y*z + (-b + 3*y)*(-b + 3*z)",
+        "lhs": "-b**2 + (-b + 3*y)*(-b + 3*z)",
+        "numerator": "0",
+        "rhs": "3*(-b*(y + z) + (3*y)*z)"
+      },
+      "numerator_coefficients": [
+        "0"
+      ],
+      "polynomial_numerator": true,
+      "recommended_evidence_role": "decisive",
+      "schema_version": 1,
+      "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+    },
+    "elapsed_seconds": 1.016,
+    "independent_check": {
+      "certificate_hash": "6c7b22f71ac0912ad5287ae2617fadc74a8c41b2b32922a4776e2495dd12b906",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    }
+  },
+  "result_hash": "9e22094a79d28bcdb9d802df78eed0a3a37ac1cd81d5153ca23a5cfdc7c45753",
+  "created": 1788847819.7391832
+}

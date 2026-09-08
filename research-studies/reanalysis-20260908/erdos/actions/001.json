@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Original conjecture remains open in this study. Investigate n=24t+1, t>=1, x=6t+1, b=nx. Conjecture for this route: 3/b=1/y+1/z is solvable in positive integers iff b has a prime divisor q=2 mod 3. First attack boundary cases, then prove both directions and exact construction. Compare with unrestricted witnesses; a greedy obstruction is not a conjecture counterexample. Novelty not assessed."
+      },
+      "tool": "note"
+    },
+    "evidence": [],
+    "falsifier": "Reject a conclusion that exceeds its quantifiers, statistical design or verified source scope.",
+    "rationale": "Freeze the research scope before executing new checks."
+  },
+  "fingerprint": "986a114414cf22ee2eb06e190a2b284b88ee7e8ee55322da727eb237ba10f15f",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Original conjecture remains open in this study. Investigate n=24t+1, t>=1, x=6t+1, b=nx. Conjecture for this route: 3/b=1/y+1/z is solvable in positive integers iff b has a prime divisor q=2 mod 3. First attack boundary cases, then prove both directions and exact construction. Compare with unrestricted witnesses; a greedy obstruction is not a conjecture counterexample. Novelty not assessed.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "b80588d6b5c5455275d015cc3927ae1ac2abe056787e1c09a0fe7f8895dff542",
+  "created": 1788847783.718723
+}

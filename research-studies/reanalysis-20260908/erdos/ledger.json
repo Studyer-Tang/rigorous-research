@@ -1,0 +1,607 @@
+{
+  "state": {
+    "domain": "mathematics",
+    "execution": "DELIVERED",
+    "machine_contract": null,
+    "machine_contract_status": "NOT_DECLARED",
+    "model_calls": 0,
+    "network": false,
+    "novelty_status": "NOT_ASSESSED",
+    "objective": "Reinvestigate the distinct-denominator Erdos-Straus conjecture for all n>=3; determine exactly when the greedy first denominator works on n=1 mod 24, without confusing a failed route with a counterexample to the conjecture.",
+    "objective_status": "UNRESOLVED",
+    "paused": false,
+    "revision": 8,
+    "schema_version": 1,
+    "stop_reason": "",
+    "translation_status": "REQUIRES_REVIEW"
+  },
+  "actions": [
+    {
+      "id": 1,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Original conjecture remains open in this study. Investigate n=24t+1, t>=1, x=6t+1, b=nx. Conjecture for this route: 3/b=1/y+1/z is solvable in positive integers iff b has a prime divisor q=2 mod 3. First attack boundary cases, then prove both directions and exact construction. Compare with unrestricted witnesses; a greedy obstruction is not a conjecture counterexample. Novelty not assessed."
+          },
+          "tool": "note"
+        },
+        "evidence": [],
+        "falsifier": "Reject a conclusion that exceeds its quantifiers, statistical design or verified source scope.",
+        "rationale": "Freeze the research scope before executing new checks."
+      },
+      "fingerprint": "986a114414cf22ee2eb06e190a2b284b88ee7e8ee55322da727eb237ba10f15f",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Original conjecture remains open in this study. Investigate n=24t+1, t>=1, x=6t+1, b=nx. Conjecture for this route: 3/b=1/y+1/z is solvable in positive integers iff b has a prime divisor q=2 mod 3. First attack boundary cases, then prove both directions and exact construction. Compare with unrestricted witnesses; a greedy obstruction is not a conjecture counterexample. Novelty not assessed.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "b80588d6b5c5455275d015cc3927ae1ac2abe056787e1c09a0fe7f8895dff542",
+      "created": 1788847783.718723
+    },
+    {
+      "id": 2,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "4/(24*t+1)-1/(6*t+1)",
+            "rhs": "3/((24*t+1)*(6*t+1))",
+            "symbols": [
+              "t"
+            ],
+            "values": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "10",
+              "100"
+            ]
+          },
+          "tool": "counterexample"
+        },
+        "evidence": [
+          1
+        ],
+        "falsifier": "Any admissible nonzero difference invalidates the reduction.",
+        "rationale": "Attack the residual formula at positive-integer boundaries before using it."
+      },
+      "fingerprint": "810ac754200b1ca64a3792568fc3a659f8f852a62805644c20defa4f1fc55e2b",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "4/(24*t+1)-1/(6*t+1)",
+            "rhs": "3/((24*t+1)*(6*t+1))",
+            "symbols": [
+              "t"
+            ]
+          },
+          "counterexample_found": false,
+          "created_at": "2026-09-08T06:10:19.084515+00:00",
+          "excluded_points": 0,
+          "grid": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "100"
+          ],
+          "grid_exhausted": true,
+          "max_points": 1000,
+          "operation": "rational-counterexample-search",
+          "recommended_evidence_role": "diagnostic",
+          "schema_version": 1,
+          "status": "INCONCLUSIVE",
+          "tested_points": 7,
+          "total_grid_points": 7,
+          "visited_points": 7,
+          "warning": "A witness refutes only the stated identity under the recorded assumptions. Finite search cannot prove a universal identity; case verdict and release review remain separate.",
+          "witness": null
+        },
+        "elapsed_seconds": 1.406,
+        "independent_check": {
+          "certificate_hash": "b7ad010998f5917c6526b0aa770ce6afd7be3b97a5fe02ca2f552fe4182f939a",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "INCONCLUSIVE"
+        },
+        "status": "INCONCLUSIVE",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "f27be98e860da88c84d9d0fabc42cf95e4b896418725772e414383fcb79d5c0a",
+      "created": 1788847818.3031735
+    },
+    {
+      "id": 3,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "(3*y-b)*(3*z-b)-b**2",
+            "rhs": "3*(3*y*z-b*(y+z))",
+            "symbols": [
+              "b",
+              "y",
+              "z"
+            ]
+          },
+          "tool": "identity"
+        },
+        "evidence": [
+          1
+        ],
+        "falsifier": "A nonzero cleared polynomial difference rejects the claimed equivalence.",
+        "rationale": "Verify the Diophantine factorization underlying necessity and sufficiency."
+      },
+      "fingerprint": "ae7ced89ddcb902269d562245f4755f1befdbdbde3ba9ba3ce49066b9b3db063",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "(3*y-b)*(3*z-b)-b**2",
+            "rhs": "3*(3*y*z-b*(y+z))",
+            "symbols": [
+              "b",
+              "y",
+              "z"
+            ]
+          },
+          "classification": "exact-polynomial",
+          "created_at": "2026-09-08T06:10:20.228994+00:00",
+          "domain_analysis_complete": true,
+          "domain_restrictions": [],
+          "exceptional_set": "none",
+          "identity_established": true,
+          "normalized": {
+            "denominator": "1",
+            "difference": "-b**2 + 3*b*(y + z) - 9*y*z + (-b + 3*y)*(-b + 3*z)",
+            "lhs": "-b**2 + (-b + 3*y)*(-b + 3*z)",
+            "numerator": "0",
+            "rhs": "3*(-b*(y + z) + (3*y)*z)"
+          },
+          "numerator_coefficients": [
+            "0"
+          ],
+          "polynomial_numerator": true,
+          "recommended_evidence_role": "decisive",
+          "schema_version": 1,
+          "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+        },
+        "elapsed_seconds": 1.016,
+        "independent_check": {
+          "certificate_hash": "6c7b22f71ac0912ad5287ae2617fadc74a8c41b2b32922a4776e2495dd12b906",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "9e22094a79d28bcdb9d802df78eed0a3a37ac1cd81d5153ca23a5cfdc7c45753",
+      "created": 1788847819.7391832
+    },
+    {
+      "id": 4,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "4/(24*t+1)-1/(6*t+1)",
+            "rhs": "3/((24*t+1)*(6*t+1))",
+            "symbols": [
+              "t"
+            ]
+          },
+          "tool": "identity"
+        },
+        "evidence": [
+          2,
+          3
+        ],
+        "falsifier": "A nonzero rational numerator invalidates the residual formula.",
+        "rationale": "The earlier finite search found no disagreement; now check the formula for its entire rational domain."
+      },
+      "fingerprint": "f76cc1bfc45be940243fdaab6c640c516da18264840eb8400739c1e04ca99b2a",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "4/(24*t+1)-1/(6*t+1)",
+            "rhs": "3/((24*t+1)*(6*t+1))",
+            "symbols": [
+              "t"
+            ]
+          },
+          "classification": "exact-rational-on-domain",
+          "created_at": "2026-09-08T06:12:32.680702+00:00",
+          "domain_analysis_complete": true,
+          "domain_restrictions": [
+            "(6*t + 1)*(24*t + 1) != 0",
+            "24*t + 1 != 0",
+            "6*t + 1 != 0"
+          ],
+          "exceptional_set": "(6*t + 1)*(24*t + 1) = 0 or 24*t + 1 = 0 or 6*t + 1 = 0",
+          "identity_established": true,
+          "normalized": {
+            "denominator": "1",
+            "difference": "0",
+            "lhs": "4/(24*t + 1) - 1/(6*t + 1)",
+            "numerator": "0",
+            "rhs": "3/(((6*t + 1)*(24*t + 1)))"
+          },
+          "numerator_coefficients": [
+            "0"
+          ],
+          "polynomial_numerator": true,
+          "recommended_evidence_role": "decisive",
+          "schema_version": 1,
+          "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+        },
+        "elapsed_seconds": 1.11,
+        "independent_check": {
+          "certificate_hash": "1492c46947e37fbab5ae316bcea5dfbcf61d2d7b396c5daeb158c4a8f40a4535",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "6c4d5ad8db879924593d12a563c80726e82032d067537ed91486ec223671d68c",
+      "created": 1788847952.1438868
+    },
+    {
+      "id": 5,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "3/b",
+            "rhs": "3*q/(b*(q+1))+3/(b*(q+1))",
+            "symbols": [
+              "b",
+              "q"
+            ]
+          },
+          "tool": "identity"
+        },
+        "evidence": [
+          3,
+          4
+        ],
+        "falsifier": "Reject a nonzero rational difference; b=0 and q=-1 are excluded.",
+        "rationale": "Check the constructive pair y=b(q+1)/(3q), z=b(q+1)/3; integrality is a separate obligation."
+      },
+      "fingerprint": "f0acc02d35de39b162876522ce77228ce76cc1d3484a456cf05d515a953a3335",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "3/b",
+            "rhs": "3*q/(b*(q+1))+3/(b*(q+1))",
+            "symbols": [
+              "b",
+              "q"
+            ]
+          },
+          "classification": "exact-rational-on-domain",
+          "created_at": "2026-09-08T06:12:33.829545+00:00",
+          "domain_analysis_complete": true,
+          "domain_restrictions": [
+            "b != 0",
+            "b*(q + 1) != 0"
+          ],
+          "exceptional_set": "b = 0 or b*(q + 1) = 0",
+          "identity_established": true,
+          "normalized": {
+            "denominator": "1",
+            "difference": "0",
+            "lhs": "3/b",
+            "numerator": "0",
+            "rhs": "(3*q)/((b*(q + 1))) + 3/((b*(q + 1)))"
+          },
+          "numerator_coefficients": [
+            "0"
+          ],
+          "polynomial_numerator": true,
+          "recommended_evidence_role": "decisive",
+          "schema_version": 1,
+          "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+        },
+        "elapsed_seconds": 1.109,
+        "independent_check": {
+          "certificate_hash": "ae934a861815b77a00b5c69f49fec6f4d23cf65c11c9c0818d1ea725f32b004e",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "9621b6597f2f754b8f542b230ddd1e7bb2f13c4b4d09a8d93c216315e44b18f0",
+      "created": 1788847953.2874904
+    },
+    {
+      "id": 6,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "4/(120*s+97)",
+            "rhs": "1/(30*s+25)+1/(2*(120*s+97)*(6*s+5))+1/(10*(120*s+97)*(6*s+5))",
+            "symbols": [
+              "s"
+            ]
+          },
+          "tool": "identity"
+        },
+        "evidence": [
+          5
+        ],
+        "falsifier": "Check rational identity; separately require s an integer >=0 and strict denominator ordering.",
+        "rationale": "Specialize q=5 to a family inside the previously uncovered residue 1 mod 24."
+      },
+      "fingerprint": "5711b1689880941513e7799c856ae3521dcc939313dd551f7c48232912400bf4",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "4/(120*s+97)",
+            "rhs": "1/(30*s+25)+1/(2*(120*s+97)*(6*s+5))+1/(10*(120*s+97)*(6*s+5))",
+            "symbols": [
+              "s"
+            ]
+          },
+          "classification": "exact-rational-on-domain",
+          "created_at": "2026-09-08T06:12:34.994725+00:00",
+          "domain_analysis_complete": true,
+          "domain_restrictions": [
+            "10*(6*s + 5)*(120*s + 97) != 0",
+            "120*s + 97 != 0",
+            "2*(6*s + 5)*(120*s + 97) != 0",
+            "5*(6*s + 5) != 0"
+          ],
+          "exceptional_set": "10*(6*s + 5)*(120*s + 97) = 0 or 120*s + 97 = 0 or 2*(6*s + 5)*(120*s + 97) = 0 or 5*(6*s + 5) = 0",
+          "identity_established": true,
+          "normalized": {
+            "denominator": "1",
+            "difference": "0",
+            "lhs": "4/(120*s + 97)",
+            "numerator": "0",
+            "rhs": "(1/(30*s + 25) + 1/((6*s + 5)*(2*(120*s + 97)))) + 1/((6*s + 5)*(10*(120*s + 97)))"
+          },
+          "numerator_coefficients": [
+            "0"
+          ],
+          "polynomial_numerator": true,
+          "recommended_evidence_role": "decisive",
+          "schema_version": 1,
+          "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+        },
+        "elapsed_seconds": 1.172,
+        "independent_check": {
+          "certificate_hash": "3930a5caab98bf2643dcec51a74ad5f4eccc41da924d63e1f47e21666c679961",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "07b657dd1c12dc9e45ec58e9c2048ca358c53f03d33899943bca508e33ded3a7",
+      "created": 1788847954.4392638
+    },
+    {
+      "id": 7,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "For n=24t+1,t>=1,x=6t+1,b=nx: greedy completion exists iff b has a prime factor q=2 mod3. Necessity: (3y-b)(3z-b)=b^2 has positive factors, the first 2 mod3; if all primes of b are 1 mod3 this is impossible. Sufficiency: y=b(q+1)/(3q),z=q*y are integral, positive, and x<y<z since n>=25 and odd b forces q>=5. The q=5 subfamily is n=120s+97, x=30s+25, y=2n(6s+5), z=10n(6s+5), s>=0. General reasoning is a written proof, not a formal certificate or human-reviewed result. Independent finite audit: 416 cases,275 greedy successes,141 obstructions,zero criterion mismatches. Unrestricted finite replay exactly matches the old artifact hash and gives 9998 witnesses. Original conjecture unresolved; novelty not audited.\nArtifacts: {\"greedy-audit.json\": \"9b568ea2577d08374e3625a2913057bee74a992557950a290b607a97ea302b17\", \"unrestricted-replay.json\": \"0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab\", \"unrestricted-check.json\": \"c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2\"}"
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "falsifier": "Recheck exact claims against artifacts; a changed hash, wrong domain or missing analytic assumption invalidates the associated conclusion.",
+        "rationale": "Integrate the observed results and precise limitations into the live Agent record."
+      },
+      "fingerprint": "3ea047456029fdab49d5e1e9461fbc167dc526cf6b8fb193cc54d7281a0e5dcc",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "For n=24t+1,t>=1,x=6t+1,b=nx: greedy completion exists iff b has a prime factor q=2 mod3. Necessity: (3y-b)(3z-b)=b^2 has positive factors, the first 2 mod3; if all primes of b are 1 mod3 this is impossible. Sufficiency: y=b(q+1)/(3q),z=q*y are integral, positive, and x<y<z since n>=25 and odd b forces q>=5. The q=5 subfamily is n=120s+97, x=30s+25, y=2n(6s+5), z=10n(6s+5), s>=0. General reasoning is a written proof, not a formal certificate or human-reviewed result. Independent finite audit: 416 cases,275 greedy successes,141 obstructions,zero criterion mismatches. Unrestricted finite replay exactly matches the old artifact hash and gives 9998 witnesses. Original conjecture unresolved; novelty not audited.\nArtifacts: {\"greedy-audit.json\": \"9b568ea2577d08374e3625a2913057bee74a992557950a290b607a97ea302b17\", \"unrestricted-replay.json\": \"0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab\", \"unrestricted-check.json\": \"c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2\"}",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "4f153b524014cf14c4b9eb15f64737418712a396802f6d2182ef9c2b69de5c0a",
+      "created": 1788848983.7514117
+    },
+    {
+      "id": 8,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Scoped reanalysis report delivered: erdos\\REPORT.zh-CN.md; SHA256=c492870f2e7dd24d74d862e42d0e9ac729c5811ad7278574d8fe29153c2bd15b. For n=24t+1,t>=1,x=6t+1,b=nx: greedy completion exists iff b has a prime factor q=2 mod3. Necessity: (3y-b)(3z-b)=b^2 has positive factors, the first 2 mod3; if all primes of b are 1 mod3 this is impossible. Sufficiency: y=b(q+1)/(3q),z=q*y are integral, positive, and x<y<z since n>=25 and odd b forces q>=5. The q=5 subfamily is n=120s+97, x=30s+25, y=2n(6s+5), z=10n(6s+5), s>=0. General reasoning is a written proof, not a formal certificate or human-reviewed result. Independent finite audit: 416 cases,275 greedy successes,141 obstructions,zero criterion mismatches. Unrestricted finite replay exactly matches the old artifact hash and gives 9998 witnesses. Original conjecture unresolved; novelty not audited. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review."
+          },
+          "tool": "finish"
+        },
+        "evidence": [
+          7
+        ],
+        "falsifier": "Delivery is not a proof verdict. General proof, analytic certificate and model applicability require their stated separate obligations.",
+        "rationale": "Deliver the completed research report and retain unresolved original goals."
+      },
+      "fingerprint": "86041367554356e072de64d2f3096a25c5e0daf6b356822d7e9eb7b94e1cd734",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Scoped reanalysis report delivered: erdos\\REPORT.zh-CN.md; SHA256=c492870f2e7dd24d74d862e42d0e9ac729c5811ad7278574d8fe29153c2bd15b. For n=24t+1,t>=1,x=6t+1,b=nx: greedy completion exists iff b has a prime factor q=2 mod3. Necessity: (3y-b)(3z-b)=b^2 has positive factors, the first 2 mod3; if all primes of b are 1 mod3 this is impossible. Sufficiency: y=b(q+1)/(3q),z=q*y are integral, positive, and x<y<z since n>=25 and odd b forces q>=5. The q=5 subfamily is n=120s+97, x=30s+25, y=2n(6s+5), z=10n(6s+5), s>=0. General reasoning is a written proof, not a formal certificate or human-reviewed result. Independent finite audit: 416 cases,275 greedy successes,141 obstructions,zero criterion mismatches. Unrestricted finite replay exactly matches the old artifact hash and gives 9998 witnesses. Original conjecture unresolved; novelty not audited. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "80b98cb9f6c1fa56a3e0718e43f20f633089272586e15a74fc1a58711697e18a",
+      "created": 1788848983.791566
+    }
+  ],
+  "assets": [],
+  "events": [
+    {
+      "id": 1,
+      "created": 1788847783.6039057,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 0, \"tool\": \"note\"}"
+    },
+    {
+      "id": 2,
+      "created": 1788847818.2045105,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 1, \"tool\": \"counterexample\"}"
+    },
+    {
+      "id": 3,
+      "created": 1788847819.7280378,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 2, \"tool\": \"identity\"}"
+    },
+    {
+      "id": 4,
+      "created": 1788847952.053316,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 3, \"tool\": \"identity\"}"
+    },
+    {
+      "id": 5,
+      "created": 1788847953.27795,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 4, \"tool\": \"identity\"}"
+    },
+    {
+      "id": 6,
+      "created": 1788847954.4226236,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 5, \"tool\": \"identity\"}"
+    },
+    {
+      "id": 7,
+      "created": 1788848983.6289515,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 6, \"tool\": \"note\"}"
+    },
+    {
+      "id": 8,
+      "created": 1788848983.779399,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 7, \"tool\": \"finish\"}"
+    }
+  ],
+  "warning": "Local audit record, not a signed attestation. Case verdicts are not updated. Review translation and register evidence through existing case/release gates."
+}

@@ -1,0 +1,46 @@
+{
+  "id": 14,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "All six legacy result dictionaries exactly reproduce. All four frozen exploratory extension cells completed: Gaussian L8=.8566,L25=.9160; t3 L8=.8548,L25=.9172, each 5000 replications and n=2000,phi=.8. Finite-variance innovation CLT, negligible endpoints and fixed-lag ergodic covariance consistency yield coverage limit 2Phi(1.96sqrt(rho_L))-1, rho_L=1-2phi(1-phi^(L+1))/((L+1)(1-phi^2)). At phi=.8 limits are .8619119018484576 for L8 and .925769387921012 for L25. The t3 argument uses finite second moments, not nonexistent fourth moments. Empirical MC SE, marginal Wilson and approximate eight-comparison Bonferroni-Wilson intervals are in uncertainty.json. No paired indicators were retained, so no paired test is claimed. General argument remains prose; simulation does not prove applicability.\nArtifacts: {\"replication-check.json\": \"ce142101ee9aae44476877750fdc2dccd60a4cac7b795a22b4adc773d096c8ca\", \"uncertainty.json\": \"8c59b301684b6cdd2d650ad2bf136e28690b7971b4e9bdce4efb3bcc83ff51e8\", \"extension-plan.json\": \"6baa1b797df9610886784a92aa630ec574e3449722b9e72d71dac209113fe824\"}"
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "falsifier": "Recheck exact claims against artifacts; a changed hash, wrong domain or missing analytic assumption invalidates the associated conclusion.",
+    "rationale": "Integrate the observed results and precise limitations into the live Agent record."
+  },
+  "fingerprint": "13616136cd929f59613c9b55d6db0b844e201990a426617d40fe1c7b138b806d",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "All six legacy result dictionaries exactly reproduce. All four frozen exploratory extension cells completed: Gaussian L8=.8566,L25=.9160; t3 L8=.8548,L25=.9172, each 5000 replications and n=2000,phi=.8. Finite-variance innovation CLT, negligible endpoints and fixed-lag ergodic covariance consistency yield coverage limit 2Phi(1.96sqrt(rho_L))-1, rho_L=1-2phi(1-phi^(L+1))/((L+1)(1-phi^2)). At phi=.8 limits are .8619119018484576 for L8 and .925769387921012 for L25. The t3 argument uses finite second moments, not nonexistent fourth moments. Empirical MC SE, marginal Wilson and approximate eight-comparison Bonferroni-Wilson intervals are in uncertainty.json. No paired indicators were retained, so no paired test is claimed. General argument remains prose; simulation does not prove applicability.\nArtifacts: {\"replication-check.json\": \"ce142101ee9aae44476877750fdc2dccd60a4cac7b795a22b4adc773d096c8ca\", \"uncertainty.json\": \"8c59b301684b6cdd2d650ad2bf136e28690b7971b4e9bdce4efb3bcc83ff51e8\", \"extension-plan.json\": \"6baa1b797df9610886784a92aa630ec574e3449722b9e72d71dac209113fe824\"}",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "6224be6c38ab99ff105a8bed7878678c555bd17d7c980edee258055e558f6fd8",
+  "created": 1788848984.2918553
+}

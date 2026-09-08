@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Resume the unresolved Li equation (14) subtask, not a fresh purported proof of Goldbach. Audit hashes and exact arithmetic of the stored stage-1 interval and its 494 contribution rows. Verify the D-free change-of-variable algebra and boundary conditions. Determine whether precision or Hessian enclosure dominates. This is independent checking of recorded arithmetic, not a complete independent validation of its analytic interval bounds."
+      },
+      "tool": "note"
+    },
+    "evidence": [],
+    "falsifier": "Reject a conclusion that exceeds its quantifiers, statistical design or verified source scope.",
+    "rationale": "Freeze the research scope before executing new checks."
+  },
+  "fingerprint": "8f409bbb0a47b2f56de24ef0028dcfb8b3883448abf70523fd602aeae981a32d",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Resume the unresolved Li equation (14) subtask, not a fresh purported proof of Goldbach. Audit hashes and exact arithmetic of the stored stage-1 interval and its 494 contribution rows. Verify the D-free change-of-variable algebra and boundary conditions. Determine whether precision or Hessian enclosure dominates. This is independent checking of recorded arithmetic, not a complete independent validation of its analytic interval bounds.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "81e5cb71e6b58f50a1dc1359ae73e963c39003473e7f1529394cddcf63c7d89a",
+  "created": 1788847783.7819269
+}

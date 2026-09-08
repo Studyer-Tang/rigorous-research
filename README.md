@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**Live research reanalysis (2026-09-08):** [Reports and reproducibility notes](research-studies/reanalysis-20260908/PUBLICATION.md) cover an Erdős–Straus greedy-completion criterion, AR(1) fixed-bandwidth coverage limits and experiments, and a Goldbach integral subtask audit with measured local refinement. Original conjectures remain unresolved; no novelty or fully autonomous discovery claim is made.
+
 **1.11 adds a runnable research Agent:** Codex-hosted reasoning and unattended API execution share a persistent kernel, mathematical certificate checks, statistical tools and a local workbench. It records failed attempts, feeds results back into the next step, and keeps report delivery separate from proof and original-goal acceptance. The model remains the main source of reasoning ability; architecture supplies tools, memory and enforcement, not guaranteed discoveries.
 
 ```text

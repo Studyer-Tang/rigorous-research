@@ -1,0 +1,35 @@
+{
+  "id": 6,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "The independent recorded-arithmetic audit passed for 494 rows and all recorded dependency hashes. Hessian contributes 99.8989333% of the symmetric radius. The old nominal sum is -0.239605017712..., below required -0.202861608442..., so merely shrinking a nonnegative symmetric radius at that fixed center can never satisfy the lower-bound target. Do not infer that the true integral is below threshold. Audit artifact SHA256=61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1. Next finite experiment: recompute the widest stored triangle exactly, then split into four children and recompute centers, moments and Hessian bounds at unchanged 96-bit prefix precision. Time budget 180 seconds. This shared-producer probe is not an independent analytic certificate."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      4,
+      5
+    ],
+    "falsifier": "If baseline fails exact reproduction, stop the comparison; if subdivision fails to reduce radius, report that failure.",
+    "rationale": "Use the real error audit to select a targeted geometric refinement instead of more prefix precision."
+  },
+  "fingerprint": "587b144d6c8829fde4857f4fb3c38365ae8ea645e2a88da0113b1442f25cfa5f",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "The independent recorded-arithmetic audit passed for 494 rows and all recorded dependency hashes. Hessian contributes 99.8989333% of the symmetric radius. The old nominal sum is -0.239605017712..., below required -0.202861608442..., so merely shrinking a nonnegative symmetric radius at that fixed center can never satisfy the lower-bound target. Do not infer that the true integral is below threshold. Audit artifact SHA256=61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1. Next finite experiment: recompute the widest stored triangle exactly, then split into four children and recompute centers, moments and Hessian bounds at unchanged 96-bit prefix precision. Time budget 180 seconds. This shared-producer probe is not an independent analytic certificate.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "2ff454c46a16c4a32121aa4b0fecd20e239d8995e7925ebcef6a800920905039",
+  "created": 1788848385.3581696
+}

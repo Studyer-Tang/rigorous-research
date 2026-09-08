@@ -1,0 +1,7 @@
+{"time": "2026-09-08T06:08:47.602262+00:00", "event": "workspace-initialized", "domain": "statistics"}
+{"time": "2026-09-08T06:09:43.582044+00:00", "event": "task-added", "task_id": "W001"}
+{"time": "2026-09-08T06:09:43.589193+00:00", "event": "task-added", "task_id": "W002"}
+{"time": "2026-09-08T06:24:27.947739+00:00", "event": "run-recorded", "run_id": "R001", "task_id": "W002", "returncode": 0}
+{"time": "2026-09-08T06:29:44.481834+00:00", "event": "task-updated", "task_id": "W001", "status": "DONE"}
+{"time": "2026-09-08T06:29:44.648891+00:00", "event": "task-updated", "task_id": "W002", "status": "DONE"}
+{"time": "2026-09-08T06:29:44.788498+00:00", "event": "stage-updated", "stage": "SYNTHESIS"}

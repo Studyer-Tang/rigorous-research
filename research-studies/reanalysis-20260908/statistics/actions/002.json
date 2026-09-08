@@ -1,0 +1,83 @@
+{
+  "id": 2,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "lhs": "1+2*((8*r+7*r**2+6*r**3+5*r**4+4*r**5+3*r**6+2*r**7+r**8)/9)",
+        "rhs": "(1+r)/(1-r)-2*r*(1-r**9)/(9*(1-r)**2)",
+        "symbols": [
+          "r"
+        ]
+      },
+      "tool": "identity"
+    },
+    "evidence": [
+      1
+    ],
+    "falsifier": "Reject if finite weighted autocovariance sum differs from closed form; exclude r=1.",
+    "rationale": "Independently check the population Bartlett long-run-variance factor for eight fixed lags."
+  },
+  "fingerprint": "76673643c13b02016024d907b218139bb8b1a1484d41dcc80d87d3c9d6332583",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "assumptions": {
+        "integer": [],
+        "positive": [],
+        "real": []
+      },
+      "backend": "sympy",
+      "backend_version": "1.14.0",
+      "claim": {
+        "lhs": "1+2*((8*r+7*r**2+6*r**3+5*r**4+4*r**5+3*r**6+2*r**7+r**8)/9)",
+        "rhs": "(1+r)/(1-r)-2*r*(1-r**9)/(9*(1-r)**2)",
+        "symbols": [
+          "r"
+        ]
+      },
+      "classification": "exact-rational-on-domain",
+      "created_at": "2026-09-08T06:10:21.356948+00:00",
+      "domain_analysis_complete": true,
+      "domain_restrictions": [
+        "1 - r != 0",
+        "9*(r - 1)**2 != 0"
+      ],
+      "exceptional_set": "1 - r = 0 or 9*(r - 1)**2 = 0",
+      "identity_established": true,
+      "normalized": {
+        "denominator": "9*(r - 1)**2",
+        "difference": "(2*r*(1 - r)**2*(r**7 + 2*r**6 + 3*r**5 + 4*r**4 + 5*r**3 + 6*r**2 + 7*r + 8) + 2*r*(1 - r**9) + 9*(1 - r)**2 - 9*(1 - r)*(r + 1))/(9*(1 - r)**2)",
+        "lhs": "2*((r**8 + (2*r**7 + (3*r**6 + (4*r**5 + (5*r**4 + (6*r**3 + (7*r**2 + 8*r)))))))/9) + 1",
+        "numerator": "0",
+        "rhs": "-(2*r)*(1 - r**9)/(9*(1 - r)**2) + (r + 1)/(1 - r)"
+      },
+      "numerator_coefficients": [
+        "0"
+      ],
+      "polynomial_numerator": true,
+      "recommended_evidence_role": "decisive",
+      "schema_version": 1,
+      "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+    },
+    "elapsed_seconds": 1.188,
+    "independent_check": {
+      "certificate_hash": "5fae187847d0cf7f8374cc321fbd49f2d7978cc3ce71ad30375b1f4091589580",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    }
+  },
+  "result_hash": "979519e1a55f1fb4825eaa0021244a337902c760c9ae1c12ae6484ff146f052e",
+  "created": 1788847820.7842216
+}

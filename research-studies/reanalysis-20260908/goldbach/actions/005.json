@@ -1,0 +1,90 @@
+{
+  "id": 5,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "lhs": "(L*U*(U-L)/(L+(U-L)*t)**2)/(L*U/(L+(U-L)*t))**2",
+        "rhs": "1/L-1/U",
+        "symbols": [
+          "L",
+          "U",
+          "t"
+        ]
+      },
+      "tool": "identity"
+    },
+    "evidence": [
+      4
+    ],
+    "falsifier": "A nonzero difference invalidates the change-of-variable weight; domain L,U>0 is required.",
+    "rationale": "Verify the Jacobian cancellation -z_prime/z^2 that gives the positive weight."
+  },
+  "fingerprint": "99b15416f5356009f789633a9c4e87ad18fb6e5f7167717e28131e5e71e0fe75",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "assumptions": {
+        "integer": [],
+        "positive": [],
+        "real": []
+      },
+      "backend": "sympy",
+      "backend_version": "1.14.0",
+      "claim": {
+        "lhs": "(L*U*(U-L)/(L+(U-L)*t)**2)/(L*U/(L+(U-L)*t))**2",
+        "rhs": "1/L-1/U",
+        "symbols": [
+          "L",
+          "U",
+          "t"
+        ]
+      },
+      "classification": "exact-rational-on-domain",
+      "created_at": "2026-09-08T06:12:37.353531+00:00",
+      "domain_analysis_complete": true,
+      "domain_restrictions": [
+        "(L*t - L - U*t)**2 != 0",
+        "-L*t + L + U*t != 0",
+        "L != 0",
+        "L**2*U**2/(L*t - L - U*t)**2 != 0",
+        "U != 0"
+      ],
+      "exceptional_set": "(L*t - L - U*t)**2 = 0 or -L*t + L + U*t = 0 or L = 0 or L**2*U**2/(L*t - L - U*t)**2 = 0 or U = 0",
+      "identity_established": true,
+      "normalized": {
+        "denominator": "1",
+        "difference": "0",
+        "lhs": "(((L*U)*(-L + U))/((L + t*(-L + U))**2))/(((L*U)/(L + t*(-L + U)))**2)",
+        "numerator": "0",
+        "rhs": "-1/U + 1/L"
+      },
+      "numerator_coefficients": [
+        "0"
+      ],
+      "polynomial_numerator": true,
+      "recommended_evidence_role": "decisive",
+      "schema_version": 1,
+      "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+    },
+    "elapsed_seconds": 1.172,
+    "independent_check": {
+      "certificate_hash": "becc07fdc548382567aad5670a96445b5bec0dca3a7818f4452447b8bcd86ea4",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    }
+  },
+  "result_hash": "a1866bcaf4f1fded68c03194162d1b58a203a41a9068298ad25ced319b844227",
+  "created": 1788847956.7997065
+}

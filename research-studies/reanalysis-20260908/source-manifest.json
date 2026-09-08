@@ -1,0 +1,51 @@
+{
+  "sources": [
+    {
+      "path": "examples/erdos-straus/REPORT.md",
+      "sha256": "3faa1076adb96b23832a7a8c641aa7329fc484279e5b39aedb025ed944edf99f"
+    },
+    {
+      "path": "examples/erdos-straus/artifacts/finite-search.json",
+      "sha256": "0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab"
+    },
+    {
+      "path": "examples/dependence-coverage/plan.json",
+      "sha256": "971a0e10ae9b2169aca3656595b36b8eac5709f3555eec2d52343bece7c911e2"
+    },
+    {
+      "path": "examples/dependence-coverage/coverage-grid.json",
+      "sha256": "a96f46261de92b956ee2f58a01920dd9f7e20c1cb3a332e7123555940263b841"
+    },
+    {
+      "path": "examples/dependence-coverage/run_grid.py",
+      "sha256": "358c5d52df16f442b9786e0ab8b774cfe3675ee3b565d22ee3741eeacf4de828"
+    },
+    {
+      "path": "scripts/statistics_backend.py",
+      "sha256": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e"
+    },
+    {
+      "path": "cases/goldbach-conjecture/workspace.json",
+      "sha256": "6028731f70a337ecce855424a17c6c0bc454d9a05f5b941f0f097c6e773fb7a5"
+    },
+    {
+      "path": "cases/goldbach-conjecture/case.json",
+      "sha256": "d5a635e543598edd41fd19f6e4727028baa090296c6045dcb0493e67a2a33166"
+    },
+    {
+      "path": "cases/goldbach-conjecture/agent-drafts/li-equation14-d-free-positive-weight-stage1-report.md",
+      "sha256": "96b0f52aa42d1e7a4f1de17070f78f23a95f71736e87eb3e935f596361828a67"
+    },
+    {
+      "path": "cases/goldbach-conjecture/agent-drafts/li-equation14-d-free-positive-weight-stage1-local-smoke.json",
+      "sha256": "b6715192f00c8131c6cc5b339677e53b22323edab1580360d9ffd74445844ff5"
+    },
+    {
+      "path": "cases/goldbach-conjecture/artifacts/certify_li_equation14_d_free_positive_weight_stage1.py",
+      "sha256": "055807224aa43d93a3c691f53f1c546290422cce511fd723595d02ae96aae6e8"
+    }
+  ],
+  "mode": "live-codex-hosted",
+  "old_files_modified": false,
+  "public_novelty_audit": "not undertaken in this reanalysis"
+}

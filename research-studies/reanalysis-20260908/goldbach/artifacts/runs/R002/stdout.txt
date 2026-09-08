@@ -1,0 +1,91 @@
+{
+  "scope": "Independent arithmetic/provenance audit of stored interval rows, not a new analytic integral certificate",
+  "source_sha256": "b6715192f00c8131c6cc5b339677e53b22323edab1580360d9ffd74445844ff5",
+  "triangles_checked": 494,
+  "all_local_radius_and_interval_equalities": true,
+  "aggregate_values_inside_independently_directed_sums": {
+    "nominal_in_recomputed_enclosure": true,
+    "radius_in_recomputed_enclosure": true,
+    "lower_in_recomputed_enclosure": true,
+    "upper_in_recomputed_enclosure": true,
+    "g_prefix_model_radius": true,
+    "center_derivative_panel_radius": true,
+    "weighted_moment_radius": true,
+    "coefficient_moment_interaction_radius": true,
+    "taylor_hessian_remainder_radius": true
+  },
+  "accumulation_bits": 128,
+  "maximum_aggregate_enclosure_width": "247/170141183460469231731687303715884105728",
+  "legacy_directed_interval": [
+    -61460.244271206124,
+    61459.7650611707
+  ],
+  "required_lower": -0.20286160844205192,
+  "nominal_enclosure": [
+    -0.23960501771226894,
+    -0.23960501771226894
+  ],
+  "nominal_upper_below_required_lower": true,
+  "radius_components_upper_approx": {
+    "g_prefix_model_radius": 7.727217811315574e-13,
+    "center_derivative_panel_radius": 9.338157032639941,
+    "weighted_moment_radius": 0.7843460318833207,
+    "coefficient_moment_interaction_radius": 51.99308011889616,
+    "taylor_hessian_remainder_radius": 61397.889083004986
+  },
+  "hessian_radius_share_bounds_approx": [
+    0.9989893332497973,
+    0.9989893332497973
+  ],
+  "prefix_radius_share_upper_approx": 1.2572758256828809e-17,
+  "recorded_volumes_equal": true,
+  "identity_list_digest_matches": true,
+  "dependencies": [
+    {
+      "name": "certify_g1_taylor.py",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "certify_li_equation14_polytope_taylor.py",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "certify_li_equation14_fiber_primitive.py",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "certify_li_equation14_fiber_cancel_d.py",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "certify_li_equation14_fiber_cancel_d_taylor.py",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "certify_li_equation14_g_cell_model.py",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "certify_li_equation14_positive_weight_moments.py",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "li-equation14-certificate.json",
+      "matches_recorded_hash": true
+    },
+    {
+      "name": "certify_li_equation14_d_free_positive_weight_stage1.py",
+      "matches_recorded_hash": true
+    }
+  ],
+  "all_dependencies_match": true,
+  "original_goal": "INCONCLUSIVE",
+  "new_integral_bound_certified": false,
+  "limitations": [
+    "Per-cell analytic bounds, geometric cells and g-prefix enclosures were not independently regenerated.",
+    "Aggregate agreement is certified within the stated dyadic enclosure, not asserted as exact equality of enormous global fractions.",
+    "The nominal sum is not a certified point estimate; its being below threshold does not prove the true integral below threshold."
+  ],
+  "elapsed_seconds": 0.7820000000065193,
+  "auditor_sha256": "f827d345fdff21d3b2ef4694ccc87cef9c6f3e1ccdaf960ab15beb3d4fd815b7"
+}

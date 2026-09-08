@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "workspace_id": "statistics",
+  "domain": "statistics",
+  "question": "Reproduce the previous AR(1) mean-interval coverage study and determine whether increasing sample size with eight fixed Newey-West lags restores nominal coverage, under the stated Gaussian and Student-t3 designs.",
+  "stage": "SYNTHESIS",
+  "created_at": "2026-09-08T06:08:47.602262+00:00",
+  "updated_at": "2026-09-08T06:29:44.788498+00:00",
+  "case_file": "case.json",
+  "tasks": [
+    {
+      "id": "W001",
+      "title": "Freeze old evidence and research scope",
+      "kind": "definition",
+      "acceptance": "Hash old inputs and state original versus subtask goals",
+      "depends_on": [],
+      "deliverable": "../source-manifest.json",
+      "status": "DONE",
+      "note": "Scoped deliverable exists and was checked; original research claim remains unresolved."
+    },
+    {
+      "id": "W002",
+      "title": "Reanalyse the scoped mathematical or statistical question",
+      "kind": "analysis",
+      "acceptance": "Keep exact checks, failed routes, assumptions and unresolved obligations",
+      "depends_on": [],
+      "deliverable": "REPORT.zh-CN.md",
+      "status": "DONE",
+      "note": "Scoped deliverable exists and was checked; original research claim remains unresolved."
+    }
+  ],
+  "sources": [],
+  "runs": [
+    {
+      "id": "R001",
+      "task_id": "W002",
+      "label": "complete-monte-carlo-uncertainty",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/reanalysis-20260908/statistics/summarize.py"
+      ],
+      "cwd": "../../..",
+      "started_at": "2026-09-08T06:24:27.754698+00:00",
+      "finished_at": "2026-09-08T06:24:27.837682+00:00",
+      "returncode": 0,
+      "process_returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R001/stdout.txt",
+      "stderr": "artifacts/runs/R001/stderr.txt",
+      "outputs": [
+        {
+          "file": "uncertainty.json",
+          "sha256": "8c59b301684b6cdd2d650ad2bf136e28690b7971b4e9bdce4efb3bcc83ff51e8"
+        },
+        {
+          "file": "uncertainty-table.md",
+          "sha256": "2ea5079450312e2d576cd9eaa2127919fecfe1c36a56cc4e0dd08a722157a588"
+        }
+      ],
+      "stdout_sha256": "7686cb48b36aa9653d28bdd19e298c7f2deff2c1214256b6075811b94f65b3ce",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "release_policy": {
+    "plan_seal_required": true,
+    "data_snapshot_required": false,
+    "independent_review_required": true
+  },
+  "plan_seal": "",
+  "data_snapshots": [],
+  "review_adjudication": ""
+}

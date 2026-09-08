@@ -1,0 +1,98 @@
+{
+  "id": 2,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "lhs": "D/((1-t)/U+t/L)+e",
+        "rhs": "((1-t)*(e+D/U)+t*(e+D/L))",
+        "symbols": [
+          "D",
+          "e",
+          "t",
+          "U",
+          "L"
+        ]
+      },
+      "tool": "identity"
+    },
+    "evidence": [
+      1
+    ],
+    "falsifier": "A counterexample shows this proposed transformed integrand is incorrectly written.",
+    "rationale": "Attack a potentially mistaken substitution: z must be reciprocal-affine, not affine in s."
+  },
+  "fingerprint": "19f7bc5f0f1dc4b7189e7d2c9d9d131de0399f5b01cbfbdc417041136b892740",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "assumptions": {
+        "integer": [],
+        "positive": [],
+        "real": []
+      },
+      "backend": "sympy",
+      "backend_version": "1.14.0",
+      "claim": {
+        "lhs": "D/((1-t)/U+t/L)+e",
+        "rhs": "((1-t)*(e+D/U)+t*(e+D/L))",
+        "symbols": [
+          "D",
+          "e",
+          "t",
+          "U",
+          "L"
+        ]
+      },
+      "classification": "not-established",
+      "created_at": "2026-09-08T06:10:22.569206+00:00",
+      "domain_analysis_complete": true,
+      "domain_restrictions": [
+        "-(L*t - L - U*t)/(L*U) != 0",
+        "L != 0",
+        "U != 0"
+      ],
+      "exceptional_set": "-(L*t - L - U*t)/(L*U) = 0 or L = 0 or U = 0",
+      "identity_established": false,
+      "normalized": {
+        "denominator": "-L*U*(L*t - L - U*t)",
+        "difference": "(D*L**2*U**2 + L*U*e*(L*(1 - t) + U*t) - L*(1 - t)*(D + U*e)*(L*(1 - t) + U*t) - U*t*(D + L*e)*(L*(1 - t) + U*t))/(L*U*(L*(1 - t) + U*t))",
+        "lhs": "D/((1 - t)/U + t/L) + e",
+        "numerator": "-D*(-L*U + L*t - L - U*t)*(L*U + L*t - L - U*t)",
+        "rhs": "t*(D/L + e) + (1 - t)*(D/U + e)"
+      },
+      "numerator_coefficients": [
+        "-1",
+        "2",
+        "-1",
+        "-2",
+        "2",
+        "1",
+        "-1"
+      ],
+      "polynomial_numerator": true,
+      "recommended_evidence_role": "diagnostic",
+      "schema_version": 1,
+      "warning": "A general SymPy simplification is diagnostic unless reduced to an exact polynomial or rational identity with its denominator domain recorded."
+    },
+    "elapsed_seconds": 1.188,
+    "independent_check": {
+      "certificate_hash": "216b1322e4df19ea35cd0afe04de436995c7bf5789ed0ffc025c04926245d1b2",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+      "status": "INCONCLUSIVE"
+    },
+    "status": "INCONCLUSIVE",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    }
+  },
+  "result_hash": "d0eb9bf86d1d0a38fd6c041d5bd3733f9ace414b2f1bc06630aa6390b70464e0",
+  "created": 1788847822.0101833
+}

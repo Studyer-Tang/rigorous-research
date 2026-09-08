@@ -1,0 +1,16 @@
+{
+  "classification": "Exploratory follow-up to an already observed legacy experiment; fixed before new runs, not an untouched preregistration",
+  "estimand": "Repeated-sample probability that a normal-critical-value interval covers mean zero",
+  "original_replay": {"n":120,"replications":5000,"lags":8,"phi":[0,0.4,0.8],"innovations":["gaussian","student-t3"],"seeds_in_order":[20260830,20260831,20260832,20260833,20260834,20260835]},
+  "extension_cells": [
+    {"n":2000,"phi":0.8,"replications":5000,"hac_lags":8,"distribution":"gaussian","seed":2026090801},
+    {"n":2000,"phi":0.8,"replications":5000,"hac_lags":25,"distribution":"gaussian","seed":2026090801},
+    {"n":2000,"phi":0.8,"replications":5000,"hac_lags":8,"distribution":"student-t3","seed":2026090802},
+    {"n":2000,"phi":0.8,"replications":5000,"hac_lags":25,"distribution":"student-t3","seed":2026090802}
+  ],
+  "initialization": "Original implementation: X starts at zero, 100 burn-in steps; finite samples are approximately, not exactly, stationary. All cells retained.",
+  "comparison": "Same seed within innovation pairs couples the samples for the two bandwidths. The backend does not retain paired indicator counts, so no paired significance claim will be made.",
+  "uncertainty": "Report empirical Monte Carlo SE and 95% Wilson intervals for each marginal coverage. For simultaneous statements across the 8 extension method-cell coverages, also report Bonferroni-Wilson intervals; these remain approximations.",
+  "theory_to_check": "For fixed L and stationary AR(1), variance ratio rho_L=1-2*phi*(1-phi^(L+1))/((L+1)*(1-phi^2)); limiting interval coverage is 2*Phi(1.96*sqrt(rho_L))-1. More observations alone do not remove fixed bandwidth truncation bias.",
+  "budgets": "10 coverage actions, each at most 120 seconds. No unrecorded retry or selective omission. No claim of real-population validity or research novelty."
+}

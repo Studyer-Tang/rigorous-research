@@ -1,3 +1,6 @@
 # Keep checksummed regression evidence identical across Windows and Linux.
 /evals/fixtures/** text eol=lf
 /examples/erdos-straus/** text eol=lf
+# Preserve the original bytes of the published research audit archive.
+/research-studies/reanalysis-20260908/** -text
+/cases/goldbach-conjecture/** -text

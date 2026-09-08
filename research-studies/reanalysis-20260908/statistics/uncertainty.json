@@ -1,0 +1,165 @@
+{
+  "scope": "All eight marginal method-cell coverages; approximate intervals, no paired test",
+  "rows": [
+    {
+      "action": 10,
+      "innovation": "gaussian",
+      "lags": 8,
+      "method": "iid_normal",
+      "replications": 5000,
+      "covered": 2425,
+      "coverage": 0.485,
+      "empirical_mc_se": 0.007067885115082163,
+      "wilson95": [
+        0.47116402890040254,
+        0.4988590021579492
+      ],
+      "bonferroni_wilson8": [
+        0.4657106129721785,
+        0.5043341806813931
+      ]
+    },
+    {
+      "action": 10,
+      "innovation": "gaussian",
+      "lags": 8,
+      "method": "newey_west_normal",
+      "replications": 5000,
+      "covered": 4283,
+      "coverage": 0.8566,
+      "empirical_mc_se": 0.004956539922163444,
+      "wilson95": [
+        0.8466114693560794,
+        0.8660410056167059
+      ],
+      "bonferroni_wilson8": [
+        0.8425142039342544,
+        0.8696209016081673
+      ]
+    },
+    {
+      "action": 11,
+      "innovation": "gaussian",
+      "lags": 25,
+      "method": "iid_normal",
+      "replications": 5000,
+      "covered": 2425,
+      "coverage": 0.485,
+      "empirical_mc_se": 0.007067885115082163,
+      "wilson95": [
+        0.47116402890040254,
+        0.4988590021579492
+      ],
+      "bonferroni_wilson8": [
+        0.4657106129721785,
+        0.5043341806813931
+      ]
+    },
+    {
+      "action": 11,
+      "innovation": "gaussian",
+      "lags": 25,
+      "method": "newey_west_normal",
+      "replications": 5000,
+      "covered": 4580,
+      "coverage": 0.916,
+      "empirical_mc_se": 0.0039228561023825475,
+      "wilson95": [
+        0.9079882987757564,
+        0.9233729732059563
+      ],
+      "bonferroni_wilson8": [
+        0.9046423546464479,
+        0.9261153680278298
+      ]
+    },
+    {
+      "action": 12,
+      "innovation": "student-t3",
+      "lags": 8,
+      "method": "iid_normal",
+      "replications": 5000,
+      "covered": 2409,
+      "coverage": 0.4818,
+      "empirical_mc_se": 0.0070663818181584265,
+      "wilson95": [
+        0.46796942856090396,
+        0.4956585157898963
+      ],
+      "bonferroni_wilson8": [
+        0.46251949232373685,
+        0.5011348573092635
+      ]
+    },
+    {
+      "action": 12,
+      "innovation": "student-t3",
+      "lags": 8,
+      "method": "newey_west_normal",
+      "replications": 5000,
+      "covered": 4274,
+      "coverage": 0.8548,
+      "empirical_mc_se": 0.004982307898956065,
+      "wilson95": [
+        0.8447624248907378,
+        0.8642928138090497
+      ],
+      "bonferroni_wilson8": [
+        0.8406466438682957,
+        0.8678938369125545
+      ]
+    },
+    {
+      "action": 13,
+      "innovation": "student-t3",
+      "lags": 25,
+      "method": "iid_normal",
+      "replications": 5000,
+      "covered": 2409,
+      "coverage": 0.4818,
+      "empirical_mc_se": 0.0070663818181584265,
+      "wilson95": [
+        0.46796942856090396,
+        0.4956585157898963
+      ],
+      "bonferroni_wilson8": [
+        0.46251949232373685,
+        0.5011348573092635
+      ]
+    },
+    {
+      "action": 13,
+      "innovation": "student-t3",
+      "lags": 25,
+      "method": "newey_west_normal",
+      "replications": 5000,
+      "covered": 4586,
+      "coverage": 0.9172,
+      "empirical_mc_se": 0.003897285208962772,
+      "wilson95": [
+        0.909237394290046,
+        0.9245220352069985
+      ],
+      "bonferroni_wilson8": [
+        0.905910208661511,
+        0.9272439305204809
+      ]
+    }
+  ],
+  "fixed_lag_limits": [
+    {
+      "lags": 8,
+      "variance_ratio_exact": "18112777/31640625",
+      "variance_ratio": 0.5724531990123457,
+      "limiting_coverage": 0.8619119018484576
+    },
+    {
+      "lags": 25,
+      "variance_ratio_exact": "3214029679397103901/3874301910400390625",
+      "variance_ratio": 0.8295764640254764,
+      "limiting_coverage": 0.925769387921012
+    }
+  ],
+  "iid_limit": 0.48645859257746515,
+  "ideal_critical_value_coverage": 0.9500042097035593
+}

@@ -1,0 +1,67 @@
+{
+  "id": 11,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "distribution": "gaussian",
+        "hac_lags": 25,
+        "n": 2000,
+        "phi": 0.8,
+        "replications": 5000,
+        "seed": 2026090801
+      },
+      "tool": "coverage"
+    },
+    "evidence": [
+      1,
+      2,
+      9
+    ],
+    "falsifier": "Compare with predicted fixed-bandwidth limit; do not infer population validity from simulated agreement.",
+    "rationale": "Run the frozen n=2000 extension and retain this cell regardless of outcome."
+  },
+  "fingerprint": "ee8fbf4f1e6d8025731a5ba0637f81056cd4fdc69526810fec88a899c81a77ee",
+  "execution": "SUCCEEDED",
+  "result": {
+    "assumptions_verified": false,
+    "elapsed_seconds": 28.797,
+    "result": {
+      "dgp": {
+        "innovation": "gaussian",
+        "model": "stationary AR(1)",
+        "phi": 0.8,
+        "true_mean": 0.0
+      },
+      "kind": "coverage-simulation",
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.485,
+          "mean_width": 0.14576655309901107
+        },
+        "newey_west_normal": {
+          "coverage": 0.916,
+          "lags": 25,
+          "mean_width": 0.3946003076445573
+        }
+      },
+      "monte_carlo_se_at_target": 0.0030822070014844883,
+      "replications": 5000,
+      "sample_size": 2000,
+      "schema_version": 1,
+      "seed": 2026090801,
+      "target_coverage": 0.95
+    },
+    "status": "DIAGNOSTIC",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "warning": "Calculations do not prove applicability, causal identification, or population claims."
+  },
+  "result_hash": "c5d017498c42a55db85a208d979f8e5a792e942bebfa5c07e22d18bec573a3b0",
+  "created": 1788848006.7780004
+}

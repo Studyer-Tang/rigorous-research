@@ -1,0 +1,37 @@
+{
+  "id": 7,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "For n=24t+1,t>=1,x=6t+1,b=nx: greedy completion exists iff b has a prime factor q=2 mod3. Necessity: (3y-b)(3z-b)=b^2 has positive factors, the first 2 mod3; if all primes of b are 1 mod3 this is impossible. Sufficiency: y=b(q+1)/(3q),z=q*y are integral, positive, and x<y<z since n>=25 and odd b forces q>=5. The q=5 subfamily is n=120s+97, x=30s+25, y=2n(6s+5), z=10n(6s+5), s>=0. General reasoning is a written proof, not a formal certificate or human-reviewed result. Independent finite audit: 416 cases,275 greedy successes,141 obstructions,zero criterion mismatches. Unrestricted finite replay exactly matches the old artifact hash and gives 9998 witnesses. Original conjecture unresolved; novelty not audited.\nArtifacts: {\"greedy-audit.json\": \"9b568ea2577d08374e3625a2913057bee74a992557950a290b607a97ea302b17\", \"unrestricted-replay.json\": \"0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab\", \"unrestricted-check.json\": \"c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2\"}"
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "falsifier": "Recheck exact claims against artifacts; a changed hash, wrong domain or missing analytic assumption invalidates the associated conclusion.",
+    "rationale": "Integrate the observed results and precise limitations into the live Agent record."
+  },
+  "fingerprint": "3ea047456029fdab49d5e1e9461fbc167dc526cf6b8fb193cc54d7281a0e5dcc",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "For n=24t+1,t>=1,x=6t+1,b=nx: greedy completion exists iff b has a prime factor q=2 mod3. Necessity: (3y-b)(3z-b)=b^2 has positive factors, the first 2 mod3; if all primes of b are 1 mod3 this is impossible. Sufficiency: y=b(q+1)/(3q),z=q*y are integral, positive, and x<y<z since n>=25 and odd b forces q>=5. The q=5 subfamily is n=120s+97, x=30s+25, y=2n(6s+5), z=10n(6s+5), s>=0. General reasoning is a written proof, not a formal certificate or human-reviewed result. Independent finite audit: 416 cases,275 greedy successes,141 obstructions,zero criterion mismatches. Unrestricted finite replay exactly matches the old artifact hash and gives 9998 witnesses. Original conjecture unresolved; novelty not audited.\nArtifacts: {\"greedy-audit.json\": \"9b568ea2577d08374e3625a2913057bee74a992557950a290b607a97ea302b17\", \"unrestricted-replay.json\": \"0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab\", \"unrestricted-check.json\": \"c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2\"}",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "4f153b524014cf14c4b9eb15f64737418712a396802f6d2182ef9c2b69de5c0a",
+  "created": 1788848983.7514117
+}

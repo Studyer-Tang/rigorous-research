@@ -1,0 +1,30 @@
+{
+  "checked_n_range": [
+    25,
+    9985
+  ],
+  "step": 24,
+  "total": 416,
+  "greedy_success": 275,
+  "greedy_obstructions": 141,
+  "first_obstructions": [
+    49,
+    73,
+    169,
+    193,
+    241,
+    313,
+    361,
+    409,
+    433,
+    553,
+    601,
+    673
+  ],
+  "criterion_mismatches": 0,
+  "unrestricted_witnesses": 9998,
+  "original_conjecture": "INCONCLUSIVE",
+  "novelty": "NOT_ASSESSED",
+  "verification_scope": "Finite witnesses/obstructions only; the general criterion is justified separately in the written proof.",
+  "script_sha256": "29ec25e586b4260b4361cf462b74b9a33bbdbb60cfa848a6ef0f7e8bd5cd991f"
+}

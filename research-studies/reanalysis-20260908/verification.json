@@ -1,0 +1,163 @@
+{
+  "old_sources": [
+    {
+      "path": "examples/erdos-straus/REPORT.md",
+      "matches": true
+    },
+    {
+      "path": "examples/erdos-straus/artifacts/finite-search.json",
+      "matches": true
+    },
+    {
+      "path": "examples/dependence-coverage/plan.json",
+      "matches": true
+    },
+    {
+      "path": "examples/dependence-coverage/coverage-grid.json",
+      "matches": true
+    },
+    {
+      "path": "examples/dependence-coverage/run_grid.py",
+      "matches": true
+    },
+    {
+      "path": "scripts/statistics_backend.py",
+      "matches": true
+    },
+    {
+      "path": "cases/goldbach-conjecture/workspace.json",
+      "matches": true
+    },
+    {
+      "path": "cases/goldbach-conjecture/case.json",
+      "matches": true
+    },
+    {
+      "path": "cases/goldbach-conjecture/agent-drafts/li-equation14-d-free-positive-weight-stage1-report.md",
+      "matches": true
+    },
+    {
+      "path": "cases/goldbach-conjecture/agent-drafts/li-equation14-d-free-positive-weight-stage1-local-smoke.json",
+      "matches": true
+    },
+    {
+      "path": "cases/goldbach-conjecture/artifacts/certify_li_equation14_d_free_positive_weight_stage1.py",
+      "matches": true
+    }
+  ],
+  "all_old_sources_unchanged": true,
+  "unrestricted_replay_byte_identical": true,
+  "studies": {
+    "erdos": {
+      "workspace_errors": [],
+      "workspace_warnings": [],
+      "execution": "DELIVERED",
+      "objective_status": "UNRESOLVED",
+      "actions": 8,
+      "case_decision": {
+        "verdict": "OPEN",
+        "claim_id": "C001",
+        "reason": "",
+        "evidence_ids": [],
+        "limitations": "",
+        "reproduction": ""
+      }
+    },
+    "statistics": {
+      "workspace_errors": [],
+      "workspace_warnings": [],
+      "execution": "DELIVERED",
+      "objective_status": "UNRESOLVED",
+      "actions": 15,
+      "case_decision": {
+        "verdict": "OPEN",
+        "claim_id": "C001",
+        "reason": "",
+        "evidence_ids": [],
+        "limitations": "",
+        "reproduction": ""
+      }
+    },
+    "goldbach": {
+      "workspace_errors": [],
+      "workspace_warnings": [],
+      "execution": "DELIVERED",
+      "objective_status": "UNRESOLVED",
+      "actions": 8,
+      "case_decision": {
+        "verdict": "OPEN",
+        "claim_id": "C001",
+        "reason": "",
+        "evidence_ids": [],
+        "limitations": "",
+        "reproduction": ""
+      }
+    }
+  },
+  "artifact_sha256": {
+    "erdos\\actions\\001.json": "ea395e14c4880a64e2d73c309ed174b3610303388fa8e60e3caa87fd3df04a83",
+    "erdos\\actions\\002.json": "c1f58d69fcb63160fbf607bd4ba2c080c9079531bd8b7fcce8cd8bbbddc3db4e",
+    "erdos\\actions\\003.json": "880839cd34017a89dcf0440c1e1871d35f52e45ec39df4589f8982e0e740a8c7",
+    "erdos\\actions\\004.json": "abc2206b8661a6436e1e1bd18ab19cf432993195c286799baf755c849f82469a",
+    "erdos\\actions\\005.json": "71a9b4240948a5ba567545e3c51c2d0639a6470c10d9ba1f25f8bc534f4e75ac",
+    "erdos\\actions\\006.json": "49904af2fe98c5c7eb456f8e9bb0cafdbdfc9083f6a4c07a4dc6d7ba567784e1",
+    "erdos\\actions\\007.json": "4625f2d93a3dfb99902b449e82ca0beabf23b3e4d389f587f46b3b70f3542834",
+    "erdos\\actions\\008.json": "511f77a520a8df0ed6abbf681887060f009a8ee327ecd3240a7418a5504a006c",
+    "erdos\\case.json": "94e6a9e90e4cdbd07b79318a286ae9b20b2a07f44ac7438bb1fcd0506ab70965",
+    "erdos\\check_greedy.py": "29ec25e586b4260b4361cf462b74b9a33bbdbb60cfa848a6ef0f7e8bd5cd991f",
+    "erdos\\greedy-audit.json": "9b568ea2577d08374e3625a2913057bee74a992557950a290b607a97ea302b17",
+    "erdos\\ledger.json": "b4d29ad205c092d99fb9c403424aaff1e6b7e9a025e5fbb0ac8c685c85e20df9",
+    "erdos\\REPORT.zh-CN.md": "c492870f2e7dd24d74d862e42d0e9ac729c5811ad7278574d8fe29153c2bd15b",
+    "erdos\\unrestricted-check.json": "c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2",
+    "erdos\\unrestricted-replay.json": "0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab",
+    "erdos\\workspace.json": "aec08e88727846521036f565872440fd165fba2bc92545a9898e78923ed56a67",
+    "finalize.py": "b1d58e59ade0a698c9df1d5fc1d8a11e4b5a7adbfe13248ffe84e75cb1de5ebb",
+    "goldbach\\actions\\001.json": "cb6f4705b9c145b59d1b0c7e56dcbf372de9f2f5f483b9163a9981b50a1bd380",
+    "goldbach\\actions\\002.json": "7d932e2790b584339fd5907a98e462414dda4e446fb541260f96c7a250331ede",
+    "goldbach\\actions\\003.json": "531d376709b58d0953a9ac0b57906bdfc3fab45e2cf45e4c007bbebe05f4b4a5",
+    "goldbach\\actions\\004.json": "f52e5bdcb4261396c6396ab501363257df12fc11c719107dc5e06190bc116711",
+    "goldbach\\actions\\005.json": "92f7e9c06ac08eba874791fa0f8cab88851c6fbbd7ca14162c4d59dd706952e2",
+    "goldbach\\actions\\006.json": "8401f7d54366f33c8b6210a0d693f8fc7897a2e93e33a9741aafdd398691f977",
+    "goldbach\\actions\\007.json": "7b5d5f3b463a2bef9dbcc0ab854ea629408325ed0d21795a495447af85408a99",
+    "goldbach\\actions\\008.json": "fd93f4bf71795e720ed2a7cba9d77bd5cd71aa838f6fdad257d3b87a10c2a5b8",
+    "goldbach\\audit_record.py": "f827d345fdff21d3b2ef4694ccc87cef9c6f3e1ccdaf960ab15beb3d4fd815b7",
+    "goldbach\\case.json": "0bfa4f863a7ba3360f59f5c3df78d4dd40d292f489e56a66a901357dae719454",
+    "goldbach\\ledger.json": "27b866a8080bd3742df9f7216a870d7c70426859ff35b6e66cc6a5ce0bd732c2",
+    "goldbach\\probe_subdivision.py": "7079f2011c35431e890e64f50bb48106d9f3764f92760d5478324144e3c8008f",
+    "goldbach\\record-audit.json": "61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1",
+    "goldbach\\REPORT.zh-CN.md": "6f0a28583e697bbbc592803296250a031a15565fa8420a9f6eb54c43205c38fe",
+    "goldbach\\subdivision-checkpoint.json": "73d46b41f96d3264837e3d4182bc3d7872f4cc8cadda093bf3e2d61dc1a91477",
+    "goldbach\\subdivision-probe.json": "a907d20398d368256700f39ccb0012ff9631a8127f70f97ebfcbc87e9c07e6ba",
+    "goldbach\\workspace.json": "8140dcf95980a6cd372ae1163e34945073eeb5bca5ea3e62957ceae24aa59a22",
+    "host.py": "7e74d6684873d0608259887ffb69f988d6c2fa8b51fb4e44a7441dcd86cbc3f1",
+    "REPORT.zh-CN.md": "78bed4f17b038b870b308ad48b5588caa22d6e076b11220df7734d9b99870a2c",
+    "source-manifest.json": "e5979bf967d568951b1c0ff5e82b3b4801882787531a4c2f69eca7ae2ada0fad",
+    "statistics\\actions\\001.json": "6842d0b5f86d8b385c432b76e8deb293b11b5599b90a7ed0948d643030a6db2c",
+    "statistics\\actions\\002.json": "baf97e2d5902955e2bfb051dc35731b2e0c1ff3e3cfde9c1fbd51eceebb9f021",
+    "statistics\\actions\\003.json": "910822f18d5551b5162352059873ec79073778a019ebbf22a70a01247b3c9f72",
+    "statistics\\actions\\004.json": "ed6f523ebee2756bf3eacbc030c95f87c9ea768497a6b25545c4363cd25b1392",
+    "statistics\\actions\\005.json": "08b6fb3c303d01eabf7909284ef1c011584ca03f69987aec1ce697b9b09bfce4",
+    "statistics\\actions\\006.json": "4e8ecce9bf2647e876f72773596be50e2072b72d6d8735b7a51eb0171afbff80",
+    "statistics\\actions\\007.json": "d3e3fb35b73ea3d3742baf3cd568dd557dbc3e367ce47b7d8b7dd7240775286a",
+    "statistics\\actions\\008.json": "cbc51efcf6df9b50c1c565538066069e195bb432627d2ba74ee4c6bc25279ef6",
+    "statistics\\actions\\009.json": "0d0643ade0fb88f5c360ad74ba12d31642b8c69c020a9b50a96635b6a1f2aceb",
+    "statistics\\actions\\010.json": "55183a49da9186ba930df27868ca7cbd0c446ba7618ad443119250b4a54644d5",
+    "statistics\\actions\\011.json": "5c46efece5f50e5df2aabc040d53379f70ce91e6abe03b4dafcfffd502a7640d",
+    "statistics\\actions\\012.json": "c431fba101fb487b5ec379187d4bdaad8c68dcb928afbbada33a3816818a5b03",
+    "statistics\\actions\\013.json": "dbd0d5eece10ce7fcd40ccf8c5a10e04ef1ade063a3afaf151e24a8a66ed44f2",
+    "statistics\\actions\\014.json": "34a8f1a002750d3cd2d6f85dbe4087b6f32da15001a77f1861baf3c5fedef4fe",
+    "statistics\\actions\\015.json": "d870a227c5044fec4f43a7189a7f0a8b5b691799ed7f46ab1013799e1334ff09",
+    "statistics\\case.json": "2affdb6b2587232056468452cbebbe08d1a92c984d8f80076bbe7dafeb3a5e9a",
+    "statistics\\extension-plan.json": "6baa1b797df9610886784a92aa630ec574e3449722b9e72d71dac209113fe824",
+    "statistics\\ledger.json": "e86f66b5726c6edd0503de32a00c6af249ee2425435cefbb7645fe19c8504707",
+    "statistics\\replication-check.json": "ce142101ee9aae44476877750fdc2dccd60a4cac7b795a22b4adc773d096c8ca",
+    "statistics\\REPORT.zh-CN.md": "1d3b4dd3447e5e579f9d867f55398b9493e1d1b2efd9c9bccc60a4071f1be81a",
+    "statistics\\summarize.py": "b5472b95da922dd911ea0b4e2e0f67e1b2ef2a2d602a41eca218016af5423e23",
+    "statistics\\uncertainty-table.md": "2ea5079450312e2d576cd9eaa2127919fecfe1c36a56cc4e0dd08a722157a588",
+    "statistics\\uncertainty.json": "8c59b301684b6cdd2d650ad2bf136e28690b7971b4e9bdce4efb3bcc83ff51e8",
+    "statistics\\workspace.json": "0f2919273618430c465d37199627cc142f7be3ae4003b4fa88d06c54e4a167b3"
+  },
+  "release_validation": false,
+  "formal_proof_or_human_review": false,
+  "publication": "local only"
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "workspace_id": "erdos",
+  "domain": "mathematics",
+  "question": "Reinvestigate the distinct-denominator Erdos-Straus conjecture for all n>=3; determine exactly when the greedy first denominator works on n=1 mod 24, without confusing a failed route with a counterexample to the conjecture.",
+  "stage": "SYNTHESIS",
+  "created_at": "2026-09-08T06:08:47.548773+00:00",
+  "updated_at": "2026-09-08T06:29:44.248135+00:00",
+  "case_file": "case.json",
+  "tasks": [
+    {
+      "id": "W001",
+      "title": "Freeze old evidence and research scope",
+      "kind": "definition",
+      "acceptance": "Hash old inputs and state original versus subtask goals",
+      "depends_on": [],
+      "deliverable": "../source-manifest.json",
+      "status": "DONE",
+      "note": "Scoped deliverable exists and was checked; original research claim remains unresolved."
+    },
+    {
+      "id": "W002",
+      "title": "Reanalyse the scoped mathematical or statistical question",
+      "kind": "analysis",
+      "acceptance": "Keep exact checks, failed routes, assumptions and unresolved obligations",
+      "depends_on": [],
+      "deliverable": "REPORT.zh-CN.md",
+      "status": "DONE",
+      "note": "Scoped deliverable exists and was checked; original research claim remains unresolved."
+    }
+  ],
+  "sources": [],
+  "runs": [
+    {
+      "id": "R001",
+      "task_id": "W002",
+      "label": "greedy-criterion-independent-audit",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/reanalysis-20260908/erdos/check_greedy.py"
+      ],
+      "cwd": ".",
+      "started_at": "2026-09-08T06:16:11.391145+00:00",
+      "finished_at": "2026-09-08T06:16:11.443487+00:00",
+      "returncode": 2,
+      "process_returncode": 2,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [
+        "research-studies/reanalysis-20260908/erdos/greedy-audit.json",
+        "research-studies/reanalysis-20260908/erdos/unrestricted-replay.json",
+        "research-studies/reanalysis-20260908/erdos/unrestricted-check.json"
+      ],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R001/stdout.txt",
+      "stderr": "artifacts/runs/R001/stderr.txt",
+      "outputs": [],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "6c1811be74ef3632c1076099ab77049bf6cb6ed62334cbc70ea1f5799a02a8ba"
+    },
+    {
+      "id": "R002",
+      "task_id": "W002",
+      "label": "greedy-criterion-audit-correct-cwd",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/reanalysis-20260908/erdos/check_greedy.py"
+      ],
+      "cwd": "../../..",
+      "started_at": "2026-09-08T06:17:12.213003+00:00",
+      "finished_at": "2026-09-08T06:17:12.451145+00:00",
+      "returncode": 0,
+      "process_returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R002/stdout.txt",
+      "stderr": "artifacts/runs/R002/stderr.txt",
+      "outputs": [
+        {
+          "file": "greedy-audit.json",
+          "sha256": "9b568ea2577d08374e3625a2913057bee74a992557950a290b607a97ea302b17"
+        },
+        {
+          "file": "unrestricted-replay.json",
+          "sha256": "0aa0d55efac5ca2d08497a5a26ab5d4dbe0b773a10b0685026a2e21805c05cab"
+        },
+        {
+          "file": "unrestricted-check.json",
+          "sha256": "c44b7d1829a15896cea15e621397d1d08d410c40cc4d29d6b7d564379c2f2cb2"
+        }
+      ],
+      "stdout_sha256": "2c7209531883a841730cbd4f3d65b368d9963bdfcd1b1032ab581d6b30212ec0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "release_policy": {
+    "plan_seal_required": false,
+    "data_snapshot_required": false,
+    "independent_review_required": true
+  },
+  "plan_seal": "",
+  "data_snapshots": [],
+  "review_adjudication": ""
+}

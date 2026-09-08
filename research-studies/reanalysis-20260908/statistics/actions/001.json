@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Replay all six legacy cells exactly and retain every result. The extension plan was frozen before new simulation runs: 6baa1b797df9610886784a92aa630ec574e3449722b9e72d71dac209113fe824. Follow-up is exploratory because the old results were already known. Check the fixed-bandwidth variance formula before interpreting n=2000 results. Report marginal Monte Carlo uncertainty, approximate burn-in, and no paired test without joint counts."
+      },
+      "tool": "note"
+    },
+    "evidence": [],
+    "falsifier": "Reject a conclusion that exceeds its quantifiers, statistical design or verified source scope.",
+    "rationale": "Freeze the research scope before executing new checks."
+  },
+  "fingerprint": "cc9c5420f289498a29fae033eb926205d6c3d86bc796ffb7aec3530457382ead",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Replay all six legacy cells exactly and retain every result. The extension plan was frozen before new simulation runs: 6baa1b797df9610886784a92aa630ec574e3449722b9e72d71dac209113fe824. Follow-up is exploratory because the old results were already known. Check the fixed-bandwidth variance formula before interpreting n=2000 results. Report marginal Monte Carlo uncertainty, approximate burn-in, and no paired test without joint counts.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "afaf7a4692874d2218c38138cfaf6dce7f4f7016057f6f2052619686060b4bb5",
+  "created": 1788847783.7584822
+}

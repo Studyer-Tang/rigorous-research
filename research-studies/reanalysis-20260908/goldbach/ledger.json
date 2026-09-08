@@ -1,0 +1,525 @@
+{
+  "state": {
+    "domain": "mathematics",
+    "execution": "DELIVERED",
+    "machine_contract": null,
+    "machine_contract_status": "NOT_DECLARED",
+    "model_calls": 0,
+    "network": false,
+    "novelty_status": "NOT_ASSESSED",
+    "objective": "Resume the existing strong Goldbach investigation. Audit the unresolved Li equation (14) positive-weight certificate and determine which error component must be reduced. This subtask must not be substituted for proving the strong Goldbach conjecture.",
+    "objective_status": "UNRESOLVED",
+    "paused": false,
+    "revision": 8,
+    "schema_version": 1,
+    "stop_reason": "",
+    "translation_status": "REQUIRES_REVIEW"
+  },
+  "actions": [
+    {
+      "id": 1,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Resume the unresolved Li equation (14) subtask, not a fresh purported proof of Goldbach. Audit hashes and exact arithmetic of the stored stage-1 interval and its 494 contribution rows. Verify the D-free change-of-variable algebra and boundary conditions. Determine whether precision or Hessian enclosure dominates. This is independent checking of recorded arithmetic, not a complete independent validation of its analytic interval bounds."
+          },
+          "tool": "note"
+        },
+        "evidence": [],
+        "falsifier": "Reject a conclusion that exceeds its quantifiers, statistical design or verified source scope.",
+        "rationale": "Freeze the research scope before executing new checks."
+      },
+      "fingerprint": "8f409bbb0a47b2f56de24ef0028dcfb8b3883448abf70523fd602aeae981a32d",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Resume the unresolved Li equation (14) subtask, not a fresh purported proof of Goldbach. Audit hashes and exact arithmetic of the stored stage-1 interval and its 494 contribution rows. Verify the D-free change-of-variable algebra and boundary conditions. Determine whether precision or Hessian enclosure dominates. This is independent checking of recorded arithmetic, not a complete independent validation of its analytic interval bounds.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "81e5cb71e6b58f50a1dc1359ae73e963c39003473e7f1529394cddcf63c7d89a",
+      "created": 1788847783.7819269
+    },
+    {
+      "id": 2,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "D/((1-t)/U+t/L)+e",
+            "rhs": "((1-t)*(e+D/U)+t*(e+D/L))",
+            "symbols": [
+              "D",
+              "e",
+              "t",
+              "U",
+              "L"
+            ]
+          },
+          "tool": "identity"
+        },
+        "evidence": [
+          1
+        ],
+        "falsifier": "A counterexample shows this proposed transformed integrand is incorrectly written.",
+        "rationale": "Attack a potentially mistaken substitution: z must be reciprocal-affine, not affine in s."
+      },
+      "fingerprint": "19f7bc5f0f1dc4b7189e7d2c9d9d131de0399f5b01cbfbdc417041136b892740",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "D/((1-t)/U+t/L)+e",
+            "rhs": "((1-t)*(e+D/U)+t*(e+D/L))",
+            "symbols": [
+              "D",
+              "e",
+              "t",
+              "U",
+              "L"
+            ]
+          },
+          "classification": "not-established",
+          "created_at": "2026-09-08T06:10:22.569206+00:00",
+          "domain_analysis_complete": true,
+          "domain_restrictions": [
+            "-(L*t - L - U*t)/(L*U) != 0",
+            "L != 0",
+            "U != 0"
+          ],
+          "exceptional_set": "-(L*t - L - U*t)/(L*U) = 0 or L = 0 or U = 0",
+          "identity_established": false,
+          "normalized": {
+            "denominator": "-L*U*(L*t - L - U*t)",
+            "difference": "(D*L**2*U**2 + L*U*e*(L*(1 - t) + U*t) - L*(1 - t)*(D + U*e)*(L*(1 - t) + U*t) - U*t*(D + L*e)*(L*(1 - t) + U*t))/(L*U*(L*(1 - t) + U*t))",
+            "lhs": "D/((1 - t)/U + t/L) + e",
+            "numerator": "-D*(-L*U + L*t - L - U*t)*(L*U + L*t - L - U*t)",
+            "rhs": "t*(D/L + e) + (1 - t)*(D/U + e)"
+          },
+          "numerator_coefficients": [
+            "-1",
+            "2",
+            "-1",
+            "-2",
+            "2",
+            "1",
+            "-1"
+          ],
+          "polynomial_numerator": true,
+          "recommended_evidence_role": "diagnostic",
+          "schema_version": 1,
+          "warning": "A general SymPy simplification is diagnostic unless reduced to an exact polynomial or rational identity with its denominator domain recorded."
+        },
+        "elapsed_seconds": 1.188,
+        "independent_check": {
+          "certificate_hash": "216b1322e4df19ea35cd0afe04de436995c7bf5789ed0ffc025c04926245d1b2",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "INCONCLUSIVE"
+        },
+        "status": "INCONCLUSIVE",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "d0eb9bf86d1d0a38fd6c041d5bd3733f9ace414b2f1bc06630aa6390b70464e0",
+      "created": 1788847822.0101833
+    },
+    {
+      "id": 3,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Action 2 deliberately tested a wrong alternative substitution as a negative control, not a defect found in the old proof. If z=1/h(t), then D/z=D*h(t), not D/h(t). Do not report this adversarial input as a discovered error in the legacy source. The real source identity is now checked below."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          2
+        ],
+        "falsifier": "Reject any report falsely attributing the negative-control expression to the legacy derivation.",
+        "rationale": "Separate a deliberately false control from an actual source defect."
+      },
+      "fingerprint": "05737e0b58836cfb0cf922313bda0fe4e7b27645539c7f8a21e6928695b9bd8d",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Action 2 deliberately tested a wrong alternative substitution as a negative control, not a defect found in the old proof. If z=1/h(t), then D/z=D*h(t), not D/h(t). Do not report this adversarial input as a discovered error in the legacy source. The real source identity is now checked below.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "4b1d4ed3b02dd057f1c4e5bf82e357c95909461d839c8c9ce9ab2835ea22504f",
+      "created": 1788847955.6474514
+    },
+    {
+      "id": 4,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "e+D*(L+(U-L)*t)/(L*U)",
+            "rhs": "(1-t)*(e+D/U)+t*(e+D/L)",
+            "symbols": [
+              "e",
+              "D",
+              "L",
+              "U",
+              "t"
+            ]
+          },
+          "tool": "identity"
+        },
+        "evidence": [
+          1,
+          3
+        ],
+        "falsifier": "A nonzero rational numerator invalidates the interpolation formula.",
+        "rationale": "Check the source transformation z=LU/(L+(U-L)t) without dividing by D."
+      },
+      "fingerprint": "9f1933d1438054178f77df87dd76ba3bde59616391f4c077805c605d5673878a",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "e+D*(L+(U-L)*t)/(L*U)",
+            "rhs": "(1-t)*(e+D/U)+t*(e+D/L)",
+            "symbols": [
+              "e",
+              "D",
+              "L",
+              "U",
+              "t"
+            ]
+          },
+          "classification": "exact-rational-on-domain",
+          "created_at": "2026-09-08T06:12:36.198529+00:00",
+          "domain_analysis_complete": true,
+          "domain_restrictions": [
+            "L != 0",
+            "L*U != 0",
+            "U != 0"
+          ],
+          "exceptional_set": "L = 0 or L*U = 0 or U = 0",
+          "identity_established": true,
+          "normalized": {
+            "denominator": "L*U",
+            "difference": "(D*(L + t*(-L + U)) + L*U*e - L*(1 - t)*(D + U*e) - U*t*(D + L*e))/(L*U)",
+            "lhs": "e + (D*(L + t*(-L + U)))/((L*U))",
+            "numerator": "0",
+            "rhs": "t*(D/L + e) + (1 - t)*(D/U + e)"
+          },
+          "numerator_coefficients": [
+            "0"
+          ],
+          "polynomial_numerator": true,
+          "recommended_evidence_role": "decisive",
+          "schema_version": 1,
+          "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+        },
+        "elapsed_seconds": 1.093,
+        "independent_check": {
+          "certificate_hash": "56fac45bc9cd133347804352038476171ab631dc45002bf14422bdf0c9e958b5",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "776fecfbbae43e0c86f363b4a348f2e1bd0adc6ec1e80e1bfe14e13005ae11a7",
+      "created": 1788847955.6781719
+    },
+    {
+      "id": 5,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "lhs": "(L*U*(U-L)/(L+(U-L)*t)**2)/(L*U/(L+(U-L)*t))**2",
+            "rhs": "1/L-1/U",
+            "symbols": [
+              "L",
+              "U",
+              "t"
+            ]
+          },
+          "tool": "identity"
+        },
+        "evidence": [
+          4
+        ],
+        "falsifier": "A nonzero difference invalidates the change-of-variable weight; domain L,U>0 is required.",
+        "rationale": "Verify the Jacobian cancellation -z_prime/z^2 that gives the positive weight."
+      },
+      "fingerprint": "99b15416f5356009f789633a9c4e87ad18fb6e5f7167717e28131e5e71e0fe75",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "assumptions": {
+            "integer": [],
+            "positive": [],
+            "real": []
+          },
+          "backend": "sympy",
+          "backend_version": "1.14.0",
+          "claim": {
+            "lhs": "(L*U*(U-L)/(L+(U-L)*t)**2)/(L*U/(L+(U-L)*t))**2",
+            "rhs": "1/L-1/U",
+            "symbols": [
+              "L",
+              "U",
+              "t"
+            ]
+          },
+          "classification": "exact-rational-on-domain",
+          "created_at": "2026-09-08T06:12:37.353531+00:00",
+          "domain_analysis_complete": true,
+          "domain_restrictions": [
+            "(L*t - L - U*t)**2 != 0",
+            "-L*t + L + U*t != 0",
+            "L != 0",
+            "L**2*U**2/(L*t - L - U*t)**2 != 0",
+            "U != 0"
+          ],
+          "exceptional_set": "(L*t - L - U*t)**2 = 0 or -L*t + L + U*t = 0 or L = 0 or L**2*U**2/(L*t - L - U*t)**2 = 0 or U = 0",
+          "identity_established": true,
+          "normalized": {
+            "denominator": "1",
+            "difference": "0",
+            "lhs": "(((L*U)*(-L + U))/((L + t*(-L + U))**2))/(((L*U)/(L + t*(-L + U)))**2)",
+            "numerator": "0",
+            "rhs": "-1/U + 1/L"
+          },
+          "numerator_coefficients": [
+            "0"
+          ],
+          "polynomial_numerator": true,
+          "recommended_evidence_role": "decisive",
+          "schema_version": 1,
+          "warning": "The certificate establishes the normalized algebraic identity; it does not validate that the expression models the user's intended object."
+        },
+        "elapsed_seconds": 1.172,
+        "independent_check": {
+          "certificate_hash": "becc07fdc548382567aad5670a96445b5bec0dca3a7818f4452447b8bcd86ea4",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Recorded mathematical claim and assumptions only; no prose-translation guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        }
+      },
+      "result_hash": "a1866bcaf4f1fded68c03194162d1b58a203a41a9068298ad25ced319b844227",
+      "created": 1788847956.7997065
+    },
+    {
+      "id": 6,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "The independent recorded-arithmetic audit passed for 494 rows and all recorded dependency hashes. Hessian contributes 99.8989333% of the symmetric radius. The old nominal sum is -0.239605017712..., below required -0.202861608442..., so merely shrinking a nonnegative symmetric radius at that fixed center can never satisfy the lower-bound target. Do not infer that the true integral is below threshold. Audit artifact SHA256=61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1. Next finite experiment: recompute the widest stored triangle exactly, then split into four children and recompute centers, moments and Hessian bounds at unchanged 96-bit prefix precision. Time budget 180 seconds. This shared-producer probe is not an independent analytic certificate."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          4,
+          5
+        ],
+        "falsifier": "If baseline fails exact reproduction, stop the comparison; if subdivision fails to reduce radius, report that failure.",
+        "rationale": "Use the real error audit to select a targeted geometric refinement instead of more prefix precision."
+      },
+      "fingerprint": "587b144d6c8829fde4857f4fb3c38365ae8ea645e2a88da0113b1442f25cfa5f",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "The independent recorded-arithmetic audit passed for 494 rows and all recorded dependency hashes. Hessian contributes 99.8989333% of the symmetric radius. The old nominal sum is -0.239605017712..., below required -0.202861608442..., so merely shrinking a nonnegative symmetric radius at that fixed center can never satisfy the lower-bound target. Do not infer that the true integral is below threshold. Audit artifact SHA256=61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1. Next finite experiment: recompute the widest stored triangle exactly, then split into four children and recompute centers, moments and Hessian bounds at unchanged 96-bit prefix precision. Time budget 180 seconds. This shared-producer probe is not an independent analytic certificate.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "2ff454c46a16c4a32121aa4b0fecd20e239d8995e7925ebcef6a800920905039",
+      "created": 1788848385.3581696
+    },
+    {
+      "id": 7,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved.\nArtifacts: {\"record-audit.json\": \"61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1\", \"subdivision-probe.json\": \"a907d20398d368256700f39ccb0012ff9631a8127f70f97ebfcbc87e9c07e6ba\"}"
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "falsifier": "Recheck exact claims against artifacts; a changed hash, wrong domain or missing analytic assumption invalidates the associated conclusion.",
+        "rationale": "Integrate the observed results and precise limitations into the live Agent record."
+      },
+      "fingerprint": "c884b7252d9c46a7909a3bff5c0a58b3785872f255718ff8ad48859457854562",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved.\nArtifacts: {\"record-audit.json\": \"61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1\", \"subdivision-probe.json\": \"a907d20398d368256700f39ccb0012ff9631a8127f70f97ebfcbc87e9c07e6ba\"}",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "55d4da31bfa7c67c497fb1bcbf6b2007d9f3bd9b72e499614f577be58e902f3d",
+      "created": 1788848984.8312647
+    },
+    {
+      "id": 8,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Scoped reanalysis report delivered: goldbach\\REPORT.zh-CN.md; SHA256=6f0a28583e697bbbc592803296250a031a15565fa8420a9f6eb54c43205c38fe. Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review."
+          },
+          "tool": "finish"
+        },
+        "evidence": [
+          7
+        ],
+        "falsifier": "Delivery is not a proof verdict. General proof, analytic certificate and model applicability require their stated separate obligations.",
+        "rationale": "Deliver the completed research report and retain unresolved original goals."
+      },
+      "fingerprint": "549b51414ffa68123753ba176b750b9ed824051b288fb969483e5a8ddbded36a",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Scoped reanalysis report delivered: goldbach\\REPORT.zh-CN.md; SHA256=6f0a28583e697bbbc592803296250a031a15565fa8420a9f6eb54c43205c38fe. Independent recorded-arithmetic audit passed on 494 rows, directed global sums and recorded dependency hashes; it does not independently validate analytic bounds or reconstruct all geometry. Hessian share=99.8989333%. The fixed-center obstruction motivates geometry refinement, not a conclusion about the true integral. Actual experiment exactly reproduced the widest triangle then split it into four and recomputed local centers and bounds: radius 10002.130374177372 -> 853.2577448645017, reduction11.722284895012258; center -.0003117596728436075 -> -.0000916746132377151. This used the same analytic producer. One-cell improvement does not imply global convergence or a valid full integral certificate. Action2 was an intentional negative control, not a discovered legacy defect. Li14 and Goldbach remain unresolved. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+        },
+        "verified": false
+      },
+      "result_hash": "ebb47b3953d54cee3965a21a9831dd24ddd3b52bba1b2fdcb391bca81a4e7d38",
+      "created": 1788848984.8637507
+    }
+  ],
+  "assets": [],
+  "events": [
+    {
+      "id": 1,
+      "created": 1788847783.7819269,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 0, \"tool\": \"note\"}"
+    },
+    {
+      "id": 2,
+      "created": 1788847821.9990845,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 1, \"tool\": \"identity\"}"
+    },
+    {
+      "id": 3,
+      "created": 1788847955.6363323,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 2, \"tool\": \"note\"}"
+    },
+    {
+      "id": 4,
+      "created": 1788847955.66907,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 3, \"tool\": \"identity\"}"
+    },
+    {
+      "id": 5,
+      "created": 1788847956.7906706,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 4, \"tool\": \"identity\"}"
+    },
+    {
+      "id": 6,
+      "created": 1788848385.2639663,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 5, \"tool\": \"note\"}"
+    },
+    {
+      "id": 7,
+      "created": 1788848984.8216507,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 6, \"tool\": \"note\"}"
+    },
+    {
+      "id": 8,
+      "created": 1788848984.8557274,
+      "kind": "host_proposal",
+      "data": "{\"controller\": \"live Codex host\", \"external_model_api\": false, \"revision\": 7, \"tool\": \"finish\"}"
+    }
+  ],
+  "warning": "Local audit record, not a signed attestation. Case verdicts are not updated. Review translation and register evidence through existing case/release gates."
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 4,
+  "case_id": "goldbach",
+  "domain": "mathematics",
+  "question": "Resume the existing strong Goldbach investigation. Audit the unresolved Li equation (14) positive-weight certificate and determine which error component must be reduced. This subtask must not be substituted for proving the strong Goldbach conjecture.",
+  "created_at": "2026-09-08T06:08:47.647541+00:00",
+  "updated_at": "2026-09-08T06:08:47.647541+00:00",
+  "contract": {
+    "ambient_object": "",
+    "coefficient_domain": "",
+    "quantifiers": "",
+    "equality_semantics": ""
+  },
+  "claims": [
+    {
+      "id": "C001",
+      "statement": "Resume the existing strong Goldbach investigation. Audit the unresolved Li equation (14) positive-weight certificate and determine which error component must be reduced. This subtask must not be substituted for proving the strong Goldbach conjecture.",
+      "scope": "",
+      "status": "OPEN",
+      "assumption_ids": [],
+      "evidence_ids": []
+    }
+  ],
+  "assumptions": [],
+  "checks": [],
+  "evidence": [],
+  "proof_obligations": [
+    {
+      "id": "P001",
+      "target_claim": "C001",
+      "kind": "translation",
+      "statement": "Check the original claim's types, domain, quantifiers, assumptions, and scope against the proposed derivation.",
+      "coverage": "full",
+      "depends_on": [],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    },
+    {
+      "id": "P002",
+      "target_claim": "C001",
+      "kind": "proof",
+      "statement": "Establish the scoped claim or replace this obligation with an admissible counterexample.",
+      "coverage": "full",
+      "depends_on": [
+        "P001"
+      ],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    }
+  ],
+  "decision": {
+    "verdict": "OPEN",
+    "claim_id": "C001",
+    "reason": "",
+    "evidence_ids": [],
+    "limitations": "",
+    "reproduction": ""
+  }
+}

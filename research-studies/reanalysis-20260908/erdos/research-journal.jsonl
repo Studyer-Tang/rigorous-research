@@ -1,0 +1,8 @@
+{"time": "2026-09-08T06:08:47.548773+00:00", "event": "workspace-initialized", "domain": "mathematics"}
+{"time": "2026-09-08T06:09:43.569976+00:00", "event": "task-added", "task_id": "W001"}
+{"time": "2026-09-08T06:09:43.576042+00:00", "event": "task-added", "task_id": "W002"}
+{"time": "2026-09-08T06:16:11.551855+00:00", "event": "run-recorded", "run_id": "R001", "task_id": "W002", "returncode": 2}
+{"time": "2026-09-08T06:17:12.556675+00:00", "event": "run-recorded", "run_id": "R002", "task_id": "W002", "returncode": 0}
+{"time": "2026-09-08T06:29:43.947752+00:00", "event": "task-updated", "task_id": "W001", "status": "DONE"}
+{"time": "2026-09-08T06:29:44.093010+00:00", "event": "task-updated", "task_id": "W002", "status": "DONE"}
+{"time": "2026-09-08T06:29:44.248135+00:00", "event": "stage-updated", "stage": "SYNTHESIS"}

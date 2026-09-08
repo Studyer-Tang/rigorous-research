@@ -1,0 +1,34 @@
+{
+  "id": 3,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Action 2 deliberately tested a wrong alternative substitution as a negative control, not a defect found in the old proof. If z=1/h(t), then D/z=D*h(t), not D/h(t). Do not report this adversarial input as a discovered error in the legacy source. The real source identity is now checked below."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      2
+    ],
+    "falsifier": "Reject any report falsely attributing the negative-control expression to the legacy derivation.",
+    "rationale": "Separate a deliberately false control from an actual source defect."
+  },
+  "fingerprint": "05737e0b58836cfb0cf922313bda0fe4e7b27645539c7f8a21e6928695b9bd8d",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Action 2 deliberately tested a wrong alternative substitution as a negative control, not a defect found in the old proof. If z=1/h(t), then D/z=D*h(t), not D/h(t). Do not report this adversarial input as a discovered error in the legacy source. The real source identity is now checked below.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "4b1d4ed3b02dd057f1c4e5bf82e357c95909461d839c8c9ce9ab2835ea22504f",
+  "created": 1788847955.6474514
+}

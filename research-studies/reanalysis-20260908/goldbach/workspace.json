@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "workspace_id": "goldbach",
+  "domain": "mathematics",
+  "question": "Resume the existing strong Goldbach investigation. Audit the unresolved Li equation (14) positive-weight certificate and determine which error component must be reduced. This subtask must not be substituted for proving the strong Goldbach conjecture.",
+  "stage": "SYNTHESIS",
+  "created_at": "2026-09-08T06:08:47.653022+00:00",
+  "updated_at": "2026-09-08T06:29:45.324522+00:00",
+  "case_file": "case.json",
+  "tasks": [
+    {
+      "id": "W001",
+      "title": "Freeze old evidence and research scope",
+      "kind": "definition",
+      "acceptance": "Hash old inputs and state original versus subtask goals",
+      "depends_on": [],
+      "deliverable": "../source-manifest.json",
+      "status": "DONE",
+      "note": "Scoped deliverable exists and was checked; original research claim remains unresolved."
+    },
+    {
+      "id": "W002",
+      "title": "Reanalyse the scoped mathematical or statistical question",
+      "kind": "analysis",
+      "acceptance": "Keep exact checks, failed routes, assumptions and unresolved obligations",
+      "depends_on": [],
+      "deliverable": "REPORT.zh-CN.md",
+      "status": "DONE",
+      "note": "Scoped deliverable exists and was checked; original research claim remains unresolved."
+    }
+  ],
+  "sources": [],
+  "runs": [
+    {
+      "id": "R001",
+      "task_id": "W002",
+      "label": "li14-independent-directed-audit",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/reanalysis-20260908/goldbach/audit_record.py"
+      ],
+      "cwd": ".",
+      "started_at": "2026-09-08T06:16:11.696400+00:00",
+      "finished_at": "2026-09-08T06:16:11.747379+00:00",
+      "returncode": 2,
+      "process_returncode": 2,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [
+        "research-studies/reanalysis-20260908/goldbach/record-audit.json"
+      ],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R001/stdout.txt",
+      "stderr": "artifacts/runs/R001/stderr.txt",
+      "outputs": [],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "7efac7dd6914aed3dc91898402399c34eea1848af739e6c793b4d584d3539586"
+    },
+    {
+      "id": "R002",
+      "task_id": "W002",
+      "label": "li14-directed-audit-correct-cwd",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/reanalysis-20260908/goldbach/audit_record.py"
+      ],
+      "cwd": "../../..",
+      "started_at": "2026-09-08T06:17:12.696164+00:00",
+      "finished_at": "2026-09-08T06:17:13.574172+00:00",
+      "returncode": 0,
+      "process_returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R002/stdout.txt",
+      "stderr": "artifacts/runs/R002/stderr.txt",
+      "outputs": [
+        {
+          "file": "record-audit.json",
+          "sha256": "61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1"
+        }
+      ],
+      "stdout_sha256": "61cd699457da413f14559cf0517e98f2797103a22477f8a108be2a5004b85fc1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "R003",
+      "task_id": "W002",
+      "label": "widest-triangle-subdivision-probe",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-u",
+        "research-studies/reanalysis-20260908/goldbach/probe_subdivision.py"
+      ],
+      "cwd": "../../..",
+      "started_at": "2026-09-08T06:19:45.520310+00:00",
+      "finished_at": "2026-09-08T06:19:48.013637+00:00",
+      "returncode": 0,
+      "process_returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R003/stdout.txt",
+      "stderr": "artifacts/runs/R003/stderr.txt",
+      "outputs": [
+        {
+          "file": "subdivision-probe.json",
+          "sha256": "a907d20398d368256700f39ccb0012ff9631a8127f70f97ebfcbc87e9c07e6ba"
+        }
+      ],
+      "stdout_sha256": "b1d24598a5ff0ab7bb90d2c523914e54050ef55f851457a8ce9fd51e28505c1f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "release_policy": {
+    "plan_seal_required": false,
+    "data_snapshot_required": false,
+    "independent_review_required": true
+  },
+  "plan_seal": "",
+  "data_snapshots": [],
+  "review_adjudication": ""
+}

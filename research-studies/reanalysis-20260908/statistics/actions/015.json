@@ -1,0 +1,34 @@
+{
+  "id": 15,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Scoped reanalysis report delivered: statistics\\REPORT.zh-CN.md; SHA256=1d3b4dd3447e5e579f9d867f55398b9493e1d1b2efd9c9bccc60a4071f1be81a. All six legacy result dictionaries exactly reproduce. All four frozen exploratory extension cells completed: Gaussian L8=.8566,L25=.9160; t3 L8=.8548,L25=.9172, each 5000 replications and n=2000,phi=.8. Finite-variance innovation CLT, negligible endpoints and fixed-lag ergodic covariance consistency yield coverage limit 2Phi(1.96sqrt(rho_L))-1, rho_L=1-2phi(1-phi^(L+1))/((L+1)(1-phi^2)). At phi=.8 limits are .8619119018484576 for L8 and .925769387921012 for L25. The t3 argument uses finite second moments, not nonexistent fourth moments. Empirical MC SE, marginal Wilson and approximate eight-comparison Bonferroni-Wilson intervals are in uncertainty.json. No paired indicators were retained, so no paired test is claimed. General argument remains prose; simulation does not prove applicability. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review."
+      },
+      "tool": "finish"
+    },
+    "evidence": [
+      14
+    ],
+    "falsifier": "Delivery is not a proof verdict. General proof, analytic certificate and model applicability require their stated separate obligations.",
+    "rationale": "Deliver the completed research report and retain unresolved original goals."
+  },
+  "fingerprint": "f618f5cfc2467042372ae3f7902401e5ceabecd00fc28d83d13e9e12a16a1b6e",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Scoped reanalysis report delivered: statistics\\REPORT.zh-CN.md; SHA256=1d3b4dd3447e5e579f9d867f55398b9493e1d1b2efd9c9bccc60a4071f1be81a. All six legacy result dictionaries exactly reproduce. All four frozen exploratory extension cells completed: Gaussian L8=.8566,L25=.9160; t3 L8=.8548,L25=.9172, each 5000 replications and n=2000,phi=.8. Finite-variance innovation CLT, negligible endpoints and fixed-lag ergodic covariance consistency yield coverage limit 2Phi(1.96sqrt(rho_L))-1, rho_L=1-2phi(1-phi^(L+1))/((L+1)(1-phi^2)). At phi=.8 limits are .8619119018484576 for L8 and .925769387921012 for L25. The t3 argument uses finite second moments, not nonexistent fourth moments. Empirical MC SE, marginal Wilson and approximate eight-comparison Bonferroni-Wilson intervals are in uncertainty.json. No paired indicators were retained, so no paired test is claimed. General argument remains prose; simulation does not prove applicability. Original objective status remains UNRESOLVED. No novelty claim or fabricated human review.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "ee2f4e4b06a146ea7cfed6ae6601d389960c2a0811d308650c03f83a4b3c1061",
+  "created": 1788848984.3247366
+}

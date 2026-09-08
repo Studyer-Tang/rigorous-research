@@ -1,0 +1,66 @@
+{
+  "id": 3,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "distribution": "gaussian",
+        "hac_lags": 8,
+        "n": 120,
+        "phi": 0.0,
+        "replications": 5000,
+        "seed": 20260830
+      },
+      "tool": "coverage"
+    },
+    "evidence": [
+      1,
+      2
+    ],
+    "falsifier": "Any result mismatch prevents an exact replication claim.",
+    "rationale": "Reproduce one prespecified legacy cell using the same inputs and seed."
+  },
+  "fingerprint": "dc3a2dd0bfd1017996690d65430e36a49ea429055ed360ca68ca0c105fd38506",
+  "execution": "SUCCEEDED",
+  "result": {
+    "assumptions_verified": false,
+    "elapsed_seconds": 1.563,
+    "result": {
+      "dgp": {
+        "innovation": "gaussian",
+        "model": "stationary AR(1)",
+        "phi": 0.0,
+        "true_mean": 0.0
+      },
+      "kind": "coverage-simulation",
+      "methods": {
+        "iid_normal": {
+          "coverage": 0.944,
+          "mean_width": 0.3566491647002504
+        },
+        "newey_west_normal": {
+          "coverage": 0.9238,
+          "lags": 8,
+          "mean_width": 0.3399383739663719
+        }
+      },
+      "monte_carlo_se_at_target": 0.0030822070014844883,
+      "replications": 5000,
+      "sample_size": 120,
+      "schema_version": 1,
+      "seed": 20260830,
+      "target_coverage": 0.95
+    },
+    "status": "DIAGNOSTIC",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "warning": "Calculations do not prove applicability, causal identification, or population claims."
+  },
+  "result_hash": "2330cd14d2ab9f7ffa99d58111c4273d494c04f819b4cef2afcd8d4f8a5093e2",
+  "created": 1788847858.0564194
+}

@@ -1,0 +1,40 @@
+{
+  "id": 9,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "All six legacy cells reproduced exactly. For phi=4/5, L=8, the checked variance ratio is 18112777/31640625; the limiting coverage prediction is 0.861911901848, using c=1.96. Proof obligations: (1-phi) sum X_t=sum innovations+phi(X_0-X_n), so CLT uses iid finite-variance innovations; fixed-lag sample covariances converge by ergodicity and finite second moments; Slutsky gives the stated ratio. Gaussian and standardized t3 innovations both have finite variance. The t3 fourth moment is infinite, so no fourth-moment variance theorem is invoked. We now execute all four frozen extension cells."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "falsifier": "A violation of finite variance, ergodicity, fixed phi or the estimator definition invalidates the theoretical interpretation.",
+    "rationale": "Use the reproduced result and an explicit asymptotic argument to predict the extension."
+  },
+  "fingerprint": "1ab8aeccf7b248b9f27c2784253c4a1c79b08757301a8ee579c55ffa37da855a",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "All six legacy cells reproduced exactly. For phi=4/5, L=8, the checked variance ratio is 18112777/31640625; the limiting coverage prediction is 0.861911901848, using c=1.96. Proof obligations: (1-phi) sum X_t=sum innovations+phi(X_0-X_n), so CLT uses iid finite-variance innovations; fixed-lag sample covariances converge by ergodicity and finite second moments; Slutsky gives the stated ratio. Gaussian and standardized t3 innovations both have finite variance. The t3 fourth moment is infinite, so no fourth-moment variance theorem is invoked. We now execute all four frozen extension cells.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "0df73f5603e89bb7a46fd007a3a84420fd86ab22e5432fc8065393087379466e",
+  "created": 1788847991.007398
+}

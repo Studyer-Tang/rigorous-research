@@ -1,0 +1,25 @@
+Building inherited delay and prefix objects
+Recomputing the old widest triangle
+Child 1
+Child 2
+Child 3
+Child 4
+{
+  "scope": "one-triangle subdivision probe using the existing analytic producer; not independently validated analytic bounds",
+  "source_sha256": "b6715192f00c8131c6cc5b339677e53b22323edab1580360d9ffd74445844ff5",
+  "baseline_identity": "850bc57041e2f08a35ee01682ed02cdf52bfebbf438f145289910976febadc36",
+  "baseline_exact_reproduction": true,
+  "baseline_radius": 10002.130374177372,
+  "baseline_nominal": -0.0003117596728436075,
+  "baseline_hessian": 9999.216079309335,
+  "children_radius": 853.2577448645017,
+  "children_nominal": -9.16746132377151e-05,
+  "children_hessian": 852.5080474941166,
+  "radius_reduction_factor": 11.722284895012258,
+  "hessian_reduction_factor": 11.729175001574802,
+  "parent_and_children_intervals_overlap": true,
+  "elapsed_seconds": 2.10999999998603,
+  "original_goal": "INCONCLUSIVE",
+  "new_global_certificate": false,
+  "script_sha256": "7079f2011c35431e890e64f50bb48106d9f3764f92760d5478324144e3c8008f"
+}
