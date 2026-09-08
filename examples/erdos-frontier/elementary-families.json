@@ -1,0 +1,596 @@
+[
+  {
+    "residue": 0,
+    "action_id": 69,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        24,
+        24
+      ],
+      "x": [
+        12,
+        12
+      ],
+      "y": [
+        13,
+        12
+      ],
+      "z": [
+        156,
+        300,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 2,
+    "action_id": 70,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        26,
+        24
+      ],
+      "x": [
+        13,
+        12
+      ],
+      "y": [
+        14,
+        12
+      ],
+      "z": [
+        182,
+        324,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 3,
+    "action_id": 71,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        3,
+        24
+      ],
+      "x": [
+        1,
+        6
+      ],
+      "y": [
+        4,
+        42,
+        144
+      ],
+      "z": [
+        12,
+        294,
+        2772,
+        12096,
+        20736
+      ]
+    }
+  },
+  {
+    "residue": 4,
+    "action_id": 72,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        4,
+        24
+      ],
+      "x": [
+        2,
+        12
+      ],
+      "y": [
+        3,
+        12
+      ],
+      "z": [
+        6,
+        60,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 5,
+    "action_id": 73,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        5,
+        24
+      ],
+      "x": [
+        2,
+        8
+      ],
+      "y": [
+        5,
+        24
+      ],
+      "z": [
+        10,
+        88,
+        192
+      ]
+    }
+  },
+  {
+    "residue": 6,
+    "action_id": 74,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        6,
+        24
+      ],
+      "x": [
+        3,
+        12
+      ],
+      "y": [
+        4,
+        12
+      ],
+      "z": [
+        12,
+        84,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 7,
+    "action_id": 75,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        7,
+        24
+      ],
+      "x": [
+        2,
+        6
+      ],
+      "y": [
+        15,
+        90,
+        144
+      ],
+      "z": [
+        210,
+        2610,
+        12276,
+        25920,
+        20736
+      ]
+    }
+  },
+  {
+    "residue": 8,
+    "action_id": 76,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        8,
+        24
+      ],
+      "x": [
+        4,
+        12
+      ],
+      "y": [
+        5,
+        12
+      ],
+      "z": [
+        20,
+        108,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 9,
+    "action_id": 77,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        9,
+        24
+      ],
+      "x": [
+        3,
+        8
+      ],
+      "y": [
+        12,
+        32
+      ],
+      "z": [
+        36,
+        96
+      ]
+    }
+  },
+  {
+    "residue": 10,
+    "action_id": 78,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        10,
+        24
+      ],
+      "x": [
+        5,
+        12
+      ],
+      "y": [
+        6,
+        12
+      ],
+      "z": [
+        30,
+        132,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 11,
+    "action_id": 79,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        11,
+        24
+      ],
+      "x": [
+        3,
+        6
+      ],
+      "y": [
+        34,
+        138,
+        144
+      ],
+      "z": [
+        1122,
+        9246,
+        28692,
+        39744,
+        20736
+      ]
+    }
+  },
+  {
+    "residue": 12,
+    "action_id": 80,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        12,
+        24
+      ],
+      "x": [
+        6,
+        12
+      ],
+      "y": [
+        7,
+        12
+      ],
+      "z": [
+        42,
+        156,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 13,
+    "action_id": 81,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        13,
+        24
+      ],
+      "x": [
+        4,
+        6
+      ],
+      "y": [
+        26,
+        87,
+        72
+      ],
+      "z": [
+        52,
+        174,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 14,
+    "action_id": 82,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        14,
+        24
+      ],
+      "x": [
+        7,
+        12
+      ],
+      "y": [
+        8,
+        12
+      ],
+      "z": [
+        56,
+        180,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 15,
+    "action_id": 83,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        15,
+        24
+      ],
+      "x": [
+        4,
+        6
+      ],
+      "y": [
+        61,
+        186,
+        144
+      ],
+      "z": [
+        3660,
+        22506,
+        52020,
+        53568,
+        20736
+      ]
+    }
+  },
+  {
+    "residue": 16,
+    "action_id": 84,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        16,
+        24
+      ],
+      "x": [
+        8,
+        12
+      ],
+      "y": [
+        9,
+        12
+      ],
+      "z": [
+        72,
+        204,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 17,
+    "action_id": 85,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        17,
+        24
+      ],
+      "x": [
+        6,
+        8
+      ],
+      "y": [
+        17,
+        24
+      ],
+      "z": [
+        102,
+        280,
+        192
+      ]
+    }
+  },
+  {
+    "residue": 18,
+    "action_id": 86,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        18,
+        24
+      ],
+      "x": [
+        9,
+        12
+      ],
+      "y": [
+        10,
+        12
+      ],
+      "z": [
+        90,
+        228,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 19,
+    "action_id": 87,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        19,
+        24
+      ],
+      "x": [
+        5,
+        6
+      ],
+      "y": [
+        96,
+        234,
+        144
+      ],
+      "z": [
+        9120,
+        44694,
+        82260,
+        67392,
+        20736
+      ]
+    }
+  },
+  {
+    "residue": 20,
+    "action_id": 88,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        20,
+        24
+      ],
+      "x": [
+        10,
+        12
+      ],
+      "y": [
+        11,
+        12
+      ],
+      "z": [
+        110,
+        252,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 21,
+    "action_id": 89,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        21,
+        24
+      ],
+      "x": [
+        6,
+        6
+      ],
+      "y": [
+        63,
+        135,
+        72
+      ],
+      "z": [
+        126,
+        270,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 22,
+    "action_id": 90,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        22,
+        24
+      ],
+      "x": [
+        11,
+        12
+      ],
+      "y": [
+        12,
+        12
+      ],
+      "z": [
+        132,
+        276,
+        144
+      ]
+    }
+  },
+  {
+    "residue": 23,
+    "action_id": 91,
+    "arguments": {
+      "numerator": 4,
+      "distinct": true,
+      "n": [
+        23,
+        24
+      ],
+      "x": [
+        6,
+        6
+      ],
+      "y": [
+        139,
+        282,
+        144
+      ],
+      "z": [
+        19182,
+        78114,
+        119412,
+        81216,
+        20736
+      ]
+    }
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "id": 64,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "A general lifting route from an exact witness: let n0,x0,y0,z0 be positive with x0<y0<z0 and4/n0=1/x0+1/y0+1/z0. Put r=4x0-n0>0,b0=n0*x0,d=r*y0-b0>0. Then d*(r*z0-b0)=b0^2. For integer t>=0 set N=n0+4*r*d*t, X=x0+r*d*t,B=N*X,Y=(B+d)/r,Z=(B+B^2/d)/r. B-b0 is a multiple of r*d in Z[t], so Y,Z have integer coefficients (their constant terms are y0,z0). Factor identity proves4/N=1/X+1/Y+1/Z. X>0; Y-X has positive constant y0-x0 and nonnegative other coefficients, because its linear coefficient is2*d*n0 and its quadratic coefficient positive. Z-Y=(B^2/d-d)/r has positive constant z0-y0 and nonnegative other coefficients. Thus X<Y<Z for every t>=0. This is a written general lemma, with no novelty claim; the next actions check explicit lifted families independently. It propagates already solved inputs, not a descent or covering proof for every n."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      8,
+      11,
+      33
+    ],
+    "falsifier": "A division or coefficient-integrality error invalidates the lift; coverage of all input integers is not supplied by this lemma.",
+    "rationale": "Turn particular witnesses into certified infinite arithmetic progressions while retaining the original coverage gap."
+  },
+  "fingerprint": "07f4b7c0cb52d5fe57b8905725b0f19867edeabe2974b0bd3efb9e1550efbed7",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "A general lifting route from an exact witness: let n0,x0,y0,z0 be positive with x0<y0<z0 and4/n0=1/x0+1/y0+1/z0. Put r=4x0-n0>0,b0=n0*x0,d=r*y0-b0>0. Then d*(r*z0-b0)=b0^2. For integer t>=0 set N=n0+4*r*d*t, X=x0+r*d*t,B=N*X,Y=(B+d)/r,Z=(B+B^2/d)/r. B-b0 is a multiple of r*d in Z[t], so Y,Z have integer coefficients (their constant terms are y0,z0). Factor identity proves4/N=1/X+1/Y+1/Z. X>0; Y-X has positive constant y0-x0 and nonnegative other coefficients, because its linear coefficient is2*d*n0 and its quadratic coefficient positive. Z-Y=(B^2/d-d)/r has positive constant z0-y0 and nonnegative other coefficients. Thus X<Y<Z for every t>=0. This is a written general lemma, with no novelty claim; the next actions check explicit lifted families independently. It propagates already solved inputs, not a descent or covering proof for every n.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    },
+    "verified": false
+  },
+  "result_hash": "4389d1d3fb93fa0cafbd653933302655c0553bf40c639512620c925c1e55363b",
+  "created": 1788851097.306681
+}

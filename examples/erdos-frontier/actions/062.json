@@ -1,0 +1,100 @@
+{
+  "id": 62,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "distinct": true,
+        "n": [
+          793,
+          840
+        ],
+        "numerator": 4,
+        "x": [
+          200,
+          210
+        ],
+        "y": [
+          22660,
+          47790,
+          25200
+        ],
+        "z": [
+          179693800,
+          757997190,
+          1199056635,
+          843015600,
+          222264000
+        ]
+      },
+      "tool": "egyptian_family"
+    },
+    "evidence": [
+      34
+    ],
+    "falsifier": "A nonzero cross-multiplied polynomial or failed side condition defeats this candidate; passing does not cover other residues.",
+    "rationale": "Verify the candidate for n=793 mod840 for all integer t>=0."
+  },
+  "fingerprint": "8fa2a5c4b658727ed67f24f5120484367090392882f54001376476a73e4871ba",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "backend": "exact-integer",
+      "backend_version": "2",
+      "claim": {
+        "distinct": true,
+        "n": [
+          793,
+          840
+        ],
+        "numerator": 4,
+        "parameter": "nonnegative-integer",
+        "x": [
+          200,
+          210
+        ],
+        "y": [
+          22660,
+          47790,
+          25200
+        ],
+        "z": [
+          179693800,
+          757997190,
+          1199056635,
+          843015600,
+          222264000
+        ]
+      },
+      "counterexample_parameter": null,
+      "identity_zero": true,
+      "nonnegative_coefficients": true,
+      "operation": "unit-fraction-polynomial-family",
+      "schema_version": 1,
+      "warning": "Proves only this explicit polynomial family for integer t>=0. Coverage of other integers and novelty are separate."
+    },
+    "elapsed_seconds": 0.578,
+    "independent_check": {
+      "certificate_hash": "2d83fafd8e1a17a95fb564ee9145e75ca687281e37223e01ee82d8dfbd0c0c9d",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Only the recorded finite domain, denominator window, obstruction or explicit polynomial family; no coverage of other integers or novelty claim.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    }
+  },
+  "result_hash": "c10dd87614e438cb5e7d43cfa84cff72a028f3b0cfc4d59963077f2d8989c7d2",
+  "created": 1788851015.9159908
+}

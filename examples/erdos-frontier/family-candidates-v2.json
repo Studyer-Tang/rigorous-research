@@ -1,0 +1,881 @@
+{
+  "modulus": 840,
+  "universe": "n>=3,n=1 mod24",
+  "families": [
+    {
+      "residue": 25,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          25,
+          840
+        ],
+        "x": [
+          7,
+          210
+        ],
+        "y": [
+          60,
+          3710,
+          58800
+        ],
+        "z": [
+          2100,
+          263410,
+          12433260,
+          261777600,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 49,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 7,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          49,
+          840
+        ],
+        "x": [
+          14,
+          210
+        ],
+        "y": [
+          99,
+          3150,
+          25200
+        ],
+        "z": [
+          9702,
+          620550,
+          14886900,
+          158760000,
+          635040000
+        ]
+      }
+    },
+    {
+      "residue": 73,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 10,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          73,
+          840
+        ],
+        "x": [
+          20,
+          210
+        ],
+        "y": [
+          210,
+          4590,
+          25200
+        ],
+        "z": [
+          30660,
+          1344870,
+          22131270,
+          161935200,
+          444528000
+        ]
+      }
+    },
+    {
+      "residue": 97,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          97,
+          840
+        ],
+        "x": [
+          25,
+          210
+        ],
+        "y": [
+          810,
+          13790,
+          58800
+        ],
+        "z": [
+          392850,
+          13390090,
+          171193260,
+          973022400,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 145,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          145,
+          840
+        ],
+        "x": [
+          37,
+          210
+        ],
+        "y": [
+          1790,
+          20510,
+          58800
+        ],
+        "z": [
+          1920670,
+          44034970,
+          378639660,
+          1447185600,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 193,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 10,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          193,
+          840
+        ],
+        "x": [
+          50,
+          210
+        ],
+        "y": [
+          1380,
+          11790,
+          25200
+        ],
+        "z": [
+          1331700,
+          22766490,
+          145964070,
+          415951200,
+          444528000
+        ]
+      }
+    },
+    {
+      "residue": 217,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          217,
+          840
+        ],
+        "x": [
+          55,
+          210
+        ],
+        "y": [
+          3980,
+          30590,
+          58800
+        ],
+        "z": [
+          9500260,
+          146067250,
+          842218860,
+          2158430400,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 241,
+      "method": "proportional divisor",
+      "offset": 3,
+      "q": 21,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          241,
+          840
+        ],
+        "x": [
+          63,
+          210
+        ],
+        "y": [
+          1446,
+          9860,
+          16800
+        ],
+        "z": [
+          30366,
+          207060,
+          352800
+        ]
+      }
+    },
+    {
+      "residue": 265,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          265,
+          840
+        ],
+        "x": [
+          67,
+          210
+        ],
+        "y": [
+          5920,
+          37310,
+          58800
+        ],
+        "z": [
+          21021920,
+          265012930,
+          1252878060,
+          2632593600,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 313,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 20,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          313,
+          840
+        ],
+        "x": [
+          80,
+          210
+        ],
+        "y": [
+          3580,
+          18990,
+          25200
+        ],
+        "z": [
+          4482160,
+          47569950,
+          189343035,
+          334983600,
+          222264000
+        ]
+      }
+    },
+    {
+      "residue": 337,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          337,
+          840
+        ],
+        "x": [
+          85,
+          210
+        ],
+        "y": [
+          9550,
+          47390,
+          58800
+        ],
+        "z": [
+          54711950,
+          543042010,
+          2021276460,
+          3343838400,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 385,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          385,
+          840
+        ],
+        "x": [
+          97,
+          210
+        ],
+        "y": [
+          12450,
+          54110,
+          58800
+        ],
+        "z": [
+          92989050,
+          808349290,
+          2635148460,
+          3818001600,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 409,
+      "method": "proportional divisor",
+      "offset": 3,
+      "q": 21,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          409,
+          840
+        ],
+        "x": [
+          105,
+          210
+        ],
+        "y": [
+          4090,
+          16580,
+          16800
+        ],
+        "z": [
+          85890,
+          348180,
+          352800
+        ]
+      }
+    },
+    {
+      "residue": 433,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          433,
+          840
+        ],
+        "x": [
+          110,
+          210
+        ],
+        "y": [
+          6805,
+          26190,
+          25200
+        ],
+        "z": [
+          64824430,
+          498998070,
+          1440418140,
+          1847966400,
+          889056000
+        ]
+      }
+    },
+    {
+      "residue": 457,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          457,
+          840
+        ],
+        "x": [
+          115,
+          210
+        ],
+        "y": [
+          17520,
+          64190,
+          58800
+        ],
+        "z": [
+          184152720,
+          1349466370,
+          3708366060,
+          4529246400,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 481,
+      "method": "varying residual: n=7c-2",
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          481,
+          840
+        ],
+        "x": [
+          138,
+          240
+        ],
+        "y": [
+          962,
+          1680
+        ],
+        "z": [
+          33189,
+          115680,
+          100800
+        ]
+      }
+    },
+    {
+      "residue": 505,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          505,
+          840
+        ],
+        "x": [
+          127,
+          210
+        ],
+        "y": [
+          21380,
+          70910,
+          58800
+        ],
+        "z": [
+          274241260,
+          1819196050,
+          4525450860,
+          5003409600,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 553,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 7,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          553,
+          840
+        ],
+        "x": [
+          140,
+          210
+        ],
+        "y": [
+          11061,
+          33390,
+          25200
+        ],
+        "z": [
+          122334660,
+          738620190,
+          1672341300,
+          1682856000,
+          635040000
+        ]
+      }
+    },
+    {
+      "residue": 577,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          577,
+          840
+        ],
+        "x": [
+          145,
+          210
+        ],
+        "y": [
+          27890,
+          80990,
+          58800
+        ],
+        "z": [
+          466683370,
+          2710492330,
+          5903487660,
+          5714654400,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 601,
+      "method": "proportional divisor",
+      "offset": 4,
+      "q": 14,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          601,
+          840
+        ],
+        "x": [
+          154,
+          210
+        ],
+        "y": [
+          6611,
+          18255,
+          12600
+        ],
+        "z": [
+          92554,
+          255570,
+          176400
+        ]
+      }
+    },
+    {
+      "residue": 625,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          625,
+          840
+        ],
+        "x": [
+          157,
+          210
+        ],
+        "y": [
+          32710,
+          87710,
+          58800
+        ],
+        "z": [
+          641933750,
+          3442705210,
+          6923785260,
+          6188817600,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 649,
+      "method": "varying residual: n=7c-2",
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          649,
+          840
+        ],
+        "x": [
+          186,
+          240
+        ],
+        "y": [
+          1298,
+          1680
+        ],
+        "z": [
+          60357,
+          156000,
+          100800
+        ]
+      }
+    },
+    {
+      "residue": 673,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          673,
+          840
+        ],
+        "x": [
+          170,
+          210
+        ],
+        "y": [
+          16345,
+          40590,
+          25200
+        ],
+        "z": [
+          374006290,
+          1857601350,
+          3459845340,
+          2864030400,
+          889056000
+        ]
+      }
+    },
+    {
+      "residue": 697,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          697,
+          840
+        ],
+        "x": [
+          175,
+          210
+        ],
+        "y": [
+          40660,
+          97790,
+          58800
+        ],
+        "z": [
+          991900700,
+          4771271890,
+          8606641260,
+          6900062400,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 721,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 7,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          721,
+          840
+        ],
+        "x": [
+          182,
+          210
+        ],
+        "y": [
+          18747,
+          43470,
+          25200
+        ],
+        "z": [
+          351431262,
+          1629820710,
+          2834464500,
+          2190888000,
+          635040000
+        ]
+      }
+    },
+    {
+      "residue": 745,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          745,
+          840
+        ],
+        "x": [
+          187,
+          210
+        ],
+        "y": [
+          46440,
+          104510,
+          58800
+        ],
+        "z": [
+          1293957720,
+          5824028770,
+          9830151660,
+          7374225600,
+          2074464000
+        ]
+      }
+    },
+    {
+      "residue": 769,
+      "method": "proportional divisor",
+      "offset": 4,
+      "q": 14,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          769,
+          840
+        ],
+        "x": [
+          196,
+          210
+        ],
+        "y": [
+          10766,
+          23295,
+          12600
+        ],
+        "z": [
+          150724,
+          326130,
+          176400
+        ]
+      }
+    },
+    {
+      "residue": 793,
+      "offset": 2,
+      "residual_numerator": 7,
+      "divisor": 20,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          793,
+          840
+        ],
+        "x": [
+          200,
+          210
+        ],
+        "y": [
+          22660,
+          47790,
+          25200
+        ],
+        "z": [
+          179693800,
+          757997190,
+          1199056635,
+          843015600,
+          222264000
+        ]
+      }
+    },
+    {
+      "residue": 817,
+      "offset": 1,
+      "residual_numerator": 3,
+      "divisor": 5,
+      "arguments": {
+        "numerator": 4,
+        "distinct": true,
+        "n": [
+          817,
+          840
+        ],
+        "x": [
+          205,
+          210
+        ],
+        "y": [
+          55830,
+          114590,
+          58800
+        ],
+        "z": [
+          1870137510,
+          7676957050,
+          11817826860,
+          8085470400,
+          2074464000
+        ]
+      }
+    }
+  ],
+  "uncovered": [
+    1,
+    121,
+    169,
+    289,
+    361,
+    529
+  ],
+  "coverage_is_not_universal": true,
+  "previous_uncovered": [
+    1,
+    121,
+    169,
+    241,
+    289,
+    361,
+    409,
+    481,
+    529,
+    601,
+    649,
+    769
+  ]
+}

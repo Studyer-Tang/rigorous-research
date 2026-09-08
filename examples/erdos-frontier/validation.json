@@ -1,0 +1,10 @@
+{
+  "unit_tests": 211,
+  "assurance_regressions": 28,
+  "workspace_errors": [],
+  "workspace_warnings": [],
+  "original_objective_status": "UNRESOLVED",
+  "release_review": false,
+  "inconclusive_release_validation": true,
+  "human_review": false
+}

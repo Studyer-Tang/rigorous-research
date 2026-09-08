@@ -4,6 +4,14 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.12.0 - 2026-09-08
+
+- Connected finite Egyptian-fraction search directly to the hosted/API/MCP kernel and added bounded first-denominator windows and progression scans with a shared work budget. Complete divisor checks can refute a restricted route; missing work stays inconclusive.
+- Added universal integer-polynomial family certificates. A separate standard-library verifier reconstructs cross-multiplied identities and sufficient coefficient proofs for integrality, positivity and denominator ordering without importing SymPy or the producer.
+- Added bounded, hashed legacy task and proof-obligation context. Reading these records never accepts a proof or changes the immutable original objective.
+- Added a live Erdős–Straus investigation, with failures of short-window auxiliary hypotheses, 29 checked congruence families, three lifted families and explicit remaining coverage gaps. This is not a solution of the original conjecture or a novelty claim.
+- Added independent small-denominator enumeration and adversarial regression tests for changed quantifiers, forged obstructions, incomplete scans, exhausted budgets, altered polynomial coefficients and unsupported positivity.
+
 ## 1.11.0 - 2026-09-08
 
 - Added a shared persistent research-agent kernel with SQLite study records, immutable original objectives, content-addressed numeric assets, proposal validation, process locking, interruption recovery and separate execution/evidence/acceptance states.

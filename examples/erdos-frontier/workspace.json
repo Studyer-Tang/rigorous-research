@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "workspace_id": "erdos-frontier-20260908",
+  "domain": "mathematics",
+  "question": "Attempt the Erdos-Straus conjecture: for every integer n>=3 find positive integers x<y<z with 4/n=1/x+1/y+1/z. Explore first-denominator windows, divisibility and polynomial residue families; do not replace this original goal with a subsidiary result.",
+  "stage": "RELEASED",
+  "created_at": "2026-09-08T06:45:19.865308+00:00",
+  "updated_at": "2026-09-08T07:19:11.792411+00:00",
+  "case_file": "case.json",
+  "tasks": [
+    {
+      "id": "W001",
+      "title": "Record sources and exploratory routes",
+      "kind": "definition",
+      "acceptance": "Explicit domain, falsifiers, evidence and unresolved original goal",
+      "depends_on": [],
+      "deliverable": "literature/source.json",
+      "status": "DONE",
+      "note": "Scoped deliverable completed; original conjecture unresolved."
+    },
+    {
+      "id": "W002",
+      "title": "Attack short-window hypotheses",
+      "kind": "analysis",
+      "acceptance": "Explicit domain, falsifiers, evidence and unresolved original goal",
+      "depends_on": [],
+      "deliverable": "window-summary.json",
+      "status": "DONE",
+      "note": "Scoped deliverable completed; original conjecture unresolved."
+    },
+    {
+      "id": "W003",
+      "title": "Discover and verify infinite families",
+      "kind": "analysis",
+      "acceptance": "Explicit domain, falsifiers, evidence and unresolved original goal",
+      "depends_on": [],
+      "deliverable": "family-candidates.json",
+      "status": "DONE",
+      "note": "Scoped deliverable completed; original conjecture unresolved."
+    },
+    {
+      "id": "W004",
+      "title": "Synthesize proof, limits and architecture evaluation",
+      "kind": "analysis",
+      "acceptance": "Explicit domain, falsifiers, evidence and unresolved original goal",
+      "depends_on": [],
+      "deliverable": "REPORT.zh-CN.md",
+      "status": "DONE",
+      "note": "Scoped deliverable completed; original conjecture unresolved."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S001",
+      "citation": "Miguel Angel Lopez, A Complete Congruence System for the Erdos-Straus Conjecture, arXiv:2404.01508v3 (2024).",
+      "role": "primary",
+      "url": "https://arxiv.org/html/2404.01508v3",
+      "file": "literature/source.json",
+      "sha256": "4ee9b51200eca6d480e1b3adbf957b2bc4204407e87bb01b98f1f1bf56693611",
+      "accessed_at": "2026-09-08T07:19:11.654221+00:00",
+      "note": "Primary preprint read; its account of Mordell is secondary, and its conjectures are not accepted proofs.",
+      "supports": [
+        "C001"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "R001",
+      "task_id": "W003",
+      "label": "explore-840-polynomial-families",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/erdos-frontier-20260908/discover_families.py"
+      ],
+      "cwd": "../..",
+      "started_at": "2026-09-08T06:59:58.340188+00:00",
+      "finished_at": "2026-09-08T06:59:58.828418+00:00",
+      "returncode": 0,
+      "process_returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R001/stdout.txt",
+      "stderr": "artifacts/runs/R001/stderr.txt",
+      "outputs": [
+        {
+          "file": "family-candidates.json",
+          "sha256": "639647b68d4e1f2085d60159f50363eb39aa542aa0c01b45f5b6f140e3450952"
+        }
+      ],
+      "stdout_sha256": "edd958088faccf45c1f266d8a01db0a5df525afa89f68884015f7d23503cc787",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "R002",
+      "task_id": "W003",
+      "label": "expand-polynomial-ansatz",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/erdos-frontier-20260908/expand_families.py"
+      ],
+      "cwd": "../..",
+      "started_at": "2026-09-08T07:02:28.870328+00:00",
+      "finished_at": "2026-09-08T07:02:29.527988+00:00",
+      "returncode": 0,
+      "process_returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R002/stdout.txt",
+      "stderr": "artifacts/runs/R002/stderr.txt",
+      "outputs": [
+        {
+          "file": "family-candidates-v2.json",
+          "sha256": "371035cfec37c07f8b15aa60403395aa3ad496b1a8ff6425b6edcbf7b7bb6fd1"
+        }
+      ],
+      "stdout_sha256": "438e173c283f36803e5e4fa973fcfdc6947ad9b3043edafa54c9af9e024411e6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "R003",
+      "task_id": "W002",
+      "label": "independent-certificate-and-coverage-summary",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "research-studies/erdos-frontier-20260908/summarize.py"
+      ],
+      "cwd": "../..",
+      "started_at": "2026-09-08T07:12:31.475080+00:00",
+      "finished_at": "2026-09-08T07:12:31.903989+00:00",
+      "returncode": 0,
+      "process_returncode": 0,
+      "accepted_returncodes": [
+        0
+      ],
+      "missing_outputs": [],
+      "timed_out": false,
+      "launch_error": "",
+      "environment": {
+        "python": "3.12.14",
+        "platform": "Windows-11-10.0.26200-SP0"
+      },
+      "stdout": "artifacts/runs/R003/stdout.txt",
+      "stderr": "artifacts/runs/R003/stderr.txt",
+      "outputs": [
+        {
+          "file": "window-summary.json",
+          "sha256": "1f6e1cc861242629cba0017f3f332f670b3346b46533b65e5d61d801993e5edb"
+        }
+      ],
+      "stdout_sha256": "5b90068810666e174961693a124b8bf1119c13a3b9ebda5e8307f0fd1025aebe",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "release_policy": {
+    "plan_seal_required": false,
+    "data_snapshot_required": false,
+    "independent_review_required": true
+  },
+  "plan_seal": "",
+  "data_snapshots": [],
+  "review_adjudication": ""
+}

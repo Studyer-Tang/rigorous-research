@@ -1,0 +1,14 @@
+{"time": "2026-09-08T06:45:19.859699+00:00", "event": "initialized", "domain": "mathematics"}
+{"time": "2026-09-08T07:19:10.155889+00:00", "event": "contract-set", "field": "ambient_object"}
+{"time": "2026-09-08T07:19:10.280024+00:00", "event": "contract-set", "field": "coefficient_domain"}
+{"time": "2026-09-08T07:19:10.388509+00:00", "event": "contract-set", "field": "quantifiers"}
+{"time": "2026-09-08T07:19:10.512207+00:00", "event": "contract-set", "field": "equality_semantics"}
+{"time": "2026-09-08T07:19:10.637294+00:00", "event": "claim-updated", "claim_id": "C001"}
+{"time": "2026-09-08T07:19:10.761882+00:00", "event": "evidence-added", "evidence_id": "E001"}
+{"time": "2026-09-08T07:19:10.893699+00:00", "event": "evidence-added", "evidence_id": "E002"}
+{"time": "2026-09-08T07:19:11.016735+00:00", "event": "evidence-linked", "target": "C001", "evidence_id": "E001"}
+{"time": "2026-09-08T07:19:11.124148+00:00", "event": "evidence-linked", "target": "C001", "evidence_id": "E002"}
+{"time": "2026-09-08T07:19:11.224066+00:00", "event": "check-added", "check_id": "K001"}
+{"time": "2026-09-08T07:19:11.328404+00:00", "event": "check-updated", "check_id": "K001", "outcome": "UNRESOLVED"}
+{"time": "2026-09-08T07:19:11.430010+00:00", "event": "evidence-linked", "target": "K001", "evidence_id": "E001"}
+{"time": "2026-09-08T07:19:11.527320+00:00", "event": "decision-recorded", "claim_id": "C001", "verdict": "INCONCLUSIVE"}

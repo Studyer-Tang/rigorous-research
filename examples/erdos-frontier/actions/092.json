@@ -1,0 +1,44 @@
+{
+  "id": 92,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Independent aggregation verified55 polynomial families, with52 covering834 residues modulo840 and three extra lifts. The exact uncovered residues are1,121,169,289,361,529; the smallest n>=3 in every included progression was checked. Window evidence establishes minimal first denominators285 at1129,306 at1201 and61570 at246241. 4597 inputs were tested for the eight-step route, including an unbroken4166-input prefix25..99985 before the targeted counterexample. Architecture1.12 now supports native finite/window/scan/family tools and bounded hashed task/proof memory. Full regression211 tests and28 assurance cases passed after restoring backward-compatible scope wording. No human review, novelty claim or original-goal resolution."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      91
+    ],
+    "falsifier": "Recheck archived certificates and residue coverage; an unproved remaining class prevents universal acceptance.",
+    "rationale": "Consolidate verified outcomes and implementation validation before reporting."
+  },
+  "fingerprint": "c72999c4b9fbd44c0ee6941922610caa5eada3e0d14368f96df92494c51fc6c4",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Independent aggregation verified55 polynomial families, with52 covering834 residues modulo840 and three extra lifts. The exact uncovered residues are1,121,169,289,361,529; the smallest n>=3 in every included progression was checked. Window evidence establishes minimal first denominators285 at1129,306 at1201 and61570 at246241. 4597 inputs were tested for the eight-step route, including an unbroken4166-input prefix25..99985 before the targeted counterexample. Architecture1.12 now supports native finite/window/scan/family tools and bounded hashed task/proof memory. Full regression211 tests and28 assurance cases passed after restoring backward-compatible scope wording. No human review, novelty claim or original-goal resolution.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+      "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+      "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "c0d42651683484ac4fdd9b9f3024a10fa82bd241f538b277b3b1a6443c0f8d9c",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "9fd74438ebaedeb82ce1e6818e4eabb9b8adb4786635482bfb64af584827c9ec"
+    },
+    "verified": false
+  },
+  "result_hash": "e6e921e0f84a4642dde0d769acb8e171684d7efe7b81f8e85f81bd778eb92a6a",
+  "created": 1788851840.46248
+}

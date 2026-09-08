@@ -1,0 +1,43 @@
+{
+  "id": 68,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Actions35..63 independently established all29 proposed hard-class families. Actions65..67 established lifts through1129,1201,246241. To make the overall remaining gap precise, also certify the23 elementary classes other than1 modulo24. These are standard constructions plus the scaled solution for multiples of3. Combine the23 modulo24 families and29 modulo840 families by exact residue enumeration; explicitly check the smallest n>=3 in every progression to avoid a missing finite prefix. Expected complement1,121,169,289,361,529 mod840 must be recomputed, not assumed from the paper. This is a reproducible classical partial coverage result, not a new solution."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      34,
+      63,
+      64,
+      65,
+      66,
+      67
+    ],
+    "falsifier": "A residue or initial-value gap invalidates the stated scope; six remaining classes leave the original conjecture open.",
+    "rationale": "Complete the coverage argument for the partial theorem, including small inputs and all other residues."
+  },
+  "fingerprint": "f2659eb2b505a4cad28a1327658a7d8810d92edd3531e4d0117d5b3f3ccaa1cd",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Actions35..63 independently established all29 proposed hard-class families. Actions65..67 established lifts through1129,1201,246241. To make the overall remaining gap precise, also certify the23 elementary classes other than1 modulo24. These are standard constructions plus the scaled solution for multiples of3. Combine the23 modulo24 families and29 modulo840 families by exact residue enumeration; explicitly check the smallest n>=3 in every progression to avoid a missing finite prefix. Expected complement1,121,169,289,361,529 mod840 must be recomputed, not assumed from the paper. This is a reproducible classical partial coverage result, not a new solution.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "abf8d4ba057f45f0606a44b7989a73d9f11303e9fc84311df5afc062f11eefd0",
+      "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+      "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "c0d42651683484ac4fdd9b9f3024a10fa82bd241f538b277b3b1a6443c0f8d9c",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "9fd74438ebaedeb82ce1e6818e4eabb9b8adb4786635482bfb64af584827c9ec"
+    },
+    "verified": false
+  },
+  "result_hash": "417a7c41403f2df9fda4ff9126deb706298be4bd37c213f597e5188b87864820",
+  "created": 1788851434.2852566
+}

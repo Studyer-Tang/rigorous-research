@@ -1,0 +1,253 @@
+{
+  "id": 2,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "limit": 5,
+        "provider": "arxiv",
+        "query": "Erdos Straus conjecture polynomial identities congruence classes"
+      },
+      "tool": "literature"
+    },
+    "evidence": [
+      1
+    ],
+    "falsifier": "Metadata does not certify a claimed proof; inspect selected primary sources.",
+    "rationale": "Find primary papers on the statement and limitations of congruence-family approaches."
+  },
+  "fingerprint": "f2c3198e8d3f31fb68b653dc51f8d31edb3747441165038e67c9965df31e8656",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 1.906,
+    "sources": {
+      "dedup_decisions": [],
+      "fuzzy_threshold": 0.94,
+      "query": "Erdos Straus conjecture polynomial identities congruence classes",
+      "raw_count": 5,
+      "raw_records": [
+        {
+          "abstract": "In this paper we attack the Erdos-Straus conjecture by means of the structure of its solutions, extending and improving the results of a previous paper. Using previous results and supported by the works of Elsholtz and Tao and Monks and Velingker we define a system of congruences for which there are always solutions to the Erdos-Straus conjecture and which we conjecture to include all prime numbers. For this purpose, and always taking into account a result due to Mordell that limits the congruences admitting polynomial identities to those that are not quadratic residues, we will adopt a transversal approach and classify the solutions by their form and not by those congruences that produce them. Thus we define two new types of solutions, which we call Type A and B, and relate them to the already known Type II solutions and study their properties. Finally we conjecture that every prime number has at least one solution of Type A or B and we associate a congruence and a general polynomial to each Type of solution.",
+          "arxiv_id": "2404.01508",
+          "authors": [
+            "Miguel Angel Lopez"
+          ],
+          "doi": "",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "A Complete Congruence System for the Erdos-Straus Conjecture",
+          "url": "http://arxiv.org/abs/2404.01508v3",
+          "venue": "arXiv (math.NT)",
+          "year": 2024
+        },
+        {
+          "abstract": "In number theory, the Erdos-Straus conjecture states that for all n >=2, the rational number 4/n can be expressed as the sum of three unit fractions. Paul Erdos and Ernst G. Straus formulated the conjecture in 1948. The restriction that the three unit fractions be positive is essential to the difficulty of the problem, for if negative values were allowed the problem could always be solved. This paper presents an explicit solutions to this conjecture for all n >=2 excepting some n such that n=1(mod8).",
+          "arxiv_id": "1812.05684",
+          "authors": [
+            "Dagnachew Jenber Negash"
+          ],
+          "doi": "",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "Solutions to Diophantine Equation of Erdos-Straus Conjecture",
+          "url": "http://arxiv.org/abs/1812.05684v2",
+          "venue": "arXiv (math.HO)",
+          "year": 2018
+        },
+        {
+          "abstract": "In 1948, Erdös and Straus formulated a conjecture : for any positive integer $n>2$, there exist positive integers $n_1,n_2$ and $n_3$ such that \\begin{equation}\\frac{4}{n}=\\frac{1}{n_1}+\\frac{1}{n_2}+\\frac{1}{n_3},\\nonumber\\end{equation} which is still open. It is known that one only needs to prove the conjecture for any prime number $n$ such that $n\\equiv 1\\;(\\mbox{mod}\\;24)$. If $n=24m+1$ and $n_1\\leq n_2,n_3$, then $n_1=6m+k$ with $1\\leq k\\leq 12m$. A solution $(n_1,n_2,n_3)$ of the above equation is called a {\\it tame solution} if $n_2$ and $n_3$ are factors of $(6m+k)(24m+1)$. We call $n=24m+1$ {\\it wild} if it does not have any tame solution. Computer calculation shows that there are only nine wild primes among the 7185 primes of the form $24m+1$ with $m\\leq 30000$. In this paper, we derive the tame solutions of the above equation for the integers of the form $24m+1$ with $m$ parameterized by certain congruence classes. They cover the solvability of all the 586 tame primes among the 591 primes of the form $24m+1$ with $m\\leq 2000$.",
+          "arxiv_id": "2605.23601",
+          "authors": [
+            "Xiaoping Xu"
+          ],
+          "doi": "",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "Congruence Classes of Supporting the Erdös-Straus Conjecture I: Tame Solutions",
+          "url": "http://arxiv.org/abs/2605.23601v1",
+          "venue": "arXiv (math.NT)",
+          "year": 2026
+        },
+        {
+          "abstract": "In a recent paper (Straus et al. 2008) we determined the energy flux of internal gravity waves in the lower solar atmosphere using a combination of 3D numerical simulations and observations obtained with the IBIS instrument operated at the Dunn Solar Telescope and the Michelson Doppler Imager (MDI) on SOHO. In this paper we extend these studies using coordinated observations from SOT/NFI and SOT/SP on Hinode and MDI. The new measurements confirm that gravity waves are the dominant phenomenon in the quiet middle/upper photosphere and that they transport more mechanical energy than the high-frequency (> 5mHz) acoustic waves, even though we find an acoustic flux 3-5 times larger than the upper limit estimate of Fossum & Carlsson (2005). It therefore appears justified to reconsider the significance of (non-M)HD waves for the energy balance of the solar chromosphere.",
+          "arxiv_id": "1003.3773",
+          "authors": [
+            "Thomas Straus",
+            "Bernhard Fleck",
+            "Stuart M. Jefferies",
+            "Scott W. McIntosh",
+            "Giuseppe Severino",
+            "Matthias Steffen",
+            "Theodore D. Tarbell"
+          ],
+          "doi": "",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "On the Role of Acoustic-gravity Waves in the Energetics of the Solar Atmosphere",
+          "url": "http://arxiv.org/abs/1003.3773v1",
+          "venue": "arXiv (astro-ph.SR)",
+          "year": 2010
+        },
+        {
+          "abstract": "In this article, we establish an additive decomposition of the discrete zeta function (for $s \\in \\mathbb{N}^*$, $s > 1$), more precisely of the function $4(ζ(s)-1)$, as a series whose general term is of the form $1/x_n(s) + 1/y_n(s) + 1/z_n(s)$, where $x_n(s), y_n(s), z_n(s)$ are solutions of the Erdos--Straus conjecture under a personal conjecture (which I will refer to here as Mballa's Conjecture) that I formulated by parametrization in the article: arXiv:2502.20935. This connection thus builds a bridge between analysis and Egyptian fractions in general, and the Erdos--Straus conjecture in particular.",
+          "arxiv_id": "2505.08716",
+          "authors": [
+            "Philemon Urbain Mballa"
+          ],
+          "doi": "",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "An Unexpected Connection Between the Discrete Zeta Function and the Erdos-Straus Conjecture Under Mballa's Conjecture",
+          "url": "http://arxiv.org/abs/2505.08716v1",
+          "venue": "arXiv (math.NT)",
+          "year": 2025
+        }
+      ],
+      "records": [
+        {
+          "abstract": "In a recent paper (Straus et al. 2008) we determined the energy flux of internal gravity waves in the lower solar atmosphere using a combination of 3D numerical simulations and observations obtained with the IBIS instrument operated at the Dunn Solar Telescope and the Michelson Doppler Imager (MDI) on SOHO. In this paper we extend these studies using coordinated observations from SOT/NFI and SOT/SP on Hinode and MDI. The new measurements confirm that gravity waves are the dominant phenomenon in the quiet middle/upper photosphere and that they transport more mechanical energy than the high-frequency (> 5mHz) acoustic waves, even though we find an acoustic flux 3-5 times larger than the upper limit estimate of Fossum & Carlsson (2005). It therefore appears justified to reconsider the significance of (non-M)HD waves for the energy balance of the solar chromosphere.",
+          "arxiv_id": "1003.3773",
+          "authors": [
+            "Thomas Straus",
+            "Bernhard Fleck",
+            "Stuart M. Jefferies",
+            "Scott W. McIntosh",
+            "Giuseppe Severino",
+            "Matthias Steffen",
+            "Theodore D. Tarbell"
+          ],
+          "doi": "",
+          "id": "L001",
+          "merged_from": [
+            4
+          ],
+          "normalized_title": "on the role of acoustic gravity waves in the energetics of the solar atmosphere",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "On the Role of Acoustic-gravity Waves in the Energetics of the Solar Atmosphere",
+          "url": "http://arxiv.org/abs/1003.3773v1",
+          "venue": "arXiv (astro-ph.SR)",
+          "year": 2010
+        },
+        {
+          "abstract": "In number theory, the Erdos-Straus conjecture states that for all n >=2, the rational number 4/n can be expressed as the sum of three unit fractions. Paul Erdos and Ernst G. Straus formulated the conjecture in 1948. The restriction that the three unit fractions be positive is essential to the difficulty of the problem, for if negative values were allowed the problem could always be solved. This paper presents an explicit solutions to this conjecture for all n >=2 excepting some n such that n=1(mod8).",
+          "arxiv_id": "1812.05684",
+          "authors": [
+            "Dagnachew Jenber Negash"
+          ],
+          "doi": "",
+          "id": "L002",
+          "merged_from": [
+            2
+          ],
+          "normalized_title": "solutions to diophantine equation of erdos straus conjecture",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "Solutions to Diophantine Equation of Erdos-Straus Conjecture",
+          "url": "http://arxiv.org/abs/1812.05684v2",
+          "venue": "arXiv (math.HO)",
+          "year": 2018
+        },
+        {
+          "abstract": "In this paper we attack the Erdos-Straus conjecture by means of the structure of its solutions, extending and improving the results of a previous paper. Using previous results and supported by the works of Elsholtz and Tao and Monks and Velingker we define a system of congruences for which there are always solutions to the Erdos-Straus conjecture and which we conjecture to include all prime numbers. For this purpose, and always taking into account a result due to Mordell that limits the congruences admitting polynomial identities to those that are not quadratic residues, we will adopt a transversal approach and classify the solutions by their form and not by those congruences that produce them. Thus we define two new types of solutions, which we call Type A and B, and relate them to the already known Type II solutions and study their properties. Finally we conjecture that every prime number has at least one solution of Type A or B and we associate a congruence and a general polynomial to each Type of solution.",
+          "arxiv_id": "2404.01508",
+          "authors": [
+            "Miguel Angel Lopez"
+          ],
+          "doi": "",
+          "id": "L003",
+          "merged_from": [
+            1
+          ],
+          "normalized_title": "a complete congruence system for the erdos straus conjecture",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "A Complete Congruence System for the Erdos-Straus Conjecture",
+          "url": "http://arxiv.org/abs/2404.01508v3",
+          "venue": "arXiv (math.NT)",
+          "year": 2024
+        },
+        {
+          "abstract": "In this article, we establish an additive decomposition of the discrete zeta function (for $s \\in \\mathbb{N}^*$, $s > 1$), more precisely of the function $4(ζ(s)-1)$, as a series whose general term is of the form $1/x_n(s) + 1/y_n(s) + 1/z_n(s)$, where $x_n(s), y_n(s), z_n(s)$ are solutions of the Erdos--Straus conjecture under a personal conjecture (which I will refer to here as Mballa's Conjecture) that I formulated by parametrization in the article: arXiv:2502.20935. This connection thus builds a bridge between analysis and Egyptian fractions in general, and the Erdos--Straus conjecture in particular.",
+          "arxiv_id": "2505.08716",
+          "authors": [
+            "Philemon Urbain Mballa"
+          ],
+          "doi": "",
+          "id": "L004",
+          "merged_from": [
+            5
+          ],
+          "normalized_title": "an unexpected connection between the discrete zeta function and the erdos straus conjecture under mballa s conjecture",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "An Unexpected Connection Between the Discrete Zeta Function and the Erdos-Straus Conjecture Under Mballa's Conjecture",
+          "url": "http://arxiv.org/abs/2505.08716v1",
+          "venue": "arXiv (math.NT)",
+          "year": 2025
+        },
+        {
+          "abstract": "In 1948, Erdös and Straus formulated a conjecture : for any positive integer $n>2$, there exist positive integers $n_1,n_2$ and $n_3$ such that \\begin{equation}\\frac{4}{n}=\\frac{1}{n_1}+\\frac{1}{n_2}+\\frac{1}{n_3},\\nonumber\\end{equation} which is still open. It is known that one only needs to prove the conjecture for any prime number $n$ such that $n\\equiv 1\\;(\\mbox{mod}\\;24)$. If $n=24m+1$ and $n_1\\leq n_2,n_3$, then $n_1=6m+k$ with $1\\leq k\\leq 12m$. A solution $(n_1,n_2,n_3)$ of the above equation is called a {\\it tame solution} if $n_2$ and $n_3$ are factors of $(6m+k)(24m+1)$. We call $n=24m+1$ {\\it wild} if it does not have any tame solution. Computer calculation shows that there are only nine wild primes among the 7185 primes of the form $24m+1$ with $m\\leq 30000$. In this paper, we derive the tame solutions of the above equation for the integers of the form $24m+1$ with $m$ parameterized by certain congruence classes. They cover the solvability of all the 586 tame primes among the 591 primes of the form $24m+1$ with $m\\leq 2000$.",
+          "arxiv_id": "2605.23601",
+          "authors": [
+            "Xiaoping Xu"
+          ],
+          "doi": "",
+          "id": "L005",
+          "merged_from": [
+            3
+          ],
+          "normalized_title": "congruence classes of supporting the erdös straus conjecture i tame solutions",
+          "providers": [
+            "arxiv"
+          ],
+          "record_type": "preprint",
+          "title": "Congruence Classes of Supporting the Erdös-Straus Conjecture I: Tame Solutions",
+          "url": "http://arxiv.org/abs/2605.23601v1",
+          "venue": "arXiv (math.NT)",
+          "year": 2026
+        }
+      ],
+      "request_errors": [],
+      "requests": [
+        {
+          "provider": "arxiv",
+          "records": 5,
+          "status": "OK",
+          "url": "https://export.arxiv.org/api/query?search_query=all%3AErdos+Straus+conjecture+polynomial+identities+congruence+classes&start=0&max_results=5&sortBy=relevance"
+        }
+      ],
+      "retrieved_at": "2026-09-08T06:45:21.932677+00:00",
+      "schema_version": 1,
+      "unique_count": 5
+    },
+    "status": "CANDIDATE_SOURCES",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    }
+  },
+  "result_hash": "3017b10b70c3fa14482501ee90956f5cfa8d789a36b1109dd3a37bdae5695c6c",
+  "created": 1788849920.0437248
+}

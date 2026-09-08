@@ -1,0 +1,49 @@
+{
+  "original_goal": "INCONCLUSIVE",
+  "polynomial_families": 55,
+  "modulus": 840,
+  "covered_residue_count": 834,
+  "uncovered_residues": [
+    1,
+    121,
+    169,
+    289,
+    361,
+    529
+  ],
+  "coverage_scope": "For every n>=3 outside these six residues, a checked distinct-denominator family applies.",
+  "minimal_first_denominators": [
+    {
+      "n": 1129,
+      "minimal_x": 285,
+      "failed_initial_choices": 2,
+      "y": 29260,
+      "z": 99103620
+    },
+    {
+      "n": 1201,
+      "minimal_x": 306,
+      "failed_initial_choices": 5,
+      "y": 15980,
+      "z": 172727820
+    },
+    {
+      "n": 246241,
+      "minimal_x": 61570,
+      "failed_initial_choices": 9,
+      "y": 388745120,
+      "z": 4499074393414240
+    }
+  ],
+  "eight_step_checked_inputs": 4597,
+  "eight_step_refuted_inputs": [
+    246241
+  ],
+  "eight_step_complete_prefix": {
+    "start": 25,
+    "stop": 99985,
+    "step": 24,
+    "count": 4166
+  },
+  "novelty": "NOT_ASSESSED; partial modular coverage agrees with existing literature"
+}

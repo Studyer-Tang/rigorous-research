@@ -4,3 +4,4 @@
 # Preserve the original bytes of the published research audit archive.
 /research-studies/reanalysis-20260908/** -text
 /cases/goldbach-conjecture/** -text
+/examples/erdos-frontier/** -text

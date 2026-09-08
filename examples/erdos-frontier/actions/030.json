@@ -1,0 +1,39 @@
+{
+  "id": 30,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Actions12 and14..29 established the eight-step hypothesis for all4166 integers n=1 mod24 in25..99985. This remains finite only. The first polynomial generator found23 of35 classes modulo840, with12 gaps; its initial local invocation failed because rational multiplication was attempted in SymPy ZZ, corrected by declaring QQ before the recorded successful workspace runR001. This implementation error is not a scientific refutation. Missing classes3,5,6 mod7 suggest changing the ansatz: use a divisor proportional to nx, or allow the residual numerator to vary. Next numerical falsification is restricted to the six literature-identified difficult residues1,121,169,289,361,529 mod840 above100000 through1000000; at most30 scans, stop on a refuted or unresolved window. No global minimality claim for a discovered failure in this restricted scan."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      12,
+      29
+    ],
+    "falsifier": "Any uncovered class blocks the modular proof; any checked eight-step obstruction refutes that route.",
+    "rationale": "Preserve accumulated results and change search structure based on the uncovered residue classes."
+  },
+  "fingerprint": "110addd5717d38830e4de7a888d9521f1428672f2bb8e2d4776dae87553a42ef",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Actions12 and14..29 established the eight-step hypothesis for all4166 integers n=1 mod24 in25..99985. This remains finite only. The first polynomial generator found23 of35 classes modulo840, with12 gaps; its initial local invocation failed because rational multiplication was attempted in SymPy ZZ, corrected by declaring QQ before the recorded successful workspace runR001. This implementation error is not a scientific refutation. Missing classes3,5,6 mod7 suggest changing the ansatz: use a divisor proportional to nx, or allow the residual numerator to vary. Next numerical falsification is restricted to the six literature-identified difficult residues1,121,169,289,361,529 mod840 above100000 through1000000; at most30 scans, stop on a refuted or unresolved window. No global minimality claim for a discovered failure in this restricted scan.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    },
+    "verified": false
+  },
+  "result_hash": "871c85d157d999a1bf1fa5e5e38891b48b1fd1a8c544b0ba9689720aa681702c",
+  "created": 1788850908.353952
+}

@@ -1,0 +1,89 @@
+{
+  "id": 5,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "denominator": 73,
+        "distinct": true,
+        "max_work": 100000,
+        "numerator": 4,
+        "start_x": 19,
+        "stop_x": 20
+      },
+      "tool": "egyptian_window"
+    },
+    "evidence": [
+      3
+    ],
+    "falsifier": "An independently refuted window defeats this strengthened route only.",
+    "rationale": "Test the two-step route with complete divisor obstructions, not missing witnesses."
+  },
+  "fingerprint": "a38c348364428ed410241ba3582f21a348fb2480d6984d7f0c45f7293266662c",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "backend": "exact-integer",
+      "backend_version": "2",
+      "budget": {
+        "max_work": 100000,
+        "used_work": 84
+      },
+      "claim": {
+        "denominator": 73,
+        "distinct": true,
+        "numerator": 4,
+        "start_x": 19,
+        "stop_x": 20
+      },
+      "entries": [
+        {
+          "factorization": [
+            [
+              19,
+              1
+            ],
+            [
+              73,
+              1
+            ]
+          ],
+          "outcome": "obstructed",
+          "x": 19
+        },
+        {
+          "outcome": "witness",
+          "x": 20,
+          "y": 210,
+          "z": 30660
+        }
+      ],
+      "operation": "three-unit-fractions-window",
+      "schema_version": 1,
+      "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+    },
+    "elapsed_seconds": 0.266,
+    "independent_check": {
+      "certificate_hash": "94c855c5f5ec6be06820d0c863ea70127ba3f7ad8203b9e76ecf8410230d7a85",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Only the recorded finite domain, denominator window, obstruction or explicit polynomial family; no coverage of other integers or novelty claim.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "bbc09e47434c7a09d3163ec8992ec16ec656223569d48c9716c4f432898b5758",
+      "integer_research.py": "d7bdf35ba4391efe03d4ade56a1981a1d2e1ff83af6d22eb74411e6f71d3be9a",
+      "integer_research_verifier.py": "0861d06ec49c6778169970229f9e887d4ad1ef604a66c094c771d7311e42336e",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "c501ba52d2b7d3a3b9fcf5ac3f131dcddff426228cc3c6b147be20ab88b8660d",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "9508e3d4f4f99178916fc339a966808ae7bed91f7d246c388063dccea010b5b2"
+    }
+  },
+  "result_hash": "e6221564a39a11a7ab8cbf699c090a03aad12f5f327e13e9afc6eed05d78cba0",
+  "created": 1788850319.8091543
+}

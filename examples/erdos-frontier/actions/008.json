@@ -1,0 +1,135 @@
+{
+  "id": 8,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "denominator": 1129,
+        "distinct": true,
+        "max_work": 1000000,
+        "numerator": 4,
+        "start_x": 285,
+        "stop_x": 300
+      },
+      "tool": "egyptian_window"
+    },
+    "evidence": [
+      7
+    ],
+    "falsifier": "A valid later witness confirms this is only a failed route, not a counterexample to Erdos-Straus.",
+    "rationale": "Two-step conjecture failed at1129; seek an alternative completion and locate the first working x after the rejected prefix."
+  },
+  "fingerprint": "a26ea1817140c07ab519e945c6ac297162be379f58d1da37e3add92a40d1d76f",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "backend": "exact-integer",
+      "backend_version": "2",
+      "budget": {
+        "max_work": 1000000,
+        "used_work": 112
+      },
+      "claim": {
+        "denominator": 1129,
+        "distinct": true,
+        "numerator": 4,
+        "start_x": 285,
+        "stop_x": 300
+      },
+      "entries": [
+        {
+          "outcome": "witness",
+          "x": 285,
+          "y": 29260,
+          "z": 99103620
+        },
+        {
+          "outcome": "unresolved",
+          "x": 286
+        },
+        {
+          "outcome": "unresolved",
+          "x": 287
+        },
+        {
+          "outcome": "unresolved",
+          "x": 288
+        },
+        {
+          "outcome": "unresolved",
+          "x": 289
+        },
+        {
+          "outcome": "unresolved",
+          "x": 290
+        },
+        {
+          "outcome": "unresolved",
+          "x": 291
+        },
+        {
+          "outcome": "unresolved",
+          "x": 292
+        },
+        {
+          "outcome": "unresolved",
+          "x": 293
+        },
+        {
+          "outcome": "unresolved",
+          "x": 294
+        },
+        {
+          "outcome": "unresolved",
+          "x": 295
+        },
+        {
+          "outcome": "unresolved",
+          "x": 296
+        },
+        {
+          "outcome": "unresolved",
+          "x": 297
+        },
+        {
+          "outcome": "unresolved",
+          "x": 298
+        },
+        {
+          "outcome": "unresolved",
+          "x": 299
+        },
+        {
+          "outcome": "unresolved",
+          "x": 300
+        }
+      ],
+      "operation": "three-unit-fractions-window",
+      "schema_version": 1,
+      "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+    },
+    "elapsed_seconds": 0.266,
+    "independent_check": {
+      "certificate_hash": "cbc3cfb51001fdf81652641d4081e167e993462a04932771e1bc6ba3ef3fa03b",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Only the recorded finite domain, denominator window, obstruction or explicit polynomial family; no coverage of other integers or novelty claim.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    }
+  },
+  "result_hash": "c6bba289b3fcb56acdcf62933935c5b7fc417991b064ff744a5a0f8583e0bd28",
+  "created": 1788850498.8045566
+}

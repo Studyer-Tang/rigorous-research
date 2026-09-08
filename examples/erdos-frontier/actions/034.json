@@ -1,0 +1,40 @@
+{
+  "id": 34,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "The expanded polynomial ansatz found 29 candidate classes modulo840; remaining residues are [1, 121, 169, 289, 361, 529]. Unlike the first constant-divisor attempt, the new formulas use divisors proportional to nx and a varying residual for n=7c-2. Each candidate will now be verified independently for every nonnegative integer parameter, including identity, integrality, positivity and strict order. This reproduces scoped congruence coverage described in literature; no novelty claim. The eight-step hypothesis has a certified counterexample n=246241 (not claimed globally minimal), even though all4166 tested n=1mod24 below100000 passed."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      30,
+      32,
+      33
+    ],
+    "falsifier": "Any coefficient, integrality or ordering failure invalidates that candidate; uncovered residues block total coverage.",
+    "rationale": "Integrate the observed failure and proceed with independent checks of infinite families."
+  },
+  "fingerprint": "59fde40754e1e7c17bb8615396ea8c4eac538b8dc0550ad0e850f18aeca672c0",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "The expanded polynomial ansatz found 29 candidate classes modulo840; remaining residues are [1, 121, 169, 289, 361, 529]. Unlike the first constant-divisor attempt, the new formulas use divisors proportional to nx and a varying residual for n=7c-2. Each candidate will now be verified independently for every nonnegative integer parameter, including identity, integrality, positivity and strict order. This reproduces scoped congruence coverage described in literature; no novelty claim. The eight-step hypothesis has a certified counterexample n=246241 (not claimed globally minimal), even though all4166 tested n=1mod24 below100000 passed.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    },
+    "verified": false
+  },
+  "result_hash": "a2b62e04c65465f63df512a2ed966190c57f687617e91b632a46ad7963d0cbb4",
+  "created": 1788850985.4429479
+}

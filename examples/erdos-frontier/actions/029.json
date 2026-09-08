@@ -1,0 +1,4283 @@
+{
+  "id": 29,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "distinct": true,
+        "max_work": 2000000,
+        "numerator": 4,
+        "start": 98329,
+        "step": 24,
+        "stop": 100000,
+        "width": 8
+      },
+      "tool": "egyptian_scan"
+    },
+    "evidence": [
+      13
+    ],
+    "falsifier": "One complete obstruction suffices; no extrapolation beyond this finite range.",
+    "rationale": "Continue the declared disjoint eight-step finite scan."
+  },
+  "fingerprint": "b9efd0dbb04d0e718d0af78cd8df2e2cc8b56a34aeff0b5ad42f6d2627a2f223",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "backend": "exact-integer",
+      "backend_version": "2",
+      "budget": {
+        "max_work": 2000000,
+        "used_work": 109927
+      },
+      "claim": {
+        "distinct": true,
+        "numerator": 4,
+        "start": 98329,
+        "step": 24,
+        "stop": 100000,
+        "width": 8
+      },
+      "operation": "three-unit-fractions-window-scan",
+      "schema_version": 1,
+      "warning": "Tests the short-window hypothesis on this finite progression. A refuted window is not an Erdos-Straus counterexample.",
+      "windows": [
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 2000000,
+            "used_work": 768
+          },
+          "claim": {
+            "denominator": 98329,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24583,
+            "stop_x": 24590
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24583,
+              "y": 805740606,
+              "z": 177059433055326822
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24584
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24585
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24586
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24587
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24588
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24589
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24590
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1999232,
+            "used_work": 270
+          },
+          "claim": {
+            "denominator": 98353,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24589,
+            "stop_x": 24596
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24589,
+              "y": 806133992,
+              "z": 33043321891723096
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24590
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24591
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24592
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24593
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24594
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24595
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24596
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1998962,
+            "used_work": 2491
+          },
+          "claim": {
+            "denominator": 98377,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24595,
+            "stop_x": 24602
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24595,
+              "y": 806527440,
+              "z": 390291906077244720
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24596
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24597
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24598
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24599
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24600
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24601
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24602
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1996471,
+            "used_work": 2975
+          },
+          "claim": {
+            "denominator": 98401,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24601,
+            "stop_x": 24608
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  19,
+                  1
+                ],
+                [
+                  73,
+                  1
+                ],
+                [
+                  337,
+                  1
+                ],
+                [
+                  5179,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24601
+            },
+            {
+              "outcome": "witness",
+              "x": 24602,
+              "y": 345837354,
+              "z": 11016109232479083
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24603
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24604
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24605
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24606
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24607
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24608
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1993496,
+            "used_work": 476
+          },
+          "claim": {
+            "denominator": 98425,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24607,
+            "stop_x": 24614
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24607,
+              "y": 807314660,
+              "z": 391054175343234700
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24608
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24609
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24610
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24611
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24612
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24613
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24614
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1993020,
+            "used_work": 659
+          },
+          "claim": {
+            "denominator": 98449,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24613,
+            "stop_x": 24620
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  13,
+                  1
+                ],
+                [
+                  151,
+                  1
+                ],
+                [
+                  163,
+                  1
+                ],
+                [
+                  7573,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24613
+            },
+            {
+              "outcome": "witness",
+              "x": 24614,
+              "y": 346174816,
+              "z": 32263808216457376
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24615
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24616
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24617
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24618
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24619
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24620
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1992361,
+            "used_work": 2564
+          },
+          "claim": {
+            "denominator": 98473,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24619,
+            "stop_x": 24626
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  7,
+                  1
+                ],
+                [
+                  3517,
+                  1
+                ],
+                [
+                  98473,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24619
+            },
+            {
+              "outcome": "witness",
+              "x": 24620,
+              "y": 346343610,
+              "z": 83967726985138860
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24621
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24622
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24623
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24624
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24625
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24626
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1989797,
+            "used_work": 295
+          },
+          "claim": {
+            "denominator": 98497,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24625,
+            "stop_x": 24632
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24625,
+              "y": 808496210,
+              "z": 392199672142122250
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24626
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24627
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24628
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24629
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24630
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24631
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24632
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1989502,
+            "used_work": 625
+          },
+          "claim": {
+            "denominator": 98521,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24631,
+            "stop_x": 24638
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24631,
+              "y": 808890278,
+              "z": 23649522631215166
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24632
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24633
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24634
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24635
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24636
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24637
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24638
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1988877,
+            "used_work": 260
+          },
+          "claim": {
+            "denominator": 98545,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24637,
+            "stop_x": 24644
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24637,
+              "y": 809284390,
+              "z": 392964733529318870
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24638
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24639
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24640
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24641
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24642
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24643
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24644
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1988617,
+            "used_work": 871
+          },
+          "claim": {
+            "denominator": 98569,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24643,
+            "stop_x": 24650
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  19,
+                  1
+                ],
+                [
+                  241,
+                  1
+                ],
+                [
+                  409,
+                  1
+                ],
+                [
+                  1297,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24643
+            },
+            {
+              "outcome": "witness",
+              "x": 24644,
+              "y": 347019234,
+              "z": 4173051342889812
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24645
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24646
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24647
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24648
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24649
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24650
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1987746,
+            "used_work": 129
+          },
+          "claim": {
+            "denominator": 98593,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24649,
+            "stop_x": 24656
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24649,
+              "y": 810072956,
+              "z": 178968597565175572
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24650
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24651
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24652
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24653
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24654
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24655
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24656
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1987617,
+            "used_work": 2552
+          },
+          "claim": {
+            "denominator": 98617,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24655,
+            "stop_x": 24662
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24655,
+              "y": 810467380,
+              "z": 394114423615971260
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24656
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24657
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24658
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24659
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24660
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24661
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24662
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1985065,
+            "used_work": 694
+          },
+          "claim": {
+            "denominator": 98641,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24661,
+            "stop_x": 24668
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  7,
+                  1
+                ],
+                [
+                  13,
+                  1
+                ],
+                [
+                  271,
+                  1
+                ],
+                [
+                  98641,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24661
+            },
+            {
+              "outcome": "witness",
+              "x": 24662,
+              "y": 347526340,
+              "z": 22247944361857060
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24663
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24664
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24665
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24666
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24667
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24668
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1984371,
+            "used_work": 975
+          },
+          "claim": {
+            "denominator": 98665,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24667,
+            "stop_x": 24674
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24667,
+              "y": 811256520,
+              "z": 394882283934249720
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24668
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24669
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24670
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24671
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24672
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24673
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24674
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1983396,
+            "used_work": 1153
+          },
+          "claim": {
+            "denominator": 98689,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24673,
+            "stop_x": 24680
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24673,
+              "y": 811651236,
+              "z": 179666652524801772
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24674
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24675
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24676
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24677
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24678
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24679
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24680
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1982243,
+            "used_work": 243
+          },
+          "claim": {
+            "denominator": 98713,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24679,
+            "stop_x": 24686
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24679,
+              "y": 812046050,
+              "z": 86011145360206450
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24680
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24681
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24682
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24683
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24684
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24685
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24686
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1982000,
+            "used_work": 2500
+          },
+          "claim": {
+            "denominator": 98737,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24685,
+            "stop_x": 24692
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24685,
+              "y": 812440950,
+              "z": 396036177529700550
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24686
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24687
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24688
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24689
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24690
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24691
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24692
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1979500,
+            "used_work": 166
+          },
+          "claim": {
+            "denominator": 98761,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24691,
+            "stop_x": 24698
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24691,
+              "y": 812835974,
+              "z": 27916998650341294
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24692
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24693
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24694
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24695
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24696
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24697
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24698
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1979334,
+            "used_work": 516
+          },
+          "claim": {
+            "denominator": 98785,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24697,
+            "stop_x": 24704
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24697,
+              "y": 813231050,
+              "z": 396806843597230450
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24698
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24699
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24700
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24701
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24702
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24703
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24704
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1978818,
+            "used_work": 2597
+          },
+          "claim": {
+            "denominator": 98809,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24703,
+            "stop_x": 24710
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  7,
+                  1
+                ],
+                [
+                  3529,
+                  1
+                ],
+                [
+                  98809,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24703
+            },
+            {
+              "factorization": [
+                [
+                  2,
+                  7
+                ],
+                [
+                  193,
+                  1
+                ],
+                [
+                  98809,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24704
+            },
+            {
+              "outcome": "witness",
+              "x": 24705,
+              "y": 221916048,
+              "z": 2960185876222320
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24706
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24707
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24708
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24709
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24710
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1976221,
+            "used_work": 1669
+          },
+          "claim": {
+            "denominator": 98833,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24709,
+            "stop_x": 24716
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  7,
+                  2
+                ],
+                [
+                  2017,
+                  1
+                ],
+                [
+                  24709,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24709
+            },
+            {
+              "outcome": "witness",
+              "x": 24710,
+              "y": 348880491,
+              "z": 121717596651520590
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24711
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24712
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24713
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24714
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24715
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24716
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1974552,
+            "used_work": 447
+          },
+          "claim": {
+            "denominator": 98857,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24715,
+            "stop_x": 24722
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24715,
+              "y": 814416920,
+              "z": 397964950934954920
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24716
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24717
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24718
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24719
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24720
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24721
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24722
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1974105,
+            "used_work": 296
+          },
+          "claim": {
+            "denominator": 98881,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24721,
+            "stop_x": 24728
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24721,
+              "y": 814812420,
+              "z": 33758606631946380
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24722
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24723
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24724
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24725
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24726
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24727
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24728
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1973809,
+            "used_work": 325
+          },
+          "claim": {
+            "denominator": 98905,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24727,
+            "stop_x": 24734
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24727,
+              "y": 815207980,
+              "z": 398738429578200260
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24728
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24729
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24730
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24731
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24732
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24733
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24734
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1973484,
+            "used_work": 12628
+          },
+          "claim": {
+            "denominator": 98929,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24733,
+            "stop_x": 24740
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  24733,
+                  1
+                ],
+                [
+                  98929,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24733
+            },
+            {
+              "outcome": "witness",
+              "x": 24734,
+              "y": 349558567,
+              "z": 10305280883473414
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24735
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24736
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24737
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24738
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24739
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24740
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1960856,
+            "used_work": 243
+          },
+          "claim": {
+            "denominator": 98953,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24739,
+            "stop_x": 24746
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24739,
+              "y": 815999426,
+              "z": 181596834610999522
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24740
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24741
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24742
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24743
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24744
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24745
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24746
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1960613,
+            "used_work": 463
+          },
+          "claim": {
+            "denominator": 98977,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24745,
+            "stop_x": 24752
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24745,
+              "y": 816395290,
+              "z": 399900760904115170
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24746
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24747
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24748
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24749
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24750
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24751
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24752
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1960150,
+            "used_work": 322
+          },
+          "claim": {
+            "denominator": 99001,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24751,
+            "stop_x": 24758
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24751,
+              "y": 816791268,
+              "z": 37763092134966156
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24752
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24753
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24754
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24755
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24756
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24757
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24758
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1959828,
+            "used_work": 529
+          },
+          "claim": {
+            "denominator": 99025,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24757,
+            "stop_x": 24764
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24757,
+              "y": 817187310,
+              "z": 400677058957834350
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24758
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24759
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24760
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24761
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24762
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24763
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24764
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1959299,
+            "used_work": 1878
+          },
+          "claim": {
+            "denominator": 99049,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24763,
+            "stop_x": 24770
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  37,
+                  1
+                ],
+                [
+                  2677,
+                  1
+                ],
+                [
+                  24763,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24763
+            },
+            {
+              "outcome": "witness",
+              "x": 24764,
+              "y": 350407074,
+              "z": 10481656022333052
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24765
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24766
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24767
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24768
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24769
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24770
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1957421,
+            "used_work": 294
+          },
+          "claim": {
+            "denominator": 99073,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24769,
+            "stop_x": 24776
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24769,
+              "y": 817979718,
+              "z": 118074849604260198
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24770
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24771
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24772
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24773
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24774
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24775
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24776
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1957127,
+            "used_work": 637
+          },
+          "claim": {
+            "denominator": 99097,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24775,
+            "stop_x": 24782
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24775,
+              "y": 818376060,
+              "z": 401843624530298100
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24776
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24777
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24778
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24779
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24780
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24781
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24782
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1956490,
+            "used_work": 4537
+          },
+          "claim": {
+            "denominator": 99121,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24781,
+            "stop_x": 24788
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24781,
+              "y": 818772504,
+              "z": 182833202810253864
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24782
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24783
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24784
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24785
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24786
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24787
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24788
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1951953,
+            "used_work": 375
+          },
+          "claim": {
+            "denominator": 99145,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24787,
+            "stop_x": 24794
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24787,
+              "y": 819169040,
+              "z": 402622748837543920
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24788
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24789
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24790
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24791
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24792
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24793
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24794
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1951578,
+            "used_work": 1593
+          },
+          "claim": {
+            "denominator": 99169,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24793,
+            "stop_x": 24800
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  7,
+                  1
+                ],
+                [
+                  31,
+                  1
+                ],
+                [
+                  457,
+                  1
+                ],
+                [
+                  24793,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24793
+            },
+            {
+              "outcome": "witness",
+              "x": 24794,
+              "y": 351256599,
+              "z": 123381197989790202
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24795
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24796
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24797
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24798
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24799
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24800
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1949985,
+            "used_work": 208
+          },
+          "claim": {
+            "denominator": 99193,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24799,
+            "stop_x": 24806
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24799,
+              "y": 819962496,
+              "z": 7177990228221312
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24800
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24801
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24802
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24803
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24804
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24805
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24806
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1949777,
+            "used_work": 436
+          },
+          "claim": {
+            "denominator": 99217,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24805,
+            "stop_x": 24812
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24805,
+              "y": 820359230,
+              "z": 403793558927356510
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24806
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24807
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24808
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24809
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24810
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24811
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24812
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1949341,
+            "used_work": 4045
+          },
+          "claim": {
+            "denominator": 99241,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24811,
+            "stop_x": 24818
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  43,
+                  1
+                ],
+                [
+                  577,
+                  1
+                ],
+                [
+                  99241,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24811
+            },
+            {
+              "factorization": [
+                [
+                  2,
+                  2
+                ],
+                [
+                  6203,
+                  1
+                ],
+                [
+                  99241,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24812
+            },
+            {
+              "outcome": "witness",
+              "x": 24813,
+              "y": 223862886,
+              "z": 22216376669526
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24814
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24815
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24816
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24817
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24818
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1945296,
+            "used_work": 319
+          },
+          "claim": {
+            "denominator": 99265,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24817,
+            "stop_x": 24824
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24817,
+              "y": 821153170,
+              "z": 404575516339476170
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24818
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24819
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24820
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24821
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24822
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24823
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24824
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1944977,
+            "used_work": 7523
+          },
+          "claim": {
+            "denominator": 99289,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24823,
+            "stop_x": 24830
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  103,
+                  1
+                ],
+                [
+                  241,
+                  1
+                ],
+                [
+                  99289,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24823
+            },
+            {
+              "factorization": [
+                [
+                  2,
+                  3
+                ],
+                [
+                  29,
+                  1
+                ],
+                [
+                  107,
+                  1
+                ],
+                [
+                  99289,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24824
+            },
+            {
+              "factorization": [
+                [
+                  3,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  331,
+                  1
+                ],
+                [
+                  99289,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24825
+            },
+            {
+              "factorization": [
+                [
+                  2,
+                  1
+                ],
+                [
+                  12413,
+                  1
+                ],
+                [
+                  99289,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24826
+            },
+            {
+              "outcome": "witness",
+              "x": 24827,
+              "y": 129739390,
+              "z": 785783351916310
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24828
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24829
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24830
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1937454,
+            "used_work": 2735
+          },
+          "claim": {
+            "denominator": 99313,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24829,
+            "stop_x": 24836
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  7,
+                  1
+                ],
+                [
+                  19,
+                  1
+                ],
+                [
+                  3547,
+                  1
+                ],
+                [
+                  5227,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24829
+            },
+            {
+              "outcome": "witness",
+              "x": 24830,
+              "y": 352277400,
+              "z": 86869556233254600
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24831
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24832
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24833
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24834
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24835
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24836
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1934719,
+            "used_work": 558
+          },
+          "claim": {
+            "denominator": 99337,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24835,
+            "stop_x": 24842
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24835,
+              "y": 822344800,
+              "z": 405750581229879200
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24836
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24837
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24838
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24839
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24840
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24841
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24842
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1934161,
+            "used_work": 1622
+          },
+          "claim": {
+            "denominator": 99361,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24841,
+            "stop_x": 24848
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  67,
+                  1
+                ],
+                [
+                  1483,
+                  1
+                ],
+                [
+                  24841,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24841
+            },
+            {
+              "outcome": "witness",
+              "x": 24842,
+              "y": 352618842,
+              "z": 146725934322147
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24843
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24844
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24845
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24846
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24847
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24848
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1932539,
+            "used_work": 328
+          },
+          "claim": {
+            "denominator": 99385,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24847,
+            "stop_x": 24854
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24847,
+              "y": 823139700,
+              "z": 406535378606514300
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24848
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24849
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24850
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24851
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24852
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24853
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24854
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1932211,
+            "used_work": 460
+          },
+          "claim": {
+            "denominator": 99409,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24853,
+            "stop_x": 24860
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24853,
+              "y": 823537302,
+              "z": 70160035843921926
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24854
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24855
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24856
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24857
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24858
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24859
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24860
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1931751,
+            "used_work": 2956
+          },
+          "claim": {
+            "denominator": 99433,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24859,
+            "stop_x": 24866
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24859,
+              "y": 823934988,
+              "z": 119800387020281508
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24860
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24861
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24862
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24863
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24864
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24865
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24866
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1928795,
+            "used_work": 270
+          },
+          "claim": {
+            "denominator": 99457,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24865,
+            "stop_x": 24872
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24865,
+              "y": 824332770,
+              "z": 407714708593190970
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24866
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24867
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24868
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24869
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24870
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24871
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24872
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1928525,
+            "used_work": 764
+          },
+          "claim": {
+            "denominator": 99481,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24871,
+            "stop_x": 24878
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24871,
+              "y": 824730654,
+              "z": 185503813260887814
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24872
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24873
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24874
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24875
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24876
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24877
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24878
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1927761,
+            "used_work": 1508
+          },
+          "claim": {
+            "denominator": 99505,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24877,
+            "stop_x": 24884
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24877,
+              "y": 825128630,
+              "z": 408502352802277510
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24878
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24879
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24880
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24881
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24882
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24883
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24884
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1926253,
+            "used_work": 189
+          },
+          "claim": {
+            "denominator": 99529,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24883,
+            "stop_x": 24890
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24883,
+              "y": 825526752,
+              "z": 13721363300667936
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24884
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24885
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24886
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24887
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24888
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24889
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24890
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1926064,
+            "used_work": 472
+          },
+          "claim": {
+            "denominator": 99553,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24889,
+            "stop_x": 24896
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24889,
+              "y": 825924910,
+              "z": 18110228119876190
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24890
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24891
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24892
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24893
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24894
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24895
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24896
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1925592,
+            "used_work": 278
+          },
+          "claim": {
+            "denominator": 99577,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24895,
+            "stop_x": 24902
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24895,
+              "y": 826323140,
+              "z": 409685958193352620
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24896
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24897
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24898
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24899
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24900
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24901
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24902
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1925314,
+            "used_work": 1037
+          },
+          "claim": {
+            "denominator": 99601,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24901,
+            "stop_x": 24908
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  37,
+                  1
+                ],
+                [
+                  103,
+                  1
+                ],
+                [
+                  673,
+                  1
+                ],
+                [
+                  967,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24901
+            },
+            {
+              "outcome": "witness",
+              "x": 24902,
+              "y": 354323502,
+              "z": 2133048209964867
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24903
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24904
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24905
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24906
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24907
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24908
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1924277,
+            "used_work": 468
+          },
+          "claim": {
+            "denominator": 99625,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24907,
+            "stop_x": 24914
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24907,
+              "y": 827119960,
+              "z": 410476456111121000
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24908
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24909
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24910
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24911
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24912
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24913
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24914
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1923809,
+            "used_work": 1867
+          },
+          "claim": {
+            "denominator": 99649,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24913,
+            "stop_x": 24920
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24913,
+              "y": 827518516,
+              "z": 186760061260529372
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24914
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24915
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24916
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24917
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24918
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24919
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24920
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1921942,
+            "used_work": 333
+          },
+          "claim": {
+            "denominator": 99673,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24919,
+            "stop_x": 24926
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24919,
+              "y": 827917172,
+              "z": 70908293347166716
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24920
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24921
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24922
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24923
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24924
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24925
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24926
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1921609,
+            "used_work": 640
+          },
+          "claim": {
+            "denominator": 99697,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24925,
+            "stop_x": 24932
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24925,
+              "y": 828315910,
+              "z": 411664347227160950
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24926
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24927
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24928
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24929
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24930
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24931
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24932
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1920969,
+            "used_work": 189
+          },
+          "claim": {
+            "denominator": 99721,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24931,
+            "stop_x": 24938
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24931,
+              "y": 828714786,
+              "z": 19255182251706498
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24932
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24933
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24934
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24935
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24936
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24937
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24938
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1920780,
+            "used_work": 1220
+          },
+          "claim": {
+            "denominator": 99745,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24937,
+            "stop_x": 24944
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24937,
+              "y": 829113690,
+              "z": 412457705738135970
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24938
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24939
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24940
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24941
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24942
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24943
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24944
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1919560,
+            "used_work": 166
+          },
+          "claim": {
+            "denominator": 99769,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24943,
+            "stop_x": 24950
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24943,
+              "y": 829512742,
+              "z": 34987696923386846
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24944
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24945
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24946
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24947
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24948
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24949
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24950
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1919394,
+            "used_work": 642
+          },
+          "claim": {
+            "denominator": 99793,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24949,
+            "stop_x": 24956
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  61,
+                  1
+                ],
+                [
+                  409,
+                  1
+                ],
+                [
+                  99793,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24949
+            },
+            {
+              "outcome": "witness",
+              "x": 24950,
+              "y": 355690765,
+              "z": 177122288073108550
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24951
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24952
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24953
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24954
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24955
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24956
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1918752,
+            "used_work": 407
+          },
+          "claim": {
+            "denominator": 99817,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24955,
+            "stop_x": 24962
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24955,
+              "y": 830311080,
+              "z": 413649892912148760
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24956
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24957
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24958
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24959
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24960
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24961
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24962
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1918345,
+            "used_work": 365
+          },
+          "claim": {
+            "denominator": 99841,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24961,
+            "stop_x": 24968
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24961,
+              "y": 830710406,
+              "z": 121778783634586918
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24962
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24963
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24964
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24965
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24966
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24967
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24968
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1917980,
+            "used_work": 10018
+          },
+          "claim": {
+            "denominator": 99865,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24967,
+            "stop_x": 24974
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24967,
+              "y": 831109820,
+              "z": 414446118909149620
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24968
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24969
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24970
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24971
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24972
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24973
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24974
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1907962,
+            "used_work": 788
+          },
+          "claim": {
+            "denominator": 99889,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24973,
+            "stop_x": 24980
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24973,
+              "y": 831509338,
+              "z": 122013136671055058
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24974
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24975
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24976
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24977
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24978
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24979
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24980
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1907174,
+            "used_work": 233
+          },
+          "claim": {
+            "denominator": 99913,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24979,
+            "stop_x": 24986
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24979,
+              "y": 831908946,
+              "z": 188747043104863122
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24980
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24981
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24982
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24983
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24984
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24985
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24986
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1906941,
+            "used_work": 449
+          },
+          "claim": {
+            "denominator": 99937,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24985,
+            "stop_x": 24992
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24985,
+              "y": 832308650,
+              "z": 415642612486584850
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24986
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24987
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24988
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24989
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24990
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24991
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24992
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1906492,
+            "used_work": 14547
+          },
+          "claim": {
+            "denominator": 99961,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24991,
+            "stop_x": 24998
+          },
+          "entries": [
+            {
+              "factorization": [
+                [
+                  67,
+                  1
+                ],
+                [
+                  373,
+                  1
+                ],
+                [
+                  99961,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24991
+            },
+            {
+              "factorization": [
+                [
+                  2,
+                  5
+                ],
+                [
+                  11,
+                  1
+                ],
+                [
+                  71,
+                  1
+                ],
+                [
+                  99961,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24992
+            },
+            {
+              "factorization": [
+                [
+                  3,
+                  2
+                ],
+                [
+                  2777,
+                  1
+                ],
+                [
+                  99961,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24993
+            },
+            {
+              "factorization": [
+                [
+                  2,
+                  1
+                ],
+                [
+                  12497,
+                  1
+                ],
+                [
+                  99961,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24994
+            },
+            {
+              "factorization": [
+                [
+                  5,
+                  1
+                ],
+                [
+                  4999,
+                  1
+                ],
+                [
+                  99961,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24995
+            },
+            {
+              "factorization": [
+                [
+                  2,
+                  2
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  2083,
+                  1
+                ],
+                [
+                  99961,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24996
+            },
+            {
+              "factorization": [
+                [
+                  7,
+                  1
+                ],
+                [
+                  3571,
+                  1
+                ],
+                [
+                  99961,
+                  1
+                ]
+              ],
+              "outcome": "obstructed",
+              "x": 24997
+            },
+            {
+              "outcome": "witness",
+              "x": 24998,
+              "y": 80781037,
+              "z": 37470780694
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        },
+        {
+          "backend": "exact-integer",
+          "backend_version": "2",
+          "budget": {
+            "max_work": 1891945,
+            "used_work": 1872
+          },
+          "claim": {
+            "denominator": 99985,
+            "distinct": true,
+            "numerator": 4,
+            "start_x": 24997,
+            "stop_x": 25004
+          },
+          "entries": [
+            {
+              "outcome": "witness",
+              "x": 24997,
+              "y": 833108350,
+              "z": 416441712870725150
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24998
+            },
+            {
+              "outcome": "unresolved",
+              "x": 24999
+            },
+            {
+              "outcome": "unresolved",
+              "x": 25000
+            },
+            {
+              "outcome": "unresolved",
+              "x": 25001
+            },
+            {
+              "outcome": "unresolved",
+              "x": 25002
+            },
+            {
+              "outcome": "unresolved",
+              "x": 25003
+            },
+            {
+              "outcome": "unresolved",
+              "x": 25004
+            }
+          ],
+          "operation": "three-unit-fractions-window",
+          "schema_version": 1,
+          "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+        }
+      ]
+    },
+    "elapsed_seconds": 0.266,
+    "independent_check": {
+      "certificate_hash": "dff7729116237d343354e8494ff7f9d83469f2dab738ba5c738dc84d37d7d132",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Only the recorded finite domain, denominator window, obstruction or explicit polynomial family; no coverage of other integers or novelty claim.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    }
+  },
+  "result_hash": "009111142e35f5c57d6339df20a1003a2e9310293c945da5d28584ebc6373075",
+  "created": 1788850728.3590791
+}

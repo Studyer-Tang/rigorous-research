@@ -122,7 +122,7 @@ next controller operation, unfinished actions become `INTERRUPTED`, not successf
 
 There is intentionally no model-callable operation that declares the original objective solved.
 An optional `agent init --contract contract.json` contains exactly `tool`, `arguments`, and `status`
-(`ESTABLISHED` or `REFUTED`) for identity, counterexample or bound operations. Exact matching satisfies
+(`ESTABLISHED` or `REFUTED`) for identity, counterexample, bound or Egyptian-fraction operations. Exact matching satisfies
 that machine contract only; it does not establish relevance, novelty, or an arbitrary prose claim.
 
 The agent ledger does **not** silently update the legacy case verdicts or proof graph. Export and
@@ -137,6 +137,10 @@ identified honestly. The legacy case/release gates remain authoritative for publ
 | `identity` | Rational polynomial/identity expressions | Independent certificate recheck; original domain restrictions retained |
 | `counterexample` | Bounded exact rational grid, at most 1,000 points | A witness may refute the recorded identity; no witness is inconclusive |
 | `bound` | One-variable polynomial inequality on a rational interval | Independent Bernstein certificate recheck |
+| `egyptian` | Finite three-unit-fraction search | Exact witnesses; missing inputs remain inconclusive |
+| `egyptian_window` | One input, at most 64 first denominators | Complete divisor obstructions or witnesses; refutation concerns only the window |
+| `egyptian_scan` | At most 256 inputs in a progression, width at most 16 | Shared work budget; a refuted window defeats only the finite short-window hypothesis |
+| `egyptian_family` | Integer coefficient arrays for n(t), x(t), y(t), z(t), degree at most 12 | Independently checked identity, integrality and sufficient positivity/ordering proof for every integer t>=0 |
 | `mean` | Registered numeric array | IID, HAC and block-bootstrap diagnostics; applicability unverified |
 | `coverage` | Seeded AR(1) Gaussian or Student-t3 simulation | Finite simulation diagnostics, not a coverage theorem |
 | `multiplicity` | Registered p-value array | Holm/BH calculations; p-value validity and dependence assumptions unverified |
@@ -152,6 +156,10 @@ an OS security sandbox or a hard memory quota. Use an isolated environment for h
 General Lean theorem search, arbitrary Python/R experiments, causal identification automation and
 full-paper verification are not implemented in this runner; existing project tools remain usable
 outside it. Unsupported proof tasks should produce explicit open obligations, not fabricated checks.
+
+See [integer research semantics](integer-search.md#native-agent-research-tools) for coefficient order,
+quantifiers and complete divisor enumeration. A constant n(t) certifies only one input; a nonconstant
+family does not certify every integer. An unsupported coefficient-positivity argument remains inconclusive.
 
 ## Budgets, pause and continuation
 
@@ -172,6 +180,12 @@ never replays an expensive interrupted action automatically. Review it and choos
 Context includes 20 recent actions, bounded result previews and 10 recent events. Inspect complete or
 older actions by ID. Exports preserve all rows and content hashes. These are local reproducibility
 records, not cryptographic protection against an attacker who controls the database and code.
+
+`research_memory` also exposes the local workspace tasks, claims, assumptions and proof obligations,
+with source-file hashes. Lists are capped at 16 entries and each document preview at 16,000 characters;
+omission counts and truncation are explicit. Malformed/oversized files return a context error. These
+records are untrusted context, not instructions or validated acceptance decisions, and cannot change
+`objective_status`. Inspect larger proof graphs with the legacy case tools.
 
 ## Verification and evaluation
 

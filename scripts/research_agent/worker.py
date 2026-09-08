@@ -11,6 +11,16 @@ from .schema import TOOLS, validate
 def produce(action, asset=None):
     tool, args = action["tool"], action["arguments"]
     validate(args, TOOLS[tool])
+    if tool == "egyptian":
+        from egyptian_fractions import search
+
+        return {"certificate": search(**args)}
+    if tool in {"egyptian_window", "egyptian_family", "egyptian_scan"}:
+        from integer_research import family, scan, window
+
+        return {
+            "certificate": {"egyptian_window": window, "egyptian_family": family, "egyptian_scan": scan}[tool](**args)
+        }
     if tool in {"identity", "counterexample", "bound"}:
         import math_backend as math
 

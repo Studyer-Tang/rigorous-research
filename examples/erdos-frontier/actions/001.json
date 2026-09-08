@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Live Codex investigation, not synthetic replay. Routes: (A) falsify a small fixed first-denominator window conjecture, starting with one and two offsets; (B) turn exact divisor completions into infinite polynomial families; (C) combine modular families and inspect uncovered classes rather than declare total coverage. Compare original universal goal, auxiliary hypotheses proposed during this study and machine-checkable subclaims separately. Record budget exhaustion as inconclusive. Existing Agent cannot call its integer backend or certify whole polynomial families: these are concrete capability gaps to address. Public status must be checked against primary literature; no novelty claim."
+      },
+      "tool": "note"
+    },
+    "evidence": [],
+    "falsifier": "A valid n with no representation would refute the original; a failed restricted window only refutes that route. Missing modular classes block a covering proof.",
+    "rationale": "Freeze exact original objective, exploratory route portfolio and falsifiers before new computation."
+  },
+  "fingerprint": "b08dcd91e1ba26c5f9b383e27d119f625e64e5a84b5bb78c543c125dad211b54",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Live Codex investigation, not synthetic replay. Routes: (A) falsify a small fixed first-denominator window conjecture, starting with one and two offsets; (B) turn exact divisor completions into infinite polynomial families; (C) combine modular families and inspect uncovered classes rather than declare total coverage. Compare original universal goal, auxiliary hypotheses proposed during this study and machine-checkable subclaims separately. Record budget exhaustion as inconclusive. Existing Agent cannot call its integer backend or certify whole polynomial families: these are concrete capability gaps to address. Public status must be checked against primary literature; no novelty claim.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "9040e19821299bcec4fb819e8e4f26beead5c362694a18727550e8c5bfcbe36b",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "ad3b41c2808a0b51eed019ef66c6fa13ddc4efa8cdf620870ac2113731ddf4ed"
+    },
+    "verified": false
+  },
+  "result_hash": "2a7a75012f321ecafdbf2acd7b8dd0343520c461d2ce496764d1fa39999763e6",
+  "created": 1788849920.0183303
+}

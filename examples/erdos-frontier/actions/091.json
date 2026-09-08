@@ -1,0 +1,100 @@
+{
+  "id": 91,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "distinct": true,
+        "n": [
+          23,
+          24
+        ],
+        "numerator": 4,
+        "x": [
+          6,
+          6
+        ],
+        "y": [
+          139,
+          282,
+          144
+        ],
+        "z": [
+          19182,
+          78114,
+          119412,
+          81216,
+          20736
+        ]
+      },
+      "tool": "egyptian_family"
+    },
+    "evidence": [
+      68
+    ],
+    "falsifier": "A failed domain, identity or order check invalidates this progression.",
+    "rationale": "Verify the elementary progression n=23+24t for all integer t>=0."
+  },
+  "fingerprint": "a813bea96fce85c2b572c1313e7e3a57c2f0cb82b8524f0e273156932db5892d",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "backend": "exact-integer",
+      "backend_version": "2",
+      "claim": {
+        "distinct": true,
+        "n": [
+          23,
+          24
+        ],
+        "numerator": 4,
+        "parameter": "nonnegative-integer",
+        "x": [
+          6,
+          6
+        ],
+        "y": [
+          139,
+          282,
+          144
+        ],
+        "z": [
+          19182,
+          78114,
+          119412,
+          81216,
+          20736
+        ]
+      },
+      "counterexample_parameter": null,
+      "identity_zero": true,
+      "nonnegative_coefficients": true,
+      "operation": "unit-fraction-polynomial-family",
+      "schema_version": 1,
+      "warning": "Proves only this explicit polynomial family for integer t>=0. Coverage of other integers and novelty are separate."
+    },
+    "elapsed_seconds": 0.593,
+    "independent_check": {
+      "certificate_hash": "fea63e679728ef833c7b824ef98e3102650c32669cf16e431472ce391bb26676",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Only the recorded finite domain, denominator window, obstruction or explicit polynomial family; no coverage of other integers or novelty claim.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "abf8d4ba057f45f0606a44b7989a73d9f11303e9fc84311df5afc062f11eefd0",
+      "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+      "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "c0d42651683484ac4fdd9b9f3024a10fa82bd241f538b277b3b1a6443c0f8d9c",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "9fd74438ebaedeb82ce1e6818e4eabb9b8adb4786635482bfb64af584827c9ec"
+    }
+  },
+  "result_hash": "a80778b2fd26a373ba3b3a7f652acebb51545fc25a25044c1fa88fcbbd5bafbd",
+  "created": 1788851458.306599
+}

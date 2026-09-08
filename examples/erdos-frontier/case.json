@@ -1,0 +1,100 @@
+{
+  "schema_version": 4,
+  "case_id": "erdos-frontier-20260908",
+  "domain": "mathematics",
+  "question": "Attempt the Erdos-Straus conjecture: for every integer n>=3 find positive integers x<y<z with 4/n=1/x+1/y+1/z. Explore first-denominator windows, divisibility and polynomial residue families; do not replace this original goal with a subsidiary result.",
+  "created_at": "2026-09-08T06:45:19.859699+00:00",
+  "updated_at": "2026-09-08T07:19:11.527320+00:00",
+  "contract": {
+    "ambient_object": "Positive integer denominators and rational numbers",
+    "coefficient_domain": "Z for n,x,y,z; exact equality in Q",
+    "quantifiers": "For every integer n>=3, there exist integers 0<x<y<z",
+    "equality_semantics": "Exact rational identity 4/n=1/x+1/y+1/z"
+  },
+  "claims": [
+    {
+      "id": "C001",
+      "statement": "For every integer n>=3 there exist positive integers x<y<z with 4/n=1/x+1/y+1/z.",
+      "scope": "Original universal distinct-denominator version; restricted windows and polynomial families are subsidiary results.",
+      "status": "INCONCLUSIVE",
+      "assumption_ids": [],
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ]
+    }
+  ],
+  "assumptions": [],
+  "checks": [
+    {
+      "id": "K001",
+      "target_claim": "C001",
+      "kind": "proof",
+      "target": "Original universal conjecture",
+      "falsifier": "An unproved residue family or missing all-integer argument prevents support.",
+      "coverage": "All n>=3 required; six residue classes remain outside the modular coverage.",
+      "outcome": "UNRESOLVED",
+      "result": "No all-integer proof or original-conjecture counterexample. Auxiliary window refutations do not settle the original.",
+      "evidence_ids": [
+        "E001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "derivation",
+      "role": "diagnostic",
+      "summary": "Scoped research report with written lifting lemma and explicit unresolved original goal.",
+      "locator": "REPORT.zh-CN.md",
+      "sha256": "eca4d3ab4b42c41c9dd1116be5b064487beaa884e12ecf73e43a6785434bcb2a",
+      "independent": false
+    },
+    {
+      "id": "E002",
+      "kind": "diagnostic",
+      "role": "diagnostic",
+      "summary": "Independently checked finite windows and partial modular coverage; not decisive for the universal claim.",
+      "locator": "window-summary.json",
+      "sha256": "1f6e1cc861242629cba0017f3f332f670b3346b46533b65e5d61d801993e5edb",
+      "independent": false
+    }
+  ],
+  "proof_obligations": [
+    {
+      "id": "P001",
+      "target_claim": "C001",
+      "kind": "translation",
+      "statement": "Check the original claim's types, domain, quantifiers, assumptions, and scope against the proposed derivation.",
+      "coverage": "full",
+      "depends_on": [],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    },
+    {
+      "id": "P002",
+      "target_claim": "C001",
+      "kind": "proof",
+      "statement": "Establish the scoped claim or replace this obligation with an admissible counterexample.",
+      "coverage": "full",
+      "depends_on": [
+        "P001"
+      ],
+      "assumption_ids": [],
+      "operation": "plain",
+      "side_conditions": {}
+    }
+  ],
+  "decision": {
+    "verdict": "INCONCLUSIVE",
+    "claim_id": "C001",
+    "reason": "Finite route counterexamples and partial infinite families do not close the universal quantifier.",
+    "evidence_ids": [
+      "E001",
+      "E002"
+    ],
+    "limitations": "Six congruence classes remain; no general proof, original counterexample, novelty audit or human review.",
+    "reproduction": "From repository root: python examples/erdos-frontier/reproduce.py. Archived actions retain exact claims and evidence."
+  }
+}

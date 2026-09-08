@@ -1,0 +1,42 @@
+{
+  "id": 13,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "text": "Eight-step completion passed only the tested 256 inputs25..6145, step24. Extend the same eight-step hypothesis to successive disjoint blocks through n<=100000, stopping at the first independently refuted window or an inconclusive/failed action; max16 additional blocks and120s per action. Separately explore polynomial families for all35 residues1 mod24 modulo840, using x=(n+4k-1)/4,k1..64 and constant divisors of the coefficient gcd of (nx)^2. Candidate generation is a host-authored exploratory script; each returned family will be checked through native Agent certificates, and gaps will be retained. No promise of an exhaustive search over all possible formulas."
+      },
+      "tool": "note"
+    },
+    "evidence": [
+      7,
+      9,
+      10,
+      11,
+      12
+    ],
+    "falsifier": "A failed eight-step window or any uncovered residue blocks the corresponding proposed proof.",
+    "rationale": "Fix bounded extensions and a structurally different route after the initial window failures."
+  },
+  "fingerprint": "5d9a5199d4a6acc99bd37c793e6c41e1c2659599c9cc464e50283e076598c49b",
+  "execution": "SUCCEEDED",
+  "result": {
+    "elapsed_seconds": 0.0,
+    "status": "DRAFT",
+    "text": "Eight-step completion passed only the tested 256 inputs25..6145, step24. Extend the same eight-step hypothesis to successive disjoint blocks through n<=100000, stopping at the first independently refuted window or an inconclusive/failed action; max16 additional blocks and120s per action. Separately explore polynomial families for all35 residues1 mod24 modulo840, using x=(n+4k-1)/4,k1..64 and constant divisors of the coefficient gcd of (nx)^2. Candidate generation is a host-authored exploratory script; each returned family will be checked through native Agent certificates, and gaps will be retained. No promise of an exhaustive search over all possible formulas.",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    },
+    "verified": false
+  },
+  "result_hash": "741f911b26fdd8d004ba4c70cae72e47508c370b30842700cadc1c225c2ef364",
+  "created": 1788850719.559662
+}

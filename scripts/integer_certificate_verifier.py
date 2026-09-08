@@ -1,4 +1,4 @@
-"""Independently check finite unit-fraction witnesses and a narrow modular obstruction."""
+"""Independently check finite witnesses, modular obstructions, windows and polynomial families."""
 
 from __future__ import annotations
 
@@ -98,6 +98,16 @@ def verify(certificate: dict[str, Any]) -> dict[str, Any]:
             status = check_finite(certificate)
         elif operation == "two-unit-fractions-obstruction":
             status = check_obstruction(certificate)
+        elif operation in {"three-unit-fractions-window", "unit-fraction-polynomial-family"}:
+            from integer_research_verifier import check_family, check_window
+
+            status = (
+                check_window(certificate) if operation == "three-unit-fractions-window" else check_family(certificate)
+            )
+        elif operation == "three-unit-fractions-window-scan":
+            from integer_research_verifier import check_scan
+
+            status = check_scan(certificate)
         else:
             raise ValueError("unsupported integer operation")
         errors = []
@@ -109,5 +119,5 @@ def verify(certificate: dict[str, Any]) -> dict[str, Any]:
         "status": status,
         "errors": errors,
         "certificate_hash": canonical_hash(certificate),
-        "scope": "Only the explicit finite domain or fixed-first-denominator obstruction; no universal conjecture or novelty claim.",
+        "scope": "Only the recorded finite domain, fixed-first-denominator obstruction, window or explicit polynomial family; no coverage of other integers or novelty claim.",
     }

@@ -1,0 +1,309 @@
+{
+  "id": 33,
+  "proposal": {
+    "action": {
+      "arguments": {
+        "denominator": 246241,
+        "distinct": true,
+        "max_work": 10000000,
+        "numerator": 4,
+        "start_x": 61569,
+        "stop_x": 61624
+      },
+      "tool": "egyptian_window"
+    },
+    "evidence": [
+      32
+    ],
+    "falsifier": "An exact later witness prevents misclassifying the route counterexample as a conjecture counterexample.",
+    "rationale": "Eight-step route was refuted at246241 after many finite successes; search a later bounded window."
+  },
+  "fingerprint": "bf48565564bb52db6d8bf50b830c32b22008f208e0f4bd99904e782cb0f64691",
+  "execution": "SUCCEEDED",
+  "result": {
+    "certificate": {
+      "backend": "exact-integer",
+      "backend_version": "2",
+      "budget": {
+        "max_work": 10000000,
+        "used_work": 4009
+      },
+      "claim": {
+        "denominator": 246241,
+        "distinct": true,
+        "numerator": 4,
+        "start_x": 61569,
+        "stop_x": 61624
+      },
+      "entries": [
+        {
+          "factorization": [
+            [
+              3,
+              2
+            ],
+            [
+              6841,
+              1
+            ],
+            [
+              246241,
+              1
+            ]
+          ],
+          "outcome": "obstructed",
+          "x": 61569
+        },
+        {
+          "outcome": "witness",
+          "x": 61570,
+          "y": 388745120,
+          "z": 4499074393414240
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61571
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61572
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61573
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61574
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61575
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61576
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61577
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61578
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61579
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61580
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61581
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61582
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61583
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61584
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61585
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61586
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61587
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61588
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61589
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61590
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61591
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61592
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61593
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61594
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61595
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61596
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61597
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61598
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61599
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61600
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61601
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61602
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61603
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61604
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61605
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61606
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61607
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61608
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61609
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61610
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61611
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61612
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61613
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61614
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61615
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61616
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61617
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61618
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61619
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61620
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61621
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61622
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61623
+        },
+        {
+          "outcome": "unresolved",
+          "x": 61624
+        }
+      ],
+      "operation": "three-unit-fractions-window",
+      "schema_version": 1,
+      "warning": "REFUTED means no ordered completion inside this explicit window only. Unresolved entries are not obstructions."
+    },
+    "elapsed_seconds": 0.297,
+    "independent_check": {
+      "certificate_hash": "a69e1994597b8b5a0830b1923803a5a4fc799a6dd723ccb2958fad2cd158e45f",
+      "errors": [],
+      "kind": "independent-certificate-check",
+      "schema_version": 1,
+      "scope": "Only the recorded finite domain, denominator window, obstruction or explicit polynomial family; no coverage of other integers or novelty claim.",
+      "status": "ESTABLISHED"
+    },
+    "status": "ESTABLISHED",
+    "toolchain_sha256": {
+      "certificate_verifier.py": "45d35bb596b4246c7674a036ad140f030361c9d6ed72bfab1659c74f14764117",
+      "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+      "integer_certificate_verifier.py": "3d2853651c2451681443bd402e2e1ec3ccc2960493bd7ed5b5d799c0ebfe5261",
+      "integer_research.py": "198f98d2b156fee22cbd7613842fd1943246ed2ab8d5816be2b9e5927d532dfb",
+      "integer_research_verifier.py": "298a60510e5e53efdbbd038c569e8b7e0d7fb913532c73a9734fce3d79798bfb",
+      "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+      "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+      "schema.py": "a3375bf75d180377cf1d4a4012cdad7e4f51c6ad64d746cfbe698091d7580b54",
+      "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+      "worker.py": "3d20f6bdeee55ae1117c2fb1e150e5e841eb363fa384ff1ae7962656398a326e"
+    }
+  },
+  "result_hash": "54aa19437902495090570f3b71fac0a6defec14bbf9bee25962433f605bd630d",
+  "created": 1788850984.6629808
+}
