@@ -2,6 +2,7 @@ include LICENSE
 include README.md
 include README.zh-CN.md
 recursive-include scripts/papertrail_frontend *.css *.html *.js
+recursive-include scripts/research_agent *.html
 prune tests
 prune scripts/rigorous_research.egg-info
 global-exclude __pycache__ *.py[cod]

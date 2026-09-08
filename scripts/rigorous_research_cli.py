@@ -16,6 +16,7 @@ class Command:
 
 
 COMMANDS = {
+    "agent": Command("research_agent.cli", "run a persistent mathematics and statistics research agent"),
     "egyptian": Command("egyptian_fractions", "search finite integer unit-fraction domains with exact witnesses"),
     "statistical-contract": Command("statistical_contract", "audit theorem, design, and implementation conditions"),
     "verify-certificate": Command("certificate_verifier", "independently recheck an exact mathematical certificate"),

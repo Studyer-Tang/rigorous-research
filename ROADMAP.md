@@ -2,7 +2,10 @@
 
 The roadmap favors stronger evidence and easier independent reproduction over adding broad but weak automation.
 
-## Current release: 1.10
+## Current release: 1.11
+
+- Persistent shared research-agent kernel, bounded API loop, Codex MCP interface and local workbench, with separate tool execution, mathematical evidence and original-goal acceptance states.
+- Real offline mathematics/statistics feedback loops, local model-protocol integration and adversarial pause, recovery, evidence-integrity and false-completion checks.
 
 - One installable CLI for cases, workspaces, literature, research integrity, governed AI review, mathematics, statistics, data, sealing, review, evaluation, and repository quality.
 - Five literature metadata providers with conservative deduplication and visible retrieval gaps.
@@ -21,6 +24,8 @@ The roadmap favors stronger evidence and easier independent reproduction over ad
 
 ## Next
 
+- Run fixed-model, fixed-budget external research evaluations against direct model use; report target-proof success, false completion, unresolved goals and cost separately.
+- Add explicitly reviewed extensions for broader theorem proving, sourced statistical applicability and constrained experiment execution; preserve the existing compact kernel and closed tool contracts.
 - Audit named Lean targets and transitive axioms against pinned imports before enabling decisive formal receipts.
 - Extend statistical contracts with sourced theorem statements and method-specific implementation validation; test research outcomes on held-out proof and misspecification tasks.
 

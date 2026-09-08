@@ -23,16 +23,18 @@ jobs:
           test "v$VERSION" = "${GITHUB_REF_NAME}"
       - name: Test and build release artifacts
         run: |
-          python -m pip install -e ".[math,dev]"
+          python -m pip install -e ".[math,dev,agent]"
           python -m unittest discover -s tests -v
           python scripts/skill_quality.py
           python scripts/research_eval.py
           python -m build
-          python scripts/build_plugin.py --output build/agent-plugin --archive dist/rigorous-research-agent-plugin
+          python scripts/build_plugin.py --output build/codex/rigorous-research --archive dist/rigorous-research-agent-plugin
       - name: Generate dependency SBOM
         run: |
           python -m pip install cyclonedx-bom
-          python -m pip freeze | grep -Ei '^(sympy|mpmath)==' > dist/runtime-requirements.txt
+          python -m venv build/runtime
+          build/runtime/bin/python -m pip install ".[math,agent]"
+          build/runtime/bin/python -m pip freeze --exclude rigorous-research > dist/runtime-requirements.txt
           cyclonedx-py requirements dist/runtime-requirements.txt \
             --pyproject pyproject.toml \
             --output-reproducible \

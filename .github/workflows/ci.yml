@@ -21,7 +21,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Compile and test
         run: |
-          python -m pip install -e ".[math,dev]"
+          python -m pip install -e ".[math,dev,agent]"
           ruff format --check scripts tests
           ruff check scripts tests
           python -m py_compile scripts/*.py
@@ -30,6 +30,7 @@ jobs:
         run: |
           python scripts/skill_quality.py
           python scripts/research_eval.py
+          python examples/agent-research/reproduce.py --output build/agent-replay
       - name: Validate released workspaces
         run: |
           python scripts/research_workspace.py validate examples/toeplitz-determinant/workspace.json --release

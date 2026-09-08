@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.10"
+  version: "1.11"
   skill-author: Rigorous Research contributors
 ---
 
@@ -12,6 +12,17 @@ metadata:
 Treat every research result as an **inference contract**: a scoped claim joined to the objects or estimand, assumptions, falsifiers, and evidence that make the conclusion valid. Build the surrounding investigation as a recoverable research workspace. Do not let mathematical proof, statistical estimation, and financial backtesting borrow standards from one another without an explicit bridge.
 
 ## Choose the operating layer
+
+For persistent autonomous mathematics or statistics research, read [references/research-agent.md](references/research-agent.md).
+Use the shared Agent kernel through `research_context` / `research_submit` MCP tools when connected,
+or `rigorous-research agent context` / `agent submit` from the CLI. Codex supplies the reasoning;
+no separate model key is required in hosted mode. For unattended operation, the user-selected API
+model uses the same kernel through `agent run`. Follow the returned action schema and current revision.
+Inspect failed results before choosing the next route; keep proof drafts, assumptions and remaining
+obligations in notes with references to prior actions. For statistics, record the estimand, sampling
+design, identification conditions, multiplicity family and exploratory status before interpreting results.
+Use `finish` for an honest current report, never as evidence that the original objective was achieved.
+Export exact artifacts and apply the existing case/release gates before closing proof obligations.
 
 - For a focused claim audit, use `scripts/inference_case.py` and read [references/evidence-contracts.md](references/evidence-contracts.md).
 - For research spanning literature, dependent tasks, computations, revisions, or a paper-quality output, use `scripts/research_workspace.py` and read [references/research-workflow.md](references/research-workflow.md). The workspace initializes and validates an inference case inside it.

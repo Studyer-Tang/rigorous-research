@@ -201,6 +201,18 @@ def request_advice(
     packet: dict[str, Any], provider: str, endpoint: str, model: str, api_key_env: str, requester=None
 ) -> dict[str, Any]:
     check_packet(packet)
+    result = request_structured(
+        packet["context"], ADVICE_SCHEMA, INSTRUCTIONS, provider, endpoint, model, api_key_env, requester
+    )
+    advice = normalize_advice(packet, result["proposal"])
+    advice["provenance"] = result["provenance"]
+    return advice
+
+
+def request_structured(
+    context, schema, instructions, provider, endpoint, model, api_key_env, requester=None, timeout=120
+):
+    """Request a bounded JSON proposal; callers validate it before execution."""
     parsed = urllib.parse.urlparse(endpoint)
     if (
         provider not in PROVIDERS
@@ -218,11 +230,11 @@ def request_advice(
     if parsed.scheme == "http" and parsed.hostname not in ("localhost", "127.0.0.1", "::1"):
         raise ValueError("remote model endpoints require HTTPS")
     messages = [
-        {"role": "system", "content": INSTRUCTIONS},
+        {"role": "system", "content": instructions},
         {
             "role": "user",
             "content": json.dumps(
-                {"research_context": packet["context"], "required_response_schema": ADVICE_SCHEMA}, ensure_ascii=False
+                {"research_context": context, "required_response_schema": schema}, ensure_ascii=False
             ),
         },
     ]
@@ -239,22 +251,20 @@ def request_advice(
             "input": messages,
             "store": False,
             "max_output_tokens": 6000,
-            "text": {
-                "format": {"type": "json_schema", "name": "research_actions", "strict": True, "schema": ADVICE_SCHEMA}
-            },
+            "text": {"format": {"type": "json_schema", "name": "research_actions", "strict": True, "schema": schema}},
         }
     elif provider == "openai-compatible":
         suffix = "/chat/completions"
         body = {"model": model, "messages": messages, "response_format": {"type": "json_object"}}
     else:
         suffix = "/api/chat"
-        body = {"model": model, "messages": messages, "stream": False, "format": ADVICE_SCHEMA}
+        body = {"model": model, "messages": messages, "stream": False, "format": schema}
     url = endpoint.rstrip("/")
     url = url if url.endswith(suffix) else url + suffix
     request = urllib.request.Request(url, data=json.dumps(body).encode("utf-8"), headers=headers, method="POST")
     requester = requester or urllib.request.build_opener(NoRedirect()).open
     try:
-        with requester(request, timeout=120) as response:
+        with requester(request, timeout=timeout) as response:
             raw = response.read(2000001)
         if len(raw) > 2000000:
             raise ValueError("model response exceeds 2 MB")
@@ -272,10 +282,14 @@ def request_advice(
                 raise ValueError("model declined to produce a research proposal")
             content = "".join(part["text"] for part in parts if part.get("type") == "output_text")
         elif provider == "ollama":
+            if envelope.get("done") is False:
+                raise ValueError("model response was incomplete")
             content = envelope["message"]["content"]
         else:
+            if envelope["choices"][0].get("finish_reason") not in (None, "stop"):
+                raise ValueError("model response was incomplete")
             content = envelope["choices"][0]["message"]["content"]
-        result = normalize_advice(packet, json.loads(content))
+        result = {"proposal": json.loads(content)}
     except urllib.error.HTTPError as exc:
         raise ValueError(f"model request failed with HTTP {exc.code}; no automatic retry was made") from None
     except (KeyError, TypeError, AttributeError, IndexError) as exc:

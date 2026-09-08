@@ -2,6 +2,19 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**1.11 adds a runnable research Agent:** Codex-hosted reasoning and unattended API execution share a persistent kernel, mathematical certificate checks, statistical tools and a local workbench. It records failed attempts, feeds results back into the next step, and keeps report delivery separate from proof and original-goal acceptance. The model remains the main source of reasoning ability; architecture supplies tools, memory and enforcement, not guaranteed discoveries.
+
+```text
+python -m pip install -e ".[agent,math]"
+rigorous-research agent init research-studies expansion --objective "Derive and verify the expansion of (x+1)^2."
+rigorous-research agent context research-studies/expansion
+rigorous-research agent serve --root research-studies
+```
+
+Open `http://127.0.0.1:8765` for the local research workbench. Codex can use `agent submit` or the project's MCP server without a separate API key. For unattended operation, configure `RESEARCH_AI_MODEL` and `RESEARCH_AI_API_KEY`, then run `rigorous-research agent run research-studies/expansion --steps 12 --seconds 600`. OpenAI Responses, compatible Chat Completions and Ollama are supported; no model is silently substituted.
+
+See the [Agent guide](references/research-agent.md), [中文指南](references/research-agent.zh-CN.md), and [math/statistics replay](examples/agent-research/README.md). The bundled Codex plugin is built with `python scripts/build_plugin.py --output build/codex/rigorous-research`; building does not install it. Mathematical tools cover specified exact subclaims, while general proof drafts and statistical applicability remain review obligations. Local protocol/replay tests do not establish live provider compatibility, research novelty or improved model intelligence.
+
 **1.10 includes a real open-conjecture investigation:** [Erdős–Straus report and replay](examples/erdos-straus/REPORT.md). It checks 9,998 distinct integer witnesses, proves that a natural greedy proof route fails at `n=49`, and leaves the original conjecture **INCONCLUSIVE**. No new theorem or computational record is claimed. This use exposed and fixed missing integer-certificate support and the conflation of inconclusive scientific outcomes with failed processes.
 
 Use `rigorous-research egyptian --start 3 --stop 10000 --distinct --output finite.json`, then `rigorous-research verify-certificate finite.json`. Integer search and independent checking use only the standard library; the example's symbolic families additionally require SymPy. See the [integer-search guide](references/integer-search.md) for scope and budget semantics.

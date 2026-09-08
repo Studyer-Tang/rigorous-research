@@ -2,6 +2,19 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**1.11 版加入可运行的科研 Agent 架构**：Codex 托管理解与推理、独立 API 自主运行共用一个持久化内核，接入数学证书校验、统计工具和本地研究工作台。失败尝试会保存并反馈到下一步，报告交付、数学证据与原始目标验收分别记录。模型仍是推理能力的主要来源；架构提供工具、记忆和执行约束，不能保证科研突破。
+
+```text
+python -m pip install -e ".[agent,math]"
+rigorous-research agent init research-studies expansion --objective "推导并验证 (x+1)^2 的展开式。"
+rigorous-research agent context research-studies/expansion
+rigorous-research agent serve --root research-studies
+```
+
+打开 `http://127.0.0.1:8765` 使用本地研究工作台。Codex 可以通过 `agent submit` 或项目提供的 MCP 工具执行研究，无需另填模型 API 密钥。独立运行时配置环境变量 `RESEARCH_AI_MODEL` 和 `RESEARCH_AI_API_KEY`，再运行 `rigorous-research agent run research-studies/expansion --steps 12 --seconds 600`。支持 OpenAI Responses、兼容 Chat Completions 的接口和 Ollama，不自动替换用户选择的模型。
+
+详见[中文 Agent 指南](references/research-agent.zh-CN.md)、[完整接口与架构](references/research-agent.md)和[数学／统计实跑示例](examples/agent-research/README.md)。运行 `python scripts/build_plugin.py --output build/codex/rigorous-research` 可构建 Codex 插件包；构建不等于安装。当前精确数学工具覆盖明确的子命题，通用证明草稿和统计适用条件仍需审查。本地协议测试与离线回放不代表已经验证外部模型的科研水平、创新性或实际服务兼容性。
+
 **1.10 版加入真实未解猜想实测**：[Erdős–Straus 研究报告与复现流程](examples/erdos-straus/REPORT.md)。验证了 9,998 个互异正整数分母见证，严格证明一条自然的贪心证明路线在 `n=49` 时失败，同时把原猜想保留为 **INCONCLUSIVE（证据不足）**。这不是解决了原猜想，也不声称刷新了数学结果或计算纪录。实测推动项目补齐整数证书，并区分“科研结果不确定”与“程序运行失败”。
 
 运行 `rigorous-research egyptian --start 3 --stop 10000 --distinct --output finite.json`，再用 `rigorous-research verify-certificate finite.json` 独立检查。整数搜索和检查只依赖标准库；示例中的符号恒等式另需 SymPy。预算不足时保留未解决输入，不将其冒充反例。范围和预算说明见[整数搜索指南](references/integer-search.md)。

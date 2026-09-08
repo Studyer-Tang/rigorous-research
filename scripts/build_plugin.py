@@ -61,6 +61,38 @@ def build_plugin(root: Path, output: Path, archive: Path | None = None) -> Path:
         "keywords": ["agent-skills", "research", "reproducibility", "statistics", "quantitative-finance"],
     }
     (output / "plugin.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    codex_manifest = {key: value for key, value in manifest.items() if key != "$schema"}
+    codex_manifest.update(skills="./skills/", mcpServers="./.mcp.json")
+    codex_manifest["interface"] = {
+        "displayName": "Rigorous Research",
+        "shortDescription": "Evidence-gated mathematics and statistics research",
+        "longDescription": "Run persistent research studies with typed tools, independent mathematical checks and explicit unresolved obligations.",
+        "developerName": "Rigorous Research contributors",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": [
+            "Use the research agent to investigate my mathematical or statistical question and preserve the evidence and open obligations."
+        ],
+        "brandColor": "#244F40",
+    }
+    (output / ".codex-plugin").mkdir()
+    (output / ".codex-plugin" / "plugin.json").write_text(json.dumps(codex_manifest, indent=2) + "\n", encoding="utf-8")
+    (output / ".mcp.json").write_text(
+        json.dumps(
+            {"mcpServers": {"rigorous-research": {"command": "rigorous-research", "args": ["agent", "mcp"]}}}, indent=2
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (output / "INSTALL.md").write_text(
+        "# Codex plugin\n\nInstall the matching rigorous-research[agent,math] Python package first. "
+        "The MCP entry uses the rigorous-research executable on PATH. If Codex cannot find it, "
+        "set command in .mcp.json to the absolute executable path. Set RESEARCH_AGENT_ROOT "
+        "in the server environment to an absolute writable study directory; the default is "
+        "research-studies in the server working directory. No separate model key is needed in Codex-hosted mode. "
+        "Import this plugin directory through your Codex plugin workflow. Building does not install it.\n",
+        encoding="utf-8",
+    )
     if archive:
         archive = archive.resolve()
         archive.parent.mkdir(parents=True, exist_ok=True)

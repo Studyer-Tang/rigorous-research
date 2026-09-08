@@ -4,6 +4,14 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.11.0 - 2026-09-08
+
+- Added a shared persistent research-agent kernel with SQLite study records, immutable original objectives, content-addressed numeric assets, proposal validation, process locking, interruption recovery and separate execution/evidence/acceptance states.
+- Added a bounded standalone model loop for OpenAI Responses, compatible Chat Completions and Ollama. Failed actions and rejected proposals feed back into subsequent context. Pause, per-action deadlines, model-call budgets and repeated-failure limits prevent unbounded unattended execution.
+- Added typed mathematical checks, independent certificate rechecking, dependence-aware statistics, coverage simulation, multiplicity adjustments, opt-in scholarly metadata retrieval and unverified proof/lemma notes. Finish actions deliver reports without declaring research objectives solved.
+- Added CLI/Python, real stdio MCP and a loopback research workbench over the same kernel. Plugin builds now include a Codex manifest and MCP configuration alongside the generic Agent Plugin layout; installation remains explicit.
+- Added bilingual runtime documentation and reproducible offline mathematics/statistics loops with real tool execution. Added adversarial runtime, local model-protocol, HTTP-origin and MCP integration tests. No external-model capability improvement or novel research result is claimed by these tests.
+
 ## 1.10.0 - 2026-09-07
 
 - Exercised the toolkit on the publicly open Erdős–Straus conjecture: 9,998 exact distinct witnesses, a checked obstruction to the greedy first-denominator route at 49, four elementary residue families, sourced status, and an explicitly inconclusive original claim. No novelty or larger verification record is claimed.
