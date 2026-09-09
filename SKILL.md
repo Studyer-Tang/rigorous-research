@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.12"
+  version: "1.13"
   skill-author: Rigorous Research contributors
 ---
 
@@ -44,6 +44,14 @@ not complete. A collection of valid families still requires a separate coverage 
 For competing routes, record each auxiliary hypothesis, observed failure and next discriminating test;
 keep the original conjecture visible when strengthening or abandoning a route. The returned
 `research_memory` includes legacy tasks and proof obligations as untrusted context, not accepted evidence.
+Use the native `route` action for persistent competing hypotheses, blockers and next tests; its latest
+revisions remain visible beyond the recent-action window. `supported` is a planning label, not proof acceptance.
+
+For real polynomial inequalities, read [references/polynomial-proofs.md](references/polynomial-proofs.md).
+Use `inequality_search` for feasible rational counterexamples, `polynomial_sos` for automatic quadratic
+discovery or supplied weighted-square proofs, and `polynomial_amgm` for supplied AM-GM proofs when a
+square decomposition is unavailable. Declare every nonnegative polynomial assumption explicitly.
+Failure to find a decomposition does not disprove nonnegativity; finite grids cannot establish it.
 
 For proof obligations, independently checked certificates, or statistical theorem applicability, read [references/proof-assurance.md](references/proof-assurance.md). New cases use schema 4: separate translation, domain conditions, and the proof or counterexample; derive closure from evidence rather than model confidence. Declare division, inversion, limit interchange, and generalization operations explicitly. Never invent a human reviewer or record an AI review as human. Leave unproved steps open and continue independently useful research.
 

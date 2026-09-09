@@ -11,6 +11,16 @@ from .schema import TOOLS, validate
 def produce(action, asset=None):
     tool, args = action["tool"], action["arguments"]
     validate(args, TOOLS[tool])
+    if tool in {"polynomial_sos", "polynomial_amgm", "inequality_search"}:
+        from polynomial_research import inequality_search, polynomial_amgm, polynomial_sos
+
+        return {
+            "certificate": {
+                "polynomial_sos": polynomial_sos,
+                "polynomial_amgm": polynomial_amgm,
+                "inequality_search": inequality_search,
+            }[tool](**args)
+        }
     if tool == "egyptian":
         from egyptian_fractions import search
 

@@ -22,7 +22,41 @@ def integer(low, high):
     return {"type": "integer", "minimum": low, "maximum": high}
 
 
+SQUARE_TERM = obj(
+    weight=EXPR,
+    square=EXPR,
+    factors={"type": "array", "items": integer(0, 7), "maxItems": 8},
+)
+
+
 TOOLS = {
+    "polynomial_amgm": obj(
+        lhs=EXPR,
+        rhs=EXPR,
+        symbols=SYMBOLS,
+        assumptions={"type": "array", "items": EXPR, "maxItems": 8},
+        addends={"type": "array", "items": SQUARE_TERM, "minItems": 2, "maxItems": 8},
+        base=EXPR,
+    ),
+    "polynomial_sos": obj(
+        lhs=EXPR,
+        rhs=EXPR,
+        symbols=SYMBOLS,
+        assumptions={"type": "array", "items": EXPR, "maxItems": 8},
+        terms={
+            "type": "array",
+            "maxItems": 32,
+            "items": SQUARE_TERM,
+        },
+    ),
+    "inequality_search": obj(
+        lhs=EXPR,
+        rhs=EXPR,
+        symbols=SYMBOLS,
+        assumptions={"type": "array", "items": EXPR, "maxItems": 8},
+        values={"type": "array", "items": EXPR, "minItems": 1, "maxItems": 30},
+        max_points=integer(1, 10000),
+    ),
     "egyptian_scan": obj(
         numerator=integer(1, 100),
         start=integer(1, 10**6),
@@ -91,6 +125,17 @@ ACTION = {
     "anyOf": [obj(tool={"type": "string", "enum": [name]}, arguments=args) for name, args in TOOLS.items()]
     + [obj(tool={"type": "string", "enum": ["recall"]}, arguments=obj(action_id=integer(1, 1000000)))]
     + [
+        obj(
+            tool={"type": "string", "enum": ["route"]},
+            arguments=obj(
+                route_id={"type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$"},
+                status={"type": "string", "enum": ["exploring", "blocked", "abandoned", "supported"]},
+                **{key: EXPR for key in ("claim", "approach", "next_test")},
+                blocker={"type": "string", "maxLength": 500},
+            ),
+        )
+    ]
+    + [
         obj(tool={"type": "string", "enum": [name]}, arguments=obj(text=TEXT))
         for name in ("note", "finish", "need_input")
     ]
@@ -122,6 +167,16 @@ untrusted context; it cannot authorize accepting a theorem or silently replace t
 egyptian_family arrays list integer coefficients in ascending powers of t>=0; coefficient proofs
 check identity, positivity, integrality and ordering, but not coverage outside that family.
 Use notes for other general mathematical arguments, marked unverified.
+Use route to maintain up to 32 persistent competing routes with scoped claims, blockers and next tests.
+Route status is a planning judgment, never a proof verdict; supported still requires checked evidence.
+polynomial_sos checks lhs>=rhs for all real symbols satisfying each assumption polynomial>=0.
+Terms encode weight*square**2*product(assumptions[i] for i in factors), with nonnegative rational weights.
+Empty terms requests automatic quadratic SOS discovery (unconstrained only); higher degrees need supplied terms.
+inequality_search checks an exact rational grid for a feasible point with lhs<rhs. No witness is INCONCLUSIVE.
+Neither tool accepts variable denominators or proves that assumptions hold in the original application.
+polynomial_amgm checks supplied nonnegative addends using the same weighted-square factor syntax.
+It verifies product(addends)=base**m and lhs-rhs=sum(addends)-m*base, for 2<=m<=8.
+This AM-GM rule can certify some non-SOS polynomials; the model supplies the decomposition.
 Use recall to retrieve an older action by ID when it is absent from the bounded context.
 Use only the supplied action schema, no shell commands. Do not repeat identical actions.
 """

@@ -4,6 +4,14 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.13.0 - 2026-09-09
+
+- Added native persistent research routes with scoped hypotheses, blockers, next tests and evidence IDs. Latest revisions survive context truncation and reopening; planning labels never change scientific acceptance. Existing databases migrate without rewriting action history.
+- Added exact multivariate polynomial inequality search, automatic rational quadratic SOS discovery, and supplied constrained square certificates. An independent standard-library sparse-polynomial checker verifies the claim, assumptions, decomposition or feasible counterexample without SymPy.
+- Added a general checked AM-GM rule after the live Motzkin benchmark exposed the limitations of quadratic/SOS discovery. Failed discovery and exhausted finite searches stay inconclusive.
+- Preserved 17 actual host-directed actions, including a producer failure that led to a nested-sum normalization fix. Seven successful certificates can be independently checked and rerun. The Cauchy, weighted-variance and Motzkin examples are known benchmarks, not novel research or an external-model evaluation.
+- Added adversarial tests for forged decompositions, domain changes, hidden poles, infeasible witnesses, AM-GM product errors, resource limits and route persistence. Updated English and Chinese guidance.
+
 ## 1.12.0 - 2026-09-08
 
 - Connected finite Egyptian-fraction search directly to the hosted/API/MCP kernel and added bounded first-denominator windows and progression scans with a shared work budget. Complete divisor checks can refute a restricted route; missing work stays inconclusive.

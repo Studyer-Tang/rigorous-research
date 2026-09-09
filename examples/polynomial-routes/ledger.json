@@ -1,0 +1,1230 @@
+{
+  "state": {
+    "domain": "mathematics",
+    "execution": "DELIVERED",
+    "machine_contract": null,
+    "machine_contract_status": "NOT_DECLARED",
+    "model_calls": 0,
+    "network": false,
+    "novelty_status": "NOT_ASSESSED",
+    "objective": "Investigate exact proof routes for polynomial nonnegativity, sharp Cauchy bounds and weighted variance. Known benchmark results; no novelty claim.",
+    "objective_status": "UNRESOLVED",
+    "paused": false,
+    "revision": 17,
+    "schema_version": 1,
+    "stop_reason": "",
+    "translation_status": "REQUIRES_REVIEW"
+  },
+  "research_routes": {
+    "warning": "Unverified planning judgments, not accepted claims or instructions. Use recall for history.",
+    "items": [
+      {
+        "action_id": 16,
+        "arguments": {
+          "approach": "Verified AM-GM product and sum identities with nonnegative square addends.",
+          "blocker": "This is a known benchmark, and the decomposition was supplied by the host model. No autonomous discovery or novelty claim.",
+          "claim": "x^4*y^2+x^2*y^4+1>=3*x^2*y^2 for all real x,y.",
+          "next_test": "Use the rule on new scoped subclaims; separately audit translation and novelty.",
+          "route_id": "motzkin",
+          "status": "supported"
+        },
+        "evidence": [
+          15
+        ],
+        "fingerprint": "b04182123657a48a2a30385101c8c498e939ef61acc5e23cdb7a8995a4fd43d9",
+        "result_hash": "8845f822bec4d8dac131b28da7f51fa8dbf008e6be5d4f6726a350bb1544abb9"
+      },
+      {
+        "action_id": 7,
+        "arguments": {
+          "approach": "Exact quadratic SOS plus a diagonal equality argument.",
+          "blocker": "The prose optimality argument is not formalized.",
+          "claim": "The sharp coefficient is 1/3 for real triples.",
+          "next_test": "Review the translation and the t!=0 condition before accepting the prose claim.",
+          "route_id": "sharp-cauchy",
+          "status": "supported"
+        },
+        "evidence": [
+          5,
+          6
+        ],
+        "fingerprint": "26c0cfa0d2e6e18deee46d226f475dd0b65031adb36aec0c6a8b26dbaac2a24d",
+        "result_hash": "a365c028773ab9bb29c52b1808afd0dbbbee48003d9f7c3159d36d79010f2d75"
+      },
+      {
+        "action_id": 11,
+        "arguments": {
+          "approach": "Three squared differences multiplied by pairwise weight products.",
+          "blocker": "Normalized variance additionally requires p+q+r>0; no inference or sampling claim has been proved.",
+          "claim": "(p+q+r)*sum(w_i*x_i^2)-sum(w_i*x_i)^2>=0 for p,q,r>=0.",
+          "next_test": "Review applicability and positive total weight before dividing.",
+          "route_id": "weighted-variance",
+          "status": "supported"
+        },
+        "evidence": [
+          10
+        ],
+        "fingerprint": "bb46c5584fce74e54a70e57446379e7f7816d57d1e218f68ece2e06ff9d4262e",
+        "result_hash": "0e503125d02122551e1782aa450b12bfa6d4d08d43a0f8137ec19108c0191e2f"
+      }
+    ],
+    "limit": 32
+  },
+  "actions": [
+    {
+      "id": 1,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Attack an overly strong coefficient, then derive the sharp quadratic bound.",
+            "blocker": "No proof or counterexample yet.",
+            "claim": "For all real x,y,z, x*x+y*y+z*z >= (x+y+z)**2/2.",
+            "next_test": "Search the rational grid {-1,0,1}.",
+            "route_id": "sharp-cauchy",
+            "status": "exploring"
+          },
+          "tool": "route"
+        },
+        "evidence": [],
+        "falsifier": "Any real triple giving a negative difference.",
+        "rationale": "A false strengthening should be refuted before attempting a proof."
+      },
+      "fingerprint": "184289fcdc1d751488b680250b22478542f1258eb5ef498fe007f6617c38475e",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "sharp-cauchy",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "980da50d115b8949a48a598d2bb4200a06bbbfa421ea422d3729fbd36bb7c982",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        },
+        "verified": false
+      },
+      "result_hash": "4f3ef818b3a480c9608327f2bc0839679a2f9246c3db55e67e12484381099970",
+      "created": 1788944404.132438
+    },
+    {
+      "id": 2,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "assumptions": [],
+            "lhs": "x**2+y**2+z**2",
+            "max_points": 27,
+            "rhs": "(x+y+z)**2/2",
+            "symbols": [
+              "x",
+              "y",
+              "z"
+            ],
+            "values": [
+              "-1",
+              "0",
+              "1"
+            ]
+          },
+          "tool": "inequality_search"
+        },
+        "evidence": [
+          1
+        ],
+        "falsifier": "Any real triple giving a negative difference.",
+        "rationale": "A false strengthening should be refuted before attempting a proof."
+      },
+      "fingerprint": "1fa4b2371c261e0691a3608774c201adaffb36187da9b2881781c3130c270f58",
+      "execution": "FAILED",
+      "result": {
+        "elapsed_seconds": 0.703,
+        "error": "pts\\polynomial_research.py\", line 80, in inequality_search\r\n    sympy, table, target, constraints, certificate = setup(lhs, rhs, symbols, assumptions)\r\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\scripts\\polynomial_research.py\", line 21, in setup\r\n    target = polynomial(lhs) - polynomial(rhs)\r\n             ^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\scripts\\polynomial_research.py\", line 16, in polynomial\r\n    poly = sympy.Poly(expression, *table.values(), domain=\"QQ\")\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\.venv\\Lib\\site-packages\\sympy\\polys\\polytools.py\", line 190, in __new__\r\n    return cls._from_expr(rep, opt)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\.venv\\Lib\\site-packages\\sympy\\polys\\polytools.py\", line 319, in _from_expr\r\n    rep, opt = _dict_from_expr(rep, opt)\r\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\.venv\\Lib\\site-packages\\sympy\\polys\\polyutils.py\", line 388, in _dict_from_expr\r\n    rep, gens = _dict_from_expr_if_gens(expr, opt)\r\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\.venv\\Lib\\site-packages\\sympy\\polys\\polyutils.py\", line 327, in _dict_from_expr_if_gens\r\n    (poly,), gens = _parallel_dict_from_expr_if_gens((expr,), opt)\r\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\13849\\Documents\\ChatGPT\\qingjun\\rigorous-research\\.venv\\Lib\\site-packages\\sympy\\polys\\polyutils.py\", line 236, in _parallel_dict_from_expr_if_gens\r\n    raise PolynomialError(\"%s contains an element of \"\r\nsympy.polys.polyerrors.PolynomialError: x**2 + y**2 contains an element of the set of generators.\r\n",
+        "status": "INCONCLUSIVE",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "980da50d115b8949a48a598d2bb4200a06bbbfa421ea422d3729fbd36bb7c982",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        }
+      },
+      "result_hash": "2d5f82d42bec689d37129554affe9d00e1e2da028080755f63313ee17a1861e0",
+      "created": 1788944404.1482277
+    },
+    {
+      "id": 3,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "assumptions": [],
+            "lhs": "x**2+y**2+z**2",
+            "max_points": 27,
+            "rhs": "(x+y+z)**2/2",
+            "symbols": [
+              "x",
+              "y",
+              "z"
+            ],
+            "values": [
+              "-1",
+              "0",
+              "1"
+            ]
+          },
+          "tool": "inequality_search"
+        },
+        "evidence": [
+          1
+        ],
+        "falsifier": "Any real triple giving a negative difference.",
+        "rationale": "A false strengthening should be refuted before attempting a proof."
+      },
+      "fingerprint": "1fa4b2371c261e0691a3608774c201adaffb36187da9b2881781c3130c270f58",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "rational-polynomial",
+          "claim": {
+            "assumptions": [],
+            "domain": "real",
+            "lhs": "x**2+y**2+z**2",
+            "relation": ">=",
+            "rhs": "(x+y+z)**2/2",
+            "symbols": [
+              "x",
+              "y",
+              "z"
+            ]
+          },
+          "method": "exact-rational-grid",
+          "operation": "nonnegative",
+          "proof": null,
+          "schema_version": 1,
+          "search": {
+            "checked_points": 1,
+            "feasible_points": 1,
+            "grid_complete": false,
+            "max_points": 27,
+            "total_points": 27,
+            "values": [
+              "-1",
+              "0",
+              "1"
+            ]
+          },
+          "witness": {
+            "x": "-1",
+            "y": "-1",
+            "z": "-1"
+          }
+        },
+        "elapsed_seconds": 0.61,
+        "independent_check": {
+          "certificate_hash": "9abba860db051e87b5fe682e6a498a4a8780dfe01f0ca80a4b568312c3a8b4db",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only the recorded real polynomial inequality under its listed nonnegative assumptions; no application or novelty guarantee.",
+          "status": "REFUTED"
+        },
+        "status": "REFUTED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        }
+      },
+      "result_hash": "0d6d306d23e1893fbfa64b34d69e6997d7bacc156bf79c655a428e08b5cdecb7",
+      "created": 1788944448.534672
+    },
+    {
+      "id": 4,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Retain the counterexample and replace the auxiliary coefficient with 1/3.",
+            "blocker": "At (-1,-1,-1), lhs-rhs=-3/2.",
+            "claim": "The coefficient 1/2 fails for real triples.",
+            "next_test": "Automatically complete squares for coefficient 1/3.",
+            "route_id": "sharp-cauchy",
+            "status": "abandoned"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          3
+        ],
+        "falsifier": "An incorrectly evaluated or infeasible witness.",
+        "rationale": "The checked witness refutes only the proposed strengthening."
+      },
+      "fingerprint": "ce300a50373610fe44192ed7099cc746aebc700334f0548e5ae43126b729f8c5",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "sharp-cauchy",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        },
+        "verified": false
+      },
+      "result_hash": "a365c028773ab9bb29c52b1808afd0dbbbee48003d9f7c3159d36d79010f2d75",
+      "created": 1788944503.692844
+    },
+    {
+      "id": 5,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "assumptions": [],
+            "lhs": "x**2+y**2+z**2",
+            "rhs": "(x+y+z)**2/3",
+            "symbols": [
+              "x",
+              "y",
+              "z"
+            ],
+            "terms": []
+          },
+          "tool": "polynomial_sos"
+        },
+        "evidence": [
+          3,
+          4
+        ],
+        "falsifier": "A negative pivot or nonzero reconstruction residual.",
+        "rationale": "Ask the tool to discover a rational quadratic decomposition without supplying one."
+      },
+      "fingerprint": "7657f76bc0f1ffbceb978c090abe86b94cd5f47621cd31e37c44a2160066de8f",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "rational-polynomial",
+          "claim": {
+            "assumptions": [],
+            "domain": "real",
+            "lhs": "x**2+y**2+z**2",
+            "relation": ">=",
+            "rhs": "(x+y+z)**2/3",
+            "symbols": [
+              "x",
+              "y",
+              "z"
+            ]
+          },
+          "method": "quadratic-completion",
+          "operation": "nonnegative",
+          "proof": [
+            {
+              "factors": [],
+              "square": "x - y/2 - z/2",
+              "weight": "2/3"
+            },
+            {
+              "factors": [],
+              "square": "y - z",
+              "weight": "1/2"
+            }
+          ],
+          "schema_version": 1,
+          "search": null,
+          "witness": null
+        },
+        "elapsed_seconds": 0.593,
+        "independent_check": {
+          "certificate_hash": "5ebc39c5b19753ff014d0415ee4845cffeb2eeeb410406828ce189edb09da750",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only the recorded real polynomial inequality under its listed nonnegative assumptions; no application or novelty guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        }
+      },
+      "result_hash": "903dcbdb21af17d368e10940ed9a3ac96b0de89e6572fae770b8a1904e0f0f39",
+      "created": 1788944503.7153873
+    },
+    {
+      "id": 6,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Sharp coefficient: on the diagonal x=y=z=t!=0, an inequality sum(x_i^2)>=c*(sum x_i)^2 implies 3*t^2>=9*c*t^2, hence c<=1/3. Action 5 establishes c=1/3 for all real triples. This is the classical Cauchy bound, not a novel result. This explanatory translation and optimality argument are written reasoning, not a formal proof-assistant check."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          5
+        ],
+        "falsifier": "Check division requires t!=0 and that the same real domain is used.",
+        "rationale": "Combine the independently checked universal inequality with a diagonal upper bound on its coefficient."
+      },
+      "fingerprint": "4179f215542f718a6d9b398c5706beada4d49762b506d98dbd62ddb6c6c906a3",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Sharp coefficient: on the diagonal x=y=z=t!=0, an inequality sum(x_i^2)>=c*(sum x_i)^2 implies 3*t^2>=9*c*t^2, hence c<=1/3. Action 5 establishes c=1/3 for all real triples. This is the classical Cauchy bound, not a novel result. This explanatory translation and optimality argument are written reasoning, not a formal proof-assistant check.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        },
+        "verified": false
+      },
+      "result_hash": "a2e94b49f1db7472ee8197d0573ae2fe1692d3647d1097163ce252fa5230155c",
+      "created": 1788944504.350997
+    },
+    {
+      "id": 7,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Exact quadratic SOS plus a diagonal equality argument.",
+            "blocker": "The prose optimality argument is not formalized.",
+            "claim": "The sharp coefficient is 1/3 for real triples.",
+            "next_test": "Review the translation and the t!=0 condition before accepting the prose claim.",
+            "route_id": "sharp-cauchy",
+            "status": "supported"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          5,
+          6
+        ],
+        "falsifier": "Incorrect transfer from the polynomial certificate to the prose claim.",
+        "rationale": "Record the revised route separately from theorem acceptance."
+      },
+      "fingerprint": "26c0cfa0d2e6e18deee46d226f475dd0b65031adb36aec0c6a8b26dbaac2a24d",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "sharp-cauchy",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        },
+        "verified": false
+      },
+      "result_hash": "a365c028773ab9bb29c52b1808afd0dbbbee48003d9f7c3159d36d79010f2d75",
+      "created": 1788944504.3747115
+    },
+    {
+      "id": 8,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "First remove the sign assumptions to test their necessity; then construct weighted square terms.",
+            "blocker": "Need an explicit domain-bound certificate.",
+            "claim": "Weighted variance numerator is nonnegative when weights are nonnegative.",
+            "next_test": "Search {-1,1} for a failure when negative weights are allowed.",
+            "route_id": "weighted-variance",
+            "status": "exploring"
+          },
+          "tool": "route"
+        },
+        "evidence": [],
+        "falsifier": "A feasible negative variance numerator.",
+        "rationale": "Statistical assumptions must be explicit rather than inferred from naming a variable a weight."
+      },
+      "fingerprint": "e90b4db22c57d079ea18edeca07fed3d45db3999de17f90fda398109c4624213",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "weighted-variance",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        },
+        "verified": false
+      },
+      "result_hash": "0e503125d02122551e1782aa450b12bfa6d4d08d43a0f8137ec19108c0191e2f",
+      "created": 1788944504.400552
+    },
+    {
+      "id": 9,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "assumptions": [],
+            "lhs": "(p+q+r)*(p*x**2+q*y**2+r*z**2)",
+            "max_points": 64,
+            "rhs": "(p*x+q*y+r*z)**2",
+            "symbols": [
+              "p",
+              "q",
+              "r",
+              "x",
+              "y",
+              "z"
+            ],
+            "values": [
+              "-1",
+              "1"
+            ]
+          },
+          "tool": "inequality_search"
+        },
+        "evidence": [
+          8
+        ],
+        "falsifier": "A negative numerator on the exact grid.",
+        "rationale": "Attack the stronger claim over unrestricted real weights."
+      },
+      "fingerprint": "0c916155a6d4c2e14df036af3e12c98ef01e1037541a18e977e3476dc2ad3495",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "rational-polynomial",
+          "claim": {
+            "assumptions": [],
+            "domain": "real",
+            "lhs": "(p+q+r)*(p*x**2+q*y**2+r*z**2)",
+            "relation": ">=",
+            "rhs": "(p*x+q*y+r*z)**2",
+            "symbols": [
+              "p",
+              "q",
+              "r",
+              "x",
+              "y",
+              "z"
+            ]
+          },
+          "method": "exact-rational-grid",
+          "operation": "nonnegative",
+          "proof": null,
+          "schema_version": 1,
+          "search": {
+            "checked_points": 10,
+            "feasible_points": 10,
+            "grid_complete": false,
+            "max_points": 64,
+            "total_points": 64,
+            "values": [
+              "-1",
+              "1"
+            ]
+          },
+          "witness": {
+            "p": "-1",
+            "q": "-1",
+            "r": "1",
+            "x": "-1",
+            "y": "-1",
+            "z": "1"
+          }
+        },
+        "elapsed_seconds": 0.609,
+        "independent_check": {
+          "certificate_hash": "3fe11d1b165b99310163d46ed3fdf933c08e7c8af53a3c5c2cea8d5da7690998",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only the recorded real polynomial inequality under its listed nonnegative assumptions; no application or novelty guarantee.",
+          "status": "REFUTED"
+        },
+        "status": "REFUTED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        }
+      },
+      "result_hash": "1146f378a1e22a93e5e8353db375d2018fbcd797ddefabe7842e2f4bbab8a4a2",
+      "created": 1788944504.421314
+    },
+    {
+      "id": 10,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "assumptions": [
+              "p",
+              "q",
+              "r"
+            ],
+            "lhs": "(p+q+r)*(p*x**2+q*y**2+r*z**2)",
+            "rhs": "(p*x+q*y+r*z)**2",
+            "symbols": [
+              "p",
+              "q",
+              "r",
+              "x",
+              "y",
+              "z"
+            ],
+            "terms": [
+              {
+                "factors": [
+                  0,
+                  1
+                ],
+                "square": "x-y",
+                "weight": "1"
+              },
+              {
+                "factors": [
+                  0,
+                  2
+                ],
+                "square": "x-z",
+                "weight": "1"
+              },
+              {
+                "factors": [
+                  1,
+                  2
+                ],
+                "square": "y-z",
+                "weight": "1"
+              }
+            ]
+          },
+          "tool": "polynomial_sos"
+        },
+        "evidence": [
+          9
+        ],
+        "falsifier": "A wrong cross term or an undeclared sign constraint.",
+        "rationale": "Supply the derived weighted pairwise-difference identity for independent checking. This decomposition comes from host reasoning, not automatic quadratic search."
+      },
+      "fingerprint": "4be58ad015185a0c24489ded6b3142564697f79998802e2dfa2ca4330b165108",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "rational-polynomial",
+          "claim": {
+            "assumptions": [
+              "p",
+              "q",
+              "r"
+            ],
+            "domain": "real",
+            "lhs": "(p+q+r)*(p*x**2+q*y**2+r*z**2)",
+            "relation": ">=",
+            "rhs": "(p*x+q*y+r*z)**2",
+            "symbols": [
+              "p",
+              "q",
+              "r",
+              "x",
+              "y",
+              "z"
+            ]
+          },
+          "method": "supplied-decomposition",
+          "operation": "nonnegative",
+          "proof": [
+            {
+              "factors": [
+                0,
+                1
+              ],
+              "square": "x-y",
+              "weight": "1"
+            },
+            {
+              "factors": [
+                0,
+                2
+              ],
+              "square": "x-z",
+              "weight": "1"
+            },
+            {
+              "factors": [
+                1,
+                2
+              ],
+              "square": "y-z",
+              "weight": "1"
+            }
+          ],
+          "schema_version": 1,
+          "search": null,
+          "witness": null
+        },
+        "elapsed_seconds": 0.578,
+        "independent_check": {
+          "certificate_hash": "e95b02a644d861c549ffee3eca907ba68e705a88ff339b7cf155313a05acdec1",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only the recorded real polynomial inequality under its listed nonnegative assumptions; no application or novelty guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        }
+      },
+      "result_hash": "db89cf5c765c18872c3e1ed721be7715d52d382835e478f4d90a1beffecfa2ab",
+      "created": 1788944505.0537965
+    },
+    {
+      "id": 11,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Three squared differences multiplied by pairwise weight products.",
+            "blocker": "Normalized variance additionally requires p+q+r>0; no inference or sampling claim has been proved.",
+            "claim": "(p+q+r)*sum(w_i*x_i^2)-sum(w_i*x_i)^2>=0 for p,q,r>=0.",
+            "next_test": "Review applicability and positive total weight before dividing.",
+            "route_id": "weighted-variance",
+            "status": "supported"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          10
+        ],
+        "falsifier": "An application allowing negative weights or zero total weight.",
+        "rationale": "Persist statistical domain obligations alongside the algebraic result."
+      },
+      "fingerprint": "bb46c5584fce74e54a70e57446379e7f7816d57d1e218f68ece2e06ff9d4262e",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "weighted-variance",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        },
+        "verified": false
+      },
+      "result_hash": "0e503125d02122551e1782aa450b12bfa6d4d08d43a0f8137ec19108c0191e2f",
+      "created": 1788944505.6635594
+    },
+    {
+      "id": 12,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "assumptions": [],
+            "lhs": "x**4*y**2+x**2*y**4+1",
+            "rhs": "3*x**2*y**2",
+            "symbols": [
+              "x",
+              "y"
+            ],
+            "terms": []
+          },
+          "tool": "polynomial_sos"
+        },
+        "evidence": [],
+        "falsifier": "No decomposition is not evidence of a counterexample.",
+        "rationale": "Probe a known nonnegative higher-degree benchmark (Motzkin); the quadratic discovery method is insufficient."
+      },
+      "fingerprint": "5e41c47a822ba679fd82933276effa72decdf41f4294d738f6f87c1341d37edc",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "rational-polynomial",
+          "claim": {
+            "assumptions": [],
+            "domain": "real",
+            "lhs": "x**4*y**2+x**2*y**4+1",
+            "relation": ">=",
+            "rhs": "3*x**2*y**2",
+            "symbols": [
+              "x",
+              "y"
+            ]
+          },
+          "method": "quadratic-completion",
+          "operation": "nonnegative",
+          "proof": null,
+          "schema_version": 1,
+          "search": null,
+          "witness": null
+        },
+        "elapsed_seconds": 0.61,
+        "independent_check": {
+          "certificate_hash": "7edec589bba28d48483b2c5d64103e571c3fc8179149f2ee79b0eeb420d7e742",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only the recorded real polynomial inequality under its listed nonnegative assumptions; no application or novelty guarantee.",
+          "status": "INCONCLUSIVE"
+        },
+        "status": "INCONCLUSIVE",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        }
+      },
+      "result_hash": "37404e4a4c53848a2f2e68cf644d0101a5f5baf78b64da4d69442a87636c6578",
+      "created": 1788944505.6895173
+    },
+    {
+      "id": 13,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "assumptions": [],
+            "lhs": "x**4*y**2+x**2*y**4+1",
+            "max_points": 25,
+            "rhs": "3*x**2*y**2",
+            "symbols": [
+              "x",
+              "y"
+            ],
+            "values": [
+              "-2",
+              "-1",
+              "0",
+              "1",
+              "2"
+            ]
+          },
+          "tool": "inequality_search"
+        },
+        "evidence": [
+          12
+        ],
+        "falsifier": "Any negative value would refute the recorded claim.",
+        "rationale": "Search a small exact grid without claiming that a finite grid proves global nonnegativity."
+      },
+      "fingerprint": "215fa7550f2328bb87a6ab92ce4c43429172c90fc61c1ee17d897759c6bcb4f7",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "rational-polynomial",
+          "claim": {
+            "assumptions": [],
+            "domain": "real",
+            "lhs": "x**4*y**2+x**2*y**4+1",
+            "relation": ">=",
+            "rhs": "3*x**2*y**2",
+            "symbols": [
+              "x",
+              "y"
+            ]
+          },
+          "method": "exact-rational-grid",
+          "operation": "nonnegative",
+          "proof": null,
+          "schema_version": 1,
+          "search": {
+            "checked_points": 25,
+            "feasible_points": 25,
+            "grid_complete": true,
+            "max_points": 25,
+            "total_points": 25,
+            "values": [
+              "-2",
+              "-1",
+              "0",
+              "1",
+              "2"
+            ]
+          },
+          "witness": null
+        },
+        "elapsed_seconds": 0.625,
+        "independent_check": {
+          "certificate_hash": "c1761474b9aafc7777380ef5cf3ec7e1bf8d99ee3affbdb96bc7efbab020f725",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only the recorded real polynomial inequality under its listed nonnegative assumptions; no application or novelty guarantee.",
+          "status": "INCONCLUSIVE"
+        },
+        "status": "INCONCLUSIVE",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        }
+      },
+      "result_hash": "ec1e8b156e5d6909bdbca56b5925a7f3fad1c50ca3fdf7d6b5bda04a8b263e75",
+      "created": 1788944506.3274055
+    },
+    {
+      "id": 14,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "AM-GM on x^4*y^2, x^2*y^4 and 1 gives sum>=3*x^2*y^2; this is a known example.",
+            "blocker": "The current native checker has no AM-GM proof rule; quadratic discovery and finite grids cannot certify this proof.",
+            "claim": "Motzkin polynomial is nonnegative for all real x,y.",
+            "next_test": "Add a general checked AM-GM rule or formally verify the analytic argument; do not label the missing certificate a disproof.",
+            "route_id": "motzkin",
+            "status": "blocked"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          12,
+          13
+        ],
+        "falsifier": "A domain error in the AM-GM argument or a negative exact witness.",
+        "rationale": "Record the actual proof-fragment gap exposed by use."
+      },
+      "fingerprint": "c98b7e0010607666e1e007285e8f1f3e0ed4a847771f623103dafe2179315313",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "motzkin",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "5a4715d966fbe3ba8dbcd42bd5dd04e7c05db95e47562e7aee59de7b08d58fa4",
+          "polynomial_verifier.py": "6269ac7f83ff1c791af979a8e750fadc08de071e941bd97ea67a275c925d4ed9",
+          "schema.py": "0caf126c5cf958ce6b2aaad2077b7b03e2722d4fcfd947e79bc5eba3bd82c466",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "f1bf18ec1e02787e0d97dd8a665a638ef1b3e88b39950737e8507e5217cd0df0"
+        },
+        "verified": false
+      },
+      "result_hash": "9ef6ab6a4314550119b0009f408b3464197c512119e4e871fd62ab30d2b7e44e",
+      "created": 1788944506.9941547
+    },
+    {
+      "id": 15,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "addends": [
+              {
+                "factors": [],
+                "square": "x**2*y",
+                "weight": "1"
+              },
+              {
+                "factors": [],
+                "square": "x*y**2",
+                "weight": "1"
+              },
+              {
+                "factors": [],
+                "square": "1",
+                "weight": "1"
+              }
+            ],
+            "assumptions": [],
+            "base": "x**2*y**2",
+            "lhs": "x**4*y**2+x**2*y**4+1",
+            "rhs": "3*x**2*y**2",
+            "symbols": [
+              "x",
+              "y"
+            ]
+          },
+          "tool": "polynomial_amgm"
+        },
+        "evidence": [
+          12,
+          13,
+          14
+        ],
+        "falsifier": "Either the product identity or the reconstruction of the inequality fails.",
+        "rationale": "Use the newly implemented general AM-GM rule on the three nonnegative terms; their product equals (x^2*y^2)^3."
+      },
+      "fingerprint": "7d539f358005aaec92417fdb4271555b88b27fb5c92b6f3537d68b79ddd927c8",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "rational-polynomial",
+          "claim": {
+            "assumptions": [],
+            "domain": "real",
+            "lhs": "x**4*y**2+x**2*y**4+1",
+            "relation": ">=",
+            "rhs": "3*x**2*y**2",
+            "symbols": [
+              "x",
+              "y"
+            ]
+          },
+          "method": "supplied-amgm",
+          "operation": "nonnegative",
+          "proof": {
+            "addends": [
+              {
+                "factors": [],
+                "square": "x**2*y",
+                "weight": "1"
+              },
+              {
+                "factors": [],
+                "square": "x*y**2",
+                "weight": "1"
+              },
+              {
+                "factors": [],
+                "square": "1",
+                "weight": "1"
+              }
+            ],
+            "base": "x**2*y**2",
+            "rule": "amgm"
+          },
+          "schema_version": 1,
+          "search": null,
+          "witness": null
+        },
+        "elapsed_seconds": 0.625,
+        "independent_check": {
+          "certificate_hash": "c6c6a1671b3a98860df8f5ca270e42f9a22e0fb869d49806fe1cd63f0ddbbe64",
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only the recorded real polynomial inequality under its listed nonnegative assumptions; no application or novelty guarantee.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "12c164db162ff49df2930b155ac710b9e98b3c63a6cbc00dc9f85f53af0c09d5",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c2c9e9c2617c1b4ed6e2976d3c03eb00d62cb56d9a92c79855c0cbd9e146b578"
+        }
+      },
+      "result_hash": "82d4fb9d2e9b9eb0e9c94b15d50c39446b267959f018ab1674d830220079a338",
+      "created": 1788944713.1711807
+    },
+    {
+      "id": 16,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Verified AM-GM product and sum identities with nonnegative square addends.",
+            "blocker": "This is a known benchmark, and the decomposition was supplied by the host model. No autonomous discovery or novelty claim.",
+            "claim": "x^4*y^2+x^2*y^4+1>=3*x^2*y^2 for all real x,y.",
+            "next_test": "Use the rule on new scoped subclaims; separately audit translation and novelty.",
+            "route_id": "motzkin",
+            "status": "supported"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          15
+        ],
+        "falsifier": "A wrong nonnegativity condition or a mismatch between the claim and certificate.",
+        "rationale": "Close the tool-fragment blocker while retaining the route history and scientific limitations."
+      },
+      "fingerprint": "b04182123657a48a2a30385101c8c498e939ef61acc5e23cdb7a8995a4fd43d9",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "motzkin",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "12c164db162ff49df2930b155ac710b9e98b3c63a6cbc00dc9f85f53af0c09d5",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c2c9e9c2617c1b4ed6e2976d3c03eb00d62cb56d9a92c79855c0cbd9e146b578"
+        },
+        "verified": false
+      },
+      "result_hash": "8845f822bec4d8dac131b28da7f51fa8dbf008e6be5d4f6726a350bb1544abb9",
+      "created": 1788944713.8309963
+    },
+    {
+      "id": 17,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Known benchmark results only: refuted coefficient 1/2 in the three-variable Cauchy bound, automatically discovered an exact quadratic SOS for coefficient 1/3, refuted unrestricted-weight variance nonnegativity, checked the nonnegative-weight identity, and certified the Motzkin inequality through a host-supplied AM-GM proof. The initial quadratic method and finite grid were inconclusive on Motzkin. One real producer failure on nested sums was preserved and fixed. These runs demonstrate scoped tool capability, not a newly solved open conjecture, a model comparison, independent API autonomy, or formal verification of the checker implementation."
+          },
+          "tool": "finish"
+        },
+        "evidence": [
+          3,
+          5,
+          6,
+          9,
+          10,
+          12,
+          13,
+          15,
+          16
+        ],
+        "falsifier": "Overclaiming finite search, proof discovery, novelty or applicability.",
+        "rationale": "Deliver reproducible evidence and describe the actual capability boundaries."
+      },
+      "fingerprint": "8aefb436e80226554f0e695d08e20dc0319c456997f4511d75b19644170ea9c7",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Known benchmark results only: refuted coefficient 1/2 in the three-variable Cauchy bound, automatically discovered an exact quadratic SOS for coefficient 1/3, refuted unrestricted-weight variance nonnegativity, checked the nonnegative-weight identity, and certified the Motzkin inequality through a host-supplied AM-GM proof. The initial quadratic method and finite grid were inconclusive on Motzkin. One real producer failure on nested sums was preserved and fixed. These runs demonstrate scoped tool capability, not a newly solved open conjecture, a model comparison, independent API autonomy, or formal verification of the checker implementation.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "12c164db162ff49df2930b155ac710b9e98b3c63a6cbc00dc9f85f53af0c09d5",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c2c9e9c2617c1b4ed6e2976d3c03eb00d62cb56d9a92c79855c0cbd9e146b578"
+        },
+        "verified": false
+      },
+      "result_hash": "9101d777e5228acb01931d4487bcc2ecae346554b8d47c046887c3a769db07b7",
+      "created": 1788944713.8492143
+    }
+  ],
+  "assets": [],
+  "events": [],
+  "warning": "Local audit record, not a signed attestation. Case verdicts are not updated. Review translation and register evidence through existing case/release gates."
+}

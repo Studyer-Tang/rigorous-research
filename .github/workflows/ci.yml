@@ -31,6 +31,7 @@ jobs:
           python scripts/skill_quality.py
           python scripts/research_eval.py
           python examples/agent-research/reproduce.py --output build/agent-replay
+          python examples/polynomial-routes/reproduce.py
       - name: Validate released workspaces
         run: |
           python scripts/research_workspace.py validate examples/toeplitz-determinant/workspace.json --release

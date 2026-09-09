@@ -155,6 +155,10 @@ def check_identity(
 
 
 def verify(certificate: dict[str, Any], inputs: list[Path] | None = None) -> dict[str, Any]:
+    if certificate.get("backend") == "rational-polynomial":
+        from polynomial_verifier import verify as verify_polynomial
+
+        return verify_polynomial(certificate)
     if certificate.get("backend") == "exact-integer":
         from integer_certificate_verifier import verify as verify_integer
 

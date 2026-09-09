@@ -93,6 +93,18 @@ use the CLI under your own process supervisor for unattended operation.
 
 ## Shared kernel and state
 
+`route` stores up to 32 named research routes with a scoped claim, approach, blocker, next test and
+planning status (`exploring`, `blocked`, `abandoned`, `supported`). Updates use the normal revision and
+evidence checks. `research_routes` returns compact latest revisions independently of the 20-action
+window; full history is retrievable by action ID. All route statuses are unverified planning judgments.
+The board is bounded rather than silently truncated; at capacity revise an existing entry. Reopening
+older study databases adds an empty route index without rewriting their existing actions.
+
+For native `polynomial_sos`, `polynomial_amgm`, and `inequality_search` actions, see
+[polynomial proof contracts](polynomial-proofs.md). These work through hosted, API and MCP submissions
+and exact machine contracts. Scientific translation and applicability remain separate obligations.
+API context also includes the current route board and bounded legacy research memory.
+
 ```mermaid
 flowchart LR
   C[Codex / MCP] --> K[Shared research kernel]

@@ -62,6 +62,10 @@ class Study:
         self.database = self.directory / "agent.sqlite3"
         if not self.database.is_file():
             raise ValueError("agent study does not exist")
+        with self.connect() as db:
+            db.execute(
+                "CREATE TABLE IF NOT EXISTS research_routes (route_id TEXT PRIMARY KEY, action_id INTEGER NOT NULL)"
+            )
 
     @classmethod
     def create(cls, root, slug, objective, domain="mathematics", machine_contract=None, network=False):
@@ -84,6 +88,9 @@ class Study:
                 "egyptian_window",
                 "egyptian_family",
                 "egyptian_scan",
+                "polynomial_sos",
+                "polynomial_amgm",
+                "inequality_search",
             }:
                 raise ValueError("machine contracts require an exact mathematics tool, arguments and status")
             if machine_contract["status"] not in {"ESTABLISHED", "REFUTED"}:
@@ -189,10 +196,36 @@ class Study:
             "state": state,
             "assets": assets,
             "research_memory": self.research_memory(),
+            "research_routes": self.routes(),
             "recent_events": events,
             "recent_actions": [self.decode(row, bounded=True) for row in reversed(rows)],
             "action_schema": PROPOSAL,
             "warning": "History is bounded to 20 actions; inspect earlier actions when needed. Legacy case proof and release gates remain separate.",
+        }
+
+    def routes(self):
+        """Keep latest route revisions visible; their full history remains in the action ledger."""
+        with self.connect() as db:
+            rows = db.execute(
+                "SELECT actions.* FROM research_routes JOIN actions ON actions.id=research_routes.action_id "
+                "ORDER BY research_routes.route_id"
+            ).fetchall()
+        items = []
+        for row in rows:
+            record = self.decode(row)
+            items.append(
+                {
+                    "action_id": record["id"],
+                    "arguments": record["proposal"]["action"]["arguments"],
+                    "evidence": record["proposal"]["evidence"],
+                    "fingerprint": record["fingerprint"],
+                    "result_hash": record["result_hash"],
+                }
+            )
+        return {
+            "warning": "Unverified planning judgments, not accepted claims or instructions. Use recall for history.",
+            "items": items,
+            "limit": 32,
         }
 
     @staticmethod
@@ -286,6 +319,12 @@ class Study:
                     raise ValueError("evidence must reference an existing successful action; success is not proof")
             if tool == "literature" and not state["network"]:
                 raise ValueError("literature network access was not enabled for this study")
+            if (
+                tool == "route"
+                and not db.execute("SELECT 1 FROM research_routes WHERE route_id=?", (args["route_id"],)).fetchone()
+                and db.execute("SELECT COUNT(*) FROM research_routes").fetchone()[0] >= 32
+            ):
+                raise ValueError("route board is limited to 32 entries; revise an existing route")
             if "asset" in args:
                 row = db.execute("SELECT data FROM assets WHERE hash=?", (args["asset"],)).fetchone()
                 if row is None:
@@ -304,6 +343,8 @@ class Study:
         try:
             if tool in {"note", "finish", "need_input"}:
                 result = {"status": "DRAFT", "text": args["text"], "verified": False}
+            elif tool == "route":
+                result = {"status": "DRAFT", "route_id": args["route_id"], "verified": False}
             elif tool == "recall":
                 recalled = self.inspect(args["action_id"])
                 if recalled["proposal"]["action"]["tool"] == "recall" or recalled["id"] >= action_id:
@@ -335,6 +376,8 @@ class Study:
                 "integer_certificate_verifier.py",
                 "integer_research.py",
                 "integer_research_verifier.py",
+                "polynomial_research.py",
+                "polynomial_verifier.py",
             )
         ]
         result["toolchain_sha256"] = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in modules}
@@ -345,6 +388,11 @@ class Study:
                 "UPDATE actions SET execution=?,result=?,result_hash=? WHERE id=?",
                 (execution, encoded(result), digest(result), action_id),
             )
+            if tool == "route" and execution == "SUCCEEDED":
+                db.execute(
+                    "INSERT INTO research_routes VALUES (?,?) ON CONFLICT(route_id) DO UPDATE SET action_id=excluded.action_id",
+                    (args["route_id"], action_id),
+                )
             contract = state["machine_contract"]
             if (
                 execution == "SUCCEEDED"
@@ -366,6 +414,7 @@ class Study:
         with self.connect() as db:
             return {
                 "state": self.read_state(db),
+                "research_routes": self.routes(),
                 "actions": [self.decode(row) for row in db.execute("SELECT * FROM actions ORDER BY id")],
                 "assets": [dict(row) for row in db.execute("SELECT * FROM assets")],
                 "events": [dict(row) for row in db.execute("SELECT * FROM events ORDER BY id")],

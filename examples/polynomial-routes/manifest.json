@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "ledger_sha256": "a3fcb28a0634ce23be5ce154c74b013c775e14fc9f342304c7f6177986f26f2c",
+  "provenance": "Actual Codex-hosted actions; replay is deterministic; no external model API call."
+}
