@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "sha256": {
+    "ledger.json": "e0c47a099e3b7080212a70e95df7979fcfa80255c882784435d13c84711dd6f3",
+    "assignment.json": "a0e6faaf4986c3030775a280a7dcfb4ed7c1fa197ca273b7d0bbfde5217d2711",
+    "../frankl-frontier/ledger.json": "66cb40a1dd6145d53538f92d4de3b50898d56227e7071ccffc65b8e5694451f4"
+  },
+  "warning": "Local integrity chain, not an attestation; original conjecture remains unresolved."
+}

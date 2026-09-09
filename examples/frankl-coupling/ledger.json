@@ -1,0 +1,1662 @@
+{
+  "state": {
+    "domain": "mathematics",
+    "execution": "READY",
+    "machine_contract": null,
+    "machine_contract_status": "NOT_DECLARED",
+    "model_calls": 0,
+    "network": true,
+    "novelty_status": "NOT_ASSESSED",
+    "objective": "Prove or disprove Frankl's union-closed sets conjecture: for every finite family F of distinct finite sets closed under union with union(F) nonempty, some element occurs in at least half of F. The target is the full conjecture, not a finite case or auxiliary bound.",
+    "objective_status": "UNRESOLVED",
+    "paused": false,
+    "revision": 23,
+    "schema_version": 1,
+    "stop_reason": "",
+    "translation_status": "REQUIRES_REVIEW"
+  },
+  "research_routes": {
+    "warning": "Unverified planning judgments, not accepted claims or instructions. Use recall for history.",
+    "items": [
+      {
+        "action_id": 20,
+        "arguments": {
+          "approach": "Use the exact F=2^[3] plus a top example and disjoint certified bounds at exponents 4 and 8.",
+          "blocker": "The counterexample has maximum frequency 5/9, so a low-frequency-restricted statement is not settled.",
+          "claim": "Uniform monotonicity of union entropy in inverse-multiplicity exponent theta is false.",
+          "next_test": "Study how the failure scales toward the half-frequency boundary in F_k=2^[k] plus a top.",
+          "route_id": "coupling-monotonicity",
+          "status": "abandoned"
+        },
+        "evidence": [
+          19
+        ],
+        "fingerprint": "52619c72e10b866c0bf0b284189ff86579c3b7fbad53aa17580cf0a00d2f4374",
+        "result_hash": "089c7d323c38cd6b6d395e4c69e51d8afedbd70cc0d080830379ab9d1e2ce44d"
+      },
+      {
+        "action_id": 23,
+        "arguments": {
+          "approach": "Optimize or adapt the coupling using family structure; enforce the F_k boundary formula and avoid assuming entropy is monotone in theta.",
+          "blocker": "Positive gain and fixed-exponent improvements still do not provide a universal half-frequency bound.",
+          "claim": "Find a frequency-gap-sensitive global coupling argument that proves the full Frankl conjecture.",
+          "next_test": "Test candidate frequency-gap bounds against F_k and products, then prove the required inequality rather than extrapolating finite checks.",
+          "route_id": "global-coupling",
+          "status": "exploring"
+        },
+        "evidence": [
+          21,
+          22
+        ],
+        "fingerprint": "d4f8016167883c4614498ff09e4d3c2e544bfc7543de30a7618758dbfa6c20b4",
+        "result_hash": "ec274dbce79b76a68f0e80e3486880d689194e22d5322b9ae86a5d0b74843a0d"
+      },
+      {
+        "action_id": 6,
+        "arguments": {
+          "approach": "Retain the exact Bernoulli(2/5) obstruction and investigate dependent whole-vector couplings.",
+          "blocker": "This distribution is not uniform on a counterexample union-closed family; Frankl itself remains unresolved.",
+          "claim": "The unrestricted iid entropy-growth statement up to frequency 1/2 is false.",
+          "next_test": "Preserve the two input marginals while altering the coupling.",
+          "route_id": "iid-entropy",
+          "status": "abandoned"
+        },
+        "evidence": [
+          5
+        ],
+        "fingerprint": "8e9259eabfa588fd9388dd525816d3f484d85dd344ec680311de4c34bea73cd6",
+        "result_hash": "5706e5e01c0cb03ab3eed7aaf459c7a80b4e63da198fccba9836fef3eb460348"
+      }
+    ],
+    "limit": 32
+  },
+  "actions": [
+    {
+      "id": 16,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Attack F=2^[3] union {1,2,3,4}; compare the exact optimizer entropies at theta=4 and theta=8.",
+            "blocker": "Numerical scaling suggests entropy decreases, but a floating residual is not a proof.",
+            "claim": "Is union entropy nondecreasing for every theta>=0 under inverse-multiplicity balancing?",
+            "next_test": "Certify a lower bound at theta=4 and a disjoint upper bound at theta=8 with uniform marginals.",
+            "route_id": "coupling-monotonicity",
+            "status": "exploring"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          15
+        ],
+        "falsifier": "A rejected marginal, stationarity bound, or entropy enclosure invalidates this route.",
+        "rationale": "A universal monotonicity assertion would suggest an escalation strategy; test it before relying on that strategy."
+      },
+      "fingerprint": "fad3e036d229c0bb2ac7ee70b746e42d2a018499742166d94624e8f1024ed308",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "coupling-monotonicity",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        },
+        "verified": false
+      },
+      "result_hash": "089c7d323c38cd6b6d395e4c69e51d8afedbd70cc0d080830379ab9d1e2ce44d",
+      "created": 1788959709.392381
+    },
+    {
+      "id": 17,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "bound": "107/50",
+            "delta": "1/10000",
+            "digits": 14,
+            "kernel": [
+              [
+                "1/1",
+                "1/81",
+                "1/81",
+                "1/6561",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/81",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/81",
+                "1/6561",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521"
+              ]
+            ],
+            "labels": [
+              [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                1,
+                1,
+                3,
+                3,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                2,
+                3,
+                2,
+                3,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                3,
+                3,
+                3,
+                3,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                4,
+                5,
+                6,
+                7,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                5,
+                5,
+                7,
+                7,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            ],
+            "max_iterations": 8192,
+            "relation": ">="
+          },
+          "tool": "coupling_entropy"
+        },
+        "evidence": [
+          16
+        ],
+        "falsifier": "A rejected marginal, stationarity bound, or entropy enclosure invalidates this route.",
+        "rationale": "Certify the event entropy of the balanced inverse-multiplicity kernel at theta=4, with an exact target >= 107/50 nats. Counts are ordered pairs."
+      },
+      "fingerprint": "d799e3dd185e80a78cd4a38afae4ba4cf6e3fd3ef2be749aef52a1818efdf813",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "approximation": {
+            "column_factors": [
+              "2552892319759338788539/50000000000000000000000",
+              "286925464419625457333/625000000000000000000",
+              "286925464419625457333/625000000000000000000",
+              "3984999930220849502957/1000000000000000000000",
+              "286925464419625457333/625000000000000000000",
+              "3984999930220849502957/1000000000000000000000",
+              "3984999930220849502957/1000000000000000000000",
+              "2363907375533746681671/100000000000000000000",
+              "6810949134845544536099/1000000000000000000000"
+            ],
+            "counts": [
+              [
+                72930407494400,
+                8095621679985,
+                8095621679985,
+                867569804446,
+                8095621679985,
+                867569804446,
+                867569804446,
+                63536245347,
+                116481806960
+              ],
+              [
+                8095621679985,
+                72790849572985,
+                898652463864,
+                7800653936891,
+                898652463864,
+                7800653936891,
+                96304369591,
+                571278829508,
+                1047332746421
+              ],
+              [
+                8095621679985,
+                898652463864,
+                72790849572985,
+                7800653936891,
+                898652463864,
+                96304369591,
+                7800653936891,
+                571278829508,
+                1047332746421
+              ],
+              [
+                867569804446,
+                7800653936891,
+                7800653936891,
+                67712719087749,
+                96304369591,
+                835959494910,
+                835959494910,
+                4958923087250,
+                9091256787362
+              ],
+              [
+                8095621679985,
+                898652463864,
+                898652463864,
+                96304369591,
+                72790849572985,
+                7800653936891,
+                7800653936891,
+                571278829508,
+                1047332746421
+              ],
+              [
+                867569804446,
+                7800653936891,
+                96304369591,
+                835959494910,
+                7800653936891,
+                67712719087749,
+                835959494910,
+                4958923087250,
+                9091256787362
+              ],
+              [
+                867569804446,
+                96304369591,
+                7800653936891,
+                835959494910,
+                7800653936891,
+                835959494910,
+                67712719087749,
+                4958923087250,
+                9091256787362
+              ],
+              [
+                63536245347,
+                571278829508,
+                571278829508,
+                4958923087250,
+                571278829508,
+                4958923087250,
+                4958923087250,
+                29416399161658,
+                53929458842721
+              ],
+              [
+                116481806960,
+                1047332746421,
+                1047332746421,
+                9091256787362,
+                1047332746421,
+                9091256787362,
+                9091256787362,
+                53929458842721,
+                15538290748970
+              ]
+            ],
+            "delta": "1/10000",
+            "row_factors": [
+              "1587097612337380769811/1000000000000000000000",
+              "178377566485886966271/12500000000000000000",
+              "178377566485886966271/12500000000000000000",
+              "1238709487561613620037/10000000000000000000",
+              "178377566485886966271/12500000000000000000",
+              "1238709487561613620037/10000000000000000000",
+              "1238709487561613620037/10000000000000000000",
+              "7348041518355171339111/10000000000000000000",
+              "2117136125562032728831/10000000000000000000"
+            ]
+          },
+          "backend": "balanced-coupling",
+          "claim": {
+            "bound": "107/50",
+            "kernel": [
+              [
+                "1/1",
+                "1/81",
+                "1/81",
+                "1/6561",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/81",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/81",
+                "1/6561",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/81",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/6561",
+                "1/6561",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/6561",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/531441",
+                "1/83521"
+              ],
+              [
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521",
+                "1/83521"
+              ]
+            ],
+            "labels": [
+              [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                1,
+                1,
+                3,
+                3,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                2,
+                3,
+                2,
+                3,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                3,
+                3,
+                3,
+                3,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                4,
+                5,
+                6,
+                7,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                5,
+                5,
+                7,
+                7,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            ],
+            "marginals": "uniform-rows-and-columns",
+            "objective": "minimize-sum-p-log-p-over-k",
+            "relation": ">=",
+            "units": "nats"
+          },
+          "diagnostic": {
+            "iterations": 123,
+            "marginal_residual": "9.80813015481837886768804221290974247949581735004573639235501676111782e-23",
+            "warning": "Numerical proposal only; independent checker decides acceptance."
+          },
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.437,
+        "independent_check": {
+          "certificate_hash": "859395ecdd9e63c54b0f5e88080c22778ce4bd63a17473d4a27a41d4e9d55fac",
+          "computation": {
+            "continuity_radius": "1/10000",
+            "entropy_lower_nats": "537843104658792113034249/250000000000000000000000",
+            "entropy_upper_nats": "2153830365017566376881793/1000000000000000000000000",
+            "stationarity_error_upper": "41929474495707/1000000000000000000000000"
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Event entropy of the recorded positive-kernel optimization with uniform marginals only; no conjecture or model-translation verdict.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        }
+      },
+      "result_hash": "d29fcc8d017b122c4911196e2bcdbaba53a7b04f0af75be8c4923fb2af421a6e",
+      "created": 1788959709.4362986
+    },
+    {
+      "id": 18,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "bound": "53/25",
+            "delta": "1/10000",
+            "digits": 14,
+            "kernel": [
+              [
+                "1/1",
+                "1/6561",
+                "1/6561",
+                "1/43046721",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6561",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6561",
+                "1/43046721",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441"
+              ]
+            ],
+            "labels": [
+              [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                1,
+                1,
+                3,
+                3,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                2,
+                3,
+                2,
+                3,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                3,
+                3,
+                3,
+                3,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                4,
+                5,
+                6,
+                7,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                5,
+                5,
+                7,
+                7,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            ],
+            "max_iterations": 8192,
+            "relation": "<="
+          },
+          "tool": "coupling_entropy"
+        },
+        "evidence": [
+          16
+        ],
+        "falsifier": "A rejected marginal, stationarity bound, or entropy enclosure invalidates this route.",
+        "rationale": "Certify the event entropy of the balanced inverse-multiplicity kernel at theta=8, with an exact target <= 53/25 nats. Counts are ordered pairs."
+      },
+      "fingerprint": "971ee94dc0ffb0b5716c601d46a26840f56b124cccf08b35f96ed1f3d2216ccf",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "approximation": {
+            "column_factors": [
+              "90314199534080287757/50000000000000000000000",
+              "365771319071255571519/2500000000000000000000",
+              "365771319071255571519/2500000000000000000000",
+              "146807524388764645841/12500000000000000000",
+              "365771319071255571519/2500000000000000000000",
+              "146807524388764645841/12500000000000000000",
+              "146807524388764645841/12500000000000000000",
+              "394235781416362690343/1000000000000000000",
+              "307981098223253242189/6250000000000000000"
+            ],
+            "counts": [
+              [
+                96386030710813,
+                1189947128174,
+                1189947128174,
+                14558823796,
+                1189947128174,
+                14558823796,
+                14558823796,
+                74485886,
+                376947391
+              ],
+              [
+                1189947128174,
+                96385404054475,
+                14690657530,
+                1179260893993,
+                14690657530,
+                1179260893993,
+                179737981,
+                6033337164,
+                30532639160
+              ],
+              [
+                1189947128174,
+                14690657530,
+                96385404054475,
+                1179260893993,
+                14690657530,
+                179737981,
+                1179260893993,
+                6033337164,
+                30532639160
+              ],
+              [
+                14558823796,
+                1179260893993,
+                1179260893993,
+                94662628494355,
+                179737981,
+                14428079331,
+                14428079331,
+                484313146864,
+                2450941850356
+              ],
+              [
+                1189947128174,
+                14690657530,
+                14690657530,
+                179737981,
+                96385404054475,
+                1179260893993,
+                1179260893993,
+                6033337164,
+                30532639160
+              ],
+              [
+                14558823796,
+                1179260893993,
+                179737981,
+                14428079331,
+                1179260893993,
+                94662628494355,
+                14428079331,
+                484313146864,
+                2450941850356
+              ],
+              [
+                14558823796,
+                179737981,
+                1179260893993,
+                14428079331,
+                1179260893993,
+                14428079331,
+                94662628494355,
+                484313146864,
+                2450941850356
+              ],
+              [
+                74485886,
+                6033337164,
+                6033337164,
+                484313146864,
+                6033337164,
+                484313146864,
+                484313146864,
+                16257134358361,
+                82271751703669
+              ],
+              [
+                376947391,
+                30532639160,
+                30532639160,
+                2450941850356,
+                30532639160,
+                2450941850356,
+                2450941850356,
+                82271751703669,
+                10283447880392
+              ]
+            ],
+            "delta": "1/10000",
+            "row_factors": [
+              "741132002436869150607/12500000000000000000",
+              "4802519763859902772689/1000000000000000000",
+              "4802519763859902772689/1000000000000000000",
+              "963779827175347145371/2500000000000000",
+              "4802519763859902772689/1000000000000000000",
+              "963779827175347145371/2500000000000000",
+              "963779827175347145371/2500000000000000",
+              "647031708459349392063/50000000000000",
+              "202187163672107441001/125000000000000"
+            ]
+          },
+          "backend": "balanced-coupling",
+          "claim": {
+            "bound": "53/25",
+            "kernel": [
+              [
+                "1/1",
+                "1/6561",
+                "1/6561",
+                "1/43046721",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6561",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6561",
+                "1/43046721",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/6561",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/43046721",
+                "1/43046721",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/43046721",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/282429536481",
+                "1/6975757441"
+              ],
+              [
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441",
+                "1/6975757441"
+              ]
+            ],
+            "labels": [
+              [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                1,
+                1,
+                3,
+                3,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                2,
+                3,
+                2,
+                3,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                3,
+                3,
+                3,
+                3,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                4,
+                5,
+                6,
+                7,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              [
+                5,
+                5,
+                7,
+                7,
+                5,
+                5,
+                7,
+                7,
+                8
+              ],
+              [
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                6,
+                7,
+                8
+              ],
+              [
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                8
+              ],
+              [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            ],
+            "marginals": "uniform-rows-and-columns",
+            "objective": "minimize-sum-p-log-p-over-k",
+            "relation": "<=",
+            "units": "nats"
+          },
+          "diagnostic": {
+            "iterations": 997,
+            "marginal_residual": "9.59276194291333475667970700981653815353275754271542829008747241401564e-23",
+            "warning": "Numerical proposal only; independent checker decides acceptance."
+          },
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.906,
+        "independent_check": {
+          "certificate_hash": "dba1f7c713ed1a365d242e175430b06116254572890e813ae846797308e3fe78",
+          "computation": {
+            "continuity_radius": "1/10000",
+            "entropy_lower_nats": "526544471171915890908449/250000000000000000000000",
+            "entropy_upper_nats": "1054317915535030744401127/500000000000000000000000",
+            "stationarity_error_upper": "8452423138571953/1000000000000000000000000"
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Event entropy of the recorded positive-kernel optimization with uniform marginals only; no conjecture or model-translation verdict.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        }
+      },
+      "result_hash": "3c8323fe39641dfb30235a1efce980207bbf6fee67c04caa8d2898329c9bd773",
+      "created": 1788959709.8930793
+    },
+    {
+      "id": 19,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Independent translation check: F consists of every subset of {1,2,3} and the extra top {1,2,3,4}. It is union-closed, has N=9 distinct members and frequencies (5,5,5,1)/9. Ordered union multiplicities are 1,3,3,9,3,9,9,27,17 in mask order [0,1,2,3,4,5,6,7,15]. Actions 17 and 18 certify the entropy of the minimizer of sum P log(P/K_theta), K_theta(A,B)=r(A union B)^(-theta), with uniform marginals. H_4>=107/50=2.14 nats and H_8<=53/25=2.12 nats disprove monotonicity in theta. This is a counterexample to our auxiliary universal monotonicity hypothesis, not Frankl, not Jiang Theorem 10.2, and not a monotonicity assertion restricted to frequencies at most 1/2."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          17,
+          18
+        ],
+        "falsifier": "A hidden hypothesis, invalid translation or failed exact check defeats the stated auxiliary conclusion.",
+        "rationale": "Bind the two certified optimizer bounds back to the same explicit family and preserve their limited scope."
+      },
+      "fingerprint": "fb37153145f24904f664b5abf1086b6c4b33d304ae1341133581eed3f2504a9c",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Independent translation check: F consists of every subset of {1,2,3} and the extra top {1,2,3,4}. It is union-closed, has N=9 distinct members and frequencies (5,5,5,1)/9. Ordered union multiplicities are 1,3,3,9,3,9,9,27,17 in mask order [0,1,2,3,4,5,6,7,15]. Actions 17 and 18 certify the entropy of the minimizer of sum P log(P/K_theta), K_theta(A,B)=r(A union B)^(-theta), with uniform marginals. H_4>=107/50=2.14 nats and H_8<=53/25=2.12 nats disprove monotonicity in theta. This is a counterexample to our auxiliary universal monotonicity hypothesis, not Frankl, not Jiang Theorem 10.2, and not a monotonicity assertion restricted to frequencies at most 1/2.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        },
+        "verified": false
+      },
+      "result_hash": "5b50a49a39112affb173de8eb236fa6ed404f6a973bd18362dc749ee444710d6",
+      "created": 1788960019.342006
+    },
+    {
+      "id": 20,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Use the exact F=2^[3] plus a top example and disjoint certified bounds at exponents 4 and 8.",
+            "blocker": "The counterexample has maximum frequency 5/9, so a low-frequency-restricted statement is not settled.",
+            "claim": "Uniform monotonicity of union entropy in inverse-multiplicity exponent theta is false.",
+            "next_test": "Study how the failure scales toward the half-frequency boundary in F_k=2^[k] plus a top.",
+            "route_id": "coupling-monotonicity",
+            "status": "abandoned"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          19
+        ],
+        "falsifier": "A hidden hypothesis, invalid translation or failed exact check defeats the stated auxiliary conclusion.",
+        "rationale": "Do not keep increasing the exponent as if it were a monotone proof strategy."
+      },
+      "fingerprint": "52619c72e10b866c0bf0b284189ff86579c3b7fbad53aa17580cf0a00d2f4374",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "coupling-monotonicity",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        },
+        "verified": false
+      },
+      "result_hash": "089c7d323c38cd6b6d395e4c69e51d8afedbd70cc0d080830379ab9d1e2ce44d",
+      "created": 1788960019.3749087
+    },
+    {
+      "id": 21,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Written general-family lemma, not formally verified and no novelty claim. Let F_k=2^[k] plus T=[k+1], k>=3, N=2^k+1, U=[k]. Then r(S)=3^|S| for S subset [k], and r(T)=2N-1. For any permutation, a cycle contained in the cube has union-cost sum at least its diagonal cost, with equality only for fixed points. A nontrivial cycle T,A1,...,Am,T has excess cost log(2N-1)-|A1|log3+sum_{i<m}|Ai minus A(i+1)|log3, at least log(2N-1)-k log3, with equality only for m=1,A1=U. Since 3^k>2N-1 for k>=3, the unique minimum-cost permutation exchanges U and T and fixes everything else. By the Birkhoff decomposition this is the unique linear-cost minimizer among uniform-marginal couplings. For P_theta, comparison with that minimizer bounds the excess linear cost by log(N)/theta; compactness and uniqueness imply convergence to it. Thus the limiting union law has count 0 at U, 2 at T, and 1 elsewhere out of N, with entropy log N-(2/N)log2. Maximum frequency is (N+1)/(2N); writing delta=pmax-1/2 gives limiting entropy deficit 4*delta*log2. This supplies a necessary boundary consistency check for a future gap-sensitive theorem; it does not establish such a theorem."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          19,
+          20
+        ],
+        "falsifier": "A hidden hypothesis, invalid translation or failed exact check defeats the stated auxiliary conclusion.",
+        "rationale": "Extend the finite obstruction into an explicit family approaching frequency 1/2, so future candidate inequalities can be tested analytically."
+      },
+      "fingerprint": "d6d810fae2d8d5f08427e8d7a1dffb873448795dacde4f206778930ac4e50044",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Written general-family lemma, not formally verified and no novelty claim. Let F_k=2^[k] plus T=[k+1], k>=3, N=2^k+1, U=[k]. Then r(S)=3^|S| for S subset [k], and r(T)=2N-1. For any permutation, a cycle contained in the cube has union-cost sum at least its diagonal cost, with equality only for fixed points. A nontrivial cycle T,A1,...,Am,T has excess cost log(2N-1)-|A1|log3+sum_{i<m}|Ai minus A(i+1)|log3, at least log(2N-1)-k log3, with equality only for m=1,A1=U. Since 3^k>2N-1 for k>=3, the unique minimum-cost permutation exchanges U and T and fixes everything else. By the Birkhoff decomposition this is the unique linear-cost minimizer among uniform-marginal couplings. For P_theta, comparison with that minimizer bounds the excess linear cost by log(N)/theta; compactness and uniqueness imply convergence to it. Thus the limiting union law has count 0 at U, 2 at T, and 1 elsewhere out of N, with entropy log N-(2/N)log2. Maximum frequency is (N+1)/(2N); writing delta=pmax-1/2 gives limiting entropy deficit 4*delta*log2. This supplies a necessary boundary consistency check for a future gap-sensitive theorem; it does not establish such a theorem.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        },
+        "verified": false
+      },
+      "result_hash": "d0841b6b9d4384761d867bd0a65245ca72cc7e27f79d59bfc950a537acea6264",
+      "created": 1788960019.4013836
+    },
+    {
+      "id": 22,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "constant": "59/20",
+            "counts": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              2
+            ],
+            "max_bits": 500000,
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8
+                ]
+              }
+            ]
+          },
+          "tool": "entropy_inequality"
+        },
+        "evidence": [
+          21
+        ],
+        "falsifier": "A hidden hypothesis, invalid translation or failed exact check defeats the stated auxiliary conclusion.",
+        "rationale": "Check the exact N=9 limiting-law entropy against 2.95 bits; this finite calculation does not prove optimizer convergence."
+      },
+      "fingerprint": "d3fd53491834c25ec2349ddc18994e3a8431907534fbc037f1adae1178d19442",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "exact-entropy",
+          "claim": {
+            "constant": "59/20",
+            "counts": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              2
+            ],
+            "domain": "recorded-finite-distribution",
+            "relation": ">=",
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8
+                ]
+              }
+            ],
+            "units": "bits"
+          },
+          "diagnostic": {
+            "approximate_difference_bits": -0.0022972207799103472,
+            "warning": "Floating diagnostic only; use the independent exact verdict."
+          },
+          "max_bits": 500000,
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.265,
+        "independent_check": {
+          "certificate_hash": "a5afe07ce90086af74edace5cd0c02e955bff4fb16f891e305fb883250d6002f",
+          "computation": {
+            "denominator_bits": 572,
+            "integer_scale": 180,
+            "numerator_bits": 571,
+            "sign": -1
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only this recorded finite distribution and its partitions; no universal entropy inequality, coupling applicability or conjecture verdict.",
+          "status": "REFUTED"
+        },
+        "status": "REFUTED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        }
+      },
+      "result_hash": "ae49b3cb41fd9d87d245af375071ca2974696046457bc11a926a04ad167ff65c",
+      "created": 1788960019.424512
+    },
+    {
+      "id": 23,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Optimize or adapt the coupling using family structure; enforce the F_k boundary formula and avoid assuming entropy is monotone in theta.",
+            "blocker": "Positive gain and fixed-exponent improvements still do not provide a universal half-frequency bound.",
+            "claim": "Find a frequency-gap-sensitive global coupling argument that proves the full Frankl conjecture.",
+            "next_test": "Test candidate frequency-gap bounds against F_k and products, then prove the required inequality rather than extrapolating finite checks.",
+            "route_id": "global-coupling",
+            "status": "exploring"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          21,
+          22
+        ],
+        "falsifier": "A hidden hypothesis, invalid translation or failed exact check defeats the stated auxiliary conclusion.",
+        "rationale": "Retain the actual unsolved proof target after excluding a concrete escalation route."
+      },
+      "fingerprint": "d4f8016167883c4614498ff09e4d3c2e544bfc7543de30a7618758dbfa6c20b4",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "global-coupling",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "9562d98d34201ca0473dc92316380d1b00f696cf022ceed409ae42f8dd053d48",
+          "coupling_research.py": "2e769641709c8e68bd47ca90cc945ace7b688392682b9a904e8af357c02fdf2f",
+          "coupling_verifier.py": "1a02790eee25f546a6a692e3476402d57945fde1486692afa47278683e6fe2b0",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "rational_log.py": "3dee2fd99ccf9c956e35556d99e4f282cff8fba1930e0348b379f6ebcafbf0cf",
+          "schema.py": "3f64c34f48cc84ff4b35c5f4ec78ef9ba74b864b2917a7bf25941d32ba0967bc",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c29168f7062ce12451e8ed3a523a4ccb72f96df40d7783ab6acb711ba9c384b6"
+        },
+        "verified": false
+      },
+      "result_hash": "ec274dbce79b76a68f0e80e3486880d689194e22d5322b9ae86a5d0b74843a0d",
+      "created": 1788960019.7273767
+    }
+  ],
+  "assets": [],
+  "events": [],
+  "warning": "Local audit record, not a signed attestation. Case verdicts are not updated. Review translation and register evidence through existing case/release gates."
+}

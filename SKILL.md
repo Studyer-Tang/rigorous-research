@@ -3,7 +3,7 @@ name: rigorous-research
 description: Plan, execute, audit, and package mathematical, statistical, or quantitative-finance research with sourced work plans, reproducible computations, explicit assumptions, falsification tests, and domain release gates. Use for multi-step research, literature-grounded theorem work, counterexamples, estimand design, simulations, empirical studies, factor research, or backtest validation; do not use for ordinary summaries or generic project management.
 license: MIT
 metadata:
-  version: "1.14"
+  version: "1.15"
   skill-author: Rigorous Research contributors
 ---
 
@@ -58,6 +58,10 @@ For information-theoretic proof routes, read [references/entropy-proofs.md](refe
 distribution. Its exact integer comparison ignores floating diagnostics; universal quantifiers and
 the required coupling marginals must be justified separately. A failed literature request is not an
 empty search result. Preserve fielded arXiv queries and inspect primary text before accepting a proof claim.
+For entropy bounds on a positive-kernel matrix-scaling optimizer, use `coupling_entropy` and read
+[references/coupling-certificates.md](references/coupling-certificates.md). It certifies proximity to
+the true optimizer, not just the entropy of a numerically balanced matrix. Preserve the kernel,
+event labels, both uniform marginals and natural-log units when translating a research claim.
 
 For proof obligations, independently checked certificates, or statistical theorem applicability, read [references/proof-assurance.md](references/proof-assurance.md). New cases use schema 4: separate translation, domain conditions, and the proof or counterexample; derive closure from evidence rather than model confidence. Declare division, inversion, limit interchange, and generalization operations explicitly. Never invent a human reviewer or record an AI review as human. Leave unproved steps open and continue independently useful research.
 

@@ -11,6 +11,10 @@ from .schema import TOOLS, validate
 def produce(action, asset=None):
     tool, args = action["tool"], action["arguments"]
     validate(args, TOOLS[tool])
+    if tool == "coupling_entropy":
+        from coupling_research import coupling_entropy
+
+        return {"certificate": coupling_entropy(**args)}
     if tool == "entropy_inequality":
         from entropy_research import entropy_inequality
 

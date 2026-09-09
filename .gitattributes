@@ -7,3 +7,5 @@
 /examples/erdos-frontier/** -text
 /examples/polynomial-routes/ledger.json -text
 /examples/frankl-frontier/ledger.json -text
+/examples/frankl-coupling/ledger.json -text
+/examples/frankl-coupling/assignment.json -text

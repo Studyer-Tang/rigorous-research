@@ -33,6 +33,7 @@ jobs:
           python examples/agent-research/reproduce.py --output build/agent-replay
           python examples/polynomial-routes/reproduce.py
           python examples/frankl-frontier/reproduce.py
+          python examples/frankl-coupling/reproduce.py
       - name: Validate released workspaces
         run: |
           python scripts/research_workspace.py validate examples/toeplitz-determinant/workspace.json --release

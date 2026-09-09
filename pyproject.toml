@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rigorous-research"
-version = "1.14.0"
+version = "1.15.0"
 description = "Evidence-gated research workspaces for mathematics, statistics, and quantitative finance"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -39,6 +39,9 @@ package-dir = { "" = "scripts" }
 packages = ["papertrail_frontend", "research_agent"]
 py-modules = [
   "certificate_verifier",
+  "coupling_research",
+  "coupling_verifier",
+  "rational_log",
   "integer_certificate_verifier",
   "integer_research",
   "integer_research_verifier",

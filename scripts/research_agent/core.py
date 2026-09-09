@@ -91,6 +91,7 @@ class Study:
                 "polynomial_sos",
                 "polynomial_amgm",
                 "entropy_inequality",
+                "coupling_entropy",
                 "inequality_search",
             }:
                 raise ValueError("machine contracts require an exact mathematics tool, arguments and status")
@@ -382,6 +383,9 @@ class Study:
                 "polynomial_verifier.py",
                 "entropy_research.py",
                 "entropy_verifier.py",
+                "coupling_research.py",
+                "coupling_verifier.py",
+                "rational_log.py",
             )
         ]
         result["toolchain_sha256"] = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in modules}

@@ -4,6 +4,13 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.15.0 - 2026-09-09
+
+- Added finite matrix-scaling entropy certificates: numerical proposals are checked using exact uniform marginals, a rational stationarity bound, Pinsker's inequality and an entropy-continuity bound. Natural logarithms have outward rational series enclosures; the checker imports no numerical libraries.
+- Used the tool to refute an auxiliary monotonicity hypothesis for inverse-multiplicity couplings: on one nine-set family, entropy at exponent 4 exceeds 2.14 nats while at exponent 8 it is below 2.12 nats. This is not a Frankl counterexample or a contradiction of the cited fixed-exponent theorem.
+- Added a written near-half-frequency family analysis and checked its nine-set assignment limit by all 362,880 permutations, with a separate dynamic-programming replay. The general proof remains unformalized and novelty is not asserted.
+- Added adversarial optimizer, marginal, event-label, continuity, logarithm and resource-limit tests. Preserved the original research objective and prior archives.
+
 ## 1.14.0 - 2026-09-09
 
 - Added exact finite Shannon-entropy inequalities for rationally weighted partitions of a recorded joint distribution. A standard-library checker converts entropy differences to integer products without evaluating logarithms; its explicit bit budget preserves inconclusive outcomes.

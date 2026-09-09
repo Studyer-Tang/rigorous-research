@@ -30,6 +30,35 @@ SQUARE_TERM = obj(
 
 
 TOOLS = {
+    "coupling_entropy": obj(
+        kernel={
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 16,
+            "items": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 16,
+                "items": {"type": "string", "pattern": "^-?[0-9]{1,40}(/[1-9][0-9]{0,39})?$"},
+            },
+        },
+        labels={
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 16,
+            "items": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 16,
+                "items": integer(0, 255),
+            },
+        },
+        bound={"type": "string", "pattern": "^-?[0-9]{1,40}(/[1-9][0-9]{0,39})?$"},
+        relation={"type": "string", "enum": [">=", "<="]},
+        digits=integer(6, 16),
+        max_iterations=integer(1, 8192),
+        delta={"type": "string", "pattern": "^-?[0-9]{1,40}(/[1-9][0-9]{0,39})?$"},
+    ),
     "entropy_inequality": obj(
         counts={"type": "array", "items": integer(0, 10**6), "minItems": 1, "maxItems": 1024},
         terms={
@@ -196,6 +225,11 @@ Nonnegative integer counts specify the joint atoms; each term labels every atom 
 The independent checker converts the comparison to integer products without numerical logarithms.
 Its REFUTED status concerns only the recorded finite inequality; verify all universal-claim hypotheses
 and coupling marginals separately. An exhausted integer budget stays INCONCLUSIVE.
+coupling_entropy certifies event entropy (nats) of the minimizer of sum P*log(P/K)
+over square matrices with both uniform marginals, for a strictly positive rational kernel K.
+It checks a rational balanced approximation, a stationarity error and entropy continuity bounds.
+Numerical convergence alone is not evidence. Unavailable or inadequate bounds remain inconclusive
+or reject the certificate. Translating a family/coupling theorem to the kernel and labels is separate.
 Use recall to retrieve an older action by ID when it is absent from the bounded context.
 Use only the supplied action schema, no shell commands. Do not repeat identical actions.
 """

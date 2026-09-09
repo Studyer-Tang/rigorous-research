@@ -155,6 +155,10 @@ def check_identity(
 
 
 def verify(certificate: dict[str, Any], inputs: list[Path] | None = None) -> dict[str, Any]:
+    if certificate.get("backend") == "balanced-coupling":
+        from coupling_verifier import verify as verify_coupling
+
+        return verify_coupling(certificate)
     if certificate.get("backend") == "exact-entropy":
         from entropy_verifier import verify as verify_entropy
 
