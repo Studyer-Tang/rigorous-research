@@ -90,6 +90,7 @@ class Study:
                 "egyptian_scan",
                 "polynomial_sos",
                 "polynomial_amgm",
+                "entropy_inequality",
                 "inequality_search",
             }:
                 raise ValueError("machine contracts require an exact mathematics tool, arguments and status")
@@ -359,7 +360,8 @@ class Study:
                     result["status"] = result["independent_check"]["status"]
                     if result["status"] == "INVALID":
                         raise ValueError("independent checker rejected certificate")
-            execution = "SUCCEEDED"
+            sources = result.get("sources", {}) if tool == "literature" else {}
+            execution = "FAILED" if sources.get("request_errors") and not sources.get("requests") else "SUCCEEDED"
         except (ValueError, OSError, subprocess.SubprocessError) as exc:
             execution = "TIMEOUT" if isinstance(exc, subprocess.TimeoutExpired) else "FAILED"
             result = {"status": "INCONCLUSIVE", "error": str(exc)[-2000:]}
@@ -378,6 +380,8 @@ class Study:
                 "integer_research_verifier.py",
                 "polynomial_research.py",
                 "polynomial_verifier.py",
+                "entropy_research.py",
+                "entropy_verifier.py",
             )
         ]
         result["toolchain_sha256"] = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in modules}

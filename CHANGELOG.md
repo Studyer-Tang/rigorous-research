@@ -4,6 +4,13 @@ All notable changes are recorded here. Versions follow Semantic Versioning for t
 
 ## Unreleased
 
+## 1.14.0 - 2026-09-09
+
+- Added exact finite Shannon-entropy inequalities for rationally weighted partitions of a recorded joint distribution. A standard-library checker converts entropy differences to integer products without evaluating logarithms; its explicit bit budget preserves inconclusive outcomes.
+- Fixed arXiv fielded queries being prefixed with a second `all:`. Agent retrieval failures now retain errors, remain inconclusive, and allow the same query to be retried; a successful empty search is distinct.
+- Started a sourced investigation of the full Frankl conjecture. Preserved actual entropy counterexamples, dependent-coupling repairs, finite product checks and a written tensor-product obstruction to a proposed variance bound. None solves the conjecture or establishes novelty.
+- Added adversarial entropy, domain, atom-partition, resource-budget and retrieval-retry tests, plus bilingual research reports and a deterministic certificate replay.
+
 ## 1.13.0 - 2026-09-09
 
 - Added native persistent research routes with scoped hypotheses, blockers, next tests and evidence IDs. Latest revisions survive context truncation and reopening; planning labels never change scientific acceptance. Existing databases migrate without rewriting action history.

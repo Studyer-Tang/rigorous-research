@@ -55,6 +55,12 @@ def arxiv_identifier(value: str) -> str:
     return re.sub(r"v\d+$", "", identifier.strip())
 
 
+def arxiv_query(query: str) -> str:
+    """Preserve fielded arXiv syntax; add the all-field only to plain queries."""
+    fields = r"(?:all|ti|au|abs|co|jr|cat|rn|id|doi|submittedDate|lastUpdatedDate)"
+    return query if re.search(rf"(?:^|[\s(]){fields}\s*:", query) else f"all:{query}"
+
+
 def year_from_parts(*parts: Any) -> int | None:
     for part in parts:
         try:
@@ -452,7 +458,7 @@ def main(argv: list[str] | None = None) -> int:
     if "arxiv" in providers:
         params = urllib.parse.urlencode(
             {
-                "search_query": f"all:{args.query}",
+                "search_query": arxiv_query(args.query),
                 "start": 0,
                 "max_results": args.limit,
                 "sortBy": "relevance",

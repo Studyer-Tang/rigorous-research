@@ -11,6 +11,10 @@ from .schema import TOOLS, validate
 def produce(action, asset=None):
     tool, args = action["tool"], action["arguments"]
     validate(args, TOOLS[tool])
+    if tool == "entropy_inequality":
+        from entropy_research import entropy_inequality
+
+        return {"certificate": entropy_inequality(**args)}
     if tool in {"polynomial_sos", "polynomial_amgm", "inequality_search"}:
         from polynomial_research import inequality_search, polynomial_amgm, polynomial_sos
 
@@ -66,9 +70,11 @@ def produce(action, asset=None):
                     str(root / "sources.bib"),
                 ]
             )
+            sources = json.loads((root / "sources.json").read_text(encoding="utf-8"))
             return {
-                "status": "CANDIDATE_SOURCES",
-                "sources": json.loads((root / "sources.json").read_text(encoding="utf-8")),
+                "status": "INCONCLUSIVE" if sources.get("request_errors") else "CANDIDATE_SOURCES",
+                "sources": sources,
+                "retrieval_complete": not bool(sources.get("request_errors")),
             }
     import statistics_backend as stats
 

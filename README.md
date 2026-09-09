@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+**Version 1.14 adds exact entropy comparisons and a live Frankl-conjecture investigation.** Entropy inequalities on rational finite distributions are independently reduced to integer comparisons, while coupling assumptions remain explicit. [The research record](examples/frankl-frontier/README.md) includes current primary-source qualifications, an exact failed proof route and product-family constraints. The full conjecture remains unresolved; engineering improvements and partial results do not count as solving it.
+
 **Version 1.13 adds general polynomial proof tools and persistent research routes.** The agent can automatically discover rational quadratic square decompositions, check supplied constrained square and AM-GM proofs, and search for exact feasible counterexamples. A separate standard-library checker validates the mathematics. [Actual Cauchy, weighted-variance and Motzkin runs](examples/polynomial-routes/README.md) preserve failed attempts and method changes; these are known benchmarks, not a solved open conjecture or a model-capability comparison.
 
 **1.12 adds native integer research and universal polynomial-family checks.** A [live multi-route investigation](examples/erdos-frontier/README.md) refuted short-window auxiliary hypotheses, independently checked 55 parameter families and retained six explicit congruence gaps. Tasks and proof obligations now remain visible in bounded Agent context. The original conjecture remains unresolved.

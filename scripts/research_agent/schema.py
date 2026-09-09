@@ -30,6 +30,20 @@ SQUARE_TERM = obj(
 
 
 TOOLS = {
+    "entropy_inequality": obj(
+        counts={"type": "array", "items": integer(0, 10**6), "minItems": 1, "maxItems": 1024},
+        terms={
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "items": obj(
+                coefficient={"type": "string", "pattern": "^-?[0-9]{1,8}(/[1-9][0-9]{0,7})?$"},
+                labels={"type": "array", "items": integer(0, 1023), "minItems": 1, "maxItems": 1024},
+            ),
+        },
+        constant={"type": "string", "pattern": "^-?[0-9]{1,8}(/[1-9][0-9]{0,7})?$"},
+        max_bits=integer(1000, 500000),
+    ),
     "polynomial_amgm": obj(
         lhs=EXPR,
         rhs=EXPR,
@@ -177,6 +191,11 @@ Neither tool accepts variable denominators or proves that assumptions hold in th
 polynomial_amgm checks supplied nonnegative addends using the same weighted-square factor syntax.
 It verifies product(addends)=base**m and lhs-rhs=sum(addends)-m*base, for 2<=m<=8.
 This AM-GM rule can certify some non-SOS polynomials; the model supplies the decomposition.
+entropy_inequality checks sum(coefficient*H(partition))>=constant in bits for one finite distribution.
+Nonnegative integer counts specify the joint atoms; each term labels every atom to define a partition.
+The independent checker converts the comparison to integer products without numerical logarithms.
+Its REFUTED status concerns only the recorded finite inequality; verify all universal-claim hypotheses
+and coupling marginals separately. An exhausted integer budget stays INCONCLUSIVE.
 Use recall to retrieve an older action by ID when it is absent from the bounded context.
 Use only the supplied action schema, no shell commands. Do not repeat identical actions.
 """

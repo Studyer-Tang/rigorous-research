@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "ledger_sha256": "66cb40a1dd6145d53538f92d4de3b50898d56227e7071ccffc65b8e5694451f4",
+  "retrieval_date": "2026-09-09",
+  "sources": [
+    {
+      "url": "https://arxiv.org/abs/2211.09055",
+      "sha256": "5c9e0163857b4406699192578f9cf2197a6fdfeb640ac30e7da5288614fbbc62",
+      "local_snapshot": "2211.09055.html"
+    },
+    {
+      "url": "https://arxiv.org/abs/2212.00658",
+      "sha256": "c853f8342666a09f1ffdf1d6df3845b04e157beeed581e29828de0cbf5f24fac",
+      "local_snapshot": "2212.00658.html"
+    },
+    {
+      "url": "https://arxiv.org/html/2306.08824v1",
+      "sha256": "5850209d18046955b607aaa8abf8b2693cb2bdde05654e3b33d4ba6884cd2589",
+      "local_snapshot": "2306.08824v1.html"
+    },
+    {
+      "url": "https://arxiv.org/html/2405.10639v1",
+      "sha256": "32125ea6766cfa7c113c2d95b34cb4cf135b56c8f9b4a3d6a225f73ae6f4db77",
+      "local_snapshot": "2405.10639v1.html"
+    },
+    {
+      "url": "https://arxiv.org/html/2609.08291v1",
+      "sha256": "38ada6030a1a29cbe66ad8a1a73451ff3aeca841661b873ac17aaa61974a2305",
+      "local_snapshot": "2609.08291v1.html"
+    },
+    {
+      "url": "https://arxiv.org/abs/2405.03731",
+      "sha256": "fd5ea3e65bb64f50d1d5c6ec813094153111aa741e6ef86def5ab04dccc354a7",
+      "local_snapshot": "2405.03731-abs.html"
+    }
+  ],
+  "warning": "Source hashes identify locally retained web snapshots; replay does not contact sources or validate external proofs."
+}

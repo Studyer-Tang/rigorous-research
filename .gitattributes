@@ -6,3 +6,4 @@
 /cases/goldbach-conjecture/** -text
 /examples/erdos-frontier/** -text
 /examples/polynomial-routes/ledger.json -text
+/examples/frankl-frontier/ledger.json -text

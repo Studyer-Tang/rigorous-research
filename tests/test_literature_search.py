@@ -15,6 +15,14 @@ SPEC.loader.exec_module(ls)
 
 
 class LiteratureSearchTests(unittest.TestCase):
+    def test_arxiv_fielded_query_and_plain_query_have_distinct_translation(self):
+        self.assertEqual(ls.arxiv_query("union-closed sets"), "all:union-closed sets")
+        for query in [
+            'all:"union-closed" AND submittedDate:[202401010000 TO 202609092359]',
+            '(ti:"union-closed" OR abs:Frankl) AND cat:math.CO',
+        ]:
+            self.assertEqual(ls.arxiv_query(query), query)
+
     def test_openalex_parser_preserves_work_identifiers(self):
         payload = {
             "results": [

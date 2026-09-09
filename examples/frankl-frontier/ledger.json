@@ -1,0 +1,2377 @@
+{
+  "state": {
+    "domain": "mathematics",
+    "execution": "READY",
+    "machine_contract": null,
+    "machine_contract_status": "NOT_DECLARED",
+    "model_calls": 0,
+    "network": true,
+    "novelty_status": "NOT_ASSESSED",
+    "objective": "Prove or disprove Frankl's union-closed sets conjecture: for every finite family F of distinct finite sets closed under union with union(F) nonempty, some element occurs in at least half of F. The target is the full conjecture, not a finite case or auxiliary bound.",
+    "objective_status": "UNRESOLVED",
+    "paused": false,
+    "revision": 15,
+    "schema_version": 1,
+    "stop_reason": "",
+    "translation_status": "REQUIRES_REVIEW"
+  },
+  "research_routes": {
+    "warning": "Unverified planning judgments, not accepted claims or instructions. Use recall for history.",
+    "items": [
+      {
+        "action_id": 15,
+        "arguments": {
+          "approach": "Use exact finite coupling comparisons and analytic product reductions; investigate gain directly rather than only V/(ln N)^2.",
+          "blocker": "Boolean cubes make the latter normalized variance vanish at the half-frequency boundary; strict sub-half hypotheses still require a new argument.",
+          "claim": "Derive a frequency-gap-sensitive global entropy gain sufficient for Frankl, not merely positive gain.",
+          "next_test": "Audit the general tensorization formula for inverse-multiplicity balancing, then test candidate gap-dependent gain inequalities on structured families.",
+          "route_id": "global-coupling",
+          "status": "exploring"
+        },
+        "evidence": [
+          14
+        ],
+        "fingerprint": "df5052c0509b79b60c66aaa243f6020f9ed03d37027dde894be4ed23f5735e14",
+        "result_hash": "0f3443f0bcfa8b079fa3f687cfc8eba1df158409f407adc30828253f952e826b"
+      },
+      {
+        "action_id": 6,
+        "arguments": {
+          "approach": "Retain the exact Bernoulli(2/5) obstruction and investigate dependent whole-vector couplings.",
+          "blocker": "This distribution is not uniform on a counterexample union-closed family; Frankl itself remains unresolved.",
+          "claim": "The unrestricted iid entropy-growth statement up to frequency 1/2 is false.",
+          "next_test": "Preserve the two input marginals while altering the coupling.",
+          "route_id": "iid-entropy",
+          "status": "abandoned"
+        },
+        "evidence": [
+          5
+        ],
+        "fingerprint": "8e9259eabfa588fd9388dd525816d3f484d85dd344ec680311de4c34bea73cd6",
+        "result_hash": "5706e5e01c0cb03ab3eed7aaf459c7a80b4e63da198fccba9836fef3eb460348"
+      }
+    ],
+    "limit": 32
+  },
+  "actions": [
+    {
+      "id": 1,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "limit": 20,
+            "provider": "arxiv",
+            "query": "all:\"union-closed\" AND submittedDate:[202401010000 TO 202609092359]"
+          },
+          "tool": "literature"
+        },
+        "evidence": [],
+        "falsifier": "A verified accepted resolution or a stronger known result would change the research premise.",
+        "rationale": "Review recent primary metadata before choosing a proof route; titles claiming proofs need direct checking."
+      },
+      "fingerprint": "835529cd0b5a04154ffee52b0d0372d60cd41e9199e3290a366f1caa45de0e53",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 17.922,
+        "sources": {
+          "dedup_decisions": [],
+          "fuzzy_threshold": 0.94,
+          "query": "all:\"union-closed\" AND submittedDate:[202401010000 TO 202609092359]",
+          "raw_count": 0,
+          "raw_records": [],
+          "records": [],
+          "request_errors": [
+            {
+              "error": "HTTPError: HTTP Error 400: Bad Request",
+              "provider": "arxiv",
+              "url": "https://export.arxiv.org/api/query?search_query=all%3Aall%3A%22union-closed%22+AND+submittedDate%3A%5B202401010000+TO+202609092359%5D&start=0&max_results=20&sortBy=relevance"
+            }
+          ],
+          "requests": [],
+          "retrieved_at": "2026-09-09T12:50:02.255650+00:00",
+          "schema_version": 1,
+          "unique_count": 0
+        },
+        "status": "CANDIDATE_SOURCES",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "c1a97d27e7f437de645a487508d0b2bc06b563f7fb1f2d28f2744da12292d689",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "12c164db162ff49df2930b155ac710b9e98b3c63a6cbc00dc9f85f53af0c09d5",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "c2c9e9c2617c1b4ed6e2976d3c03eb00d62cb56d9a92c79855c0cbd9e146b578"
+        }
+      },
+      "result_hash": "11ca907de594cd2a186054e8f426014de13e563f4794b23bd61e736763542e32",
+      "created": 1788958184.3491359
+    },
+    {
+      "id": 2,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "limit": 20,
+            "provider": "arxiv",
+            "query": "ti:\"union-closed\" AND submittedDate:[202401010000 TO 202609092359]"
+          },
+          "tool": "literature"
+        },
+        "evidence": [
+          1
+        ],
+        "falsifier": "Transport failure or irrelevant metadata cannot establish public status.",
+        "rationale": "Retry with preserved fielded syntax after observing an invalid double-all prefix; no sources returned under HTTP error was not an absence result."
+      },
+      "fingerprint": "51ea2613ff1477b2f93d65ff1a74388ea3f6a3a4913095fb40348111c8c94676",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 1.265,
+        "retrieval_complete": true,
+        "sources": {
+          "dedup_decisions": [],
+          "fuzzy_threshold": 0.94,
+          "query": "ti:\"union-closed\" AND submittedDate:[202401010000 TO 202609092359]",
+          "raw_count": 17,
+          "raw_records": [
+            {
+              "abstract": "We demonstrate that when a graph exhibits a specific type of symmetry, it satisfies the Union Closed Conjecture(UCC). Additionally, we show that certain graph classes, such as Cylindrical Grid Graphs and Torus Grid Graphs also satisfy the conjecture. We prove the known result that the union closed family generated by cyclic translates of a fixed set satisfies the UCC, offering a simpler proof via symmetry arguments. Later, we show that the union closed family generated by the family obtained through cyclically shifting elements from selected translates also satisfies the conjecture.",
+              "arxiv_id": "2411.06588",
+              "authors": [
+                "Nived J M"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Symmetric Union Closed Families",
+              "url": "http://arxiv.org/abs/2411.06588v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "We prove that for any isomorphism $h: \\mathcal{K}_1 \\to \\mathcal{K}_2$ between pure union-closed families, there exists a hyperisomorphism $H: \\bigcup \\mathcal{K}_1 \\to \\bigcup \\mathcal{K}_2$ such that $h(A) = \\{ H(a) \\mid a \\in A \\}$, for all $A \\in \\mathcal{K}_1$. Since every union-closed family forms a lattice under inclusion, this result establishes a strong connection between the two frameworks. More precisely, any such family can be uniquely reconstructed from its lattice up to isomorphism. Hence, the lattice representation provides a faithful encoding, offering a perspective that may yield new insights into problems on union-closed families, including Frankl's union-closed sets conjecture.",
+              "arxiv_id": "2501.02637",
+              "authors": [
+                "M. J. Moghaddas Mehr"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Isomorphism in Union-Closed Sets",
+              "url": "http://arxiv.org/abs/2501.02637v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "The Union-Closed Sets Conjecture asks whether every union-closed set family $\\mathcal{F}$ has an element contained in half of its sets. In 2022, Nagel posed a generalisation of this problem, suggesting that the $k$th-most popular element in a union-closed set family must be contained in at least $\\frac{1}{2^{k-1} + 1} |\\mathcal{F}|$ sets. We combine the entropic method of Gilmer with the combinatorial arguments of Knill to show that this is indeed the case for all $k \\ge 2$, and characterise the families that achieve equality. Furthermore, we show that when $|\\mathcal{F}| \\to \\infty$, the $k$th-most frequent element will appear in at least $\\left( \\frac{3 - \\sqrt{5}}{2} - o(1) \\right) |\\mathcal{F}|$ sets, reflecting the recent progress made for the Union-Closed Set Conjecture.",
+              "arxiv_id": "2412.03862",
+              "authors": [
+                "Shagnik Das",
+                "Saintan Wu"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Frequent elements in union-closed set families",
+              "url": "http://arxiv.org/abs/2412.03862v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "Let $k$ and $n$ be positive integers such that $2 \\leq k \\leq n+1$. We prove that the number of $k$-chains in a union-closed family with universe $[n]$ and size $m$ is minimized when its member sets are largest possible. We also show that, whenever the minimum is nonzero and $m>n$, there are no other minimizing families.",
+              "arxiv_id": "2607.26425",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Supersaturation in union-closed families of sets",
+              "url": "http://arxiv.org/abs/2607.26425v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2026
+            },
+            {
+              "abstract": "We prove that the conjecture made by Peter Frankl in the late 1970s is true. In other words for every finite union-closed family which contains a non?empty set, there is an element that belongs to at least half of its m",
+              "arxiv_id": "2405.03731",
+              "authors": [
+                "Roberto Demontis"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "The union-closed set conjecture is true",
+              "url": "http://arxiv.org/abs/2405.03731v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "For a set of $m$ subsets of a universe set of size $n$, we construct a Boolean polynomial $\\mathrm{ICC}_{m,n}(X)$ such that the Union-Closed Conjecture is true for this $m$ and $n$ if and only if $\\mathrm{ICC}_{m,n}(X)$ is the zero Boolean polynomial. We use an equivalent formulation, called the Intersection-Closed Conjecture.",
+              "arxiv_id": "2606.26191",
+              "authors": [
+                "Mario DeFranco"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "On Boolean polynomials and the Union-Closed Conjecture",
+              "url": "http://arxiv.org/abs/2606.26191v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2026
+            },
+            {
+              "abstract": "Let $\\mathcal{A}$ be a union-closed family of sets with universe $\\bigcup_{A \\in \\mathcal{A}}A = [n] = \\{1,\\cdots,n\\}$ and length $\\ell$. We prove that $|\\mathcal{A}| \\leq \\sum_{i=0}^{\\ell} \\binom{n}{i}$, with equality if and only if $\\mathcal{A} = \\bigcup_{i=0}^{\\ell}\\binom{[n]}{n-i}$. Additionally, by showing that $|\\mathcal{A}| \\leq \\frac{\\ell^p-1}{\\ell-1}+2^n(1-2^{-\\ell})^p$ for any nonnegative integer $p$, we establish for all integers $1 \\leq k \\leq n$ that $\\sum_{i=0}^k \\binom{n}{i} \\leq \\frac{k^{\\hat{p}}-1}{k-1}+2^n(1-2^{-k})^{\\hat{p}}$, where $\\hat{p}=\\lfloor (n-k)/\\log_2(\\frac{k}{1-2^{-k}})\\rfloor + 1$.",
+              "arxiv_id": "2511.10608",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "An upper bound for union-closed family size",
+              "url": "http://arxiv.org/abs/2511.10608v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "Let $\\mathcal{A}$ be a union-closed family of sets with base set $b(\\mathcal{A})=\\bigcup_{A \\in \\mathcal{A}}A$ denoted by $[n]=\\{1, \\cdots, n\\}$, and for any real $x>0$, let $\\mathcal{A}_{<x} = \\{A \\in \\mathcal{A} \\ | \\ |A| < x\\}$. Also, denote by $\\mathcal{B}$ any smallest irredundant subfamily of $\\mathcal{A}_{<n/2}$ such that $b(\\mathcal{B})=b(\\mathcal{A}_{<n/2})$. We prove that if $\\mathcal{A}$ is separating with height $h = 4 \\leq n$ and $0 \\leq |\\mathcal{B}| \\leq 2$, then the average size of a member set from $\\mathcal{A}$ is at least $n/2$. We show that $h=4$ is greatest possible with respect to this result, and conclude by considering the remaining domain $3 \\leq |\\mathcal{B}| \\leq 4$.",
+              "arxiv_id": "2509.12537",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "An averaging result for union-closed families of sets",
+              "url": "http://arxiv.org/abs/2509.12537v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "We give a computer-assisted proof that every finite union-closed family containing a nonempty set has an element in at least 0.38288525 of its members. The argument combines independent sampling with conditionally independent sampling and an explicit product lower bound for a binary-entropy kernel. We identify the limiting constant of this pointwise method through a one-variable stationary equation. We also construct a global coupling by balancing inverse union multiplicities and prove a strictly positive, quantitative entropy gain over independent sampling. Combining the two arguments gives an additional frequency bound depending on the size of the family.",
+              "arxiv_id": "2609.08291",
+              "authors": [
+                "Yunjiang Jiang"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Entropy bounds and global couplings for union-closed families",
+              "url": "http://arxiv.org/abs/2609.08291v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2026
+            },
+            {
+              "abstract": "The union-closed sets conjecture, also known as Frankl's conjecture, is a well-studied problem with various formulations. In terms of lattices, the conjecture states that every finite lattice $L$ with more than one element contains a join-irreducible element that is less than or equal to at most half of the elements in $L$. In this work, we obtain several necessary conditions for any counterexample $\\tilde{L}$ of minimum size.",
+              "arxiv_id": "2503.00277",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "On the lattice formulation of the union-closed sets conjecture",
+              "url": "http://arxiv.org/abs/2503.00277v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "The celebrated union-closed conjecture is concerned with the cardinalities of various subsets of the Boolean $d$-cube. The cardinality of such a set is equivalent, up to a constant, to its measure under the uniform distribution, so we can pose more general conjectures by choosing a different probability distribution on the cube. In particular, for any sequence of probabilities $(p_i)_{i=1}^d$ we can consider the product of $d$ independent Bernoulli random variables, with success probabilities $p_i$. In this short note, we find a generalised form of Karpas' special case of the union-closed conjecture for families $\\mathcal{F}$ with density at least half. We also generalise Knill's logarithmic lower bound.",
+              "arxiv_id": "2504.13347",
+              "authors": [
+                "Gabriel Gendler"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Partial results for union-closed conjectures on the weighted cube",
+              "url": "http://arxiv.org/abs/2504.13347v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "Complements of union-closed families of sets, over a finite ground set, are known as simply rooted families of sets. Cubical sets are widely studied topological objects having applications in computational homology. In this paper, we look at simply rooted families of sets from the perspective of cubical sets. That is, for every family $\\mathcal F$ of subsets of a finite set, we construct a natural cubical set $X(\\mathcal F)$ (corresponding to it). We show that for every simply rooted family $\\mathcal F$, containing the empty set, the cubical set $X(\\mathcal F)$ is always acyclic (that is, it has trivial reduced cubical homology). As a consequence of this, using the Euler-Poincarè formula, we obtain a formula satisfied by all simply rooted families of sets which contain the empty set. We also provide an elementary proof of this formula.",
+              "arxiv_id": "2409.17050",
+              "authors": [
+                "Dhruv Bhasin"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "A Cubical Perspective on Complements of Union-Closed Families of Sets",
+              "url": "http://arxiv.org/abs/2409.17050v1",
+              "venue": "arXiv (math.CO, math.AT)",
+              "year": 2024
+            },
+            {
+              "abstract": "The Union Closed Sets Conjecture is one of the most renowned problems in combinatorics. Its appeal lies in the simplicity of its statement contrasted with the potential complexity of its resolution. The conjecture posits that, in any union closed family of sets, there exists at least one element that appears in at least half of the sets within the family. We establish the graph-theoretic version of certain set-theoretic results by connecting the set-based and graph-based formulations. We then prove a theorem in which we investigate the conjecture for graphs, focusing on their decompositions and the position of certain pendant vertices. As a result, we extend the validity of the conjecture to a broader class of graph structures.",
+              "arxiv_id": "2409.02221",
+              "authors": [
+                "Nived J M"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "A Study On The Graph Formulation Of Union Closed Sets Conjecture",
+              "url": "http://arxiv.org/abs/2409.02221v5",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "The Union-Closed Sets Conjecture, also known as Frankl's conjecture, asks whether, for any union-closed set family $\\mathcal{F}$ with $m$ sets, there is an element that lies in at least $\\frac{1}{2}\\cdot m$ sets in $\\mathcal{F}$. In 2022, Nagel posed a stronger conjecture that within any union-closed family whose ground set size is at least $k$, there are always $k$ elements in the ground set that appear in at least $\\frac{1}{2^{k-1}+1}$ proportion of the sets in the family. Das and Wu showed that this conjecture is true for $k\\geq 3$ and $k=2$ if $|\\mathcal{F}|$ is outside a particular range. In this companion paper, we analyse further when $\\mathcal{F}$ fails Nagel's conjecture for $k=2$ via linear programming.",
+              "arxiv_id": "2412.03863",
+              "authors": [
+                "Saintan Wu"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Further analysis on the second frequency of union-closed set families",
+              "url": "http://arxiv.org/abs/2412.03863v2",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "The union-closed sets conjecture (sometimes referred to as Frankl's conjecture) states that every finite, nontrivial union-closed family of sets has an element that is in at least half of its members. Although the conjecture is known to be false in the infinite setting, we show that many interesting results can still be recovered by imposing suitable chain conditions and considering carefully chosen elements called optimal elements. We use these elements to show that the union-closed conjecture holds for both finite and infinite union-closed families such that the cardinality of any chain of sets is at most three. We also show that the conjecture holds for all nontrivial topological spaces satisfying the descending chain condition on its open sets. Notably, none of those arguments depend on the cardinality of the underlying family or its universe. Finally, we provide an interesting class of families that satisfy the conclusion of the conjecture but are not necessarily union-closed.",
+              "arxiv_id": "2412.18740",
+              "authors": [
+                "Cory H. Colbert"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Chain Conditions and Optimal Elements in Generalized Union-Closed Families of Sets",
+              "url": "http://arxiv.org/abs/2412.18740v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "Suppose that $\\mathscr{F}$ is a finite union-closed family of sets with $\\cup_{A\\in \\mathscr{F}}A=\\{1,2,\\ldots,m\\}$ and $m\\geq 2$. Fix $i\\in \\{1,2,\\ldots,m\\}$ and denote $\\mathscr{G}:=\\{A\\backslash \\{i\\}: A\\in \\mathscr{F}\\}$. For $j\\in \\{1,2,\\ldots,m\\}\\backslash\\{i\\}$, let $\\mathscr{G}_j:=\\{A\\in\\mathscr{G}: j\\in A\\}$ and $\\mathscr{F}_j:=\\{A\\in\\mathscr{F}: j\\in A\\}$. In this note, we will prove a lemma which says that if $\\frac{|\\mathscr{G}_j|}{|\\mathscr{G}|}\\geq c\\,(c\\in (0,1])$, then $\\frac{|\\mathscr{F}_j|}{|\\mathscr{F}|}\\geq \\frac{1}{1+2(1-c)/c}$. Several applications of this lemma will be given.",
+              "arxiv_id": "2507.11008",
+              "authors": [
+                "Ze-Chun Hu",
+                "Yi-Ding Shi",
+                "Qian-Qian Zhou"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "A lemma on a finite union-closed family of finite sets and its applications",
+              "url": "http://arxiv.org/abs/2507.11008v2",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "The Union-Closed Sets Conjecture, often attributed to Péter Frankl in 1979, remains an open problem in discrete mathematics. It posits that for any finite family of sets $S\\neq\\{\\emptyset\\}$, if the union of any two sets in the family is also in the family, then $\\underline{\\text{there must exist an element that belongs to at least half of the member sets}}$. We will refer to the underlined text as the abundance condition. In 2001, David Reimer proved that the average set size of a union-closed family $S$ must be at least $\\frac{1}{2}\\log_{2}|S|$. When proving this result, he showed that a family being union-closed implies that the family satisfies certain conditions, which we will refer to as the Reimer's conditions. Therefore, as seen in the context of Tim Gowers' polymath project on the Union-Closed Sets Conjecture, it is natural to ask if all families that satisfy Reimer's conditions meet the abundance condition. A minimal counterexample to this question was offered by Raz in 2017. In this paper, we will discuss a general method to construct infinitely many such counterexamples with any fixed lower bound on the size of the member sets. Furthermore, we will discuss some properties related to these counterexamples, especially those focusing on how far these counterexamples are from being union-closed.",
+              "arxiv_id": "2405.10639",
+              "authors": [
+                "Kengbo Lu",
+                "Abigail Raz"
+              ],
+              "doi": "",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Note on the union-closed sets conjecture and Reimer's average set size theorem",
+              "url": "http://arxiv.org/abs/2405.10639v2",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            }
+          ],
+          "records": [
+            {
+              "abstract": "We prove that the conjecture made by Peter Frankl in the late 1970s is true. In other words for every finite union-closed family which contains a non?empty set, there is an element that belongs to at least half of its m",
+              "arxiv_id": "2405.03731",
+              "authors": [
+                "Roberto Demontis"
+              ],
+              "doi": "",
+              "id": "L001",
+              "merged_from": [
+                5
+              ],
+              "normalized_title": "the union closed set conjecture is true",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "The union-closed set conjecture is true",
+              "url": "http://arxiv.org/abs/2405.03731v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "The Union-Closed Sets Conjecture, often attributed to Péter Frankl in 1979, remains an open problem in discrete mathematics. It posits that for any finite family of sets $S\\neq\\{\\emptyset\\}$, if the union of any two sets in the family is also in the family, then $\\underline{\\text{there must exist an element that belongs to at least half of the member sets}}$. We will refer to the underlined text as the abundance condition. In 2001, David Reimer proved that the average set size of a union-closed family $S$ must be at least $\\frac{1}{2}\\log_{2}|S|$. When proving this result, he showed that a family being union-closed implies that the family satisfies certain conditions, which we will refer to as the Reimer's conditions. Therefore, as seen in the context of Tim Gowers' polymath project on the Union-Closed Sets Conjecture, it is natural to ask if all families that satisfy Reimer's conditions meet the abundance condition. A minimal counterexample to this question was offered by Raz in 2017. In this paper, we will discuss a general method to construct infinitely many such counterexamples with any fixed lower bound on the size of the member sets. Furthermore, we will discuss some properties related to these counterexamples, especially those focusing on how far these counterexamples are from being union-closed.",
+              "arxiv_id": "2405.10639",
+              "authors": [
+                "Kengbo Lu",
+                "Abigail Raz"
+              ],
+              "doi": "",
+              "id": "L002",
+              "merged_from": [
+                17
+              ],
+              "normalized_title": "note on the union closed sets conjecture and reimer s average set size theorem",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Note on the union-closed sets conjecture and Reimer's average set size theorem",
+              "url": "http://arxiv.org/abs/2405.10639v2",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "The Union Closed Sets Conjecture is one of the most renowned problems in combinatorics. Its appeal lies in the simplicity of its statement contrasted with the potential complexity of its resolution. The conjecture posits that, in any union closed family of sets, there exists at least one element that appears in at least half of the sets within the family. We establish the graph-theoretic version of certain set-theoretic results by connecting the set-based and graph-based formulations. We then prove a theorem in which we investigate the conjecture for graphs, focusing on their decompositions and the position of certain pendant vertices. As a result, we extend the validity of the conjecture to a broader class of graph structures.",
+              "arxiv_id": "2409.02221",
+              "authors": [
+                "Nived J M"
+              ],
+              "doi": "",
+              "id": "L003",
+              "merged_from": [
+                13
+              ],
+              "normalized_title": "a study on the graph formulation of union closed sets conjecture",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "A Study On The Graph Formulation Of Union Closed Sets Conjecture",
+              "url": "http://arxiv.org/abs/2409.02221v5",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "Complements of union-closed families of sets, over a finite ground set, are known as simply rooted families of sets. Cubical sets are widely studied topological objects having applications in computational homology. In this paper, we look at simply rooted families of sets from the perspective of cubical sets. That is, for every family $\\mathcal F$ of subsets of a finite set, we construct a natural cubical set $X(\\mathcal F)$ (corresponding to it). We show that for every simply rooted family $\\mathcal F$, containing the empty set, the cubical set $X(\\mathcal F)$ is always acyclic (that is, it has trivial reduced cubical homology). As a consequence of this, using the Euler-Poincarè formula, we obtain a formula satisfied by all simply rooted families of sets which contain the empty set. We also provide an elementary proof of this formula.",
+              "arxiv_id": "2409.17050",
+              "authors": [
+                "Dhruv Bhasin"
+              ],
+              "doi": "",
+              "id": "L004",
+              "merged_from": [
+                12
+              ],
+              "normalized_title": "a cubical perspective on complements of union closed families of sets",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "A Cubical Perspective on Complements of Union-Closed Families of Sets",
+              "url": "http://arxiv.org/abs/2409.17050v1",
+              "venue": "arXiv (math.CO, math.AT)",
+              "year": 2024
+            },
+            {
+              "abstract": "We demonstrate that when a graph exhibits a specific type of symmetry, it satisfies the Union Closed Conjecture(UCC). Additionally, we show that certain graph classes, such as Cylindrical Grid Graphs and Torus Grid Graphs also satisfy the conjecture. We prove the known result that the union closed family generated by cyclic translates of a fixed set satisfies the UCC, offering a simpler proof via symmetry arguments. Later, we show that the union closed family generated by the family obtained through cyclically shifting elements from selected translates also satisfies the conjecture.",
+              "arxiv_id": "2411.06588",
+              "authors": [
+                "Nived J M"
+              ],
+              "doi": "",
+              "id": "L005",
+              "merged_from": [
+                1
+              ],
+              "normalized_title": "symmetric union closed families",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Symmetric Union Closed Families",
+              "url": "http://arxiv.org/abs/2411.06588v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "The Union-Closed Sets Conjecture asks whether every union-closed set family $\\mathcal{F}$ has an element contained in half of its sets. In 2022, Nagel posed a generalisation of this problem, suggesting that the $k$th-most popular element in a union-closed set family must be contained in at least $\\frac{1}{2^{k-1} + 1} |\\mathcal{F}|$ sets. We combine the entropic method of Gilmer with the combinatorial arguments of Knill to show that this is indeed the case for all $k \\ge 2$, and characterise the families that achieve equality. Furthermore, we show that when $|\\mathcal{F}| \\to \\infty$, the $k$th-most frequent element will appear in at least $\\left( \\frac{3 - \\sqrt{5}}{2} - o(1) \\right) |\\mathcal{F}|$ sets, reflecting the recent progress made for the Union-Closed Set Conjecture.",
+              "arxiv_id": "2412.03862",
+              "authors": [
+                "Shagnik Das",
+                "Saintan Wu"
+              ],
+              "doi": "",
+              "id": "L006",
+              "merged_from": [
+                3
+              ],
+              "normalized_title": "frequent elements in union closed set families",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Frequent elements in union-closed set families",
+              "url": "http://arxiv.org/abs/2412.03862v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "The Union-Closed Sets Conjecture, also known as Frankl's conjecture, asks whether, for any union-closed set family $\\mathcal{F}$ with $m$ sets, there is an element that lies in at least $\\frac{1}{2}\\cdot m$ sets in $\\mathcal{F}$. In 2022, Nagel posed a stronger conjecture that within any union-closed family whose ground set size is at least $k$, there are always $k$ elements in the ground set that appear in at least $\\frac{1}{2^{k-1}+1}$ proportion of the sets in the family. Das and Wu showed that this conjecture is true for $k\\geq 3$ and $k=2$ if $|\\mathcal{F}|$ is outside a particular range. In this companion paper, we analyse further when $\\mathcal{F}$ fails Nagel's conjecture for $k=2$ via linear programming.",
+              "arxiv_id": "2412.03863",
+              "authors": [
+                "Saintan Wu"
+              ],
+              "doi": "",
+              "id": "L007",
+              "merged_from": [
+                14
+              ],
+              "normalized_title": "further analysis on the second frequency of union closed set families",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Further analysis on the second frequency of union-closed set families",
+              "url": "http://arxiv.org/abs/2412.03863v2",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "The union-closed sets conjecture (sometimes referred to as Frankl's conjecture) states that every finite, nontrivial union-closed family of sets has an element that is in at least half of its members. Although the conjecture is known to be false in the infinite setting, we show that many interesting results can still be recovered by imposing suitable chain conditions and considering carefully chosen elements called optimal elements. We use these elements to show that the union-closed conjecture holds for both finite and infinite union-closed families such that the cardinality of any chain of sets is at most three. We also show that the conjecture holds for all nontrivial topological spaces satisfying the descending chain condition on its open sets. Notably, none of those arguments depend on the cardinality of the underlying family or its universe. Finally, we provide an interesting class of families that satisfy the conclusion of the conjecture but are not necessarily union-closed.",
+              "arxiv_id": "2412.18740",
+              "authors": [
+                "Cory H. Colbert"
+              ],
+              "doi": "",
+              "id": "L008",
+              "merged_from": [
+                15
+              ],
+              "normalized_title": "chain conditions and optimal elements in generalized union closed families of sets",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Chain Conditions and Optimal Elements in Generalized Union-Closed Families of Sets",
+              "url": "http://arxiv.org/abs/2412.18740v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2024
+            },
+            {
+              "abstract": "We prove that for any isomorphism $h: \\mathcal{K}_1 \\to \\mathcal{K}_2$ between pure union-closed families, there exists a hyperisomorphism $H: \\bigcup \\mathcal{K}_1 \\to \\bigcup \\mathcal{K}_2$ such that $h(A) = \\{ H(a) \\mid a \\in A \\}$, for all $A \\in \\mathcal{K}_1$. Since every union-closed family forms a lattice under inclusion, this result establishes a strong connection between the two frameworks. More precisely, any such family can be uniquely reconstructed from its lattice up to isomorphism. Hence, the lattice representation provides a faithful encoding, offering a perspective that may yield new insights into problems on union-closed families, including Frankl's union-closed sets conjecture.",
+              "arxiv_id": "2501.02637",
+              "authors": [
+                "M. J. Moghaddas Mehr"
+              ],
+              "doi": "",
+              "id": "L009",
+              "merged_from": [
+                2
+              ],
+              "normalized_title": "isomorphism in union closed sets",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Isomorphism in Union-Closed Sets",
+              "url": "http://arxiv.org/abs/2501.02637v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "The union-closed sets conjecture, also known as Frankl's conjecture, is a well-studied problem with various formulations. In terms of lattices, the conjecture states that every finite lattice $L$ with more than one element contains a join-irreducible element that is less than or equal to at most half of the elements in $L$. In this work, we obtain several necessary conditions for any counterexample $\\tilde{L}$ of minimum size.",
+              "arxiv_id": "2503.00277",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "id": "L010",
+              "merged_from": [
+                10
+              ],
+              "normalized_title": "on the lattice formulation of the union closed sets conjecture",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "On the lattice formulation of the union-closed sets conjecture",
+              "url": "http://arxiv.org/abs/2503.00277v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "The celebrated union-closed conjecture is concerned with the cardinalities of various subsets of the Boolean $d$-cube. The cardinality of such a set is equivalent, up to a constant, to its measure under the uniform distribution, so we can pose more general conjectures by choosing a different probability distribution on the cube. In particular, for any sequence of probabilities $(p_i)_{i=1}^d$ we can consider the product of $d$ independent Bernoulli random variables, with success probabilities $p_i$. In this short note, we find a generalised form of Karpas' special case of the union-closed conjecture for families $\\mathcal{F}$ with density at least half. We also generalise Knill's logarithmic lower bound.",
+              "arxiv_id": "2504.13347",
+              "authors": [
+                "Gabriel Gendler"
+              ],
+              "doi": "",
+              "id": "L011",
+              "merged_from": [
+                11
+              ],
+              "normalized_title": "partial results for union closed conjectures on the weighted cube",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Partial results for union-closed conjectures on the weighted cube",
+              "url": "http://arxiv.org/abs/2504.13347v3",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "Suppose that $\\mathscr{F}$ is a finite union-closed family of sets with $\\cup_{A\\in \\mathscr{F}}A=\\{1,2,\\ldots,m\\}$ and $m\\geq 2$. Fix $i\\in \\{1,2,\\ldots,m\\}$ and denote $\\mathscr{G}:=\\{A\\backslash \\{i\\}: A\\in \\mathscr{F}\\}$. For $j\\in \\{1,2,\\ldots,m\\}\\backslash\\{i\\}$, let $\\mathscr{G}_j:=\\{A\\in\\mathscr{G}: j\\in A\\}$ and $\\mathscr{F}_j:=\\{A\\in\\mathscr{F}: j\\in A\\}$. In this note, we will prove a lemma which says that if $\\frac{|\\mathscr{G}_j|}{|\\mathscr{G}|}\\geq c\\,(c\\in (0,1])$, then $\\frac{|\\mathscr{F}_j|}{|\\mathscr{F}|}\\geq \\frac{1}{1+2(1-c)/c}$. Several applications of this lemma will be given.",
+              "arxiv_id": "2507.11008",
+              "authors": [
+                "Ze-Chun Hu",
+                "Yi-Ding Shi",
+                "Qian-Qian Zhou"
+              ],
+              "doi": "",
+              "id": "L012",
+              "merged_from": [
+                16
+              ],
+              "normalized_title": "a lemma on a finite union closed family of finite sets and its applications",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "A lemma on a finite union-closed family of finite sets and its applications",
+              "url": "http://arxiv.org/abs/2507.11008v2",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "Let $\\mathcal{A}$ be a union-closed family of sets with base set $b(\\mathcal{A})=\\bigcup_{A \\in \\mathcal{A}}A$ denoted by $[n]=\\{1, \\cdots, n\\}$, and for any real $x>0$, let $\\mathcal{A}_{<x} = \\{A \\in \\mathcal{A} \\ | \\ |A| < x\\}$. Also, denote by $\\mathcal{B}$ any smallest irredundant subfamily of $\\mathcal{A}_{<n/2}$ such that $b(\\mathcal{B})=b(\\mathcal{A}_{<n/2})$. We prove that if $\\mathcal{A}$ is separating with height $h = 4 \\leq n$ and $0 \\leq |\\mathcal{B}| \\leq 2$, then the average size of a member set from $\\mathcal{A}$ is at least $n/2$. We show that $h=4$ is greatest possible with respect to this result, and conclude by considering the remaining domain $3 \\leq |\\mathcal{B}| \\leq 4$.",
+              "arxiv_id": "2509.12537",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "id": "L013",
+              "merged_from": [
+                8
+              ],
+              "normalized_title": "an averaging result for union closed families of sets",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "An averaging result for union-closed families of sets",
+              "url": "http://arxiv.org/abs/2509.12537v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "Let $\\mathcal{A}$ be a union-closed family of sets with universe $\\bigcup_{A \\in \\mathcal{A}}A = [n] = \\{1,\\cdots,n\\}$ and length $\\ell$. We prove that $|\\mathcal{A}| \\leq \\sum_{i=0}^{\\ell} \\binom{n}{i}$, with equality if and only if $\\mathcal{A} = \\bigcup_{i=0}^{\\ell}\\binom{[n]}{n-i}$. Additionally, by showing that $|\\mathcal{A}| \\leq \\frac{\\ell^p-1}{\\ell-1}+2^n(1-2^{-\\ell})^p$ for any nonnegative integer $p$, we establish for all integers $1 \\leq k \\leq n$ that $\\sum_{i=0}^k \\binom{n}{i} \\leq \\frac{k^{\\hat{p}}-1}{k-1}+2^n(1-2^{-k})^{\\hat{p}}$, where $\\hat{p}=\\lfloor (n-k)/\\log_2(\\frac{k}{1-2^{-k}})\\rfloor + 1$.",
+              "arxiv_id": "2511.10608",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "id": "L014",
+              "merged_from": [
+                7
+              ],
+              "normalized_title": "an upper bound for union closed family size",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "An upper bound for union-closed family size",
+              "url": "http://arxiv.org/abs/2511.10608v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2025
+            },
+            {
+              "abstract": "For a set of $m$ subsets of a universe set of size $n$, we construct a Boolean polynomial $\\mathrm{ICC}_{m,n}(X)$ such that the Union-Closed Conjecture is true for this $m$ and $n$ if and only if $\\mathrm{ICC}_{m,n}(X)$ is the zero Boolean polynomial. We use an equivalent formulation, called the Intersection-Closed Conjecture.",
+              "arxiv_id": "2606.26191",
+              "authors": [
+                "Mario DeFranco"
+              ],
+              "doi": "",
+              "id": "L015",
+              "merged_from": [
+                6
+              ],
+              "normalized_title": "on boolean polynomials and the union closed conjecture",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "On Boolean polynomials and the Union-Closed Conjecture",
+              "url": "http://arxiv.org/abs/2606.26191v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2026
+            },
+            {
+              "abstract": "Let $k$ and $n$ be positive integers such that $2 \\leq k \\leq n+1$. We prove that the number of $k$-chains in a union-closed family with universe $[n]$ and size $m$ is minimized when its member sets are largest possible. We also show that, whenever the minimum is nonzero and $m>n$, there are no other minimizing families.",
+              "arxiv_id": "2607.26425",
+              "authors": [
+                "Christopher Bouchard"
+              ],
+              "doi": "",
+              "id": "L016",
+              "merged_from": [
+                4
+              ],
+              "normalized_title": "supersaturation in union closed families of sets",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Supersaturation in union-closed families of sets",
+              "url": "http://arxiv.org/abs/2607.26425v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2026
+            },
+            {
+              "abstract": "We give a computer-assisted proof that every finite union-closed family containing a nonempty set has an element in at least 0.38288525 of its members. The argument combines independent sampling with conditionally independent sampling and an explicit product lower bound for a binary-entropy kernel. We identify the limiting constant of this pointwise method through a one-variable stationary equation. We also construct a global coupling by balancing inverse union multiplicities and prove a strictly positive, quantitative entropy gain over independent sampling. Combining the two arguments gives an additional frequency bound depending on the size of the family.",
+              "arxiv_id": "2609.08291",
+              "authors": [
+                "Yunjiang Jiang"
+              ],
+              "doi": "",
+              "id": "L017",
+              "merged_from": [
+                9
+              ],
+              "normalized_title": "entropy bounds and global couplings for union closed families",
+              "providers": [
+                "arxiv"
+              ],
+              "record_type": "preprint",
+              "title": "Entropy bounds and global couplings for union-closed families",
+              "url": "http://arxiv.org/abs/2609.08291v1",
+              "venue": "arXiv (math.CO)",
+              "year": 2026
+            }
+          ],
+          "request_errors": [],
+          "requests": [
+            {
+              "provider": "arxiv",
+              "records": 17,
+              "status": "OK",
+              "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22union-closed%22+AND+submittedDate%3A%5B202401010000+TO+202609092359%5D&start=0&max_results=20&sortBy=relevance"
+            }
+          ],
+          "retrieved_at": "2026-09-09T12:52:21.719169+00:00",
+          "schema_version": 1,
+          "unique_count": 17
+        },
+        "status": "CANDIDATE_SOURCES",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "3472a6d2afe04e3c0511e0c1f0860afc8e652c599766a58220b08ddaba811189",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "12c164db162ff49df2930b155ac710b9e98b3c63a6cbc00dc9f85f53af0c09d5",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "cf0d1dd40ca9287a2b4e618aaf2e4ce69306332a5c1179739495c81ffbda14e5"
+        }
+      },
+      "result_hash": "cf7f2c8ab857a6a7af00ca1c6280170117efdaaf9214112cab95749c44f125c3",
+      "created": 1788958340.4644322
+    },
+    {
+      "id": 3,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Primary-source review: Gilmer arXiv:2211.09055v2 establishes 0.01; Yu arXiv:2212.00658v2 numerically evaluates about 0.38234. Liu arXiv:2306.08824v1 makes the roughly 0.38271 evaluation conditional on numerically verified hypotheses. Newly submitted Jiang arXiv:2609.08291v1 (2026-09-08), Theorem 1.1, claims a computer-assisted 0.38288525 bound; its interval appendix has not been rerun here, so this is a reported preprint result, not our verified theorem. Section 10.7 explicitly leaves the universal gap open. Demontis arXiv:2405.03731 claims the whole conjecture, but metadata alone does not validate its proof. Search covered 20 relevance-ranked arXiv records with title union-closed and dates 2024-01-01 through 2026-09-09; not an exhaustive novelty/status audit."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          2
+        ],
+        "falsifier": "An accepted complete proof or a reproduced failure in a cited result changes the premise.",
+        "rationale": "Bind route selection to actual current primary sources and their qualifications."
+      },
+      "fingerprint": "e8ffacc8474a59d054c0a412ac1fa65b0f83a1f5861e7d8cb157f0929733cfc1",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Primary-source review: Gilmer arXiv:2211.09055v2 establishes 0.01; Yu arXiv:2212.00658v2 numerically evaluates about 0.38234. Liu arXiv:2306.08824v1 makes the roughly 0.38271 evaluation conditional on numerically verified hypotheses. Newly submitted Jiang arXiv:2609.08291v1 (2026-09-08), Theorem 1.1, claims a computer-assisted 0.38288525 bound; its interval appendix has not been rerun here, so this is a reported preprint result, not our verified theorem. Section 10.7 explicitly leaves the universal gap open. Demontis arXiv:2405.03731 claims the whole conjecture, but metadata alone does not validate its proof. Search covered 20 relevance-ranked arXiv records with title union-closed and dates 2024-01-01 through 2026-09-09; not an exhaustive novelty/status audit.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        },
+        "verified": false
+      },
+      "result_hash": "9a6c9723bba002f7c8c33723de9df4c3789a406cbd6da4d10de86465f02ea278",
+      "created": 1788958705.5250497
+    },
+    {
+      "id": 4,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Attack the universal distribution-level strengthening using a one-bit rational law.",
+            "blocker": "Literature places the independent-sampling barrier at (3-sqrt(5))/2.",
+            "claim": "Could independent unions force entropy growth whenever every frequency is below 1/2?",
+            "next_test": "Check Bernoulli(2/5) and its independent union using exact integer entropy comparisons.",
+            "route_id": "iid-entropy",
+            "status": "exploring"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          3
+        ],
+        "falsifier": "A valid rational law below 1/2 with nonpositive entropy gain.",
+        "rationale": "Test a necessary warning case before attempting dimension lifting."
+      },
+      "fingerprint": "000af90c623fc545ae7707882370486ba0b289bc65c5c6df4829912a9d3614fd",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "iid-entropy",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        },
+        "verified": false
+      },
+      "result_hash": "5706e5e01c0cb03ab3eed7aaf459c7a80b4e63da198fccba9836fef3eb460348",
+      "created": 1788958705.5521638
+    },
+    {
+      "id": 5,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "constant": "0",
+            "counts": [
+              9,
+              6,
+              6,
+              4
+            ],
+            "max_bits": 500000,
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  0,
+                  1,
+                  1
+                ]
+              }
+            ]
+          },
+          "tool": "entropy_inequality"
+        },
+        "evidence": [
+          4
+        ],
+        "falsifier": "Exact negative sign invalidates the all-distributions iid strengthening.",
+        "rationale": "Joint atoms (0,0),(0,1),(1,0),(1,1) have product Bernoulli(2/5) counts 9,6,6,4. Compare H(X OR Y)-H(X)."
+      },
+      "fingerprint": "dee428e47c4724aec1fc6c25ccb20a35c36dc63ab1f69071eed9b31c37a6d171",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "exact-entropy",
+          "claim": {
+            "constant": "0",
+            "counts": [
+              9,
+              6,
+              6,
+              4
+            ],
+            "domain": "recorded-finite-distribution",
+            "relation": ">=",
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  0,
+                  1,
+                  1
+                ]
+              }
+            ],
+            "units": "bits"
+          },
+          "diagnostic": {
+            "approximate_difference_bits": -0.028267405199176365,
+            "warning": "Floating diagnostic only; use the independent exact verdict."
+          },
+          "max_bits": 500000,
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.281,
+        "independent_check": {
+          "certificate_hash": "7049f8833370cd368a78bc9abeecb0168405495d60c3f04ad33ccc9461d0e4e7",
+          "computation": {
+            "denominator_bits": 93,
+            "integer_scale": 25,
+            "numerator_bits": 92,
+            "sign": -1
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only this recorded finite distribution and its partitions; no universal entropy inequality, coupling applicability or conjecture verdict.",
+          "status": "REFUTED"
+        },
+        "status": "REFUTED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        }
+      },
+      "result_hash": "f085957e46b03ec5cfa964632ca87365a64963d47e1a3b1cef347b45c9d66f8d",
+      "created": 1788958705.5784268
+    },
+    {
+      "id": 6,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Retain the exact Bernoulli(2/5) obstruction and investigate dependent whole-vector couplings.",
+            "blocker": "This distribution is not uniform on a counterexample union-closed family; Frankl itself remains unresolved.",
+            "claim": "The unrestricted iid entropy-growth statement up to frequency 1/2 is false.",
+            "next_test": "Preserve the two input marginals while altering the coupling.",
+            "route_id": "iid-entropy",
+            "status": "abandoned"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          5
+        ],
+        "falsifier": "Incorrect conversion from a weighted probability law to a uniform family.",
+        "rationale": "The entropy witness defeats this auxiliary claim, not the original combinatorial conjecture."
+      },
+      "fingerprint": "8e9259eabfa588fd9388dd525816d3f484d85dd344ec680311de4c34bea73cd6",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "iid-entropy",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        },
+        "verified": false
+      },
+      "result_hash": "5706e5e01c0cb03ab3eed7aaf459c7a80b4e63da198fccba9836fef3eb460348",
+      "created": 1788958705.8881316
+    },
+    {
+      "id": 7,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "constant": "0",
+            "counts": [
+              5,
+              1,
+              1,
+              3
+            ],
+            "max_bits": 500000,
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  0,
+                  1,
+                  1
+                ]
+              }
+            ]
+          },
+          "tool": "entropy_inequality"
+        },
+        "evidence": [
+          5,
+          6
+        ],
+        "falsifier": "A negative exact gain or a changed marginal defeats this local repair.",
+        "rationale": "Replace the independent joint law with counts 5,1,1,3: both marginals remain (3/5,2/5), while the union is unbiased."
+      },
+      "fingerprint": "40d71f90f1ae154bf1195a47fdf148b8aa0fe67334b021a02ab7718ff592d8e6",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "exact-entropy",
+          "claim": {
+            "constant": "0",
+            "counts": [
+              5,
+              1,
+              1,
+              3
+            ],
+            "domain": "recorded-finite-distribution",
+            "relation": ">=",
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  0,
+                  1,
+                  1
+                ]
+              }
+            ],
+            "units": "bits"
+          },
+          "diagnostic": {
+            "approximate_difference_bits": 0.02904940554533142,
+            "warning": "Floating diagnostic only; use the independent exact verdict."
+          },
+          "max_bits": 500000,
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.297,
+        "independent_check": {
+          "certificate_hash": "673ce14636e5ab64a736412c57b68b61346a8ba6924d80961381426c01bfbce0",
+          "computation": {
+            "denominator_bits": 12,
+            "integer_scale": 5,
+            "numerator_bits": 12,
+            "sign": 1
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only this recorded finite distribution and its partitions; no universal entropy inequality, coupling applicability or conjecture verdict.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        }
+      },
+      "result_hash": "b882fc416d347490e0081dd8f35589b5bbf83187883a50e6002602cff85f780e",
+      "created": 1788958705.9145083
+    },
+    {
+      "id": 8,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "For the dependent joint table [[5,1],[1,3]]/10, row and column sums are exactly (6,4)/10=(3/5,2/5), and union counts are (5,5)/10. Action 7 proves strict entropy growth for this one law. It does not justify coordinatewise tensorization: under dependence, the conditional probabilities of later coordinates acquire a joint dependence structure. Liu 2306.08824v1, Introduction around equations (3)-(7), explicitly identifies this obstacle."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          7,
+          3
+        ],
+        "falsifier": "Showing entropy gain for one bit does not prove the conditional averaging inequality in arbitrary dimension.",
+        "rationale": "Record the exact coupling assumptions and the missing dimension-lifting step."
+      },
+      "fingerprint": "1142ec9d663e04ca567b2fe9d0f28cf7eb07a0711c4c216a4cf7b1da4ef81a52",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "For the dependent joint table [[5,1],[1,3]]/10, row and column sums are exactly (6,4)/10=(3/5,2/5), and union counts are (5,5)/10. Action 7 proves strict entropy growth for this one law. It does not justify coordinatewise tensorization: under dependence, the conditional probabilities of later coordinates acquire a joint dependence structure. Liu 2306.08824v1, Introduction around equations (3)-(7), explicitly identifies this obstacle.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        },
+        "verified": false
+      },
+      "result_hash": "79afccb90950c510f4b03735b2e1885c02acad3e6c11aa1801892543d62c0575",
+      "created": 1788958706.227331
+    },
+    {
+      "id": 9,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Study inverse union-multiplicity balancing and exact entropy comparisons; preserve uniform row and column marginals.",
+            "blocker": "Jiang 2609.08291v1 Section 10 gives a positive finite gain, but its size-only correction vanishes. The complete conjecture is open in this investigation.",
+            "claim": "Find a frequency-sensitive whole-family coupling bound strong enough to force maximum frequency >=1/2.",
+            "next_test": "Derive how the centered log-multiplicity variance and true entropy gain behave under Cartesian products of families.",
+            "route_id": "global-coupling",
+            "status": "exploring"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          3,
+          8
+        ],
+        "falsifier": "A tensor-power family with a vanishing normalized variance bound may rule out a naive dimension-free estimate.",
+        "rationale": "Use the latest explicit remaining quantitative problem instead of repeating the iid route."
+      },
+      "fingerprint": "65defde6223ec6072ded0707ea879be7222a4a287b7daa9181077d27a3de9819",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "global-coupling",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        },
+        "verified": false
+      },
+      "result_hash": "0f3443f0bcfa8b079fa3f687cfc8eba1df158409f407adc30828253f952e826b",
+      "created": 1788958706.254011
+    },
+    {
+      "id": 10,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "constant": "0",
+            "counts": [
+              2,
+              1,
+              1,
+              2
+            ],
+            "max_bits": 500000,
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ]
+          },
+          "tool": "entropy_inequality"
+        },
+        "evidence": [
+          9
+        ],
+        "falsifier": "An exact nonzero residual exposes a product encoding error.",
+        "rationale": "Check entropy additivity for a rational product coupling in dimension 1. This is a fixed distribution, not an induction proof."
+      },
+      "fingerprint": "32fc4d9aee9524a2559f6562c72a7dd0223b5a3036fab2540de0844450602c22",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "exact-entropy",
+          "claim": {
+            "constant": "0",
+            "counts": [
+              2,
+              1,
+              1,
+              2
+            ],
+            "domain": "recorded-finite-distribution",
+            "relation": ">=",
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ],
+            "units": "bits"
+          },
+          "diagnostic": {
+            "approximate_difference_bits": 0.0,
+            "warning": "Floating diagnostic only; use the independent exact verdict."
+          },
+          "max_bits": 500000,
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.328,
+        "independent_check": {
+          "certificate_hash": "34ad6a723a6d91a5ba159eb919dbe4843597f03efe43434056f6410eb064d554",
+          "computation": {
+            "denominator_bits": 1,
+            "integer_scale": 1,
+            "numerator_bits": 1,
+            "sign": 0
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only this recorded finite distribution and its partitions; no universal entropy inequality, coupling applicability or conjecture verdict.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        }
+      },
+      "result_hash": "efee72bc590e03de68e4af500dd01600e0f4289c6f67efa38d0fbf26198bb2ef",
+      "created": 1788958803.5480301
+    },
+    {
+      "id": 11,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "constant": "0",
+            "counts": [
+              4,
+              2,
+              2,
+              4,
+              2,
+              1,
+              1,
+              2,
+              2,
+              1,
+              1,
+              2,
+              4,
+              2,
+              2,
+              4
+            ],
+            "max_bits": 500000,
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  2,
+                  2,
+                  2,
+                  1,
+                  3,
+                  3,
+                  3,
+                  1,
+                  3,
+                  3,
+                  3,
+                  1,
+                  3,
+                  3,
+                  3
+                ]
+              },
+              {
+                "coefficient": "-2",
+                "labels": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ]
+          },
+          "tool": "entropy_inequality"
+        },
+        "evidence": [
+          9
+        ],
+        "falsifier": "An exact nonzero residual exposes a product encoding error.",
+        "rationale": "Check entropy additivity for a rational product coupling in dimension 2. This is a fixed distribution, not an induction proof."
+      },
+      "fingerprint": "9e8e2fb5d61a2279e7e3a79bdaf52a069e8428bd351a269da6ca3c7e48f69c01",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "exact-entropy",
+          "claim": {
+            "constant": "0",
+            "counts": [
+              4,
+              2,
+              2,
+              4,
+              2,
+              1,
+              1,
+              2,
+              2,
+              1,
+              1,
+              2,
+              4,
+              2,
+              2,
+              4
+            ],
+            "domain": "recorded-finite-distribution",
+            "relation": ">=",
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  2,
+                  2,
+                  2,
+                  1,
+                  3,
+                  3,
+                  3,
+                  1,
+                  3,
+                  3,
+                  3,
+                  1,
+                  3,
+                  3,
+                  3
+                ]
+              },
+              {
+                "coefficient": "-2",
+                "labels": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ],
+            "units": "bits"
+          },
+          "diagnostic": {
+            "approximate_difference_bits": 0.0,
+            "warning": "Floating diagnostic only; use the independent exact verdict."
+          },
+          "max_bits": 500000,
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.297,
+        "independent_check": {
+          "certificate_hash": "ac30f3c09f412989b651b55080dcc5a175f39a0b7e7a0304ee97b10ab789506c",
+          "computation": {
+            "denominator_bits": 77,
+            "integer_scale": 9,
+            "numerator_bits": 77,
+            "sign": 0
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only this recorded finite distribution and its partitions; no universal entropy inequality, coupling applicability or conjecture verdict.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        }
+      },
+      "result_hash": "20225e7ee5ffc6777f1e736a7c8772944512009d34e52fe7c4b5f7fc4bf3cf0b",
+      "created": 1788958803.9033291
+    },
+    {
+      "id": 12,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "constant": "0",
+            "counts": [
+              8,
+              4,
+              4,
+              8,
+              4,
+              2,
+              2,
+              4,
+              4,
+              2,
+              2,
+              4,
+              8,
+              4,
+              4,
+              8,
+              4,
+              2,
+              2,
+              4,
+              2,
+              1,
+              1,
+              2,
+              2,
+              1,
+              1,
+              2,
+              4,
+              2,
+              2,
+              4,
+              4,
+              2,
+              2,
+              4,
+              2,
+              1,
+              1,
+              2,
+              2,
+              1,
+              1,
+              2,
+              4,
+              2,
+              2,
+              4,
+              8,
+              4,
+              4,
+              8,
+              4,
+              2,
+              2,
+              4,
+              4,
+              2,
+              2,
+              4,
+              8,
+              4,
+              4,
+              8
+            ],
+            "max_bits": 500000,
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  4,
+                  4,
+                  4,
+                  2,
+                  6,
+                  6,
+                  6,
+                  2,
+                  6,
+                  6,
+                  6,
+                  2,
+                  6,
+                  6,
+                  6,
+                  1,
+                  5,
+                  5,
+                  5,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  1,
+                  5,
+                  5,
+                  5,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  1,
+                  5,
+                  5,
+                  5,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7
+                ]
+              },
+              {
+                "coefficient": "-3",
+                "labels": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ]
+          },
+          "tool": "entropy_inequality"
+        },
+        "evidence": [
+          9
+        ],
+        "falsifier": "An exact nonzero residual exposes a product encoding error.",
+        "rationale": "Check entropy additivity for a rational product coupling in dimension 3. This is a fixed distribution, not an induction proof."
+      },
+      "fingerprint": "bc97e6675f2adc1c8b462c83293e1b77b7e5f90be6265fec0a3b806eeeab74e1",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "exact-entropy",
+          "claim": {
+            "constant": "0",
+            "counts": [
+              8,
+              4,
+              4,
+              8,
+              4,
+              2,
+              2,
+              4,
+              4,
+              2,
+              2,
+              4,
+              8,
+              4,
+              4,
+              8,
+              4,
+              2,
+              2,
+              4,
+              2,
+              1,
+              1,
+              2,
+              2,
+              1,
+              1,
+              2,
+              4,
+              2,
+              2,
+              4,
+              4,
+              2,
+              2,
+              4,
+              2,
+              1,
+              1,
+              2,
+              2,
+              1,
+              1,
+              2,
+              4,
+              2,
+              2,
+              4,
+              8,
+              4,
+              4,
+              8,
+              4,
+              2,
+              2,
+              4,
+              4,
+              2,
+              2,
+              4,
+              8,
+              4,
+              4,
+              8
+            ],
+            "domain": "recorded-finite-distribution",
+            "relation": ">=",
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  4,
+                  4,
+                  4,
+                  2,
+                  6,
+                  6,
+                  6,
+                  2,
+                  6,
+                  6,
+                  6,
+                  2,
+                  6,
+                  6,
+                  6,
+                  1,
+                  5,
+                  5,
+                  5,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  1,
+                  5,
+                  5,
+                  5,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  1,
+                  5,
+                  5,
+                  5,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7,
+                  3,
+                  7,
+                  7,
+                  7
+                ]
+              },
+              {
+                "coefficient": "-3",
+                "labels": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ],
+            "units": "bits"
+          },
+          "diagnostic": {
+            "approximate_difference_bits": -4.440892098500626e-16,
+            "warning": "Floating diagnostic only; use the independent exact verdict."
+          },
+          "max_bits": 500000,
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.281,
+        "independent_check": {
+          "certificate_hash": "ee6b290cdd1ddced79049466c05ab973e89790078ac12b4e47e1637aa8f0e04e",
+          "computation": {
+            "denominator_bits": 554,
+            "integer_scale": 27,
+            "numerator_bits": 554,
+            "sign": 0
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only this recorded finite distribution and its partitions; no universal entropy inequality, coupling applicability or conjecture verdict.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        }
+      },
+      "result_hash": "46b4076976f32b3d55b2fa13d1497b7c0e5cf579b689da8afaa994803e72cc68",
+      "created": 1788958804.225323
+    },
+    {
+      "id": 13,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "constant": "0",
+            "counts": [
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            "max_bits": 500000,
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ]
+          },
+          "tool": "entropy_inequality"
+        },
+        "evidence": [
+          10,
+          11,
+          12
+        ],
+        "falsifier": "A nonpositive exact entropy gain.",
+        "rationale": "Compare H(Bernoulli(2/3)) with H(Bernoulli(3/4)) using a common exact joint distribution. Both arise as unions of uniform one-bit inputs under different couplings."
+      },
+      "fingerprint": "3528967cd710c09030c50c5902b6ca45ba3a8590d9e4dd604dae18a03deecc5c",
+      "execution": "SUCCEEDED",
+      "result": {
+        "certificate": {
+          "backend": "exact-entropy",
+          "claim": {
+            "constant": "0",
+            "counts": [
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            "domain": "recorded-finite-distribution",
+            "relation": ">=",
+            "terms": [
+              {
+                "coefficient": "1",
+                "labels": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "-1",
+                "labels": [
+                  0,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            ],
+            "units": "bits"
+          },
+          "diagnostic": {
+            "approximate_difference_bits": 0.10701770959535672,
+            "warning": "Floating diagnostic only; use the independent exact verdict."
+          },
+          "max_bits": 500000,
+          "schema_version": 1
+        },
+        "elapsed_seconds": 0.281,
+        "independent_check": {
+          "certificate_hash": "4bcec8df142612a48e5484e0860471f3de633d7f651973c4e629479223886db8",
+          "computation": {
+            "denominator_bits": 45,
+            "integer_scale": 12,
+            "numerator_bits": 46,
+            "sign": 1
+          },
+          "errors": [],
+          "kind": "independent-certificate-check",
+          "schema_version": 1,
+          "scope": "Only this recorded finite distribution and its partitions; no universal entropy inequality, coupling applicability or conjecture verdict.",
+          "status": "ESTABLISHED"
+        },
+        "status": "ESTABLISHED",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        }
+      },
+      "result_hash": "4bc574f63a95f10dd5ce69a1a9faeb84afe5e7116d36f0ee02c5627674555197",
+      "created": 1788958804.5321136
+    },
+    {
+      "id": 14,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "text": "Tensor-product route audit (written proof, not formalized): for F_d=2^[d], N=2^d, each element frequency is 1/2. Ordered union multiplicity is r(S)=3^|S|. Let L=ln 3. Under independent uniform A,B, the double-centered log-multiplicity residual is R(A,B)=L*(2*|A symmetric-difference B|-d)/4. The coordinate contributions are independent and mean zero with variance L^2/16, hence V_d=d*L^2/16. Thus V_d/(ln N)^2=L^2/(16*d*(ln 2)^2)->0. Consequently no positive dimension-free lower bound for this normalized V holds for all families with p_max<=1/2. This does NOT rule out a bound assuming p_max<1/2 with dependence on the gap, and it is NOT a counterexample to Frankl. In contrast, the rational one-bit coupling [[2,1],[1,2]]/6 has uniform input marginals and union probability 2/3; its tensor powers have entropy gain d*(h(2/3)-h(3/4)) over iid. Actions 10-12 check selected finite additivity identities; action 13 checks the strictly positive one-bit gain exactly. General additivity follows from product independence, a separate written argument."
+          },
+          "tool": "note"
+        },
+        "evidence": [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "falsifier": "A wrong union count, missing cross term or illicit extension from <=1/2 to <1/2 invalidates the obstruction.",
+        "rationale": "Determine whether the new global-coupling route needs a sharper quantity than normalized double-centered variance."
+      },
+      "fingerprint": "c3c7a81e8c9b50882b39d9e33c693b271f38f96f57ccd014fcd4cc91566ea266",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "status": "DRAFT",
+        "text": "Tensor-product route audit (written proof, not formalized): for F_d=2^[d], N=2^d, each element frequency is 1/2. Ordered union multiplicity is r(S)=3^|S|. Let L=ln 3. Under independent uniform A,B, the double-centered log-multiplicity residual is R(A,B)=L*(2*|A symmetric-difference B|-d)/4. The coordinate contributions are independent and mean zero with variance L^2/16, hence V_d=d*L^2/16. Thus V_d/(ln N)^2=L^2/(16*d*(ln 2)^2)->0. Consequently no positive dimension-free lower bound for this normalized V holds for all families with p_max<=1/2. This does NOT rule out a bound assuming p_max<1/2 with dependence on the gap, and it is NOT a counterexample to Frankl. In contrast, the rational one-bit coupling [[2,1],[1,2]]/6 has uniform input marginals and union probability 2/3; its tensor powers have entropy gain d*(h(2/3)-h(3/4)) over iid. Actions 10-12 check selected finite additivity identities; action 13 checks the strictly positive one-bit gain exactly. General additivity follows from product independence, a separate written argument.",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        },
+        "verified": false
+      },
+      "result_hash": "700994144eb8f655b9ac80ce9b37a74085e7ea804f94a30d5dc5029550745707",
+      "created": 1788958804.8313556
+    },
+    {
+      "id": 15,
+      "proposal": {
+        "action": {
+          "arguments": {
+            "approach": "Use exact finite coupling comparisons and analytic product reductions; investigate gain directly rather than only V/(ln N)^2.",
+            "blocker": "Boolean cubes make the latter normalized variance vanish at the half-frequency boundary; strict sub-half hypotheses still require a new argument.",
+            "claim": "Derive a frequency-gap-sensitive global entropy gain sufficient for Frankl, not merely positive gain.",
+            "next_test": "Audit the general tensorization formula for inverse-multiplicity balancing, then test candidate gap-dependent gain inequalities on structured families.",
+            "route_id": "global-coupling",
+            "status": "exploring"
+          },
+          "tool": "route"
+        },
+        "evidence": [
+          14
+        ],
+        "falsifier": "A candidate lower bound must respect product families and preserve both uniform marginals.",
+        "rationale": "The exact and analytic product tests change the next proof target."
+      },
+      "fingerprint": "df5052c0509b79b60c66aaa243f6020f9ed03d37027dde894be4ed23f5735e14",
+      "execution": "SUCCEEDED",
+      "result": {
+        "elapsed_seconds": 0.0,
+        "route_id": "global-coupling",
+        "status": "DRAFT",
+        "toolchain_sha256": {
+          "certificate_verifier.py": "0f0f5a174a0dd8d144e88a3e19ec5f7db440206236480d6b2f51e59e0213ac07",
+          "egyptian_fractions.py": "3cac18e88e43ca00cb7a0f8e4fd5a367efa162b59efe9575b9d0d93cae34ab39",
+          "entropy_research.py": "4af50b6b2813a1dc45884beec0858812eab524aa5b4159bc6f83d15a6fd14012",
+          "entropy_verifier.py": "0cfa72ecf46d49f117e85bcddc8a8c5143f8b0c99f1a05e6b16cc6fab277720c",
+          "integer_certificate_verifier.py": "00dab46c8faa86f45f0106ded05a9be8b9b5dfa52cb58f70dabf1bb77cc1a51c",
+          "integer_research.py": "2c35d3220b108fa9e83c20ac8fc21a0017440bb8bb88ae54bb6a3ca6bf536fa4",
+          "integer_research_verifier.py": "757e7e5da7e9daf56b1c1f9106fbfc1ba8eb9aa507be3b1a5c99fc64ae19280c",
+          "literature_search.py": "1fe26aa4f1f207d4b62cf15eaf22143f1894bd6d3ec190e0156d4c54c851bc3d",
+          "math_backend.py": "cb7f4d89d846a0592d1ad7547f04d58ad158e3bdcbcf672e6fbc299b45046874",
+          "polynomial_research.py": "e20c2b3c49b80529f1d3a5adb871db4d434b6e537c742c8c3e354db3869dc0c1",
+          "polynomial_verifier.py": "2dc3f09833ff214aa4ee7401bb1eac8412d6ce2283635ca76fd11cdaced8d31f",
+          "schema.py": "365a5b227643a87af99914294e1aee47b6fcef7c7da13fd9f894c03bd331321f",
+          "statistics_backend.py": "5dc2188829b8c0ece1713c68832f6d6efd8df638fc0079be819a35dc3f82626e",
+          "worker.py": "3b346e60fd67e0a8772bf9d01334deaf9696d4bbf7984ccf1048847c13c59cd6"
+        },
+        "verified": false
+      },
+      "result_hash": "0f3443f0bcfa8b079fa3f687cfc8eba1df158409f407adc30828253f952e826b",
+      "created": 1788958804.8599424
+    }
+  ],
+  "assets": [],
+  "events": [],
+  "warning": "Local audit record, not a signed attestation. Case verdicts are not updated. Review translation and register evidence through existing case/release gates."
+}
